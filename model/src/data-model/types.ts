@@ -60,6 +60,7 @@ export function isMultipleApiKey(
 
 export type FormDefinition = {
   pages: Page[];
+  multiStageEndpoints: any;
   conditions: ConditionRawData[];
   lists: List[];
   sections: Section[];

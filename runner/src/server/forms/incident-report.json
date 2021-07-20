@@ -1,0 +1,946 @@
+{
+  "startPage": "/incidentreport",
+  "multiStageEndpoints" : {
+    "getFormDataUrl": "http://localhost:3001/form-data/getFormById",
+    "postFormDataUrl": "http://localhost:3001/form-data/submit"
+  },
+  "pages": [
+    {
+      "title": "Incident Report",
+      "path": "/incidentreport",
+      "components": [
+        {
+          "type": "RadiosField",
+          "title": "Tell us if you are reporting:",
+          "options": {
+            "hideTitle": false
+          },
+          "name": "1-1",
+          "schema": {},
+          "list": "list1"
+        },
+        {
+          "type": "RadiosField",
+          "title": "Are you completing this form for yourself or on behalf of another?",
+          "options": {
+            "hideTitle": false
+          },
+          "name": "1-2",
+          "schema": {},
+          "list": "list2"
+        }
+      ],
+      "next": [
+        {
+          "path": "/whenandwhere"
+        }
+      ],
+      "section": "PMXq1s"
+    },
+    {
+      "path": "/whenandwhere",
+      "title": "When & Where",
+      "components": [
+        {
+          "name": "2-1",
+          "options": {},
+          "type": "TextField",
+          "title": "When did the incident take place?",
+          "content": "Date",
+          "schema": {}
+        },
+        {
+          "name": "2-2",
+          "options": {},
+          "type": "TextField",
+          "title": "When did the incident take place?",
+          "content": "Time",
+          "schema": {}
+        },
+        {
+          "type": "RadiosField",
+          "title": "Where did the incident take place?",
+          "options": {
+            "hideTitle": false
+          },
+          "name": "2-3",
+          "schema": {},
+          "list": "list2-3"
+        },
+        {
+          "name": "2-4",
+          "options": {},
+          "type": "TextField",
+          "title": "Name and Address of building",
+          "content": "Date",
+          "schema": {}
+        }
+      ],
+      "next": [
+        {
+          "path": "/description"
+        }
+      ],
+      "section": "PMXq1s"
+    },
+    {
+      "path": "/description",
+      "title": "Description",
+      "components": [
+        {
+          "name": "3-1",
+          "options": {},
+          "type": "TextField",
+          "title": "Please describe the incident",
+          "content": "Please tell us exactly what happened",
+          "schema": {}
+        },
+        {
+          "name": "3-2",
+          "options": {},
+          "type": "TextField",
+          "title": "Full name and Contact Details of any witnesses",
+          "content": "",
+          "schema": {}
+        },
+        {
+          "type": "RadiosField",
+          "title": "Were you injured as a result?",
+          "options": {
+            "hideTitle": false
+          },
+          "name": "3-3",
+          "schema": {},
+          "list": "list5-3"
+        }
+      ],
+      "next": [
+        {
+          "path": "/accidentdetails"
+        }
+      ],
+      "section": "PMXq1s"
+    },
+    {
+      "path": "/accidentdetails",
+      "title": "Accident Details",
+      "components": [
+        {
+          "type": "RadiosField",
+          "title": "Type of accident?",
+          "options": {
+            "hideTitle": false
+          },
+          "name": "4-1",
+          "schema": {},
+          "list": "list4-1"
+        },
+        {
+          "type": "RadiosField",
+          "title": "What was the cause?",
+          "options": {
+            "hideTitle": false
+          },
+          "name": "4-2",
+          "schema": {},
+          "list": "list4-2"
+        }
+      ],
+      "next": [
+        {
+          "path": "/absence"
+        }
+      ],
+      "section": "PMXq1s"
+    },
+    {
+      "path": "/absence",
+      "title": "Absence",
+      "components": [
+        {
+          "type": "RadiosField",
+          "title": "Has this resulted in an absence from work?",
+          "options": {
+            "hideTitle": false
+          },
+          "name": "7-1",
+          "schema": {},
+          "list": "list7-1"
+        },
+        {
+          "name": "7-2",
+          "options": {},
+          "type": "TextField",
+          "title": "Date of the first injury",
+          "content": "",
+          "schema": {}
+        },
+        {
+          "type": "RadiosField",
+          "title": "Have you returned to work?",
+          "options": {
+            "hideTitle": false
+          },
+          "name": "7-3",
+          "schema": {},
+          "list": "list7-3"
+        }
+      ],
+      "next": [
+        {
+          "path": "/personaldetails"
+        }
+      ],
+      "section": "PMXq1s"
+    },
+    {
+      "path": "/personaldetails",
+      "title": "Personal Details",
+      "components": [
+        {
+          "name": "8-1",
+          "options": {},
+          "type": "TextField",
+          "title": "Full name",
+          "content": "",
+          "schema": {}
+        },
+        {
+          "name": "8-2",
+          "options": {},
+          "type": "TextField",
+          "title": "Date of Birth",
+          "content": "",
+          "schema": {}
+        },
+        {
+          "type": "RadiosField",
+          "title": "Gender",
+          "options": {
+            "hideTitle": false
+          },
+          "name": "8-3",
+          "schema": {},
+          "list": "list8-3"
+        },
+        {
+          "name": "8-4",
+          "options": {},
+          "type": "TextField",
+          "title": "Adelphi Number or NI Number",
+          "content": "",
+          "schema": {}
+        },
+        {
+          "name": "8-5",
+          "options": {},
+          "type": "TextField",
+          "title": "Email Address",
+          "content": "",
+          "schema": {}
+        },
+        {
+          "name": "8-6",
+          "type": "TextField",
+          "options": {
+            "hideTitle": false
+          },
+          "title": "Line Managers Email Address",
+          "content": "Line Managers Email Address",
+          "schema": {}
+        }
+      ],
+      "next": [
+        {
+          "path": "/summary"
+        }
+      ],
+      "section": "PMXq1s"
+    },
+    {
+      "title": "summary",
+      "path": "/summary",
+      "controller": "./pages/summary.js",
+      "components": []
+    }
+  ],
+  "additionalStages": {
+    "order": ["manager", "hr"],
+    "stages": [
+      {
+        "name": "manager",
+        "startPage": "/manager-overview",
+        "skipSummary": true,
+        "pages": [
+          {
+            "title": "Manager - Overview",
+            "path": "/manager-overview",
+            "components": [
+              {
+                "type": "RadiosField",
+                "title": "Tell us if you are reporting:",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "1-1",
+                "schema": {},
+                "list": "list1"
+              },
+              {
+                "type": "RadiosField",
+                "title": "Are you completing this form for yourself or on behalf of another?",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "1-2",
+                "schema": {},
+                "list": "list2"
+              },
+              {
+                "name": "2-1",
+                "options": {},
+                "type": "TextField",
+                "title": "When did the incident take place?",
+                "content": "Date",
+                "schema": {}
+              },
+              {
+                "name": "2-2",
+                "options": {},
+                "type": "TextField",
+                "title": "When did the incident take place?",
+                "content": "Time",
+                "schema": {}
+              },
+              {
+                "type": "RadiosField",
+                "title": "Where did the incident take place?",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "2-3",
+                "schema": {},
+                "list": "list2-3"
+              },
+              {
+                "name": "2-4",
+                "options": {},
+                "type": "TextField",
+                "title": "Name and Address of building",
+                "content": "Date",
+                "schema": {}
+              },
+              {
+                "name": "3-1",
+                "options": {},
+                "type": "TextField",
+                "title": "Please describe the incident",
+                "content": "Please tell us exactly what happened",
+                "schema": {}
+              },
+              {
+                "name": "3-2",
+                "options": {},
+                "type": "TextField",
+                "title": "Full name and Contact Details of any witnesses",
+                "content": "",
+                "schema": {}
+              },
+              {
+                "type": "RadiosField",
+                "title": "Were you injured as a result?",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "3-3",
+                "schema": {},
+                "list": "list5-3"
+              },
+              {
+                "type": "RadiosField",
+                "title": "Type of accident?",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "4-1",
+                "schema": {},
+                "list": "list4-1"
+              },
+              {
+                "type": "RadiosField",
+                "title": "What was the cause?",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "4-2",
+                "schema": {},
+                "list": "list4-2"
+              },
+              {
+                "type": "RadiosField",
+                "title": "Has this resulted in an absence from work?",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "7-1",
+                "schema": {},
+                "list": "list7-1"
+              },
+              {
+                "name": "7-2",
+                "options": {},
+                "type": "TextField",
+                "title": "Date of the first injury",
+                "content": "",
+                "schema": {}
+              },
+              {
+                "type": "RadiosField",
+                "title": "Have you returned to work?",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "7-3",
+                "schema": {},
+                "list": "list7-3"
+              },
+              {
+                "name": "8-1",
+                "options": {},
+                "type": "TextField",
+                "title": "Full name",
+                "content": "",
+                "schema": {}
+              },
+              {
+                "name": "8-2",
+                "options": {},
+                "type": "TextField",
+                "title": "Date of Birth",
+                "content": "",
+                "schema": {}
+              },
+              {
+                "type": "RadiosField",
+                "title": "Gender",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "8-3",
+                "schema": {},
+                "list": "list8-3"
+              },
+              {
+                "name": "8-4",
+                "options": {},
+                "type": "TextField",
+                "title": "Adelphi Number or NI Number",
+                "content": "",
+                "schema": {}
+              },
+              {
+                "name": "8-5",
+                "options": {},
+                "type": "TextField",
+                "title": "Email Address",
+                "content": "",
+                "schema": {}
+              },
+              {
+                "name": "8-6",
+                "type": "TextField",
+                "options": {
+                  "hideTitle": false
+                },
+                "title": "Line Managers Email Address",
+                "content": "Line Managers Email Address",
+                "schema": {}
+              }
+            ],
+            "next": [
+              {
+                "path": "/manager-approval"
+              }
+            ],
+            "section": "PMXq1s"
+          },
+          {
+            "title": "Manager - Do you approve?",
+            "path": "/manager-approval",
+            "components": [
+              {
+                "name": "UjidZD",
+                "options": {},
+                "type": "YesNoField",
+                "title": "Do you approve of this?",
+                "content": "Do you approve of this?",
+                "schema": {}
+              }
+            ],
+            "next": [
+              {
+                "path": "/manager-additional-comments"
+              }
+            ],
+            "section": "PMXq1s"
+          },
+          {
+            "title": "Manager - Additional Comment",
+            "path": "/manager-additional-comments",
+            "components": [
+              {
+                "name": "UjidZC",
+                "options": {},
+                "type": "TextField",
+                "content": "Please leave a comment",
+                "schema": {}
+              }
+            ],
+            "next": [
+              {
+                "path": "/manager-summary"
+              }
+            ],
+            "section": "PMXq1s"
+          },
+          {
+            "title": "summary",
+            "path": "/manager-summary",
+            "controller": "./pages/summary.js",
+            "components": []
+          }
+        ]
+      },
+      {
+        "name": "hr",
+        "startPage": "/hr-overview",
+        "skipSummary": true,
+        "pages":
+        [
+          {
+            "title": "HR - Overview",
+            "path": "/hr-overview",
+            "components": [
+              {
+                "type": "RadiosField",
+                "title": "Tell us if you are reporting:",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "1-1",
+                "schema": {},
+                "list": "list1"
+              },
+              {
+                "type": "RadiosField",
+                "title": "Are you completing this form for yourself or on behalf of another?",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "1-2",
+                "schema": {},
+                "list": "list2"
+              },
+              {
+                "name": "2-1",
+                "options": {},
+                "type": "TextField",
+                "title": "When did the incident take place?",
+                "content": "Date",
+                "schema": {}
+              },
+              {
+                "name": "2-2",
+                "options": {},
+                "type": "TextField",
+                "title": "When did the incident take place?",
+                "content": "Time",
+                "schema": {}
+              },
+              {
+                "type": "RadiosField",
+                "title": "Where did the incident take place?",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "2-3",
+                "schema": {},
+                "list": "list2-3"
+              },
+              {
+                "name": "2-4",
+                "options": {},
+                "type": "TextField",
+                "title": "Name and Address of building",
+                "content": "Date",
+                "schema": {}
+              },
+              {
+                "name": "3-1",
+                "options": {},
+                "type": "TextField",
+                "title": "Please describe the incident",
+                "content": "Please tell us exactly what happened",
+                "schema": {}
+              },
+              {
+                "name": "3-2",
+                "options": {},
+                "type": "TextField",
+                "title": "Full name and Contact Details of any witnesses",
+                "content": "",
+                "schema": {}
+              },
+              {
+                "type": "RadiosField",
+                "title": "Were you injured as a result?",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "3-3",
+                "schema": {},
+                "list": "list5-3"
+              },
+              {
+                "type": "RadiosField",
+                "title": "Type of accident?",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "4-1",
+                "schema": {},
+                "list": "list4-1"
+              },
+              {
+                "type": "RadiosField",
+                "title": "What was the cause?",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "4-2",
+                "schema": {},
+                "list": "list4-2"
+              },
+              {
+                "type": "RadiosField",
+                "title": "Has this resulted in an absence from work?",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "7-1",
+                "schema": {},
+                "list": "list7-1"
+              },
+              {
+                "name": "7-2",
+                "options": {},
+                "type": "TextField",
+                "title": "Date of the first injury",
+                "content": "",
+                "schema": {}
+              },
+              {
+                "type": "RadiosField",
+                "title": "Have you returned to work?",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "7-3",
+                "schema": {},
+                "list": "list7-3"
+              },
+              {
+                "name": "8-1",
+                "options": {},
+                "type": "TextField",
+                "title": "Full name",
+                "content": "",
+                "schema": {}
+              },
+              {
+                "name": "8-2",
+                "options": {},
+                "type": "TextField",
+                "title": "Date of Birth",
+                "content": "",
+                "schema": {}
+              },
+              {
+                "type": "RadiosField",
+                "title": "Gender",
+                "options": {
+                  "hideTitle": false
+                },
+                "name": "8-3",
+                "schema": {},
+                "list": "list8-3"
+              },
+              {
+                "name": "8-4",
+                "options": {},
+                "type": "TextField",
+                "title": "Adelphi Number or NI Number",
+                "content": "",
+                "schema": {}
+              },
+              {
+                "name": "8-5",
+                "options": {},
+                "type": "TextField",
+                "title": "Email Address",
+                "content": "",
+                "schema": {}
+              },
+              {
+                "name": "8-6",
+                "type": "TextField",
+                "options": {
+                  "hideTitle": false
+                },
+                "title": "Line Managers Email Address",
+                "content": "Line Managers Email Address",
+                "schema": {}
+              },
+              {
+                "name": "UjidZC",
+                "options": {},
+                "type": "TextField",
+                "title": "Managers Comment",
+                "content": "Please leave a comment",
+                "schema": {}
+              }
+            ],
+            "next": [
+              {
+                "path": "/hr-approval"
+              }
+            ],
+            "section": "PMXq1s"
+          },
+          {
+            "title": "HR - Do you approve?",
+            "path": "/hr-approval",
+            "components": [
+              {
+                "name": "UjidZE",
+                "options": {},
+                "type": "YesNoField",
+                "content": "Do you approve of this?",
+                "title": "Do you approve of this?",
+                "schema": {}
+              }
+            ],
+            "next": [
+              {
+                "path": "/hr-summary"
+              }
+            ],
+            "section": "PMXq1s"
+          },
+          {
+            "title": "summary",
+            "path": "/hr-summary",
+            "controller": "./pages/summary.js",
+            "components": []
+          }
+        ]
+      }
+    ]
+  },
+  "lists": [
+    {
+      "title": "list1",
+      "name": "list1",
+      "type": "string",
+      "items": [
+        {
+          "text": "an incident at work including a near miss",
+          "value": "yes"
+        },
+        {
+          "text": "verbal abuse, threatening behaviour or assault from a non-member of staff",
+          "value": "no"
+        }
+      ]
+    },
+    {
+      "title": "list2",
+      "name": "list2",
+      "type": "string",
+      "items": [
+        {
+          "text": "Myself",
+          "value": "Myself"
+        },
+        {
+          "text": "Another",
+          "value": "Another"
+        }
+      ]
+    },
+    {
+      "title": "list2-3",
+      "name": "list2-3",
+      "type": "string",
+      "items": [
+        {
+          "text": "Office building",
+          "value": "Office Building"
+        },
+        {
+          "text": "Port / Airport",
+          "value": "Port / Airport"
+        },
+        {
+          "text": "Vehicle",
+          "value": "Vehicle"
+        },
+        {
+          "text": "While on enforcement / offsite duties including official travel outside usual commute",
+          "value": "While on enforcement / offsite duties including official travel outside usual commute"
+        },
+        {
+          "text": "Call centre",
+          "value": "Call centre"
+        },
+        {
+          "text": "Counter",
+          "value": "Counter"
+        },
+        {
+          "text": "Technical facility / laboratory",
+          "value": "Technical facility / laboratory"
+        }
+      ]
+    },
+    {
+      "title": "list5-3",
+      "name": "list5-3",
+      "type": "string",
+      "items": [
+        {
+          "text": "Yes",
+          "value": "Yes"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ]
+    },
+    {
+      "title": "list6-1",
+      "name": "list6-1",
+      "type": "string",
+      "items": [
+        {
+          "text": "Yes",
+          "value": "Yes"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ]
+    },
+    {
+      "title": "list4-2",
+      "name": "list4-2",
+      "type": "string",
+      "items": [
+        {
+          "text": "Cause1",
+          "value": "Cause1"
+        },
+        {
+          "text": "Cause2",
+          "value": "Cause2"
+        },
+        {
+          "text": "Cause3",
+          "value": "Cause3"
+        }
+      ]
+    },
+    {
+      "title": "list7-1",
+      "name": "list7-1",
+      "type": "string",
+      "items": [
+        {
+          "text": "Yes",
+          "value": "Yes"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ]
+    },
+    {
+      "title": "list7-3",
+      "name": "list7-3",
+      "type": "string",
+      "items": [
+        {
+          "text": "Yes",
+          "value": "Yes"
+        },
+        {
+          "text": "No",
+          "value": "No"
+        }
+      ]
+    },
+    {
+      "title": "list8-3",
+      "name": "list8-3",
+      "type": "string",
+      "items": [
+        {
+          "text": "Male",
+          "value": "Male"
+        },
+        {
+          "text": "Female",
+          "value": "Female"
+        },
+        {
+          "text": "Other",
+          "value": "Other"
+        }
+      ]
+    },
+    {
+      "title": "list4-1",
+      "name": "list4-1",
+      "type": "string",
+      "items": [
+        {
+          "text": "Accident: an unplanned event resulting in injury, or damage to property",
+          "value": "Accident"
+        },
+        {
+          "text": "Dangerous occurence: (Not an accident) - certain, specified 'near-miss' events.",
+          "value": "DangerousOccurence"
+        },
+        {
+          "text": "Near Miss: a set of circumstances which, while not resulting in injury, or damage to property, may have done so if circumstances had been different",
+          "value": "NearMiss"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "name": "PMXq1s",
+      "title": "Evidence"
+    }
+  ],
+  "phaseBanner": {},
+  "metadata": {},
+  "fees": [],
+  "outputs": [],
+  "version": 2,
+  "conditions": []
+}

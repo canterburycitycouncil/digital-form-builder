@@ -25,11 +25,15 @@ export class SummaryPageController extends PageController {
       const { cacheService } = request.services([]);
       const model = this.model;
 
+      const state = await cacheService.getState(request);
+
+      //TODO: Get the stage and check the skipSummary
+
       // @ts-ignore - ignoring so docs can be generated. Remove when properly typed
-      if (this.model.def.skipSummary) {
+      //If we have a stage, skip the summary
+      if (this.model.def.skipSummary || state.stage) {
         return this.makePostRouteHandler()(request, h);
       }
-      const state = await cacheService.getState(request);
       const viewModel = new SummaryViewModel(this.title, model, state, request);
 
       if (viewModel.endPage) {
@@ -101,9 +105,10 @@ export class SummaryPageController extends PageController {
    */
   makePostRouteHandler() {
     return async (request: HapiRequest, h: HapiResponseToolkit) => {
-      const { payService, cacheService } = request.services([]);
+      const { payService, cacheService, dataService } = request.services([]);
       const model = this.model;
-      const state = await cacheService.getState(request);
+      let state = await cacheService.getState(request);
+
       const summaryViewModel = new SummaryViewModel(
         this.title,
         model,
@@ -141,6 +146,33 @@ export class SummaryPageController extends PageController {
         }
 
         return startPageRedirect;
+      }
+
+      //Attempt to store the data in the xgov-data-service if it's enabled in our formSchema
+      if (this.model.multiStageEndpoints?.postFormDataUrl) {
+        //If we don't already have a formId then generate one
+        //Also set the stage to the first additionalState
+        if (!state.formId) {
+          const formId = nanoid(10);
+
+          //This is the next stage after submission
+          const stage = this.model.additionalStages.order[0];
+          state = { formId, formName: this.model.basePath, stage, ...state };
+        } else {
+          //Work out the next stage
+          const stageIndex: number = this.model.additionalStages.order.findIndex(
+            (item) => item == state.stage
+          );
+          const stage =
+            this.model.additionalStages.order[stageIndex + 1] ?? "complete";
+          state.stage = stage;
+        }
+        //We have a post URL for the data-service, so post it
+        const resultFromDatabase = await dataService.postRequest(
+          model.multiStageEndpoints.postFormDataUrl,
+          state
+        );
+        console.log(resultFromDatabase);
       }
 
       /**

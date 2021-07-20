@@ -37,7 +37,8 @@ export class FormModel {
 
   /** the entire form JSON as an object */
   def: FormDefinition;
-
+  multiStageEndpoints: any;
+  additionalStages: any;
   lists: FormDefinition["lists"];
   sections: FormDefinition["sections"] = [];
   options: any;
@@ -79,6 +80,8 @@ export class FormModel {
     });
 
     this.def = def;
+    this.additionalStages = def.additionalStages;
+    this.multiStageEndpoints = def.multiStageEndpoints;
     this.lists = def.lists;
     this.sections = def.sections;
     this.options = options;
@@ -99,8 +102,23 @@ export class FormModel {
       this.conditions[condition.name] = condition;
     });
 
-    // @ts-ignore
     this.pages = def.pages.map((pageDef) => this.makePage(pageDef));
+
+    if (this.additionalStages) {
+      for (let x = 0; x <= this.additionalStages?.stages?.length - 1; x++) {
+        for (
+          let y = 0;
+          y <= this.additionalStages?.stages[x].pages.length - 1;
+          y++
+        ) {
+          let newPage = this.makePage(
+            this.additionalStages?.stages[x].pages[y]
+          );
+          this.pages.push(newPage);
+        }
+      }
+    }
+
     this.startPage = this.pages.find((page) => page.path === def.startPage);
   }
 

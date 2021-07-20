@@ -146,7 +146,7 @@ export const plugin = {
     server.route({
       method: "get",
       path: "/{id}",
-      handler: (request: HapiRequest, h: HapiResponseToolkit) => {
+      handler: async (request: HapiRequest, h: HapiResponseToolkit) => {
         const { id } = request.params;
         const model = forms[id];
         if (model) {
@@ -159,12 +159,41 @@ export const plugin = {
     server.route({
       method: "get",
       path: "/{id}/{path*}",
-      handler: (request: HapiRequest, h: HapiResponseToolkit) => {
+      handler: async (request: HapiRequest, h: HapiResponseToolkit) => {
         const { path, id } = request.params;
         const model = forms[id];
-        const page = model?.pages.find(
-          (page) => normalisePath(page.path) === normalisePath(path)
-        );
+        const { formId, stage } = request.query;
+        let page;
+
+        if (request.query.formId && model.multiStageEndpoints?.getFormDataUrl) {
+          //We need to grab the data for this form and populate the cache
+          const { dataService } = server.services([]);
+          var formData = await dataService.getRequest(
+            `${model.multiStageEndpoints?.getFormDataUrl}?formId=${formId}&stage=${stage}`
+          );
+
+          //We're now combining all our additional pages into model.pages so this is no longer needed
+          //Now attempt to find the page in our additionalStages
+          var foundAdditionalStage = model.additionalStages.stages.find(
+            (item) => item.name === formData.stage
+          );
+
+          let page = model.pages.find(
+            (additionalPages) =>
+              normalisePath(additionalPages.path) ===
+              normalisePath(foundAdditionalStage.startPage)
+          );
+          if (page) {
+            //We've found the page, we should now merge our cache and continue
+            await cacheService.mergeState(request, formData.data);
+            return page.makeGetRouteHandler()(request, h);
+          }
+        } else {
+          page = model?.pages.find(
+            (page) => normalisePath(page.path) === normalisePath(path)
+          );
+        }
+
         if (page) {
           return page.makeGetRouteHandler()(request, h);
         }
@@ -175,7 +204,7 @@ export const plugin = {
       },
     });
 
-    const { uploadService } = server.services([]);
+    const { uploadService, cacheService } = server.services([]);
 
     const handleFiles = (request: HapiRequest, h: HapiResponseToolkit) => {
       return uploadService.handleUploadRequest(request, h);

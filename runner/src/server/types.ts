@@ -10,6 +10,7 @@ import {
   PayService,
   UploadService,
   WebhookService,
+  DataService,
 } from "./services";
 
 type Services = (
@@ -21,6 +22,7 @@ type Services = (
   payService: PayService;
   uploadService: UploadService;
   webhookService: WebhookService;
+  dataService: DataService;
 };
 
 export type RouteConfig = {

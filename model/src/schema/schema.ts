@@ -195,6 +195,8 @@ export const Schema = joi
     name: localisedString.optional(),
     feedback: feedbackSchema,
     startPage: joi.string().required(),
+    multiStageEndpoints: joi.object().optional(),
+    additionalStages: joi.object().optional(),
     pages: joi.array().required().items(pageSchema).unique("path"),
     sections: joi.array().items(sectionsSchema).unique("name").required(),
     conditions: joi.array().items(conditionsSchema).unique("name"),

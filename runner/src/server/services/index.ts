@@ -5,3 +5,4 @@ export { EmailService } from "./emailService";
 export { CacheService, catboxProvider } from "./cacheService";
 export { WebhookService } from "./webhookService";
 export { AddressService } from "./addressService";
+export { DataService } from "./dataService";
