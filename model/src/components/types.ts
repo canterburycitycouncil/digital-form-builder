@@ -79,6 +79,7 @@ interface TextFieldBase {
     autocomplete?: string;
     parameterName?: string;
     hideField?: boolean;
+    variable?: string;
   };
   schema: {
     max?: number;
@@ -98,6 +99,7 @@ interface NumberFieldBase {
   options: {
     parameterName?: string;
     hideField?: boolean;
+    variable?: string;
   };
   schema: {
     min?: number;
@@ -147,6 +149,7 @@ interface DateFieldBase {
     optionalText?: boolean;
     parameterName?: string;
     hideField?: boolean;
+    variable?: string;
   };
   schema: {};
 }
