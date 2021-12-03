@@ -81,13 +81,13 @@ export default class Designer extends Component<Props, State> {
     this.setState({ id });
     this.designerApi.fetchData(id).then((data) => {
       const newFormItemNames = Object.getOwnPropertyNames(newFormJson);
-      newFormItemNames?.map((item) => {
+      newFormItemNames?.forEach((item) => {
         if (!data?.hasOwnProperty(item)) {
           data[item] = newFormJson[item];
         }
       });
       const dataFormItems = Object.getOwnPropertyNames(data);
-      dataFormItems?.map((item) => {
+      dataFormItems?.forEach((item) => {
         if (!newFormJson?.hasOwnProperty(item)) {
           delete data[item];
         }
