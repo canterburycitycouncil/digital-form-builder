@@ -4,8 +4,10 @@ import { ComponentTypes } from "@xgovformbuilder/model";
 import { Actions } from "./reducers/component/types";
 import { Textarea } from "@govuk-jsx/textarea";
 import { Input } from "@govuk-jsx/input";
+import { Select } from "@govuk-jsx/select";
 import { i18n } from "./i18n";
 import { ErrorMessage } from "./components/ErrorMessage";
+import { DataContext } from "./context";
 
 type Props = {
   isContentField?: boolean;
@@ -13,6 +15,7 @@ type Props = {
 
 export function FieldEdit({ isContentField = false }: Props) {
   const { state, dispatch } = useContext(ComponentContext);
+  const { data } = useContext(DataContext);
   const { selectedComponent, errors } = state;
 
   const { name, title, hint, attrs, type, options = {} } = selectedComponent;
@@ -22,11 +25,18 @@ export function FieldEdit({ isContentField = false }: Props) {
     required = true,
     parameterName = "",
     hideField = false,
+    variable = "",
   } = options;
   const isFileUploadField = selectedComponent.type === "FileUploadField";
   const fieldTitle =
     ComponentTypes.find((componentType) => componentType.name === type)
       ?.title ?? "";
+  const availableVariables = data.logicExpressions.map((expression) => {
+    return {
+      children: expression.variableName,
+      value: expression.variableName,
+    };
+  });
 
   return (
     <div>
@@ -209,6 +219,32 @@ export function FieldEdit({ isContentField = false }: Props) {
             onChange={(e) => {
               dispatch({
                 type: Actions.EDIT_OPTIONS_PARAMETER_NAME,
+                payload: e.target.value,
+              });
+            }}
+            errorMessage={
+              errors?.title
+                ? { children: i18n(errors.title[0], errors.title[1]) }
+                : undefined
+            }
+          />
+        )}
+        {!isContentField && (
+          <Select
+            id="field-options-variable"
+            name="options.variable"
+            label={{
+              className: "govuk-label--s",
+              children: [i18n("common.variableOption.title")],
+            }}
+            hint={{
+              children: [i18n("common.variableOption.helpText")],
+            }}
+            items={availableVariables}
+            value={variable || ""}
+            onChange={(e) => {
+              dispatch({
+                type: Actions.EDIT_OPTIONS_VARIABLE,
                 payload: e.target.value,
               });
             }}
