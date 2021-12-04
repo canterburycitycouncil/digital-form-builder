@@ -36,9 +36,8 @@ export const getFormWithId: ServerRoute = {
         const { persistenceService } = request.services([]);
         response = await getPublished(id, persistenceService);
         const values = JSON.parse(response);
-
         if (values) {
-          values.pages = JSON.parse(values.pages);
+          values.pages = values.pages;
           formJson = values;
         }
       } catch (error) {

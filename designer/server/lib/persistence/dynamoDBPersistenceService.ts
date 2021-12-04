@@ -88,7 +88,6 @@ export class dynamoDBPersistenceService implements PersistenceService {
               reject(err);
             }
             if (data && data.Item) {
-              data.Item.outputs = JSON.parse(data.Item.outputs);
               resolve(JSON.stringify(data.Item));
             } else {
               return resolve("");
@@ -117,9 +116,9 @@ export class dynamoDBPersistenceService implements PersistenceService {
     let form = JSON.parse(configuration);
     form.createdAt = this.formatAWSDate(new Date());
     form.updatedAt = this.formatAWSDate(new Date());
-    form.pages = JSON.stringify(form.pages);
-    form.outputs = JSON.stringify(form.outputs);
-    form.logicExpressions = JSON.stringify(form.logicExpressions);
+    form.pages = form.pages;
+    form.outputs = form.outputs;
+    form.logicExpressions = form.logicExpressions;
     if (!config.dynamoDBTable) {
       this.logger.error(
         `no name for dynamoDBTable was defined. Make sure this is set in your .env file.`
