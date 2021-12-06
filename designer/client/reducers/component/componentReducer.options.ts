@@ -117,5 +117,12 @@ export function optionsReducer(state, action: OptionsActions) {
           options: { ...options, hideField: payload },
         },
       };
+    case Options.EDIT_OPTIONS_VARIABLE:
+      return {
+        selectedComponent: {
+          ...selectedComponent,
+          options: { ...options, variable: payload },
+        },
+      };
   }
 }

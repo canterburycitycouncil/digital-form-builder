@@ -31,12 +31,20 @@ export function FieldEdit({ isContentField = false }: Props) {
   const fieldTitle =
     ComponentTypes.find((componentType) => componentType.name === type)
       ?.title ?? "";
-  const availableVariables = data.logicExpressions.map((expression) => {
-    return {
-      children: expression.variableName,
-      value: expression.variableName,
-    };
-  });
+  let emptyVariableOption = [
+    {
+      children: "-Please select-",
+      value: "",
+    },
+  ];
+  const availableVariables = emptyVariableOption.concat(
+    data.logicExpressions.map((expression) => {
+      return {
+        children: expression.variableName,
+        value: expression.variableName,
+      };
+    })
+  );
 
   return (
     <div>
