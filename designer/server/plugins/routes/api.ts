@@ -50,7 +50,7 @@ export const getFormWithId: ServerRoute = {
 };
 
 type OutputRequest = {
-  formValues: string;
+  formValues: object;
   outputs: Output[];
 };
 
