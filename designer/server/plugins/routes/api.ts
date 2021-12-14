@@ -51,6 +51,7 @@ export const getFormWithId: ServerRoute = {
 
 type OutputRequest = {
   formValues: object;
+  submission: object;
   outputs: Output[];
 };
 
@@ -62,32 +63,49 @@ export const runOutputs: ServerRoute = {
       parse: true,
     },
     handler: async (request, h) => {
-      const { formValues, outputs } = request.payload as OutputRequest;
-      outputs.forEach((output) => {
-        if (!OutputType[output.type]) {
-          console.log("No output of that type found");
-        } else {
+      return new Promise((resolve, reject) => {
+        const { submission, outputs } = request.payload as OutputRequest;
+        let promiseArray: Promise<string>[] = [];
+        outputs.forEach((output) => {
           switch (output.type) {
             case "email":
               break;
             case "notify":
               break;
             case "webhook":
-              webhook(
+              let webhookPromise = webhook(
                 output.outputConfiguration as WebhookOutputConfiguration,
-                formValues
+                submission.formValues
               );
+              promiseArray.push(webhookPromise);
               break;
             case "freshdesk":
-              freshdesk(
+              let fdPromise = freshdesk(
                 output.outputConfiguration as FreshdeskOutputConfiguration,
-                formValues
+                submission,
+                submission.formValues
               );
+              promiseArray.push(fdPromise);
               break;
+            default:
+              resolve(
+                h
+                  .response("no output of that type found")
+                  .code(400)
+                  .type("application/json")
+              );
           }
-        }
+        });
+        Promise.all(promiseArray)
+          .then((res) => {
+            console.log(res);
+            resolve(h.response("it works").code(200).type("application/json"));
+          })
+          .catch((err) => {
+            console.log(err);
+            resolve(h.response(err.message).code(500).type("application/json"));
+          });
       });
-      return h.response().type("application/json");
     },
   },
 };
