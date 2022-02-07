@@ -1,6 +1,8 @@
 import { FreshdeskOutputConfiguration } from "@xgovformbuilder/model";
 
-export const freshdesk = (
+export const freshdesk = async (
   config: FreshdeskOutputConfiguration,
   formValues
-) => {};
+) => {
+  // DEPRECIATED
+};
