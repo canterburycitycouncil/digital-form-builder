@@ -21,14 +21,3 @@ services:
       - LAST_COMMIT
       - LAST_TAG
     command: yarn designer start
-    depends_on:
-      - frontend
-  frontend:
-    container_name: frontend
-    image: digital-form-builder-frontend
-    build:
-      context: .
-      dockerfile: ./form-builder-frontend/Dockerfile
-    ports:
-      - "3009:3009"
-    command: npm start
