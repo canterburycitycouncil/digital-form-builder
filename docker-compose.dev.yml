@@ -14,9 +14,3 @@ services:
       - /usr/src/app/runner/dist
       - ./designer:/usr/src/app/designer:delegated
     command: yarn designer dev
-  frontend:
-    volumes:
-      - ./form-builder-frontend:/app
-    environment:
-      - CI=true
-    command: npm start
