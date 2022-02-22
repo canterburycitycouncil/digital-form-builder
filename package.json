@@ -85,6 +85,6 @@
     }
   },
   "lint-staged": {
-    "**/*": "eslint"
+    "**/*": "eslint --fix"
   }
 }
