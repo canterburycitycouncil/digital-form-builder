@@ -24,6 +24,7 @@ import ErrorSummary from "../error-summary";
 import { DataContext } from "../context";
 import logger from "../plugins/logger";
 import FreshdeskEdit from "./freshdesk-edit";
+import S3FileUploadEdit from "./s3fileupload-edit";
 
 type State = {
   outputType: OutputType;
@@ -100,6 +101,12 @@ class OutputEdit extends Component<Props, State> {
           customFields: formData.get("freshdesk-customFields") as string,
           freshdeskHost: formData.get("freshdesk-freshdeskHost") as string,
           apiKey: formData.get("freshdesk-apiKey") as string,
+        };
+        break;
+      case OutputType.S3FileUpload:
+        outputConfiguration = {
+          apiKey: formData.get("s3fileupload-apikey") as string,
+          endpoint: formData.get("s3fileupload-endpoint") as string,
         };
         break;
     }
@@ -209,6 +216,24 @@ class OutputEdit extends Component<Props, State> {
           errors
         );
         break;
+      case OutputType.S3FileUpload:
+        let s3apiKey = formData.get("s3fileupload-apikey") as string;
+        let endpoint = formData.get("s3fileupload-endpoint") as string;
+        validateNotEmpty(
+          "s3fileupload-apikey",
+          "Upload File to S3 API key",
+          "apiKey",
+          s3apiKey,
+          errors
+        );
+        validateNotEmpty(
+          "s3fileupload-endpoint",
+          "Upload File to S3 endpoint",
+          "endpoint",
+          endpoint,
+          errors
+        );
+        break;
     }
 
     this.setState({ errors: errors });
@@ -253,6 +278,12 @@ class OutputEdit extends Component<Props, State> {
     const { data, output } = this.props;
     let outputEdit: ReactNode;
 
+    console.log(data);
+    console.log(output);
+
+    console.log(outputType);
+    console.log(OutputType.S3FileUpload);
+
     if (outputType === OutputType.Notify) {
       outputEdit = (
         <NotifyEdit
@@ -277,6 +308,15 @@ class OutputEdit extends Component<Props, State> {
           customFields={output?.outputConfiguration?.["customFields"]}
           freshdeskHost={output?.outputConfiguration?.["freshdeskHost"]}
           apiKey={output?.outputConfiguration?.["apiKey"]}
+          errors={errors}
+        />
+      );
+    } else if (outputType === OutputType.S3FileUpload) {
+      console.log("Inside S3FileUpload");
+      outputEdit = (
+        <S3FileUploadEdit
+          apiKey={output?.outputConfiguration?.["apiKey"]}
+          endpoint={output?.outputConfiguration?.["endpoint"]}
           errors={errors}
         />
       );
@@ -338,6 +378,7 @@ class OutputEdit extends Component<Props, State> {
               <option value="notify">Email via GOVUK Notify</option>
               <option value="webhook">Webhook</option>
               <option value="freshdesk">Freshdesk</option>
+              <option value="s3fileupload">Upload File to S3</option>
             </select>
           </div>
 
