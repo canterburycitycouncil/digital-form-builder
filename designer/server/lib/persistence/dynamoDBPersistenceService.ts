@@ -114,6 +114,7 @@ export class dynamoDBPersistenceService implements PersistenceService {
   async uploadConfiguration(id: string, configuration: string) {
     id = id.replace(".json", "");
     let form = JSON.parse(configuration);
+    form.formId = id;
     form.createdAt = this.formatAWSDate(new Date());
     form.updatedAt = this.formatAWSDate(new Date());
     form.pages = form.pages;
