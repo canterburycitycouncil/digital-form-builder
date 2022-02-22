@@ -190,14 +190,15 @@ const outputSchema = joi.object().keys({
   type: joi
     .string()
     .allow("notify", "email", "webhook", "sheets", "freshdesk", "s3fileupload"),
-  outputConfiguration: joi.alternatives().try(
-    notifySchema,
-
-    emailSchema,
-    webhookSchema,
-    freshdeskSchema,
-    s3FileUploadSchema
-  ),
+  outputConfiguration: joi
+    .alternatives()
+    .try(
+      notifySchema,
+      emailSchema,
+      webhookSchema,
+      freshdeskSchema,
+      s3FileUploadSchema
+    ),
 });
 
 const feedbackSchema = joi.object().keys({
