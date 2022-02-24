@@ -226,7 +226,8 @@
       "fieldHint": "A feedback form is used to gather feedback from users about another form",
       "fieldTitle": "Select a phase banner to add or change to your form",
       "hint": "A phase banner includes a link for users to give feedback on your form."
-    }
+    },
+    "internalOnly": "Is this form internal only?"
   },
   "landingPage": {
     "choice": {

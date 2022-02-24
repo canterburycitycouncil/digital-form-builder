@@ -124,6 +124,7 @@ export function isMultipleApiKey(
  * `FormDefinition` is a typescript representation of `Schema`
  */
 export type FormDefinition = {
+  internalOnly: boolean;
   pages: Page[];
   conditions: ConditionRawData[];
   lists: List[];
