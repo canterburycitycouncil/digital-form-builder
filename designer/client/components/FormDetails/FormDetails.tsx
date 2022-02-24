@@ -2,15 +2,15 @@ import React, { Component, ChangeEvent, ContextType, FormEvent } from "react";
 import { FormConfiguration, FormDefinition } from "@xgovformbuilder/model";
 import isFunction from "lodash/isFunction";
 
-import { validateTitle, hasValidationErrors } from "../../validations";
+import { hasValidationErrors } from "../../validations";
 import * as formConfigurationApi from "../../load-form-configurations";
 import ErrorSummary from "../../error-summary";
 import { DataContext } from "../../context";
 import { i18n } from "../../i18n";
 
-import { FormDetailsTitle } from "./FormDetailsTitle";
 import { FormDetailsFeedback } from "./FormDetailsFeedback";
 import { FormDetailsPhaseBanner } from "./FormDetailsPhaseBanner";
+import { FormDetailsInternalOnly } from "./FormDetailsInternalOnly";
 import "./FormDetails.scss";
 import logger from "../../plugins/logger";
 type PhaseBanner = Exclude<FormDefinition["phaseBanner"], undefined>;
@@ -21,12 +21,12 @@ interface Props {
 }
 
 interface State {
-  title: string;
   phase: Phase;
   feedbackForm: boolean;
   formConfigurations: FormConfiguration[];
   selectedFeedbackForm?: string;
   errors: any;
+  internalOnly: boolean;
 }
 
 export class FormDetails extends Component<Props, State> {
@@ -39,37 +39,36 @@ export class FormDetails extends Component<Props, State> {
     const { data } = context;
     const selectedFeedbackForm = data.feedback?.url?.substr(1) ?? "";
     this.state = {
-      title: data.name || "",
       feedbackForm: data.feedback?.feedbackForm ?? false,
       formConfigurations: [],
       selectedFeedbackForm,
       phase: data.phaseBanner?.phase,
       errors: {},
+      internalOnly: data.internalOnly || false,
     };
   }
 
   onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const validationErrors = this.validate();
-
-    if (hasValidationErrors(validationErrors)) return;
 
     const { data, save } = this.context;
     const {
-      title,
       feedbackForm = false,
       selectedFeedbackForm,
       phase,
+      internalOnly,
     } = this.state;
     const { phaseBanner = {} } = data;
     const { onCreate } = this.props;
 
     let copy: FormDefinition = { ...data };
-    copy.name = title;
+    copy.internalOnly = internalOnly;
     copy.feedback = {
       feedbackForm,
-      url: selectedFeedbackForm ? `/${selectedFeedbackForm}` : "",
     };
+    if (selectedFeedbackForm) {
+      copy.feedback.url = `/${selectedFeedbackForm}`;
+    }
 
     copy.phaseBanner = {
       ...phaseBanner,
@@ -84,13 +83,6 @@ export class FormDetails extends Component<Props, State> {
     } catch (err) {
       logger.error("FormDetails", err);
     }
-  };
-
-  validate = () => {
-    const { title } = this.state;
-    const errors = validateTitle("form-title", title);
-    this.setState({ errors });
-    return errors;
   };
 
   onSelectFeedbackForm = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -114,18 +106,19 @@ export class FormDetails extends Component<Props, State> {
     this.setState({ phase: phase || undefined });
   };
 
-  handleTitleInputBlur = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ title: event.target.value });
+  handleInternalOnlyInputBlur = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.checked);
+    this.setState({ internalOnly: event.target.checked });
   };
 
   render() {
     const {
-      title,
       phase,
       feedbackForm,
       selectedFeedbackForm,
       formConfigurations,
       errors,
+      internalOnly,
     } = this.state;
 
     return (
@@ -134,10 +127,9 @@ export class FormDetails extends Component<Props, State> {
           <ErrorSummary errorList={Object.values(errors)} />
         )}
         <form onSubmit={this.onSubmit} autoComplete="off">
-          <FormDetailsTitle
-            title={title}
-            errors={errors}
-            handleTitleInputBlur={this.handleTitleInputBlur}
+          <FormDetailsInternalOnly
+            internalOnly={internalOnly}
+            handleInternalOnlyInputBlur={this.handleInternalOnlyInputBlur}
           />
           <FormDetailsPhaseBanner
             phase={phase}
