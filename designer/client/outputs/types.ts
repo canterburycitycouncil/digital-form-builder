@@ -3,6 +3,7 @@ export enum OutputType {
   Notify = "notify",
   Webhook = "webhook",
   Freshdesk = "freshdesk",
+  S3FileUpload = "s3fileupload",
 }
 
 export type EmailOutputConfiguration = {
@@ -27,11 +28,17 @@ export type FreshdeskOutputConfiguration = {
   customFields: string;
 };
 
+export type S3FileUploadOutputConfiguration = {
+  apiKey: string;
+  endpoint: string;
+};
+
 export type OutputConfiguration =
   | EmailOutputConfiguration
   | NotifyOutputConfiguration
   | WebhookOutputConfiguration
-  | FreshdeskOutputConfiguration;
+  | FreshdeskOutputConfiguration
+  | S3FileUploadOutputConfiguration;
 
 export type Output = {
   name: string;

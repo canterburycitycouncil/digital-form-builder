@@ -110,11 +110,18 @@ export function optionsReducer(state, action: OptionsActions) {
           options: { ...options, parameterName: payload },
         },
       };
-    case Options.EDIT_OPTIONS_HIDE_FIELD:
+    case Options.EDIT_OPTIONS_IS_INTERNAL:
       return {
         selectedComponent: {
           ...selectedComponent,
-          options: { ...options, hideField: payload },
+          options: { ...options, isInternal: payload },
+        },
+      };
+    case Options.EDIT_OPTIONS_IS_EXTERNAL:
+      return {
+        selectedComponent: {
+          ...selectedComponent,
+          options: { ...options, isExternal: payload },
         },
       };
     case Options.EDIT_OPTIONS_VARIABLE:

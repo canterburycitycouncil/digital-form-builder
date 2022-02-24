@@ -179,13 +179,26 @@ const freshdeskSchema = joi.object().keys({
   customFields: joi.string().allow("").optional(),
 });
 
+const s3FileUploadSchema = joi.object().keys({
+  apiKey: joi.string(),
+  endpoint: joi.string(),
+});
+
 const outputSchema = joi.object().keys({
   name: joi.string(),
   title: joi.string().optional(),
-  type: joi.string().allow("notify", "email", "webhook", "sheets", "freshdesk"),
+  type: joi
+    .string()
+    .allow("notify", "email", "webhook", "sheets", "freshdesk", "s3fileupload"),
   outputConfiguration: joi
     .alternatives()
-    .try(notifySchema, emailSchema, webhookSchema, freshdeskSchema),
+    .try(
+      notifySchema,
+      emailSchema,
+      webhookSchema,
+      freshdeskSchema,
+      s3FileUploadSchema
+    ),
 });
 
 const feedbackSchema = joi.object().keys({
@@ -213,7 +226,7 @@ export const Schema = joi
   .required()
   .keys({
     id: joi.string().allow("").optional(),
-    name: localisedString.optional(),
+    internalOnly: joi.boolean().default(false),
     feedback: feedbackSchema,
     startPage: joi.string().required(),
     pages: joi.array().required().items(pageSchema).unique("path"),
@@ -229,6 +242,7 @@ export const Schema = joi
     metadata: joi.object({ a: joi.any() }).unknown().optional(),
     declaration: joi.string().allow("").optional(),
     outputs: joi.array().items(outputSchema),
+    s3FileUploadSchema: joi.array().items(s3FileUploadSchema),
     payApiKey: [joi.string().allow("").optional(), multiApiKeySchema],
     skipSummary: joi.boolean().default(false),
     version: joi.number().default(CURRENT_VERSION),

@@ -24,7 +24,8 @@ export function FieldEdit({ isContentField = false }: Props) {
     optionalText = false,
     required = true,
     parameterName = "",
-    hideField = false,
+    isInternal = false,
+    isExternal = false,
     variable = "",
   } = options;
   const isFileUploadField = selectedComponent.type === "FileUploadField";
@@ -267,25 +268,51 @@ export function FieldEdit({ isContentField = false }: Props) {
           <div className="govuk-checkboxes__item">
             <input
               className="govuk-checkboxes__input"
-              id="field-options-hideField"
-              name="options.hideField"
+              id="field-options-isInternal"
+              name="options.isInternal"
               type="checkbox"
-              checked={hideField}
+              checked={isInternal}
               onChange={(e) =>
                 dispatch({
-                  type: Actions.EDIT_OPTIONS_HIDE_FIELD,
+                  type: Actions.EDIT_OPTIONS_IS_INTERNAL,
                   payload: e.target.checked,
                 })
               }
             />
             <label
               className="govuk-label govuk-checkboxes__label"
-              htmlFor="field-options-hideField"
+              htmlFor="field-options-isInternal"
             >
-              {i18n("common.hideFieldOption.title")}
+              {i18n("common.isInternalOption.title")}
             </label>
             <span className="govuk-hint govuk-checkboxes__hint">
-              {i18n("common.hideFieldOption.helpText")}
+              {i18n("common.isInternalOption.helpText")}
+            </span>
+          </div>
+        )}
+        {!isContentField && (
+          <div className="govuk-checkboxes__item">
+            <input
+              className="govuk-checkboxes__input"
+              id="field-options-isExternal"
+              name="options.isExternal"
+              type="checkbox"
+              checked={isExternal}
+              onChange={(e) =>
+                dispatch({
+                  type: Actions.EDIT_OPTIONS_IS_EXTERNAL,
+                  payload: e.target.checked,
+                })
+              }
+            />
+            <label
+              className="govuk-label govuk-checkboxes__label"
+              htmlFor="field-options-isExternal"
+            >
+              {i18n("common.isExternalOption.title")}
+            </label>
+            <span className="govuk-hint govuk-checkboxes__hint">
+              {i18n("common.isExternalOption.helpText")}
             </span>
           </div>
         )}
