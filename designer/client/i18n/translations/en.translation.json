@@ -73,9 +73,13 @@
       "helpText": "Enter the description to show for this field",
       "title": "Help text (optional)"
     },
-    "hideFieldOption": {
-      "helpText": "Tick this box to stop this field appearing to the customer",
-      "title": "Hide field"
+    "isInternalOption": {
+      "helpText": "Tick this box if the field should only be viewed internally",
+      "title": "Is internal only"
+    },
+    "isExternalOption": {
+      "helpText": "Tick this box if the field should only be viewed externally",
+      "title": "Is external only"
     },
     "hideOptionalTextOption": {
       "helpText": "Tick this box if you do not want the title to indicate that this field is optional",
