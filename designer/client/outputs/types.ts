@@ -45,6 +45,9 @@ export type Output = {
   title: string;
   type: OutputType;
   outputConfiguration: OutputConfiguration;
+  previous: string;
+  previousValues: string[];
+  next: string[];
 };
 
 export interface ValidationError {
@@ -61,4 +64,21 @@ export type ValidationErrors = {
   apiKey?: ValidationError;
   url?: ValidationError;
   customFields?: ValidationError;
+};
+
+export const responses = {
+  email: {
+    title: "string",
+    recipients: "string[]",
+    successes: "number",
+    failures: "number",
+  },
+  notify: {},
+  webhook: {},
+  freshdesk: {
+    id: "string",
+  },
+  s3fileupload: {
+    url: "string",
+  },
 };

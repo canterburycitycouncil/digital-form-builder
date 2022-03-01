@@ -43,6 +43,24 @@
       "title": "Section (optional)"
     }
   },
+  "addOutput": {
+    "outputTypeOption": {
+      "title": "Output type",
+      "helpText": "Select the type of output you would like to run."
+    },
+    "previous":{
+      "title": "Previous output",
+      "helpText": "If this output depends on other outputs to run before it can execute, choose which output it should follow on from here"
+    },
+    "titleField": {
+      "title": "Title",
+      "helpText": "Human friendly name for this output"
+    },
+    "nameField": {
+      "title": "Name",
+      "helpText": "Machine name for this component. This must be unique so in most cases it's safest to keep this to the default value."
+    }
+  },
   "cancel": "Cancel",
   "close": "Close",
   "common": {
@@ -303,7 +321,7 @@
     "formDetails": "Form details",
     "links": "Add link",
     "lists": "Lists",
-    "outputs": "Outputs",
+    "outputs": "Add output",
     "sections": "Sections",
     "summary": "Summary",
     "summaryBehaviour": "Summary behaviour"
@@ -349,6 +367,13 @@
       "question": "Question page",
       "start": "Start page",
       "summary": "Summary page"
+    }
+  },
+  "outputs": {
+    "menu": {
+      "backToForm": "Back to form",
+      "addOutput": "Add output",
+      "links": "Add link"
     }
   },
   "save": "Save",

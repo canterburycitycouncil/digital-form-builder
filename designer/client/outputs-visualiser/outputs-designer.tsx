@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Menu from "../components/Menu/Menu";
-import { Visualisation } from "../components/Visualisation";
+import Menu from "./outputs-menu";
+import { Visualisation } from "./outputs-visualiser";
 import { FormDefinition } from "@xgovformbuilder/model";
 import { FlyoutContext, DataContext } from "../context";
 import { FeatureFlagProvider } from "../context/FeatureFlagContext";
@@ -25,10 +25,11 @@ interface State {
   page?: any;
   updatedAt?: any;
   downloadedAt?: any;
+  persona?: any;
 }
 
-export default class Designer extends Component<Props, State> {
-  state = { loading: true, flyoutCount: 0 };
+export class OutputsDesigner extends Component<Props, State> {
+  state: State = { loading: true, flyoutCount: 0 };
 
   designerApi = new DesignerApi();
 
@@ -42,12 +43,18 @@ export default class Designer extends Component<Props, State> {
 
   incrementFlyoutCounter = (callback = () => {}) => {
     let currentCount = this.state.flyoutCount;
-    this.setState({ flyoutCount: ++currentCount }, callback());
+    this.setState(
+      { flyoutCount: currentCount ? ++currentCount : currentCount },
+      callback()
+    );
   };
 
   decrementFlyoutCounter = (callback = () => {}) => {
     let currentCount = this.state.flyoutCount;
-    this.setState({ flyoutCount: --currentCount }, callback());
+    this.setState(
+      { flyoutCount: currentCount ? --currentCount : currentCount },
+      callback()
+    );
   };
 
   save = async (toUpdate, callback = () => {}) => {
@@ -96,8 +103,7 @@ export default class Designer extends Component<Props, State> {
   }
 
   render() {
-    const { flyoutCount, data, loading, error } = this.state;
-    const { previewUrl } = window;
+    const { flyoutCount, loading, data, error } = this.state;
     if (loading) {
       return <p>Loading ...</p>;
     }
@@ -115,17 +121,12 @@ export default class Designer extends Component<Props, State> {
           <FlyoutContext.Provider value={flyoutContextProviderValue}>
             <div id="app">
               <Prompt when={!error} message={`${i18n("leaveDesigner")}`} />
-              <Menu
-                id={this.id}
-                updateDownloadedAt={this.updateDownloadedAt}
-                updatePersona={this.updatePersona}
-              />
+              <Menu id={this.id} updateDownloadedAt={this.updateDownloadedAt} />
               <Visualisation
                 downloadedAt={this.state.downloadedAt}
                 updatedAt={this.state.updatedAt}
                 persona={this.state.persona}
                 id={this.id}
-                previewUrl={previewUrl}
               />
             </div>
           </FlyoutContext.Provider>

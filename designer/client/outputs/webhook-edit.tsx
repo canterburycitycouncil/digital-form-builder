@@ -1,21 +1,23 @@
 import React from "react";
 import { ValidationErrors } from "./types";
-import { Input } from "@govuk-jsx/input";
+import { Input } from "@xgovformbuilder/govuk-react-jsx";
 
 type Props = {
   url: string;
   errors: ValidationErrors;
+  onChange: Function;
 };
 
-const WebhookEdit = ({ url = "", errors }: Props) => (
+const WebhookEdit = ({ url = "", errors, onChange }: Props) => (
   <Input
-    id="webhook-url"
-    name="webhook-url"
+    id="url"
+    name="url"
     label={{
       className: "govuk-label--s",
       children: ["Webhook url"],
     }}
     defaultValue={url}
+    onChange={onChange}
     pattern="^\S+"
     errorMessage={errors?.url ? { children: errors?.url.children } : undefined}
   />

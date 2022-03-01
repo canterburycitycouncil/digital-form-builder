@@ -77,6 +77,7 @@ export default class Designer extends Component<Props, State> {
   };
 
   componentDidMount() {
+    console.log(this.props);
     const id = this.props.match?.params?.id;
     this.setState({ id });
     this.designerApi.fetchData(id).then((data) => {
