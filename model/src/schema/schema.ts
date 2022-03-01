@@ -226,7 +226,7 @@ export const Schema = joi
   .required()
   .keys({
     id: joi.string().allow("").optional(),
-    name: localisedString.optional(),
+    internalOnly: joi.boolean().default(false),
     feedback: feedbackSchema,
     startPage: joi.string().required(),
     pages: joi.array().required().items(pageSchema).unique("path"),
