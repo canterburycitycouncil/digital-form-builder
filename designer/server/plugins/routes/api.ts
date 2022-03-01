@@ -1,14 +1,15 @@
 import newFormJson from "../../../new-form.json";
-import { FormConfiguration, Schema } from "../../../../model";
+import { FormConfiguration, FormDefinition, Schema } from "../../../../model";
 import Wreck from "@hapi/wreck";
 import config from "../../config";
 import { publish } from "../../lib/publish";
 import { ServerRoute, ResponseObject } from "@hapi/hapi";
 import { OutputType, Output } from "@xgovformbuilder/model";
-import { freshdesk, webhook } from "../../lib/outputs";
+import { freshdesk, s3fileupload, webhook } from "../../lib/outputs";
 import {
   FreshdeskOutputConfiguration,
   WebhookOutputConfiguration,
+  S3FileUploadOutputConfiguration,
 } from "../../../client/outputs/types";
 
 const getPublished = async function (id, persistenceService) {
@@ -50,9 +51,8 @@ export const getFormWithId: ServerRoute = {
 };
 
 type OutputRequest = {
-  formValues: object;
+  formScheme: FormDefinition;
   submission: object;
-  outputs: Output[];
 };
 
 export const runOutputs: ServerRoute = {
@@ -62,11 +62,14 @@ export const runOutputs: ServerRoute = {
     payload: {
       parse: true,
     },
+    cors: {
+      origin: ["http://localhost:8000"],
+    },
     handler: async (request, h) => {
       return new Promise((resolve, reject) => {
-        const { submission, outputs } = request.payload as OutputRequest;
+        const { submission, formScheme } = request.payload as OutputRequest;
         let promiseArray: Promise<string>[] = [];
-        outputs.forEach((output) => {
+        formScheme.outputs.forEach((output) => {
           switch (output.type) {
             case "email":
               break;
@@ -86,6 +89,14 @@ export const runOutputs: ServerRoute = {
                 submission.formValues
               );
               promiseArray.push(fdPromise);
+              break;
+            case "s3fileupload":
+              let s3Promise = s3fileupload(
+                output.outputConfiguration as S3FileUploadOutputConfiguration,
+                formScheme,
+                submission
+              );
+              promiseArray.push(s3Promise);
               break;
             default:
               resolve(

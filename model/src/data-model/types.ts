@@ -62,7 +62,7 @@ export enum OutputType {
   Notify = "notify",
   Webhook = "webhook",
   Freshdesk = "freshdesk",
-  S3FileUpload = "Upload File to S3",
+  S3FileUpload = "s3fileupload",
 }
 
 export type EmailOutputConfiguration = {
