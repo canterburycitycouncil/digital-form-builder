@@ -4,6 +4,7 @@ import Page from "../../page";
 import { Lines } from "./Lines";
 import { Minimap } from "./Minimap";
 import { Info } from "./Info";
+import SaveMenu from "../SaveMenu";
 import { getLayout, Pos } from "./getLayout";
 import { DataContext } from "../../context";
 import "./visualisation.scss";
@@ -14,6 +15,7 @@ type Props = {
   previewUrl?: string;
   persona?: any;
   id?: string;
+  needsUpload?: boolean;
 };
 
 export function useVisualisation(ref) {
@@ -33,7 +35,14 @@ export function Visualisation(props: Props) {
   const { layout } = useVisualisation(ref);
   const { data } = useContext(DataContext);
 
-  const { updatedAt, downloadedAt, previewUrl, persona, id } = props;
+  const {
+    updatedAt,
+    downloadedAt,
+    previewUrl,
+    persona,
+    id,
+    needsUpload,
+  } = props;
   const { pages } = data;
 
   const wrapperStyle = layout && {
@@ -60,6 +69,8 @@ export function Visualisation(props: Props) {
             {layout && <Lines layout={layout} data={data} persona={persona} />}
           </div>
         </div>
+
+        {needsUpload && <SaveMenu />}
 
         {layout && <Info downloadedAt={downloadedAt} updatedAt={updatedAt} />}
 
