@@ -56,6 +56,7 @@ export const designerPlugin = {
       server.route(api.putFormWithId);
       server.route(api.getAllPersistedConfigurations);
       server.route(api.runOutputs);
+      server.route(api.deleteFormWithId);
       server.route(api.log);
     },
   },
