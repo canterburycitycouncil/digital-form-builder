@@ -20,10 +20,11 @@ export function migrate(form) {
 type Props = {
   id?: string;
   updateDownloadedAt?: (string) => void;
+  history?: any;
 };
 
-export function SubMenu({ id, updateDownloadedAt }: Props) {
-  const { data, save } = useContext(DataContext);
+export function SubMenu({ id, updateDownloadedAt, history }: Props) {
+  const { data, save, deleteForm } = useContext(DataContext);
   const fileInput = useRef<HTMLInputElement>(null);
 
   const onClickUpload = () => {
@@ -54,6 +55,17 @@ export function SubMenu({ id, updateDownloadedAt }: Props) {
     };
   };
 
+  const onClickDelete = () => {
+    const answer = confirm(
+      "Are you sure you want to delete this form?\nThis action cannot be undone"
+    );
+    if (answer) {
+      deleteForm().then(() => {
+        history.push("/");
+      });
+    }
+  };
+
   return (
     <div className="menu__row">
       <a href="/app" className="govuk-link submenu__link">
@@ -73,6 +85,13 @@ export function SubMenu({ id, updateDownloadedAt }: Props) {
         Download form
       </button>
       <input ref={fileInput} type="file" hidden onChange={onFileUpload} />
+      <button
+        className="govuk-body govuk-link submenu__link"
+        onClick={onClickDelete}
+        href="#"
+      >
+        Delete form
+      </button>
     </div>
   );
 }

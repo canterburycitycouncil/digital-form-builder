@@ -23,6 +23,7 @@ import { useHistory, useLocation } from "react-router-dom";
 type Props = {
   updateDownloadedAt?: (string) => void;
   id: string;
+  history?: any;
 };
 
 export default function Menu({ updateDownloadedAt, id }: Props) {
@@ -225,7 +226,11 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
         </Flyout>
       )}
 
-      <SubMenu id={id} updateDownloadedAt={updateDownloadedAt} />
+      <SubMenu
+        id={id}
+        updateDownloadedAt={updateDownloadedAt}
+        history={history}
+      />
     </nav>
   );
 }
