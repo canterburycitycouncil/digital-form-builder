@@ -187,6 +187,9 @@ const s3FileUploadSchema = joi.object().keys({
 const outputSchema = joi.object().keys({
   name: joi.string(),
   title: joi.string().optional(),
+  previous: joi.string().optional(),
+  next: joi.array().items(joi.string()).optional(),
+  previousValues: joi.array().items(joi.string()).optional(),
   type: joi
     .string()
     .allow("notify", "email", "webhook", "sheets", "freshdesk", "s3fileupload"),

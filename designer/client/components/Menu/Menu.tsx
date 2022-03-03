@@ -18,14 +18,18 @@ import { useMenuItem } from "./useMenuItem";
 import { Tabs, useTabs } from "./useTabs";
 import { SubMenu } from "./SubMenu";
 import { LogicExpressionsEdit } from "../LogicExpressions";
+import { useHistory, useLocation } from "react-router-dom";
 
 type Props = {
   updateDownloadedAt?: (string) => void;
   id: string;
+  history?: any;
 };
 
 export default function Menu({ updateDownloadedAt, id }: Props) {
   const { data } = useContext(DataContext);
+  const history = useHistory();
+  const location = useLocation();
 
   const formDetails = useMenuItem();
   const page = useMenuItem();
@@ -33,13 +37,17 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
   const sections = useMenuItem();
   const conditions = useMenuItem();
   const lists = useMenuItem();
-  const outputs = useMenuItem();
   const fees = useMenuItem();
   const summaryBehaviour = useMenuItem();
   const summary = useMenuItem();
   const logicExpression = useMenuItem();
 
   const { selectedTab, handleTabChange } = useTabs();
+
+  const goToOutputs = () => {
+    let currentUrl = location.pathname;
+    history.push(currentUrl + "/outputs");
+  };
 
   return (
     <nav className="menu">
@@ -65,7 +73,7 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
         <button data-testid="menu-lists" onClick={lists.show}>
           {i18n("menu.lists")}
         </button>
-        <button data-testid="menu-outputs" onClick={outputs.show}>
+        <button data-testid="menu-outputs" onClick={goToOutputs}>
           {i18n("menu.outputs")}
         </button>
 
@@ -124,11 +132,6 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
               <ListsEdit showEditLists={false} />
             </ListContextProvider>
           </ListsEditorContextProvider>
-        </Flyout>
-      )}
-      {outputs.isVisible && (
-        <Flyout title="Edit Outputs" onHide={outputs.hide} width="xlarge">
-          <OutputsEdit data={data} onCreate={outputs.hide} />
         </Flyout>
       )}
 
@@ -223,7 +226,11 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
         </Flyout>
       )}
 
-      <SubMenu id={id} updateDownloadedAt={updateDownloadedAt} />
+      <SubMenu
+        id={id}
+        updateDownloadedAt={updateDownloadedAt}
+        history={history}
+      />
     </nav>
   );
 }

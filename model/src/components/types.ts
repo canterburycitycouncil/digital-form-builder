@@ -78,7 +78,8 @@ interface TextFieldBase {
     allow?: string;
     autocomplete?: string;
     parameterName?: string;
-    hideField?: boolean;
+    isInternal?: boolean;
+    isExternal?: boolean;
     variable?: string;
   };
   schema: {
@@ -98,7 +99,8 @@ interface NumberFieldBase {
   hint: string;
   options: {
     parameterName?: string;
-    hideField?: boolean;
+    isInternal?: boolean;
+    isExternal?: boolean;
     variable?: string;
   };
   schema: {
@@ -121,7 +123,8 @@ interface ListFieldBase {
     classes?: string;
     bold?: boolean;
     parameterName?: string;
-    hideField?: boolean;
+    isInternal?: boolean;
+    isExternal?: boolean;
   };
   list: string;
   schema: {};
@@ -148,7 +151,8 @@ interface DateFieldBase {
     required?: boolean;
     optionalText?: boolean;
     parameterName?: string;
-    hideField?: boolean;
+    isInternal?: boolean;
+    isExternal?: boolean;
     variable?: string;
   };
   schema: {};

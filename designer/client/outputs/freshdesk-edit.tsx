@@ -1,12 +1,13 @@
 import React from "react";
 import { ValidationErrors } from "./types";
-import { Input } from "@govuk-jsx/input";
+import { Input } from "@xgovformbuilder/govuk-react-jsx";
 
 type Props = {
   customFields: string;
   apiKey: string;
   freshdeskHost: string;
   errors: ValidationErrors;
+  onChange: Function;
 };
 
 const FreshdeskEdit = ({
@@ -14,16 +15,18 @@ const FreshdeskEdit = ({
   freshdeskHost = "",
   customFields = "",
   errors,
+  onChange,
 }: Props) => (
   <React.Fragment>
     <Input
-      id="freshdesk-freshdeskHost"
-      name="freshdesk-freshdeskHost"
+      id="freshdeskHost"
+      name="freshdeskHost"
       label={{
         className: "govuk-label--s",
         children: ["Freshdesk host"],
       }}
       defaultValue={freshdeskHost}
+      onChange={onChange}
       pattern="^\S+"
       errorMessage={
         errors?.freshdeskHost
@@ -32,26 +35,28 @@ const FreshdeskEdit = ({
       }
     />
     <Input
-      id="freshdesk-apiKey"
-      name="freshdesk-apiKey"
+      id="apiKey"
+      name="apiKey"
       label={{
         className: "govuk-label--s",
         children: ["API key"],
       }}
       defaultValue={apiKey}
+      onChange={onChange}
       pattern="^\S+"
       errorMessage={
         errors?.apiKey ? { children: errors?.apiKey.children } : undefined
       }
     />
     <Input
-      id="freshdesk-customFields"
-      name="freshdesk-customFields"
+      id="customFields"
+      name="customFields"
       label={{
         className: "govuk-label--s",
         children: ["Custom fields"],
       }}
       defaultValue={customFields}
+      onChange={onChange}
       pattern="^\S+"
       errorMessage={
         errors?.customFields

@@ -25,4 +25,18 @@ export class DesignerApi {
       logger.error("fetchData", e);
     }
   }
+
+  async delete(id: string) {
+    const response = await window.fetch(`/api/${id}`, {
+      method: "delete",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return response;
+  }
 }

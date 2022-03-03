@@ -6,6 +6,7 @@ import { initI18n } from "./i18n";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Designer from "./designer";
 import { SaveError } from "./pages/ErrorPages";
+import { OutputsDesigner } from "./outputs-visualiser";
 
 initI18n();
 
@@ -19,6 +20,7 @@ export class App extends React.Component {
       <Router basename="/app">
         <div id="app">
           <Switch>
+            <Route path="/designer/:id/outputs" component={OutputsDesigner} />
             <Route path="/designer/:id" component={Designer} />
             <Route path="/" exact>
               <LandingChoice />

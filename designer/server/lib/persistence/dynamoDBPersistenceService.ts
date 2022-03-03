@@ -4,6 +4,7 @@ import { PersistenceService } from "./persistenceService";
 import { Logger, FormConfiguration } from "@xgovformbuilder/model";
 import { ConfigurationOptions } from "aws-sdk/lib/config-base";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
+import { resolve } from "path";
 
 const awsConfig: ConfigurationOptions = {
   region: "eu-west-2",
@@ -168,6 +169,29 @@ export class dynamoDBPersistenceService implements PersistenceService {
   async copyConfiguration(configurationId: string, newName: string) {
     const configuration = await this.getConfiguration(configurationId);
     return this.uploadConfiguration(newName, JSON.parse(configuration).values);
+  }
+
+  async deleteConfiguration(configurationId: string) {
+    return new Promise(async (resolve, reject) => {
+      let params = {
+        TableName: config.dynamoDBTable,
+        Key: {
+          id: configurationId,
+        },
+      };
+      try {
+        await this.client.delete(params).send((err, data) => {
+          if (err) {
+            reject(err);
+          }
+          resolve("");
+        });
+      } catch (err) {
+        this.logger.error(
+          `error deleting configuration with id: ${configurationId} ${err.message}`
+        );
+      }
+    });
   }
 
   formatAWSDate(date: Date) {

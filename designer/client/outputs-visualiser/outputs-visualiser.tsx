@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 
-import Page from "../../page";
-import { Lines } from "./Lines";
-import { Minimap } from "./Minimap";
-import { Info } from "./Info";
-import SaveMenu from "../SaveMenu";
-import { getLayout, Pos } from "./getLayout";
-import { DataContext } from "../../context";
-import "./visualisation.scss";
+import Output from "./components/outputs/output";
+import { Lines } from "./components/OutputLines";
+import { Minimap } from "../components/Visualisation/Minimap";
+import { Info } from "../components/Visualisation/Info";
+import { getOutputsLayout, Pos } from "../components/Visualisation/getLayout";
+import { DataContext } from "../context";
+import "../components/Visualisation/visualisation.scss";
 
 type Props = {
   updatedAt?: string;
@@ -15,7 +14,6 @@ type Props = {
   previewUrl?: string;
   persona?: any;
   id?: string;
-  needsUpload?: boolean;
 };
 
 export function useVisualisation(ref) {
@@ -23,7 +21,7 @@ export function useVisualisation(ref) {
   const [layout, setLayout] = useState<Pos>();
 
   useEffect(() => {
-    const layout = getLayout(data, ref.current!);
+    const layout = getOutputsLayout(data, ref.current!);
     setLayout(layout.pos);
   }, [data, ref]);
 
@@ -35,15 +33,8 @@ export function Visualisation(props: Props) {
   const { layout } = useVisualisation(ref);
   const { data } = useContext(DataContext);
 
-  const {
-    updatedAt,
-    downloadedAt,
-    previewUrl,
-    persona,
-    id,
-    needsUpload,
-  } = props;
-  const { pages } = data;
+  const { updatedAt, downloadedAt, persona } = props;
+  const outputs = data.outputs;
 
   const wrapperStyle = layout && {
     width: layout?.width,
@@ -55,22 +46,17 @@ export function Visualisation(props: Props) {
       <div className="visualisation">
         <div className="visualisation__pages-wrapper">
           <div ref={ref} style={wrapperStyle}>
-            {pages.map((page, index) => (
-              <Page
+            {outputs.map((output, index) => (
+              <Output
                 key={index}
-                page={page}
-                persona={persona}
-                previewUrl={previewUrl}
+                output={output}
                 layout={layout?.nodes[index]}
-                id={id}
               />
             ))}
 
             {layout && <Lines layout={layout} data={data} persona={persona} />}
           </div>
         </div>
-
-        {needsUpload && <SaveMenu />}
 
         {layout && <Info downloadedAt={downloadedAt} updatedAt={updatedAt} />}
 

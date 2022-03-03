@@ -10,7 +10,6 @@ type State = {
 type Props = {
   data: any; // TODO: type
   items?: string[];
-  onEdit: ({ data: any }) => void;
   values: { name: string; display: string }[];
 };
 
@@ -48,13 +47,9 @@ class NotifyItems extends React.Component<Props, State> {
     const { save } = this.context;
     const copy = clone(data);
 
-    save(copy)
-      .then((data) => {
-        this.props.onEdit({ data });
-      })
-      .catch((err) => {
-        logger.error("NotifyItems", err);
-      });
+    save(copy).catch((err) => {
+      logger.error("NotifyItems", err);
+    });
   };
 
   onChangeItem = (event: ChangeEvent<HTMLSelectElement>, index: number) => {

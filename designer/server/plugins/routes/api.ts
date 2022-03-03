@@ -170,6 +170,29 @@ export const putFormWithId: ServerRoute = {
   },
 };
 
+export const deleteFormWithId: ServerRoute = {
+  method: "DELETE",
+  path: "/api/{id}",
+  options: {
+    handler: async (request, h) => {
+      const { id } = request.params;
+      try {
+        let response;
+        const { persistenceService } = request.services([]);
+        response = await persistenceService.deleteConfiguration(id);
+      } catch (error) {
+        request.logger.error(error);
+        return h
+          .response({ ok: false, message: error })
+          .code(500)
+          .type("application/json");
+      }
+
+      return h.response({ ok: true }).code(200).type("application/json");
+    },
+  },
+};
+
 export const getAllPersistedConfigurations: ServerRoute = {
   method: "GET",
   path: "/api/configurations",
