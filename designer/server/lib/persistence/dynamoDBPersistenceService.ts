@@ -4,7 +4,6 @@ import { PersistenceService } from "./persistenceService";
 import { Logger, FormConfiguration } from "@xgovformbuilder/model";
 import { ConfigurationOptions } from "aws-sdk/lib/config-base";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
-import { resolve } from "path";
 
 const awsConfig: ConfigurationOptions = {
   region: "eu-west-2",
@@ -49,22 +48,6 @@ export class dynamoDBPersistenceService implements PersistenceService {
         }
       }
     });
-    // const response = await this.bucket.listObjects().promise();
-    // if (response.error) {
-    //   this.logger.error(
-    //     `error listing all configurations ${response.error.message}`
-    //   );
-    //   return response.error;
-    // }
-    // return response.Contents.map((entry) => {
-    //   const metadata = entry.Metadata ?? {};
-    //   return new FormConfiguration(
-    //     entry.Key.replace(".json", ""),
-    //     metadata[DISPLAY_NAME_METADATA_KEY],
-    //     entry.LastModified,
-    //     metadata[TYPE_METADATA_KEY] === FEEDBACK_TYPE
-    //   );
-    // });
   }
 
   async getConfiguration(id: string): Promise<string> {
@@ -99,17 +82,6 @@ export class dynamoDBPersistenceService implements PersistenceService {
         }
       }
     });
-    // const response = await this.bucket
-    //   .getObject({ Key: `${this._ensureJsonExtension(id)}` })
-    //   .promise();
-    // if (response.error) {
-    //   this.logger.error(
-    //     `error getting configuration with id: ${id}, ${response.error.message}`
-    //   );
-    //   return response.error;
-    // } else {
-    //   return Buffer.from(response.Body).toString("utf-8");
-    // }
   }
 
   async uploadConfiguration(id: string, configuration: string) {
@@ -149,21 +121,12 @@ export class dynamoDBPersistenceService implements PersistenceService {
           });
       } catch (err) {
         this.logger.error(
-          `error uploading configuration with id: ${id} ${err.message}`
+          `error uploading configuration with id: ${id} ${
+            (err as Error).message
+          }`
         );
       }
     }
-    // id = this._ensureJsonExtension(id);
-    // const metadata = this._createMetadata(configuration);
-    // const response = await this.bucket
-    //   .upload({ Key: id, Body: configuration, Metadata: metadata })
-    //   .promise();
-    // if (response.error) {
-    //   this.logger.error(
-    //     `error uploading configuration with id: ${id} ${response.error.message}`
-    //   );
-    // }
-    // return response;
   }
 
   async copyConfiguration(configurationId: string, newName: string) {
@@ -188,7 +151,9 @@ export class dynamoDBPersistenceService implements PersistenceService {
         });
       } catch (err) {
         this.logger.error(
-          `error deleting configuration with id: ${configurationId} ${err.message}`
+          `error deleting configuration with id: ${configurationId} ${
+            (err as Error).message
+          }`
         );
       }
     });
