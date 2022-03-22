@@ -1,12 +1,12 @@
-import config from "../../config";
-import { ServerRoute } from "@hapi/hapi";
+import { Request, ResponseToolkit, ServerRoute } from "@hapi/hapi";
 import JSZip from "jszip";
+import { designerViewHandler } from "./handlers";
 
 export const redirectNewToApp: ServerRoute = {
   method: "get",
   path: "/new",
   options: {
-    handler: async (_request, h) => {
+    handler: async (_request: Request, h: ResponseToolkit) => {
       return h.redirect("/app").code(301);
     },
   },
@@ -16,13 +16,7 @@ export const getApp: ServerRoute = {
   method: "get",
   path: "/app",
   options: {
-    handler: async (_request, h) => {
-      return h.view("designer", {
-        phase: config.phase,
-        previewUrl: config.previewUrl,
-        footerText: config.footerText,
-      });
-    },
+    handler: designerViewHandler,
   },
 };
 
@@ -30,13 +24,7 @@ export const getAppChildRoutes: ServerRoute = {
   method: "get",
   path: "/app/{path*}",
   options: {
-    handler: async (_request, h) => {
-      return h.view("designer", {
-        phase: config.phase,
-        previewUrl: config.previewUrl,
-        footerText: config.footerText,
-      });
-    },
+    handler: designerViewHandler,
   },
 };
 
@@ -44,7 +32,7 @@ export const getErrorCrashReport: ServerRoute = {
   method: "get",
   path: "/error/crashreport/{id}",
   options: {
-    handler: async (request, h) => {
+    handler: async (request: Request, h: ResponseToolkit) => {
       try {
         const { id } = request.params;
         const error = request.yar.get(`error-summary-${id}`) as any;
@@ -81,7 +69,7 @@ export const redirectOldUrlToDesigner: ServerRoute = {
   method: "get",
   path: "/{id}",
   options: {
-    handler: async (request, h) => {
+    handler: async (request: Request, h: ResponseToolkit) => {
       const { id } = request.params;
       return h.redirect(`/app/designer/${id}`).code(301);
     },

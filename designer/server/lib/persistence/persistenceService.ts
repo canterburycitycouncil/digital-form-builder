@@ -6,6 +6,7 @@ export interface PersistenceService {
   getConfiguration(id: string): Promise<string>;
   uploadConfiguration(id: string, configuration: string): Promise<any>;
   copyConfiguration(configurationId: string, newName: string): Promise<any>;
+  deleteConfiguration(configurationId: string): Promise<any>;
 }
 
 export class StubPersistenceService implements PersistenceService {
@@ -22,6 +23,9 @@ export class StubPersistenceService implements PersistenceService {
     return Promise.resolve("");
   }
   copyConfiguration(_configurationId: string, _newName: string) {
+    return Promise.resolve("");
+  }
+  deleteConfiguration(_configurationId: string) {
     return Promise.resolve("");
   }
 }

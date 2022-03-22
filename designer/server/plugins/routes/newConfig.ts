@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 import { publish } from "../../lib/publish";
 import { ServerRoute } from "@hapi/hapi";
 import { HapiRequest } from "../../types";
+import { newConfigPayload } from "./types";
 
 export const registerNewFormWithRunner: ServerRoute = {
   method: "post",
@@ -11,7 +12,7 @@ export const registerNewFormWithRunner: ServerRoute = {
   options: {
     handler: async (request: HapiRequest, h) => {
       const { persistenceService } = request.services([]);
-      const { selected, name, formName } = request.payload;
+      const { selected, name, formName } = request.payload as newConfigPayload;
 
       if (name && name !== "" && !name.match(/^[a-zA-Z0-9 _-]+$/)) {
         return h
@@ -49,7 +50,7 @@ export const registerNewFormWithRunner: ServerRoute = {
           await publish(selected.Key, copied);
         }
       } catch (e) {
-        request.logger.error(e);
+        request.logger.error(e as Error);
       }
 
       const response = {

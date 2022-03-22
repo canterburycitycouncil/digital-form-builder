@@ -1,6 +1,6 @@
 # This file brings some extra configuration needed for local dev environment
 # To start your local dev environment please run:
-#    docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+#    docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build --force-recreate
 version: "3.9"
 services:
   designer:
