@@ -49,9 +49,11 @@ export function SubMenu({ id, updateDownloadedAt, history }: Props) {
     const reader = new window.FileReader();
     reader.readAsText(file, "UTF-8");
     reader.onload = function (evt) {
-      const content = JSON.parse(evt.target.result);
-      const migrated = migrate(content);
-      save(migrated);
+      if (evt?.target?.result) {
+        const content = JSON.parse(evt.target.result as string);
+        const migrated = migrate(content);
+        save(migrated);
+      }
     };
   };
 
@@ -80,7 +82,6 @@ export function SubMenu({ id, updateDownloadedAt, history }: Props) {
       <button
         className="govuk-body govuk-link submenu__link"
         onClick={onClickDownload}
-        href="#"
       >
         Download form
       </button>
@@ -88,7 +89,6 @@ export function SubMenu({ id, updateDownloadedAt, history }: Props) {
       <button
         className="govuk-body govuk-link submenu__link"
         onClick={onClickDelete}
-        href="#"
       >
         Delete form
       </button>
