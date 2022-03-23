@@ -16,7 +16,9 @@ export const getApp: ServerRoute = {
   method: "get",
   path: "/app",
   options: {
-    handler: designerViewHandler,
+    handler: {
+      view: designerViewHandler,
+    },
   },
 };
 
@@ -24,7 +26,9 @@ export const getAppChildRoutes: ServerRoute = {
   method: "get",
   path: "/app/{path*}",
   options: {
-    handler: designerViewHandler,
+    handler: {
+      view: designerViewHandler,
+    },
   },
 };
 
