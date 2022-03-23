@@ -10,19 +10,19 @@ import { ListsEditorContextProvider } from "../../reducers/list/listsEditorReduc
 import { ListContextProvider } from "../../reducers/listReducer";
 import FeeEdit from "../../fee-edit";
 import DeclarationEdit from "../../declaration-edit";
-import OutputsEdit from "../../outputs/outputs-edit";
 import { DataContext } from "../../context";
-import { DataPrettyPrint } from "../DataPrettyPrint/DataPrettyPrint";
 import ListsEdit from "../../list/ListsEdit";
 import { useMenuItem } from "./useMenuItem";
-import { Tabs, useTabs } from "./useTabs";
 import { SubMenu } from "./SubMenu";
 import { LogicExpressionsEdit } from "../LogicExpressions";
 import { useHistory, useLocation } from "react-router-dom";
+import MenuButton from "./MenuButton";
+import SummaryEdit from "../Summary/SummaryEdit";
 
 type Props = {
   updateDownloadedAt?: (string) => void;
   id: string;
+  updatePersona?: any;
   history?: any;
 };
 
@@ -42,8 +42,6 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
   const summary = useMenuItem();
   const logicExpression = useMenuItem();
 
-  const { selectedTab, handleTabChange } = useTabs();
-
   const goToOutputs = () => {
     let currentUrl = location.pathname;
     history.push(currentUrl + "/outputs");
@@ -52,44 +50,61 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
   return (
     <nav className="menu">
       <div className="menu__row">
-        <button data-testid="menu-form-details" onClick={formDetails.show}>
-          {i18n("menu.formDetails")}
-        </button>
-        <button data-testid="menu-page" onClick={page.show}>
-          {i18n("menu.addPage")}
-        </button>
-        <button data-testid="menu-links" onClick={link.show}>
-          {i18n("menu.links")}
-        </button>
-        <button data-testid="logic-expression" onClick={logicExpression.show}>
-          {i18n("menu.logicExpression")}
-        </button>
-        <button data-testid="menu-sections" onClick={sections.show}>
-          {i18n("menu.sections")}
-        </button>
-        <button data-testid="menu-conditions" onClick={conditions.show}>
-          {i18n("menu.conditions")}
-        </button>
-        <button data-testid="menu-lists" onClick={lists.show}>
-          {i18n("menu.lists")}
-        </button>
-        <button data-testid="menu-outputs" onClick={goToOutputs}>
-          {i18n("menu.outputs")}
-        </button>
-
-        <button data-testid="menu-fees" onClick={fees.show}>
-          {i18n("menu.fees")}
-        </button>
-        <button
-          data-testid="menu-summary-behaviour"
-          onClick={summaryBehaviour.show}
-        >
-          {i18n("menu.summaryBehaviour")}
-        </button>
-
-        <button onClick={summary.show} data-testid="menu-summary">
-          {i18n("menu.summary")}
-        </button>
+        <MenuButton
+          dataTestId="menu-form-details"
+          handleClick={formDetails.show}
+          translationKey="menu.formDetails"
+        />
+        <MenuButton
+          dataTestId="menu-page"
+          handleClick={page.show}
+          translationKey="menu.addPage"
+        />
+        <MenuButton
+          dataTestId="menu-links"
+          handleClick={link.show}
+          translationKey="menu.links"
+        />
+        <MenuButton
+          dataTestId="logic-expression"
+          handleClick={logicExpression.show}
+          translationKey="menu.logicExpression"
+        />
+        <MenuButton
+          dataTestId="menu-sections"
+          handleClick={sections.show}
+          translationKey="menu.sections"
+        />
+        <MenuButton
+          dataTestId="menu-conditions"
+          handleClick={conditions.show}
+          translationKey="menu.conditions"
+        />
+        <MenuButton
+          dataTestId="menu-lists"
+          handleClick={lists.show}
+          translationKey="menu.lists"
+        />
+        <MenuButton
+          dataTestId="menu-outputs"
+          handleClick={goToOutputs}
+          translationKey="menu.outputs"
+        />
+        <MenuButton
+          dataTestId="menu-fees"
+          handleClick={fees.show}
+          translationKey="menu.fees"
+        />
+        <MenuButton
+          dataTestId="menu-summary-behaviour"
+          handleClick={summaryBehaviour.show}
+          translationKey="menu.summaryBehaviour"
+        />
+        <MenuButton
+          dataTestId="menu-summary"
+          handleClick={summary.show}
+          translationKey="menu.summary"
+        />
       </div>
       {formDetails.isVisible && (
         <Flyout title="Form Details" onHide={formDetails.hide}>
@@ -163,66 +178,7 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
 
       {summary.isVisible && (
         <Flyout title="Summary" width="large" onHide={summary.hide}>
-          <div className="js-enabled" style={{ paddingTop: "3px" }}>
-            <div className="govuk-tabs" data-module="tabs">
-              <h2 className="govuk-tabs__title">Summary</h2>
-              <ul className="govuk-tabs__list">
-                <li className="govuk-tabs__list-item">
-                  <button
-                    className="govuk-tabs__tab"
-                    aria-selected={selectedTab === Tabs.model}
-                    onClick={(e) => handleTabChange(e, Tabs.model)}
-                  >
-                    Data Model
-                  </button>
-                </li>
-                <li className="govuk-tabs__list-item">
-                  <button
-                    className="govuk-tabs__tab"
-                    aria-selected={selectedTab === Tabs.json}
-                    data-testid={"tab-json-button"}
-                    onClick={(e) => handleTabChange(e, Tabs.json)}
-                  >
-                    JSON
-                  </button>
-                </li>
-                <li className="govuk-tabs__list-item">
-                  <button
-                    className="govuk-tabs__tab"
-                    aria-selected={selectedTab === Tabs.summary}
-                    data-testid="tab-summary-button"
-                    onClick={(e) => handleTabChange(e, Tabs.summary)}
-                  >
-                    Summary
-                  </button>
-                </li>
-              </ul>
-              {selectedTab === Tabs.model && (
-                <section className="govuk-tabs__panel" data-testid="tab-model">
-                  <DataPrettyPrint data={data} />
-                </section>
-              )}
-              {selectedTab === Tabs.json && (
-                <section className="govuk-tabs__panel" data-testid="tab-json">
-                  <pre>{JSON.stringify(data, null, 2)}</pre>
-                </section>
-              )}
-              {selectedTab === Tabs.summary && (
-                <section
-                  className="govuk-tabs__panel"
-                  data-testid="tab-summary"
-                >
-                  <pre>
-                    {JSON.stringify(
-                      data.pages.map((page) => page.path),
-                      null,
-                      2
-                    )}
-                  </pre>
-                </section>
-              )}
-            </div>
-          </div>
+          <SummaryEdit data={data} />
         </Flyout>
       )}
 
