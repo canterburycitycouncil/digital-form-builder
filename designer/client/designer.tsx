@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
 import Menu from "./components/Menu/Menu";
 import { Visualisation } from "./components/Visualisation";
 import { FormDefinition } from "@xgovformbuilder/model";
@@ -8,8 +8,7 @@ import newFormJson from "../new-form.json";
 import { DesignerApi } from "./api/designerApi";
 import { i18n } from "./i18n";
 import { Prompt } from "react-router-dom";
-import { keysIn } from "lodash";
-import { callbackify } from "util";
+import { formatForm } from "./helpers";
 
 interface Props {
   match?: any;
@@ -17,21 +16,38 @@ interface Props {
   history?: any;
 }
 
+declare global {
+  interface Window {
+    previewUrl: string;
+  }
+}
+
 interface State {
-  id?: any;
-  flyoutCount?: number;
-  loading?: boolean;
-  error?: string; // not using as of now
-  newConfig?: boolean; // TODO - is this required?
-  data?: FormDefinition;
-  page?: any;
-  updatedAt?: any;
-  downloadedAt?: any;
-  needsUpload?: boolean;
+  id: any;
+  flyoutCount: number | null;
+  loading: boolean | null;
+  error: string | null; // not using as of now
+  newConfig: boolean | null; // TODO - is this required?
+  data: FormDefinition | null;
+  page: any;
+  updatedAt: any;
+  downloadedAt: any;
+  needsUpload: boolean;
 }
 
 export default class Designer extends Component<Props, State> {
-  state = { loading: true, flyoutCount: 0 };
+  state = {
+    loading: true,
+    flyoutCount: 0,
+    id: null,
+    error: null,
+    newConfig: null,
+    data: null,
+    page: null,
+    updatedAt: undefined,
+    downloadedAt: undefined,
+    needsUpload: false,
+  };
 
   designerApi = new DesignerApi();
 
@@ -45,12 +61,12 @@ export default class Designer extends Component<Props, State> {
 
   incrementFlyoutCounter = (callback = () => {}) => {
     let currentCount = this.state.flyoutCount;
-    this.setState({ flyoutCount: ++currentCount }, callback());
+    this.setState({ flyoutCount: ++currentCount }, callback);
   };
 
   decrementFlyoutCounter = (callback = () => {}) => {
     let currentCount = this.state.flyoutCount;
-    this.setState({ flyoutCount: --currentCount }, callback());
+    this.setState({ flyoutCount: --currentCount }, callback);
   };
 
   save = async (toUpdate, callback = () => {}) => {
@@ -59,14 +75,14 @@ export default class Designer extends Component<Props, State> {
         {
           data: toUpdate, //optimistic save
           updatedAt: new Date().toLocaleTimeString(),
-          error: undefined,
+          error: null,
           needsUpload: true,
         },
-        callback()
+        callback
       );
       return toUpdate;
     } catch (e) {
-      this.setState({ error: e.message });
+      this.setState({ error: (e as Error).message });
       this.props.history.push({
         pathname: "/save-error",
         state: { id: this.id },
@@ -81,14 +97,14 @@ export default class Designer extends Component<Props, State> {
         {
           data: toUpdate, //optimistic save
           updatedAt: new Date().toLocaleTimeString(),
-          error: undefined,
+          error: null,
           needsUpload: false,
         },
-        callback()
+        callback
       );
       return toUpdate;
     } catch (e) {
-      this.setState({ error: e.message });
+      this.setState({ error: (e as Error).message });
       this.props.history.push({
         pathname: "/save-error",
         state: { id: this.id },
@@ -99,19 +115,18 @@ export default class Designer extends Component<Props, State> {
   delete = async (callback = () => {}): Promise<any> => {
     try {
       const response = await this.designerApi.delete(this.id);
-      console.log(response);
       this.setState(
         {
           data: null,
           updatedAt: null,
-          error: undefined,
+          error: null,
           needsUpload: false,
         },
-        callback()
+        callback
       );
       return response;
     } catch (e) {
-      this.setState({ error: e.message });
+      this.setState({ error: (e as Error).message });
       this.props.history.push({
         pathname: "/save-error",
         state: { id: this.id },
@@ -124,22 +139,10 @@ export default class Designer extends Component<Props, State> {
   };
 
   componentDidMount() {
-    console.log(this.props);
     const id = this.props.match?.params?.id;
     this.setState({ id });
     this.designerApi.fetchData(id).then((data) => {
-      const newFormItemNames = Object.getOwnPropertyNames(newFormJson);
-      newFormItemNames?.forEach((item) => {
-        if (!data?.hasOwnProperty(item)) {
-          data[item] = newFormJson[item];
-        }
-      });
-      const dataFormItems = Object.getOwnPropertyNames(data);
-      dataFormItems?.forEach((item) => {
-        if (!newFormJson?.hasOwnProperty(item)) {
-          delete data[item];
-        }
-      });
+      data = formatForm(newFormJson, data);
       this.setState({ loading: false, data });
     });
   }
@@ -173,14 +176,12 @@ export default class Designer extends Component<Props, State> {
                 <Menu
                   id={this.id}
                   updateDownloadedAt={this.updateDownloadedAt}
-                  updatePersona={this.updatePersona}
                   history={this.props.history}
                 />
                 <Visualisation
                   downloadedAt={this.state.downloadedAt}
                   updatedAt={this.state.updatedAt}
                   needsUpload={this.state.needsUpload}
-                  persona={this.state.persona}
                   id={this.id}
                   previewUrl={previewUrl}
                 />
