@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-type MenuItemHook = {
+export type MenuItemHook = {
   isVisible: boolean;
   show: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   hide: (e?: React.MouseEvent<HTMLButtonElement>) => void;
