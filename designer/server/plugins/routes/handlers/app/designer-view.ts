@@ -1,7 +1,7 @@
 import config from "../../../../config";
 
 export const designerViewHandler = {
-  view: "designer",
+  template: "designer",
   context: {
     phase: config.phase,
     previewUrl: config.previewUrl,

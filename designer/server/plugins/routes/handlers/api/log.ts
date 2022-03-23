@@ -1,5 +1,5 @@
 import { Request, ResponseObject, ResponseToolkit } from "@hapi/hapi";
-import { returnResponse } from "../helpers";
+import { returnResponse } from "../../helpers";
 
 export const logHandler = async (
   request: Request,

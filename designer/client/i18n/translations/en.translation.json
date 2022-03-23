@@ -314,7 +314,7 @@
     "titleHint": "Enter a unique name for your list"
   },
   "menu": {
-    "addPage": "Add page",
+    "page": "Add page",
     "logicExpression": "logic expressions",
     "conditions": "Conditions",
     "fees": "Fees",
