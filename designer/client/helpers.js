@@ -1,13 +1,13 @@
 export function getFormData(form) {
   const formData = new window.FormData(form);
-  const data = {
+  const currentForm = {
     options: {},
     schema: {},
   };
 
   function cast(name, val) {
     const el = form.elements[name];
-    const cast = el && el.dataset.cast;
+    const cast = el && el.currentFormset.cast;
 
     if (!val) {
       return undefined;
@@ -33,25 +33,28 @@ export function getFormData(form) {
     if (value) {
       if (key.startsWith(optionsPrefix)) {
         if (key === `${optionsPrefix}required` && value === "on") {
-          data.options.required = false;
+          currentForm.options.required = false;
         } else if (key === `${optionsPrefix}optionalText` && value === "on") {
-          data.options.optionalText = false;
+          currentForm.options.optionalText = false;
         } else {
-          data.options[key.substr(optionsPrefix.length)] = cast(key, value);
+          currentForm.options[key.substr(optionsPrefix.length)] = cast(
+            key,
+            value
+          );
         }
       } else if (key.startsWith(schemaPrefix)) {
-        data.schema[key.substr(schemaPrefix.length)] = cast(key, value);
+        currentForm.schema[key.substr(schemaPrefix.length)] = cast(key, value);
       } else if (value) {
-        data[key] = value;
+        currentForm[key] = value;
       }
     }
   });
 
   // Cleanup
-  if (!Object.keys(data.schema).length) delete data.schema;
-  if (!Object.keys(data.options).length) delete data.options;
+  if (!Object.keys(currentForm.schema).length) delete currentForm.schema;
+  if (!Object.keys(currentForm.options).length) delete currentForm.options;
 
-  return data;
+  return currentForm;
 }
 
 export function toUrl(title) {
@@ -77,4 +80,20 @@ export function arrayMove(arr, from, to) {
   const elm = arr.splice(from, 1)[0];
   arr.splice(to, 0, elm);
   return arr;
+}
+
+export function formatForm(freshForm, currentForm) {
+  const newFormItemNames = Object.getOwnPropertyNames(freshForm);
+  newFormItemNames?.forEach((item) => {
+    if (!currentForm?.hasOwnProperty(item)) {
+      currentForm[item] = freshForm[item];
+    }
+  });
+  const currentFormItems = Object.getOwnPropertyNames(currentForm);
+  currentFormItems?.forEach((item) => {
+    if (!freshForm?.hasOwnProperty(item)) {
+      delete currentForm[item];
+    }
+  });
+  return currentForm;
 }
