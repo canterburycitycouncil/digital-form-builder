@@ -43,7 +43,7 @@ class FeeEdit extends React.Component {
 
     save(copy)
       .then((data) => {
-        this.props.onEdit({ data });
+        this.props.onCreate({ data });
       })
       .catch((err) => {
         logger.error("FeeEdit", err);
