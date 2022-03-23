@@ -2,7 +2,7 @@ import React from "react";
 import { DataPrettyPrint } from "../DataPrettyPrint/DataPrettyPrint";
 import { Tabs, useTabs } from "../Menu/useTabs";
 
-interface SummaryEditProps {
+export interface SummaryEditProps {
   data: any;
 }
 
