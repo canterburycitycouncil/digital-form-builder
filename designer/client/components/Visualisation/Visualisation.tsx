@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
+import { useVisualisation } from "./useVisualisation";
 
 import Page from "../../page";
 import { Lines } from "./Lines";
 import { Minimap } from "./Minimap";
 import { Info } from "./Info";
 import SaveMenu from "../SaveMenu";
-import { getLayout, Pos } from "./getLayout";
-import { DataContext } from "../../context";
 import "./visualisation.scss";
 
 type Props = {
@@ -18,22 +17,9 @@ type Props = {
   needsUpload?: boolean;
 };
 
-export function useVisualisation(ref) {
-  const { data } = useContext(DataContext);
-  const [layout, setLayout] = useState<Pos>();
-
-  useEffect(() => {
-    const layout = getLayout(data, ref.current!);
-    setLayout(layout.pos);
-  }, [data, ref]);
-
-  return { layout };
-}
-
 export function Visualisation(props: Props) {
   const ref = useRef(null);
-  const { layout } = useVisualisation(ref);
-  const { data } = useContext(DataContext);
+  const { layout, data } = useVisualisation(ref);
 
   const {
     updatedAt,
