@@ -53,58 +53,6 @@ export function DateFieldEdit({ context = ComponentContext }: Props) {
         }
       />
 
-      {/* <div className="govuk-form-group">
-        <label
-          className="govuk-label govuk-label--s"
-          htmlFor="field-options-maxDaysInPast"
-        >
-          {i18n("dateFieldEditComponent.maxDaysInPastField.title")}
-        </label>
-        <span className="govuk-hint">
-          {i18n("dateFieldEditComponent.maxDaysInPastField.helpText")}
-        </span>
-        <input
-          className="govuk-input govuk-input--width-3"
-          data-cast="number"
-          id="field-options-maxDaysInPast"
-          name="options.maxDaysInPast"
-          value={options.maxDaysInPast}
-          type="number"
-          onChange={(e) =>
-            dispatch({
-              type: Actions.EDIT_OPTIONS_MAX_DAYS_IN_PAST,
-              payload: e.target.value,
-            })
-          }
-        />
-      </div> */}
-
-      {/* <div className="govuk-form-group">
-        <label
-          className="govuk-label govuk-label--s"
-          htmlFor="field-options-maxDaysInFuture"
-        >
-          {i18n("dateFieldEditComponent.maxDaysInFutureField.title")}
-        </label>
-        <span className="govuk-hint">
-          {i18n("dateFieldEditComponent.maxDaysInFutureField.helpText")}
-        </span>
-        <input
-          className="govuk-input govuk-input--width-3"
-          data-cast="number"
-          id="field-options-maxDaysInFuture"
-          name="options.maxDaysInFuture"
-          value={options.maxDaysInFuture}
-          type="number"
-          onChange={(e) =>
-            dispatch({
-              type: Actions.EDIT_OPTIONS_MAX_DAYS_IN_FUTURE,
-              payload: e.target.value,
-            })
-          }
-        />
-      </div> */}
-
       <CssClasses />
     </details>
   );

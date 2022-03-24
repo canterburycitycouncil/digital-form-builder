@@ -21,23 +21,6 @@ export function ParaEdit({ context = ComponentContext }: Props) {
 
   return (
     <div>
-      {/* <div className="govuk-form-group">
-        <label className="govuk-label govuk-label--s" htmlFor="para-content">
-          Content
-        </label>
-        <span className="govuk-hint">{i18n("fieldEdit.para.hint")}</span>
-        <Editor
-          id="field-content"
-          name="content"
-          value={selectedComponent.content}
-          valueCallback={(content) => {
-            dispatch({
-              type: Actions.EDIT_CONTENT,
-              payload: content,
-            });
-          }}
-        />
-      </div> */}
       <GovUKFieldWrapper fieldName="para" translationNamespace="fieldEdit">
         <Editor
           id="field-content"
@@ -75,12 +58,6 @@ export function ParaEdit({ context = ComponentContext }: Props) {
           ))}
         </select>
       </GovUKFieldWrapper>
-      {/* <div className="govuk-form-group">
-        <label className="govuk-label govuk-label--s" htmlFor="condition">
-          Condition (optional)
-        </label>
-        <span className="govuk-hint">{i18n("fieldEdit.conditions.hint")} </span>
-      </div> */}
     </div>
   );
 }
