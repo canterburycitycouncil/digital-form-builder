@@ -1,5 +1,6 @@
 import { useEffect, useContext, useState } from "react";
-import { getLayout, Pos } from "./getLayout";
+import { getLayout } from "./getLayout";
+import { Pos } from "./types";
 import { DataContext } from "../../context";
 
 export function useVisualisation(ref) {
