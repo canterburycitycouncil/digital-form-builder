@@ -132,7 +132,7 @@ export class OutputsDesigner extends Component<Props, State> {
           <FlyoutContext.Provider value={flyoutContextProviderValue}>
             <div id="app">
               <Prompt when={!error} message={`${i18n("leaveDesigner")}`} />
-              <Menu id={this.id} updateDownloadedAt={this.updateDownloadedAt} />
+              <Menu />
               <Visualisation
                 downloadedAt={this.state.downloadedAt}
                 updatedAt={this.state.updatedAt}
