@@ -5,6 +5,7 @@ import { CssClasses } from "../CssClasses";
 import { i18n } from "../../i18n";
 import { Autocomplete } from "../Autocomplete";
 import { CustomValidationMessage } from "../CustomValidationMessage";
+import { GovUKInput } from "../govuk-fields";
 
 type Props = {
   context: any; // TODO
@@ -26,7 +27,21 @@ export function TextFieldEdit({ children, context = ComponentContext }: Props) {
         </span>
       </summary>
 
-      <div className="govuk-form-group">
+      <GovUKInput
+        translationNamespace="textFieldEditComponent"
+        fieldName="min-length-field"
+        fieldParent="schema"
+        type="number"
+        value={schema.min || ""}
+        handleChange={(e) =>
+          dispatch({
+            type: Actions.EDIT_SCHEMA_MIN,
+            payload: e.target.value,
+          })
+        }
+      />
+
+      {/* <div className="govuk-form-group">
         <label
           className="govuk-label govuk-label--s"
           htmlFor="field-schema-min"
@@ -50,9 +65,23 @@ export function TextFieldEdit({ children, context = ComponentContext }: Props) {
             })
           }
         />
-      </div>
+      </div> */}
 
-      <div className="govuk-form-group">
+      <GovUKInput
+        translationNamespace="textFieldEditComponent"
+        fieldName="max-length-field"
+        fieldParent="schema"
+        type="number"
+        value={schema.max || ""}
+        handleChange={(e) =>
+          dispatch({
+            type: Actions.EDIT_SCHEMA_MAX,
+            payload: e.target.value,
+          })
+        }
+      />
+
+      {/* <div className="govuk-form-group">
         <label
           className="govuk-label govuk-label--s"
           htmlFor="field-schema-max"
@@ -76,9 +105,23 @@ export function TextFieldEdit({ children, context = ComponentContext }: Props) {
             })
           }
         />
-      </div>
+      </div> */}
 
-      <div className="govuk-form-group">
+      <GovUKInput
+        translationNamespace="textFieldEditComponent"
+        fieldName="length-field"
+        fieldParent="schema"
+        type="number"
+        value={schema.length || ""}
+        handleChange={(e) =>
+          dispatch({
+            type: Actions.EDIT_SCHEMA_LENGTH,
+            payload: e.target.value,
+          })
+        }
+      />
+
+      {/* <div className="govuk-form-group">
         <label
           className="govuk-label govuk-label--s"
           htmlFor="field-schema-length"
@@ -102,9 +145,23 @@ export function TextFieldEdit({ children, context = ComponentContext }: Props) {
             })
           }
         />
-      </div>
+      </div> */}
 
-      <div className="govuk-form-group">
+      <GovUKInput
+        translationNamespace="textFieldEditComponent"
+        fieldName="regex-field"
+        fieldParent="schema"
+        type="number"
+        value={schema.regex || ""}
+        handleChange={(e) =>
+          dispatch({
+            type: Actions.EDIT_SCHEMA_REGEX,
+            payload: e.target.value,
+          })
+        }
+      />
+
+      {/* <div className="govuk-form-group">
         <label
           className="govuk-label govuk-label--s"
           htmlFor="field-schema-regex"
@@ -126,7 +183,7 @@ export function TextFieldEdit({ children, context = ComponentContext }: Props) {
             })
           }
         />
-      </div>
+      </div> */}
 
       {children}
 

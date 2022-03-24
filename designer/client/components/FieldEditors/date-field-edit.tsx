@@ -3,6 +3,7 @@ import { ComponentContext } from "../../reducers/component/componentReducer";
 import { Actions } from "../../reducers/component/types";
 import { CssClasses } from "../CssClasses";
 import { i18n } from "../../i18n";
+import { GovUKInput } from "../govuk-fields";
 
 type Props = {
   context: any; // TODO
@@ -23,7 +24,36 @@ export function DateFieldEdit({ context = ComponentContext }: Props) {
         </span>
       </summary>
 
-      <div className="govuk-form-group">
+      <GovUKInput
+        translationNamespace="dateFieldEditComponent"
+        fieldName="max-days-in-past-field"
+        fieldParent="options"
+        customisationClasses={["govuk-input--width-3"]}
+        type="number"
+        value={options.maxDaysInPast || ""}
+        handleChange={(e) =>
+          dispatch({
+            type: Actions.EDIT_OPTIONS_MAX_DAYS_IN_PAST,
+            payload: e.target.value,
+          })
+        }
+      />
+      <GovUKInput
+        translationNamespace="dateFieldEditComponent"
+        fieldName="max-days-in-future-field"
+        fieldParent="options"
+        customisationClasses={["govuk-input--width-3"]}
+        type="number"
+        value={options.maxDaysInPast || ""}
+        handleChange={(e) =>
+          dispatch({
+            type: Actions.EDIT_OPTIONS_MAX_DAYS_IN_FUTURE,
+            payload: e.target.value,
+          })
+        }
+      />
+
+      {/* <div className="govuk-form-group">
         <label
           className="govuk-label govuk-label--s"
           htmlFor="field-options-maxDaysInPast"
@@ -47,9 +77,9 @@ export function DateFieldEdit({ context = ComponentContext }: Props) {
             })
           }
         />
-      </div>
+      </div> */}
 
-      <div className="govuk-form-group">
+      {/* <div className="govuk-form-group">
         <label
           className="govuk-label govuk-label--s"
           htmlFor="field-options-maxDaysInFuture"
@@ -73,7 +103,7 @@ export function DateFieldEdit({ context = ComponentContext }: Props) {
             })
           }
         />
-      </div>
+      </div> */}
 
       <CssClasses />
     </details>

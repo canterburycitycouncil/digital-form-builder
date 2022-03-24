@@ -4,6 +4,7 @@ import { Actions } from "../../reducers/component/types";
 
 import { CssClasses } from "../CssClasses";
 import { i18n } from "../../i18n";
+import { GovUKInput } from "../govuk-fields";
 
 type Props = {
   context: any; // TODO
@@ -24,7 +25,52 @@ export function NumberFieldEdit({ context = ComponentContext }: Props) {
         </span>
       </summary>
 
-      <div className="govuk-form-group">
+      <GovUKInput
+        translationNamespace="numberFieldEditComponent"
+        fieldName="min"
+        fieldParent="schema"
+        customisationClasses={["govuk-input--width-3"]}
+        type="number"
+        value={schema.min || ""}
+        handleChange={(e) =>
+          dispatch({
+            type: Actions.EDIT_SCHEMA_MIN,
+            payload: e.target.value,
+          })
+        }
+      />
+
+      <GovUKInput
+        translationNamespace="numberFieldEditComponent"
+        fieldName="max"
+        fieldParent="schema"
+        customisationClasses={["govuk-input--width-3"]}
+        type="number"
+        value={schema.max || ""}
+        handleChange={(e) =>
+          dispatch({
+            type: Actions.EDIT_SCHEMA_MAX,
+            payload: e.target.value,
+          })
+        }
+      />
+
+      <GovUKInput
+        translationNamespace="numberFieldEditComponent"
+        fieldName="precision"
+        fieldParent="schema"
+        customisationClasses={["govuk-input--width-3"]}
+        type="number"
+        value={schema.precision || ""}
+        handleChange={(e) =>
+          dispatch({
+            type: Actions.EDIT_SCHEMA_PRECISION,
+            payload: e.target.value,
+          })
+        }
+      />
+
+      {/* <div className="govuk-form-group">
         <label
           className="govuk-label govuk-label--s"
           htmlFor="field-schema-min"
@@ -48,9 +94,9 @@ export function NumberFieldEdit({ context = ComponentContext }: Props) {
             })
           }
         />
-      </div>
+      </div> */}
 
-      <div className="govuk-form-group">
+      {/* <div className="govuk-form-group">
         <label
           className="govuk-label govuk-label--s"
           htmlFor="field-schema-max"
@@ -74,9 +120,9 @@ export function NumberFieldEdit({ context = ComponentContext }: Props) {
             })
           }
         />
-      </div>
+      </div> */}
 
-      <div className="govuk-form-group">
+      {/* <div className="govuk-form-group">
         <label
           className="govuk-label govuk-label--s"
           htmlFor="field-schema-precision"
@@ -100,7 +146,7 @@ export function NumberFieldEdit({ context = ComponentContext }: Props) {
             })
           }
         />
-      </div>
+      </div> */}
 
       <CssClasses />
     </details>
