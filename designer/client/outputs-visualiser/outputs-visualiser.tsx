@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import Output from "./components/outputs/output";
 import { Lines } from "./components/OutputLines";
 import { Minimap } from "../components/Visualisation/Minimap";
-import { Info } from "../components/Visualisation/Info";
 import { getOutputsLayout } from "./getOutputsLayout";
 import { Pos } from "./types";
 import { DataContext } from "../context";
@@ -34,7 +33,7 @@ export function Visualisation(props: Props) {
   const { layout } = useVisualisation(ref);
   const { data } = useContext(DataContext);
 
-  const { updatedAt, downloadedAt, persona } = props;
+  const { persona } = props;
   const outputs = data.outputs;
 
   const wrapperStyle = layout && {
@@ -58,8 +57,6 @@ export function Visualisation(props: Props) {
             {layout && <Lines layout={layout} data={data} persona={persona} />}
           </div>
         </div>
-
-        {layout && <Info downloadedAt={downloadedAt} updatedAt={updatedAt} />}
 
         {layout && <Minimap layout={layout} />}
       </div>

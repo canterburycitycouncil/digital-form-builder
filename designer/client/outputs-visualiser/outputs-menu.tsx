@@ -4,18 +4,12 @@ import LinkCreate from "../link-create";
 import { i18n } from "../i18n";
 import { DataContext } from "../context";
 import { useMenuItem } from "../components/Menu/useMenuItem";
-import { SubMenu } from "../components/Menu/./SubMenu";
 import { useHistory, useLocation } from "react-router-dom";
 import OutputCreate from "./components/outputs/output-create";
 
 // Should probably configure TS base url to avoid having to go back folders instead linking them is a lot simpler.
 
-type Props = {
-  updateDownloadedAt?: (string) => void;
-  id: string;
-};
-
-export default function Menu({ updateDownloadedAt, id }: Props) {
+export default function Menu() {
   const { data } = useContext(DataContext);
   const history = useHistory();
   const location = useLocation();
@@ -66,8 +60,6 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
           <LinkCreate data={data} onCreate={() => link.hide} />
         </Flyout>
       )}
-
-      <SubMenu id={id} updateDownloadedAt={updateDownloadedAt} />
     </nav>
   );
 }

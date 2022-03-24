@@ -16,20 +16,31 @@ interface Props {
 }
 
 interface State {
-  id?: any;
-  flyoutCount?: number;
-  loading?: boolean;
-  error?: string; // not using as of now
-  newConfig?: boolean; // TODO - is this required?
-  data?: FormDefinition;
-  page?: any;
-  updatedAt?: any;
-  downloadedAt?: any;
-  persona?: any;
+  id: any;
+  flyoutCount: number | null;
+  loading: boolean | null;
+  error: string | null; // not using as of now
+  newConfig: boolean | null; // TODO - is this required?
+  data: FormDefinition | null;
+  page: any;
+  updatedAt: any;
+  downloadedAt: any;
+  needsUpload: boolean;
 }
 
 export class OutputsDesigner extends Component<Props, State> {
-  state: State = { loading: true, flyoutCount: 0 };
+  state = {
+    loading: true,
+    flyoutCount: 0,
+    id: null,
+    error: null,
+    newConfig: null,
+    data: null,
+    page: null,
+    updatedAt: undefined,
+    downloadedAt: undefined,
+    needsUpload: false,
+  };
 
   designerApi = new DesignerApi();
 
@@ -45,7 +56,7 @@ export class OutputsDesigner extends Component<Props, State> {
     let currentCount = this.state.flyoutCount;
     this.setState(
       { flyoutCount: currentCount ? ++currentCount : currentCount },
-      callback()
+      callback
     );
   };
 
@@ -53,7 +64,7 @@ export class OutputsDesigner extends Component<Props, State> {
     let currentCount = this.state.flyoutCount;
     this.setState(
       { flyoutCount: currentCount ? --currentCount : currentCount },
-      callback()
+      callback
     );
   };
 
@@ -64,13 +75,13 @@ export class OutputsDesigner extends Component<Props, State> {
         {
           data: toUpdate, //optimistic save
           updatedAt: new Date().toLocaleTimeString(),
-          error: undefined,
+          error: null,
         },
-        callback()
+        callback
       );
       return toUpdate;
     } catch (e) {
-      this.setState({ error: e.message });
+      this.setState({ error: (e as Error).message });
       this.props.history.push({
         pathname: "/save-error",
         state: { id: this.id },
@@ -121,11 +132,10 @@ export class OutputsDesigner extends Component<Props, State> {
           <FlyoutContext.Provider value={flyoutContextProviderValue}>
             <div id="app">
               <Prompt when={!error} message={`${i18n("leaveDesigner")}`} />
-              <Menu id={this.id} updateDownloadedAt={this.updateDownloadedAt} />
+              <Menu />
               <Visualisation
                 downloadedAt={this.state.downloadedAt}
                 updatedAt={this.state.updatedAt}
-                persona={this.state.persona}
                 id={this.id}
               />
             </div>
