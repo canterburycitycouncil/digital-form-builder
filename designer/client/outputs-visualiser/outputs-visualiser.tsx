@@ -4,7 +4,8 @@ import Output from "./components/outputs/output";
 import { Lines } from "./components/OutputLines";
 import { Minimap } from "../components/Visualisation/Minimap";
 import { Info } from "../components/Visualisation/Info";
-import { getOutputsLayout, Pos } from "../components/Visualisation/getLayout";
+import { getOutputsLayout } from "./getOutputsLayout";
+import { Pos } from "./types";
 import { DataContext } from "../context";
 import "../components/Visualisation/visualisation.scss";
 

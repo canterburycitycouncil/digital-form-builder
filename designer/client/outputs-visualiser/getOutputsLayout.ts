@@ -1,10 +1,10 @@
+import { Point, Pos, Layout } from "./types";
 import dagre from "dagre";
 import { FormDefinition } from "@xgovformbuilder/model";
-import { Point, Pos, Layout } from "./types";
 
 type GetLayout = (data: FormDefinition, el: HTMLDivElement) => Layout;
 
-export const getLayout: GetLayout = (data, el) => {
+export const getOutputsLayout: GetLayout = (data, el) => {
   // Create a new directed graph
   var g = new dagre.graphlib.Graph();
 
@@ -23,28 +23,24 @@ export const getLayout: GetLayout = (data, el) => {
 
   // Add nodes to the graph. The first argument is the node id. The second is
   // metadata about the node. In this case we're going to add labels to each node
-  data.pages.forEach((page, index) => {
-    const pageEl = el.children[index] as HTMLDivElement;
+  data.outputs.forEach((output, index) => {
+    const outputEl = el.children[index] as HTMLDivElement;
 
-    g.setNode(page.path, {
-      label: page.path,
-      width: pageEl.offsetWidth,
-      height: pageEl.offsetHeight,
+    g.setNode(output.name, {
+      label: output.name,
+      width: outputEl.offsetWidth,
+      height: outputEl.offsetHeight,
     });
   });
 
   // Add edges to the graph.
-  data.pages.forEach((page) => {
-    if (Array.isArray(page.next)) {
-      page.next.forEach((next) => {
-        // The linked node (next page) may not exist if it's filtered
-        const exists = data.pages.find((page) => page.path === next.path);
+  data.outputs.forEach((output) => {
+    if (Array.isArray(output.next)) {
+      output.next.forEach((next) => {
+        // The linked node (next output) may not exist if it's filtered
+        const exists = data.outputs.find((output) => output.name === next);
         if (exists) {
-          g.setEdge(page.path, next.path, {
-            condition: data.conditions.find(
-              (condition) => condition.name === next.condition
-            )?.displayName,
-          });
+          g.setEdge(output.name, next);
         }
       });
     }
