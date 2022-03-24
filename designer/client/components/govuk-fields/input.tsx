@@ -1,10 +1,13 @@
 import React, { ChangeEventHandler } from "react";
-import { i18n } from "../../i18n";
+import { convertFieldNameToCamelCase } from "./helpers";
+import { GovUKFieldWrapper } from "./field-wrapper";
 
 interface InputProps {
   translationNamespace: string;
   fieldName: string;
   fieldParent?: string;
+  type: string;
+  customisationClasses?: string[];
   handleChange: ChangeEventHandler;
   value: string;
 }
@@ -13,30 +16,32 @@ export const GovUKInput = ({
   translationNamespace,
   fieldName,
   fieldParent,
+  type,
+  customisationClasses,
   handleChange,
   value,
 }: InputProps) => {
-  const translationName = `${translationNamespace}.${fieldName}`;
-
   return (
-    <div className="govuk-form-group">
-      <label
-        className="govuk-label govuk-label--s"
-        htmlFor={`field-${
-          fieldParent ? fieldParent + "-" + fieldName : fieldName
-        }`}
-      >
-        {i18n(`${translationName}.title`)}
-      </label>
-      <span className="govuk-hint">{i18n(`${translationName}.helpText`)}</span>
+    <GovUKFieldWrapper
+      translationNamespace={translationNamespace}
+      fieldName={fieldName}
+      fieldParent={fieldParent}
+    >
       <input
-        className="govuk-input"
-        id="field-options-autocomplete"
-        name="options.autocomplete"
-        type="text"
+        className={
+          `govuk-input` +
+          (customisationClasses ? customisationClasses.join(" ") : "")
+        }
+        id={`field-${fieldParent ? fieldParent + "-" + fieldName : fieldName}`}
+        name={
+          fieldParent
+            ? fieldParent + "." + convertFieldNameToCamelCase(fieldName)
+            : convertFieldNameToCamelCase(fieldName)
+        }
+        type={type}
         value={value}
         onChange={handleChange}
       />
-    </div>
+    </GovUKFieldWrapper>
   );
 };
