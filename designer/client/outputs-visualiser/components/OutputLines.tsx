@@ -3,7 +3,7 @@ import { Data } from "@xgovformbuilder/model";
 
 import { Flyout } from "../../components/Flyout";
 import LinkEdit from "./LinkEdit";
-import { Layout, Edge } from "../../components/Visualisation/getLayout";
+import { Layout, Edge } from "../types";
 import { DataContext } from "../../context";
 
 type Props = {

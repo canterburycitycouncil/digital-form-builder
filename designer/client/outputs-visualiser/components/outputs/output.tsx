@@ -1,6 +1,6 @@
 import React from "react";
-import { SortableContainer, arrayMove } from "react-sortable-hoc";
-import { Point } from "../../../components/Visualisation/getLayout";
+import { SortableContainer } from "react-sortable-hoc";
+import { Point } from "../../types";
 
 import { Flyout } from "../../../components/Flyout";
 import { withI18n, WithI18nProps } from "../../../i18n";

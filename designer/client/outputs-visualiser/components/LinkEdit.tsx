@@ -5,7 +5,7 @@ import { DataContext } from "../../context";
 import { findOutput } from "../../data/output";
 import { updateLink } from "../../data/output";
 import logger from "../../plugins/logger";
-import { Edge } from "../../components/Visualisation/getLayout";
+import { Edge } from "../types";
 import { Output, responses } from "../../outputs/types";
 
 interface Props {
