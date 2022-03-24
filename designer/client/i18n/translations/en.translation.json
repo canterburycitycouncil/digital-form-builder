@@ -170,6 +170,7 @@
   "field": "field",
   "fieldEdit": {
     "conditions": {
+      "title": "Conditions (optional)",
       "hint": "Select a condition that determines whether to show the contents of this component. You can create and edit conditions from the Conditions screen."
     },
     "details": {
@@ -180,6 +181,7 @@
     "optional": "Make {{fieldTitle}} optional",
     "optionalHint": "Tick this box if users do not need to complete this field to progress through the form",
     "para": {
+      "title": "Content",
       "hint": "Enter the text you want to show. You can apply basic HTML, such as text formatting and hyperlinks."
     }
   },
@@ -334,15 +336,15 @@
   },
   "no": "no",
   "numberFieldEditComponent": {
-    "maxField": {
+    "max": {
       "helpText": "Specifies the highest number users can enter",
       "title": "Max"
     },
-    "minField": {
+    "min": {
       "helpText": "Specifies the lowest number users can enter",
       "title": "Min"
     },
-    "precisionField": {
+    "precision": {
       "helpText": "Specifies the number of decimal places users can enter. For example, to allow users to enter numbers with up to two decimal places, set this to 2",
       "title": "Precision"
     }

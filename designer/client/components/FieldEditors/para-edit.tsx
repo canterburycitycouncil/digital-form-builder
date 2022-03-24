@@ -4,7 +4,7 @@ import { DataContext } from "../../context";
 import Editor from "../../editor";
 import { Actions } from "../../reducers/component/types";
 import { ContentOptions } from "@xgovformbuilder/model";
-import { i18n } from "../../i18n";
+import { GovUKFieldWrapper } from "../govuk-fields";
 
 type Props = {
   context: any; // TODO
@@ -21,11 +21,7 @@ export function ParaEdit({ context = ComponentContext }: Props) {
 
   return (
     <div>
-      <div className="govuk-form-group">
-        <label className="govuk-label govuk-label--s" htmlFor="para-content">
-          Content
-        </label>
-        <span className="govuk-hint">{i18n("fieldEdit.para.hint")}</span>
+      <GovUKFieldWrapper fieldName="para" translationNamespace="fieldEdit">
         <Editor
           id="field-content"
           name="content"
@@ -37,12 +33,11 @@ export function ParaEdit({ context = ComponentContext }: Props) {
             });
           }}
         />
-      </div>
-      <div className="govuk-form-group">
-        <label className="govuk-label govuk-label--s" htmlFor="condition">
-          Condition (optional)
-        </label>
-        <span className="govuk-hint">{i18n("fieldEdit.conditions.hint")} </span>
+      </GovUKFieldWrapper>
+      <GovUKFieldWrapper
+        fieldName="conditions"
+        translationNamespace="fieldEdit"
+      >
         <select
           className="govuk-select"
           id="condition"
@@ -62,7 +57,7 @@ export function ParaEdit({ context = ComponentContext }: Props) {
             </option>
           ))}
         </select>
-      </div>
+      </GovUKFieldWrapper>
     </div>
   );
 }

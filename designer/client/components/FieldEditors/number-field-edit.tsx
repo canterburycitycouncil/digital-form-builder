@@ -4,6 +4,7 @@ import { Actions } from "../../reducers/component/types";
 
 import { CssClasses } from "../CssClasses";
 import { i18n } from "../../i18n";
+import { GovUKInput } from "../govuk-fields";
 
 type Props = {
   context: any; // TODO
@@ -24,83 +25,50 @@ export function NumberFieldEdit({ context = ComponentContext }: Props) {
         </span>
       </summary>
 
-      <div className="govuk-form-group">
-        <label
-          className="govuk-label govuk-label--s"
-          htmlFor="field-schema-min"
-        >
-          {i18n("numberFieldEditComponent.minField.title")}
-        </label>
-        <span className="govuk-hint">
-          {i18n("numberFieldEditComponent.minField.helpText")}
-        </span>
-        <input
-          className="govuk-input govuk-input--width-3"
-          data-cast="number"
-          id="field-schema-min"
-          name="schema.min"
-          value={schema.min}
-          type="number"
-          onChange={(e) =>
-            dispatch({
-              type: Actions.EDIT_SCHEMA_MIN,
-              payload: e.target.value,
-            })
-          }
-        />
-      </div>
+      <GovUKInput
+        translationNamespace="numberFieldEditComponent"
+        fieldName="min"
+        fieldParent="schema"
+        customisationClasses={["govuk-input--width-3"]}
+        type="number"
+        value={schema.min || ""}
+        handleChange={(e) =>
+          dispatch({
+            type: Actions.EDIT_SCHEMA_MIN,
+            payload: e.target.value,
+          })
+        }
+      />
 
-      <div className="govuk-form-group">
-        <label
-          className="govuk-label govuk-label--s"
-          htmlFor="field-schema-max"
-        >
-          {i18n("numberFieldEditComponent.maxField.title")}
-        </label>
-        <span className="govuk-hint">
-          {i18n("numberFieldEditComponent.maxField.helpText")}
-        </span>
-        <input
-          className="govuk-input govuk-input--width-3"
-          data-cast="number"
-          id="field-schema-max"
-          name="schema.max"
-          value={schema.max}
-          type="number"
-          onBlur={(e) =>
-            dispatch({
-              type: Actions.EDIT_SCHEMA_MAX,
-              payload: e.target.value,
-            })
-          }
-        />
-      </div>
+      <GovUKInput
+        translationNamespace="numberFieldEditComponent"
+        fieldName="max"
+        fieldParent="schema"
+        customisationClasses={["govuk-input--width-3"]}
+        type="number"
+        value={schema.max || ""}
+        handleChange={(e) =>
+          dispatch({
+            type: Actions.EDIT_SCHEMA_MAX,
+            payload: e.target.value,
+          })
+        }
+      />
 
-      <div className="govuk-form-group">
-        <label
-          className="govuk-label govuk-label--s"
-          htmlFor="field-schema-precision"
-        >
-          {i18n("numberFieldEditComponent.precisionField.title")}
-        </label>
-        <span className="govuk-hint">
-          {i18n("numberFieldEditComponent.precisionField.helpText")}
-        </span>
-        <input
-          className="govuk-input govuk-input--width-3"
-          data-cast="number"
-          id="field-schema-precision"
-          name="schema.precision"
-          value={schema.precision || 0}
-          type="number"
-          onBlur={(e) =>
-            dispatch({
-              type: Actions.EDIT_SCHEMA_PRECISION,
-              payload: e.target.value,
-            })
-          }
-        />
-      </div>
+      <GovUKInput
+        translationNamespace="numberFieldEditComponent"
+        fieldName="precision"
+        fieldParent="schema"
+        customisationClasses={["govuk-input--width-3"]}
+        type="number"
+        value={schema.precision || ""}
+        handleChange={(e) =>
+          dispatch({
+            type: Actions.EDIT_SCHEMA_PRECISION,
+            payload: e.target.value,
+          })
+        }
+      />
 
       <CssClasses />
     </details>
