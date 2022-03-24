@@ -13,6 +13,7 @@ export function Autocomplete() {
       translationNamespace="common"
       fieldName="autocomplete"
       fieldParent="options"
+      type="text"
       value={options.autocomplete || ""}
       handleChange={(e) =>
         dispatch({
