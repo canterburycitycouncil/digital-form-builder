@@ -9,6 +9,7 @@ import type { ComponentActions } from "./types";
 import { Meta, Schema, Fields, Options, Actions } from "./types";
 import { ComponentDef } from "@xgovformbuilder/model";
 import logger from "../../plugins/logger";
+import { ErrorListItem } from "../../error-summary";
 
 type ComponentState = {
   selectedComponent: Partial<ComponentDef>;
@@ -16,6 +17,8 @@ type ComponentState = {
   initialName?: ComponentDef["name"];
   pagePath?: string;
   listItemErrors?: {};
+  errors?: ErrorListItem[];
+  hasValidated?: boolean;
 };
 
 const defaultValues = {
