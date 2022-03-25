@@ -14,6 +14,7 @@ export interface Config {
   awsAccessKeyId?: string;
   awsSecretKey?: string;
   awsRegion?: string;
+  awsApiKey?: string;
   persistentKeyId?: string;
   persistentAccessKey?: string;
   logLevel: "trace" | "info" | "debug" | "error";
@@ -49,6 +50,7 @@ const schema = joi.object({
   awsAccessKeyId: joi.string().optional(),
   awsSecretKey: joi.string().optional(),
   awsRegion: joi.string().optional(),
+  awsApiKey: joi.string().optional(),
   persistentKeyId: joi.string().optional(),
   persistentAccessKey: joi.string().optional(),
   logLevel: joi
@@ -77,6 +79,7 @@ const config = {
   awsAccessKeyId: process.env.AWS_ACCESS_KEY_ID,
   awsSecretKey: process.env.AWS_SECRET_KEY,
   awsRegion: process.env.AWS_REGION,
+  awsApiKey: process.env.AWS_API_KEY || "",
   logLevel: process.env.LOG_LEVEL || "error",
   phase: process.env.PHASE || "alpha",
   footerText: process.env.FOOTER_TEXT,
