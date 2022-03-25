@@ -6,8 +6,8 @@ import {
   logHandler,
   putFormWithIdHandler,
   runOutputsHandler,
+  saveSubmissionHandler,
 } from "./handlers";
-import { saveSubmissionHandler } from "./handlers/api/save-submission";
 
 export const getFormWithId: ServerRoute = {
   // GET DATA
