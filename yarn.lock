@@ -9144,6 +9144,7 @@ __metadata:
     govuk-frontend: ^3.10.1
     husky: ^4.3.0
     lint-staged: ^10.4.2
+    lodash: ^4.17.21
     magic-string: ^0.25.7
     prettier: 2.1.2
     typedoc: ^0.20.36
