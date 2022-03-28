@@ -6,6 +6,7 @@ import {
   logHandler,
   putFormWithIdHandler,
   runOutputsHandler,
+  saveSubmissionHandler,
 } from "./handlers";
 
 export const getFormWithId: ServerRoute = {
@@ -34,6 +35,20 @@ export const runOutputs: ServerRoute = {
       origin: ["http://localhost:8000"],
     },
     handler: runOutputsHandler,
+  },
+};
+
+export const saveSubmission: ServerRoute = {
+  method: "POST",
+  path: "/api/submission",
+  options: {
+    payload: {
+      parse: true,
+    },
+    cors: {
+      origin: ["http://localhost:8000"],
+    },
+    handler: saveSubmissionHandler,
   },
 };
 

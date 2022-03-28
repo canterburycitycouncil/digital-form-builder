@@ -5,6 +5,7 @@ import { logHandler } from "./api/log";
 import { putFormWithIdHandler } from "./api/put-form";
 import { runOutputsHandler } from "./api/run-outputs";
 import { designerViewHandler } from "./app/designer-view";
+import { saveSubmissionHandler } from "./api/save-submission";
 
 export {
   deleteFormWithIdHandler,
@@ -14,4 +15,5 @@ export {
   putFormWithIdHandler,
   runOutputsHandler,
   designerViewHandler,
+  saveSubmissionHandler,
 };

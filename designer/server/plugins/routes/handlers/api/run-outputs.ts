@@ -7,7 +7,7 @@ import {
 import { FileResponse, FileUpload } from "../../../../lib/outputs/s3fileupload";
 import { OutputRequest } from "../../types";
 import { Request, ResponseToolkit } from "@hapi/hapi";
-import { returnResponse } from "../../helpers";
+import { getTrueSubmission, returnResponse } from "../../helpers";
 
 export const runOutputsHandler = async (
   request: Request,
@@ -82,7 +82,19 @@ export const runOutputsHandler = async (
         console.log(promiseArray);
         Promise.all(promiseArray)
           .then((res) => {
-            resolve(returnResponse(h, res, 200, "application/json"));
+            let possibleSubmissionChanges = res.filter(
+              (response) =>
+                response.constructor.name === "object" &&
+                Object.keys(response).indexOf("submission") > -1
+            );
+            let submissionCopy = { ...submission };
+            if (possibleSubmissionChanges.length > 0) {
+              submissionCopy = getTrueSubmission(
+                submission,
+                possibleSubmissionChanges
+              );
+            }
+            resolve(returnResponse(h, submissionCopy, 200, "application/json"));
           })
           .catch((err) => {
             resolve(returnResponse(h, err.message, 500, "application/json"));

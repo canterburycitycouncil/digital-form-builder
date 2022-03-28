@@ -2,7 +2,9 @@ import { FormDefinition } from "../../../../../model";
 
 export interface OutputRequest {
   formScheme: FormDefinition;
-  submission: object;
+  submission: {
+    [key: string]: any;
+  };
   files: Buffer | Buffer[];
   filenames: string | string[];
   fileTypes: string | string[];

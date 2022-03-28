@@ -27,18 +27,6 @@ async function getPresignedUploadUrl(
   return presignedUrl;
 }
 
-// async function readFile(file: any) {
-//   return new Promise((resolve, reject) => {
-//     const reader = new FileReader();
-
-//     reader.onabort = () => reject();
-//     reader.onerror = () => reject();
-//     reader.onload = () => resolve(reader.result);
-
-//     reader.readAsArrayBuffer(file);
-//   });
-// }
-
 async function uploadFile(
   uploadUrl,
   file: FileUpload
@@ -57,6 +45,7 @@ async function uploadFile(
           resolve({
             ok: true,
             url: res.url.substring(0, res.url.indexOf("?")),
+            filename: file.filename,
           });
         } else {
           console.log("ERROR");
@@ -69,6 +58,21 @@ async function uploadFile(
       });
   });
 }
+
+const replaceSubmissionValueWithUrl = (
+  submission: any,
+  filename: string,
+  url: string
+): any => {
+  Object.keys(submission.formValues).forEach((page) => {
+    Object.keys(submission.formValues[page]).forEach((field) => {
+      if (submission.formValues[page][field] === filename) {
+        submission.formValues[page][field] = url;
+      }
+    });
+  });
+  return submission;
+};
 
 export interface FileUpload {
   filename: string;
@@ -89,6 +93,7 @@ interface FailedUploadResponse extends UploadResponse {
 interface PassedUploadResponse extends UploadResponse {
   ok: true;
   url: string;
+  filename: string;
 }
 
 export interface FileResponse {
@@ -107,7 +112,7 @@ export const s3fileupload = async (
   config: S3FileUploadOutputConfiguration,
   submission,
   files: FileUpload[]
-): Promise<FileResponse> => {
+): Promise<any> => {
   return new Promise((resolve, reject) => {
     let filePromises: Promise<
       FailedUploadResponse | PassedUploadResponse
@@ -149,6 +154,11 @@ export const s3fileupload = async (
                 fileResponse.uploadedFiles = [];
               }
               fileResponse.uploadedFiles.push(response.url);
+              submission = replaceSubmissionValueWithUrl(
+                submission,
+                response.filename,
+                response.url
+              );
             } else {
               if (!fileResponse.failedFiles) {
                 fileResponse.failedFiles = [];
@@ -168,7 +178,7 @@ export const s3fileupload = async (
             fileResponse.message = "No files were uploaded successfully.";
           }
           console.log(fileResponse);
-          resolve(fileResponse);
+          resolve({ submission: submission });
         })
         .catch((err) => {
           console.log("error with the file promises");

@@ -3874,6 +3874,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node-fetch@npm:^2.6.1":
+  version: 2.6.1
+  resolution: "@types/node-fetch@npm:2.6.1"
+  dependencies:
+    "@types/node": "*"
+    form-data: ^3.0.0
+  checksum: 072aed58835dbbae857c7b29f5ff581c71cc9d0539ab5512ac0353e07ae73a7f861078bd8e3776d7cad961ab4612c1d2f0222e1892814b30b76a6434d1503b43
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*, @types/node@npm:^14.11.8":
   version: 14.14.20
   resolution: "@types/node@npm:14.14.20"
@@ -9116,6 +9126,7 @@ __metadata:
     "@babel/runtime": ^7.11.2
     "@hapi/code": ^8.0.1
     "@hapi/lab": ^24.0.0
+    "@types/node-fetch": ^2.6.1
     "@typescript-eslint/eslint-plugin": ^4.10.0
     "@typescript-eslint/parser": ^4.10.0
     babel-eslint: ^11.0.0-beta.2
@@ -9133,6 +9144,7 @@ __metadata:
     govuk-frontend: ^3.10.1
     husky: ^4.3.0
     lint-staged: ^10.4.2
+    lodash: ^4.17.21
     magic-string: ^0.25.7
     prettier: 2.1.2
     typedoc: ^0.20.36
@@ -11645,6 +11657,17 @@ __metadata:
     combined-stream: ^1.0.8
     mime-types: ^2.1.12
   checksum: 1af88217b449eda6566a0d95185f2baa403ed2a0e3b11547069f6062be66cbac7c8d7a25f0fc59560702e96526e659b5b9e5a8c6fefe00f06da44338191a9133
+  languageName: node
+  linkType: hard
+
+"form-data@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "form-data@npm:3.0.1"
+  dependencies:
+    asynckit: ^0.4.0
+    combined-stream: ^1.0.8
+    mime-types: ^2.1.12
+  checksum: 6574ff4d2d845c47ba288151a6e0573767eefdee9da358be199e0f0b66aa5c454e7d62ed5e0daef6f84167ba1e9596e064f36f206488e460ef449ef7b653cdfc
   languageName: node
   linkType: hard
 
