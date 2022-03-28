@@ -34,7 +34,9 @@ export const saveSubmissionHandler = (request: Request, h: ResponseToolkit) => {
         body: JSON.stringify(request.payload),
       })
         .then((res) => res.json())
-        .then((res) => resolve(returnResponse(h, res, 200, "application/json")))
+        .then((res) => {
+          resolve(returnResponse(h, res, 200, "application/json"));
+        })
         .catch((err) =>
           resolve(returnResponse(h, err as Error, 500, "application/json"))
         );
