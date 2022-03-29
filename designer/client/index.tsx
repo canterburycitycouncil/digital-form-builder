@@ -20,6 +20,18 @@ export class App extends React.Component {
       <Router basename="/app">
         <div id="app">
           <Switch>
+            <Route
+              path="/designer/:id/submissions"
+              component={OutputsDesigner}
+            />
+            <Route
+              path="/designer/:id/submissions/:submissionId"
+              component={OutputsDesigner}
+            />
+            <Route
+              path="/designer/:id/submissions/:submissionId/:integrationId"
+              component={OutputsDesigner}
+            />
             <Route path="/designer/:id/outputs" component={OutputsDesigner} />
             <Route path="/designer/:id" component={Designer} />
             <Route path="/" exact>

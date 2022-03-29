@@ -38,6 +38,11 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
     history.push(currentUrl + "/outputs");
   };
 
+  const goToSubmissions = () => {
+    let currentUrl = location.pathname;
+    history.push(currentUrl + "/submissions");
+  };
+
   return (
     <nav className="menu">
       <div className="menu__row">
@@ -53,6 +58,11 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
           dataTestId="menu-outputs"
           handleClick={goToOutputs}
           translationKey="menu.outputs"
+        />
+        <MenuButton
+          dataTestId="menu-submissions"
+          handleClick={goToSubmissions}
+          translationKey="menu.submissions"
         />
       </div>
       {Object.keys(menuItemsObject).map((key) => {
