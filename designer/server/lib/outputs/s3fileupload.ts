@@ -40,7 +40,6 @@ async function uploadFile(
       },
     })
       .then((res) => {
-        console.log("file res:", res);
         if (res.ok) {
           resolve({
             ok: true,
@@ -177,7 +176,6 @@ export const s3fileupload = async (
           } else {
             fileResponse.message = "No files were uploaded successfully.";
           }
-          console.log(fileResponse);
           resolve({ submission: submission });
         })
         .catch((err) => {
