@@ -5,16 +5,16 @@ import {
   S3FileUploadOutputConfiguration,
 } from "../../../../../client/outputs/types";
 import { FileResponse, FileUpload } from "../../../../lib/outputs/s3fileupload";
-import { OutputRequest } from "../../types";
+import { OutputRequest, IntegrationLog } from "../../types";
 import { Request, ResponseToolkit } from "@hapi/hapi";
 import { getTrueSubmission, returnResponse } from "../../helpers";
+import fetch from "node-fetch";
 
 export const runOutputsHandler = async (
   request: Request,
   h: ResponseToolkit
 ) => {
   return new Promise((resolve) => {
-    console.log(request.payload);
     try {
       if (request.payload) {
         const {
@@ -44,6 +44,7 @@ export const runOutputsHandler = async (
             fileContent: files as Buffer,
           });
         }
+        let integrationLogsArray: IntegrationLog[] = [];
         let promiseArray: Promise<string | FileResponse>[] = [];
         formScheme.outputs.forEach((output) => {
           switch (output.type) {
@@ -57,6 +58,13 @@ export const runOutputsHandler = async (
                 submission.formValues
               );
               promiseArray.push(webhookPromise);
+              integrationLogsArray.push({
+                submissionId: submission.submissionId,
+                integrationName: output.name,
+                integrationType: output.type,
+                configuration: output.outputConfiguration,
+                request: submission.formValues,
+              });
               break;
             case "freshdesk":
               let fdPromise = freshdesk(
@@ -65,6 +73,13 @@ export const runOutputsHandler = async (
                 submission.formValues
               );
               promiseArray.push(fdPromise);
+              integrationLogsArray.push({
+                submissionId: submission.submissionId,
+                integrationName: output.name,
+                integrationType: output.type,
+                configuration: output.outputConfiguration,
+                request: submission.formValues,
+              });
               break;
             case "s3fileupload":
               let s3Promise = s3fileupload(
@@ -73,15 +88,49 @@ export const runOutputsHandler = async (
                 filesDecoded
               );
               promiseArray.push(s3Promise);
+              integrationLogsArray.push({
+                submissionId: submission.submissionId,
+                integrationName: output.name,
+                integrationType: output.type,
+                configuration: output.outputConfiguration,
+                request: {
+                  submission: submission,
+                  files: filesDecoded.map((file) => file.filename),
+                },
+              });
               break;
             default:
               const message = "No output of that type found";
               resolve(returnResponse(h, message, 400, "application/json"));
           }
         });
-        console.log(promiseArray);
         Promise.all(promiseArray)
           .then((res) => {
+            console.log(integrationLogsArray);
+            let integrationLogPromises: Promise<any>[] = [];
+            res.forEach((response, index) => {
+              integrationLogsArray[index].response = response;
+              integrationLogPromises.push(
+                new Promise((resolve, reject) => {
+                  fetch(
+                    "https://6zy0ta2uxg.execute-api.eu-west-2.amazonaws.com/dev/integrations-log",
+                    {
+                      headers: {
+                        "Content-Type": "application/json",
+                        "X-API-Key": process.env.AWS_API_KEY as string,
+                      },
+                      method: "POST",
+                      body: JSON.stringify(integrationLogsArray[index]),
+                    }
+                  )
+                    .then(() => {
+                      console.log("hello");
+                      resolve("");
+                    })
+                    .catch((err) => reject(err));
+                })
+              );
+            });
             let possibleSubmissionChanges = res.filter(
               (response) =>
                 response.constructor.name === "object" &&
@@ -94,7 +143,19 @@ export const runOutputsHandler = async (
                 possibleSubmissionChanges
               );
             }
-            resolve(returnResponse(h, submissionCopy, 200, "application/json"));
+            Promise.all(integrationLogPromises)
+              .then(() => {
+                console.log("integration logs should be done");
+                resolve(
+                  returnResponse(h, submissionCopy, 200, "application/json")
+                );
+              })
+              .catch((err) => {
+                console.log(err);
+                resolve(
+                  returnResponse(h, submissionCopy, 200, "application/json")
+                );
+              });
           })
           .catch((err) => {
             resolve(returnResponse(h, err.message, 500, "application/json"));
