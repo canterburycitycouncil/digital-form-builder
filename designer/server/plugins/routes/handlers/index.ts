@@ -6,6 +6,10 @@ import { putFormWithIdHandler } from "./api/put-form";
 import { runOutputsHandler } from "./api/run-outputs";
 import { designerViewHandler } from "./app/designer-view";
 import { saveSubmissionHandler } from "./api/save-submission";
+import { getFormSubmissionsHandler } from "./api/get-form-submissions";
+import { getSubmissionHandler } from "./api/get-submission";
+import { getIntegrationLogsHandler } from "./api/get-integration-logs";
+import { getIntegrationLogHandler } from "./api/get-integration-log";
 
 export {
   deleteFormWithIdHandler,
@@ -16,4 +20,8 @@ export {
   runOutputsHandler,
   designerViewHandler,
   saveSubmissionHandler,
+  getFormSubmissionsHandler,
+  getSubmissionHandler,
+  getIntegrationLogsHandler,
+  getIntegrationLogHandler,
 };

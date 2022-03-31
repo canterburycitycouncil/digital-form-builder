@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Designer from "./designer";
 import { SaveError } from "./pages/ErrorPages";
 import { OutputsDesigner } from "./outputs-visualiser";
+import { Submissions } from "./submissions";
 
 initI18n();
 
@@ -21,17 +22,14 @@ export class App extends React.Component {
         <div id="app">
           <Switch>
             <Route
-              path="/designer/:id/submissions"
+              path="/designer/:id/submissions/:submissionId/integration-logs/:integrationId"
               component={OutputsDesigner}
             />
             <Route
               path="/designer/:id/submissions/:submissionId"
               component={OutputsDesigner}
             />
-            <Route
-              path="/designer/:id/submissions/:submissionId/:integrationId"
-              component={OutputsDesigner}
-            />
+            <Route path="/designer/:id/submissions" component={Submissions} />
             <Route path="/designer/:id/outputs" component={OutputsDesigner} />
             <Route path="/designer/:id" component={Designer} />
             <Route path="/" exact>

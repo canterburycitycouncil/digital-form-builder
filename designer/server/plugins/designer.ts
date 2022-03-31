@@ -35,7 +35,7 @@ export const designerPlugin = {
         method: "GET",
         path: "/feature-toggles",
         options: {
-          handler: async (request, h) => {
+          handler: async (h) => {
             const featureFlags = flagg({
               store: envStore(process.env),
               definitions: {
@@ -56,6 +56,10 @@ export const designerPlugin = {
       server.route(api.getAllPersistedConfigurations);
       server.route(api.runOutputs);
       server.route(api.saveSubmission);
+      server.route(api.getFormSubmissions);
+      server.route(api.getSubmission);
+      server.route(api.getIntegrationLogs);
+      server.route(api.getIntegrationLog);
       server.route(api.deleteFormWithId);
       server.route(api.log);
     },

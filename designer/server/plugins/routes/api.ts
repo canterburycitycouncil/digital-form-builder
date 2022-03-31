@@ -2,7 +2,11 @@ import { ServerRoute } from "@hapi/hapi";
 import {
   deleteFormWithIdHandler,
   getAllPersistedConfigurationsHandler,
+  getFormSubmissionsHandler,
   getFormWithIdHandler,
+  getIntegrationLogHandler,
+  getIntegrationLogsHandler,
+  getSubmissionHandler,
   logHandler,
   putFormWithIdHandler,
   runOutputsHandler,
@@ -69,6 +73,38 @@ export const deleteFormWithId: ServerRoute = {
   path: "/api/{id}",
   options: {
     handler: deleteFormWithIdHandler,
+  },
+};
+
+export const getFormSubmissions: ServerRoute = {
+  method: "GET",
+  path: "/api/{id}/submissions",
+  options: {
+    handler: getFormSubmissionsHandler,
+  },
+};
+
+export const getSubmission: ServerRoute = {
+  method: "GET",
+  path: "/api/{id}/submissions/{submissionId}",
+  options: {
+    handler: getSubmissionHandler,
+  },
+};
+
+export const getIntegrationLogs: ServerRoute = {
+  method: "GET",
+  path: "/api/{id}/submissions/{submissionId}/integration-logs",
+  options: {
+    handler: getIntegrationLogsHandler,
+  },
+};
+
+export const getIntegrationLog: ServerRoute = {
+  method: "GET",
+  path: "/api/{id}/submissions/{submissionId}/integration-logs/{integrationId}",
+  options: {
+    handler: getIntegrationLogHandler,
   },
 };
 
