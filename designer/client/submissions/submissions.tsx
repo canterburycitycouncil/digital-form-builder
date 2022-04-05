@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Menu from "./components/submissions-menu";
 import { Submission, SubmissionKey } from "./types";
 import { SubmissionApi } from "../api/submissionApi";
@@ -25,9 +25,6 @@ export const Submissions = (props: Props) => {
     formConfiguration,
     setFormConfiguration,
   ] = useState<FormDefinition | null>(null);
-  const [observer, setObserver] = useState<IntersectionObserver | null>(null);
-  const [prevY, setPrevY] = useState<number>(0);
-  const loadingRef = useRef(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   let submissionApi = new SubmissionApi();
@@ -38,48 +35,27 @@ export const Submissions = (props: Props) => {
       submissionApi
         .getSubmissionsForForm(props.match?.params?.id, "external")
         .then((res) => {
+          console.log(res);
           setSubmissions(res.submissions);
           if (res.lastKey) {
             setLastEvaluatedKey(res.lastKey);
+          } else {
+            setLastEvaluatedKey(null);
           }
           sethasSearched(true);
         });
     }
 
     if (!formConfiguration) {
-      console.log(props);
       designerApi
         .fetchData(props.match?.params?.id)
         .then((data) => setFormConfiguration(data));
     }
-
-    if (!observer) {
-      const options = {
-        root: null,
-        rootMargin: "0px",
-        threshold: 1.0,
-      };
-      setObserver(new IntersectionObserver(handleScroll, options));
-    }
-
-    if (observer && loadingRef?.current) {
-      observer.observe(loadingRef.current);
-    }
-
-    return () => {
-      observer?.disconnect();
-    };
-  }, [hasSearched, formConfiguration, observer]);
-
-  const handleScroll = async (entries: IntersectionObserverEntry[]) => {
-    const y = entries[0].boundingClientRect.y;
-    if (prevY > y) {
-      await getMoreSubs();
-    }
-    setPrevY(y);
-  };
+  }, [hasSearched, formConfiguration]);
 
   const getMoreSubs = async () => {
+    console.log("hello2");
+    console.log(lastEvaluatedKey);
     if (lastEvaluatedKey) {
       setLoading(true);
       submissionApi
@@ -94,13 +70,13 @@ export const Submissions = (props: Props) => {
           setSubmissions(submissionsCopy);
           if (res.lastKey) {
             setLastEvaluatedKey(res.lastKey);
+          } else {
+            setLastEvaluatedKey(null);
           }
           setLoading(false);
         });
     }
   };
-
-  console.log(submissions);
 
   return (
     <div id="app">
@@ -119,7 +95,7 @@ export const Submissions = (props: Props) => {
           />
         )}
       </div>
-      <LoadingBox ref={loadingRef} loading={loading} />
+      {submissions && <LoadingBox loading={loading} onScroll={getMoreSubs} />}
     </div>
   );
 };
