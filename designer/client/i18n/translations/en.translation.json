@@ -379,6 +379,12 @@
       "links": "Add link"
     }
   },
+  "submissions": {
+    "menu": {
+      "backToForm": "Back to form",
+      "backToSubmissions": "Back to submissions"
+    }
+  },
   "save": "Save",
   "section": {
     "create": "Create section",
