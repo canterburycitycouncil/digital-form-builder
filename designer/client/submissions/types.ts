@@ -3,10 +3,12 @@ export interface Submission {
   submissionType: string;
   formId: string;
   startedAt: string;
-  completedAt?: string;
+  updatedAt?: string;
   status: string;
   userId: string;
-  formValues: string;
+  formValues: {
+    [key: string]: any;
+  };
 }
 
 export interface SubmissionKey {
@@ -14,3 +16,8 @@ export interface SubmissionKey {
   submissionId: string;
   formId: string;
 }
+
+export const submissionStatusClasses = {
+  "not complete": "incomplete",
+  Submitted: "submitted",
+};
