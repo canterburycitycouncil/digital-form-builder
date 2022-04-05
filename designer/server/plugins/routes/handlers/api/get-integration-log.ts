@@ -8,7 +8,7 @@ export const getIntegrationLogHandler = (
 ) => {
   const { integrationId } = request.params;
 
-  const url = `https://6zy0ta2uxg.execute-api.eu-west-2.amazonaws.com/dev/integration-log/${integrationId}`;
+  const url = `https://6zy0ta2uxg.execute-api.eu-west-2.amazonaws.com/dev/integrations-log/${integrationId}`;
 
   return new Promise((resolve, reject) => {
     fetch(url, {

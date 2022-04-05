@@ -9,7 +9,6 @@ import fetch from "node-fetch";
 interface AllSubmissionsResponse {
   submissions: Submission[];
   lastKey?: SubmissionKey;
-  totalItems: number;
 }
 
 export const getFormSubmissionsHandler = (
@@ -17,11 +16,9 @@ export const getFormSubmissionsHandler = (
   h: ResponseToolkit
 ) => {
   const { id } = request.params;
-  const { subType, lastEvaluatedKey } = request.query;
+  const { subType, lastKey } = request.query;
   const url = `https://6zy0ta2uxg.execute-api.eu-west-2.amazonaws.com/dev/submissions?formId=${id}&subType=${subType}${
-    lastEvaluatedKey
-      ? "&startKey=" + encodeURIComponent(JSON.stringify(lastEvaluatedKey))
-      : ""
+    lastKey ? "&startKey=" + lastKey : ""
   }`;
   return new Promise((resolve, reject) => {
     fetch(url, {
@@ -34,10 +31,9 @@ export const getFormSubmissionsHandler = (
       .then((res) => {
         let submissionRes: AllSubmissionsResponse = {
           submissions: res.Items as Submission[],
-          totalItems: res.ScannedCount,
         };
         if (res.LastEvaluatedKey) {
-          submissionRes.lastKey = res.lastEvaluatedKey;
+          submissionRes.lastKey = res.LastEvaluatedKey;
         }
         resolve(returnResponse(h, submissionRes, 200, "application/json"));
       })
