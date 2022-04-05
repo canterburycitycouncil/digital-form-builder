@@ -8,6 +8,7 @@ import Designer from "./designer";
 import { SaveError } from "./pages/ErrorPages";
 import { OutputsDesigner } from "./outputs-visualiser";
 import { Submissions } from "./submissions";
+import { SubmissionView } from "./submissions/submission";
 
 initI18n();
 
@@ -19,15 +20,15 @@ export class App extends React.Component {
   render() {
     return (
       <Router basename="/app">
-        <div id="app">
+        <div id="app" className="js-enabled">
           <Switch>
-            <Route
+            {/* <Route
               path="/designer/:id/submissions/:submissionId/integration-logs/:integrationId"
               component={OutputsDesigner}
-            />
+            /> */}
             <Route
               path="/designer/:id/submissions/:submissionId"
-              component={OutputsDesigner}
+              component={SubmissionView}
             />
             <Route path="/designer/:id/submissions" component={Submissions} />
             <Route path="/designer/:id/outputs" component={OutputsDesigner} />
