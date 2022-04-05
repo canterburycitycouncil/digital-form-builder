@@ -60,7 +60,7 @@ export const runOutputsHandler = async (
               promiseArray.push(webhookPromise);
               integrationLogsArray.push({
                 submissionId: submission.submissionId,
-                integrationName: output.name,
+                integrationName: output.title,
                 integrationType: output.type,
                 configuration: output.outputConfiguration,
                 request: submission.formValues,
@@ -75,7 +75,7 @@ export const runOutputsHandler = async (
               promiseArray.push(fdPromise);
               integrationLogsArray.push({
                 submissionId: submission.submissionId,
-                integrationName: output.name,
+                integrationName: output.title,
                 integrationType: output.type,
                 configuration: output.outputConfiguration,
                 request: submission.formValues,
@@ -90,7 +90,7 @@ export const runOutputsHandler = async (
               promiseArray.push(s3Promise);
               integrationLogsArray.push({
                 submissionId: submission.submissionId,
-                integrationName: output.name,
+                integrationName: output.title,
                 integrationType: output.type,
                 configuration: output.outputConfiguration,
                 request: {
