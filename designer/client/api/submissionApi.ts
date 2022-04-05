@@ -14,7 +14,9 @@ export class SubmissionApi {
   ): Promise<AllSubmissionsResponse> {
     return new Promise((resolve, reject) => {
       const url = `/api/${formId}/submissions?subType=${subType}${
-        lastEvaluatedKey ? "&lastKey=$lastEvaluatedKey" : ""
+        lastEvaluatedKey
+          ? `&lastKey=${encodeURIComponent(JSON.stringify(lastEvaluatedKey))}`
+          : ""
       }`;
       window
         .fetch(url, {
@@ -27,8 +29,8 @@ export class SubmissionApi {
           let submissionRes: AllSubmissionsResponse = {
             submissions: res.submissions as Submission[],
           };
-          if (res.LastEvaluatedKey) {
-            submissionRes.lastKey = res.lastEvaluatedKey;
+          if (res.lastKey) {
+            submissionRes.lastKey = res.lastKey;
           }
           resolve(submissionRes);
         })
@@ -74,7 +76,7 @@ export class SubmissionApi {
       })
         .then((res) => res.json())
         .then((res) => {
-          resolve(res as IntegrationLog[]);
+          resolve(res.Items as IntegrationLog[]);
         })
         .catch((err) => {
           reject(err);
