@@ -29,29 +29,36 @@ export const SubmissionsTable = ({ submissions, parentPath }: Props) => {
         </tr>
       </thead>
       <tbody>
-        {submissions.map((submission) => (
-          <tr key={submission.submissionId} className="govuk-table__row">
-            <td className="govuk-table__cell">
-              <p>
-                <a href={`${parentPath}/${submission.submissionId}`}>
-                  {submission.submissionId}
-                </a>
-              </p>
-            </td>
-            <td className="govuk-table__cell">
-              <p>{submission.startedAt}</p>
-            </td>
-            <td className="govuk-table__cell">
-              <p>{submission.completedAt ?? "incomplete"}</p>
-            </td>
-            <td className="govuk-table__cell">
-              <p>{submission.status}</p>
-            </td>
-            <td className="govuk-table__cell">
-              <p>{submission.userId}</p>
-            </td>
-          </tr>
-        ))}
+        {submissions.map(
+          (submission) =>
+            submission && (
+              <tr key={submission.submissionId} className="govuk-table__row">
+                <td className="govuk-table__cell">
+                  <p>
+                    <a href={`${parentPath}/${submission.submissionId}`}>
+                      {submission.submissionId}
+                    </a>
+                  </p>
+                </td>
+                <td className="govuk-table__cell">
+                  <p>{submission.startedAt}</p>
+                </td>
+                <td className="govuk-table__cell">
+                  <p>
+                    {submission.updatedAt && submission.status === "Submitted"
+                      ? submission.updatedAt
+                      : "incomplete"}
+                  </p>
+                </td>
+                <td className="govuk-table__cell">
+                  <p>{submission.status}</p>
+                </td>
+                <td className="govuk-table__cell">
+                  <p>{submission.userId}</p>
+                </td>
+              </tr>
+            )
+        )}
       </tbody>
     </table>
   );

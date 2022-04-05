@@ -17,7 +17,7 @@ export default function Menu() {
     <nav className="menu">
       <div className="menu__row">
         <button data-testid="menu-back-to-form" onClick={backToForm}>
-          {i18n("outputs.menu.backToForm")}
+          {i18n("submissions.menu.backToForm")}
         </button>
       </div>
     </nav>
