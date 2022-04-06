@@ -385,6 +385,11 @@
       "backToSubmissions": "Back to submissions"
     }
   },
+  "integrations": {
+    "menu": {
+      "backToSubmission": "Back to submission"
+    }
+  },
   "save": "Save",
   "section": {
     "create": "Create section",

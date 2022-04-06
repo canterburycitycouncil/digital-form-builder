@@ -109,6 +109,7 @@ export const SubmissionView = (props: Props) => {
           <div className="submission-tabs">
             <Tabs
               idPrefix=""
+              title=""
               items={[
                 {
                   id: "form-values",

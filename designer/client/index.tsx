@@ -9,6 +9,7 @@ import { SaveError } from "./pages/ErrorPages";
 import { OutputsDesigner } from "./outputs-visualiser";
 import { Submissions } from "./submissions";
 import { SubmissionView } from "./submissions/submission";
+import { Integration } from "./submissions/integration";
 
 initI18n();
 
@@ -22,10 +23,10 @@ export class App extends React.Component {
       <Router basename="/app">
         <div id="app" className="js-enabled">
           <Switch>
-            {/* <Route
+            <Route
               path="/designer/:id/submissions/:submissionId/integration-logs/:integrationId"
-              component={OutputsDesigner}
-            /> */}
+              component={Integration}
+            />
             <Route
               path="/designer/:id/submissions/:submissionId"
               component={SubmissionView}

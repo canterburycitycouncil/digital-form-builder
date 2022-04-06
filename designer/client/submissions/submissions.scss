@@ -8,9 +8,10 @@
   margin: auto;
 }
 
-.submission-details-container {
+.submission-details-container,
+.integration-details-container {
   width: 80%;
-  margin: auto;
+  margin: 30px auto;
   border: 2px solid black;
   padding: 30px;
   h1 {
@@ -19,28 +20,36 @@
       clear: both;
       width: 100%;
     }
-    .submission-status {
+    .submission-status,
+    .integration-status {
       display: block;
       font-size: 16px;
       padding: 5px 10px;
       border-radius: 5px;
       float: right;
+      &.failed {
+        background-color: #ff6961;
+        color: white;
+      }
       &.incomplete {
         background-color: #888;
         color: white;
       }
-      &.submitted {
+      &.submitted,
+      &.success {
         background-color: #77dd77;
         color: white;
       }
     }
   }
-  .submission-meta-table {
+  .submission-meta-table,
+  .integration-meta-table {
     display: flex;
     align-items: stretch;
     justify-content: space-between;
     flex-wrap: wrap;
-    .submission-meta-item {
+    .submission-meta-item,
+    .integration-meta-item {
       width: 33%;
       padding: 0;
       text-align: center;
@@ -61,14 +70,16 @@
   }
 }
 
-.submission-tabs {
+.submission-tabs,
+.integration-tabs {
   width: 80%;
   margin: auto;
   margin-top: 50px;
   margin-bottom: 150px;
 }
 
-.submission-form-container {
+.submission-form-container,
+.integration-configuration-container {
   font-family: "GDS Transport", arial, sans-serif;
   &:after {
     display: block;
@@ -101,6 +112,13 @@
   }
   .button-next-container {
     float: right;
+  }
+}
+
+.integration-request-container,
+.integration-response-container {
+  pre {
+    font-family: "GDS Transport", arial, sans-serif;
   }
 }
 

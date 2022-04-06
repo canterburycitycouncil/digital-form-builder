@@ -27,7 +27,7 @@ export const IntegrationsTable = ({ integrationLogs, parentPath }: Props) => {
           <tr key={log.integrationId} className="govuk-table__row">
             <td className="govuk-table__cell">
               <p>
-                <a href={`${parentPath}/${log.integrationId}`}>
+                <a href={`${parentPath}/integration-logs/${log.integrationId}`}>
                   {log.integrationId}
                 </a>
               </p>
