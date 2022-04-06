@@ -5,8 +5,7 @@ import * as Lab from "@hapi/lab";
 import PageTranslated, { Page } from "../client/page";
 import { Flyout } from "../client/components/Flyout";
 import PageEdit from "../client/page-edit";
-import { ComponentCreate } from "../client/components/ComponentCreate";
-import { Data } from "@xgovformbuilder/model";
+import { ComponentCreate } from "../client/formComponentCreationForm/ComponentCreate";
 import sinon from "sinon";
 
 const { expect } = Code;

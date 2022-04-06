@@ -1,8 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { ComponentContext } from "../../../reducers/component/componentReducer";
+import { ComponentContext } from "../../../formComponentCreationForm/componentReducer/componentReducer";
 import { ParaEdit } from "../para-edit";
-import { Data } from "@xgovformbuilder/model";
 import { DataContext } from "../../../context";
 
 describe("para edit", () => {

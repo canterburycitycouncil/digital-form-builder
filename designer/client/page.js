@@ -8,12 +8,12 @@ import {
 import { Flyout } from "./components/Flyout";
 import PageEdit from "./page-edit";
 import { Component } from "./component";
-import { ComponentCreate } from "./components/ComponentCreate";
+import { ComponentCreate } from "./formComponentCreationForm/ComponentCreate";
 import { ComponentTypes, clone } from "@xgovformbuilder/model";
 import { withI18n } from "./i18n";
 import { DataContext } from "./context";
 import { PageLinkage } from "./components/PageLinkage";
-import { ComponentContextProvider } from "./reducers/component";
+import { ComponentContextProvider } from "./formComponentCreationForm/componentReducer";
 import { findPage } from "./data";
 
 const SortableItem = SortableElement(({ index, page, component, data }) => (

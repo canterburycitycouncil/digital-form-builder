@@ -3,7 +3,7 @@ import { SortableHandle } from "react-sortable-hoc";
 import { Flyout } from "./components/Flyout";
 import { SearchIcon } from "./components/Icons";
 import ComponentEdit from "./ComponentEdit";
-import { ComponentContextProvider } from "./reducers/component/componentReducer";
+import { ComponentContextProvider } from "./formComponentCreationForm/componentReducer/componentReducer";
 import { i18n } from "./i18n";
 
 const DragHandle = SortableHandle(() => (

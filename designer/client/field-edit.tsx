@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { ComponentContext } from "./reducers/component/componentReducer";
+import { ComponentContext } from "./formComponentCreationForm/componentReducer/componentReducer";
 import { ComponentTypes } from "@xgovformbuilder/model";
-import { Actions } from "./reducers/component/types";
+import { Actions } from "./formComponentCreationForm/componentReducer/types";
 import { Textarea } from "@govuk-jsx/textarea";
 import { Input } from "@govuk-jsx/input";
 import { Select } from "@govuk-jsx/select";

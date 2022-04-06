@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { ComponentContext } from "../../../reducers/component/componentReducer";
+import { ComponentContext } from "../../../formComponentCreationForm/componentReducer/componentReducer";
 import DetailsEdit from "../details-edit";
 
 describe("details-edit", () => {

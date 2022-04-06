@@ -1,7 +1,7 @@
 import { ListActions } from "../../reducers/listActions";
 import { DataContext } from "../../context";
 import React, { useContext, useEffect, useState } from "react";
-import { ComponentContext } from "../../reducers/component/componentReducer";
+import { ComponentContext } from "../../formComponentCreationForm/componentReducer/componentReducer";
 import { Label } from "@govuk-jsx/label";
 import { i18n } from "../../i18n";
 import { ListContext } from "../../reducers/listReducer";
@@ -12,7 +12,7 @@ import {
 import classNames from "classnames";
 import { ListComponentsDef } from "@xgovformbuilder/model";
 import { findList } from "../../data";
-import { Actions as ComponentActions } from "./../../reducers/component/types";
+import { Actions as ComponentActions } from "../../formComponentCreationForm/componentReducer/types";
 import logger from "../../plugins/logger";
 export function ComponentListSelect() {
   const { data } = useContext(DataContext);

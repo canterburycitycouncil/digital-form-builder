@@ -7,7 +7,7 @@ import { Checkboxes } from "@xgovformbuilder/govuk-react-jsx";
 import { ErrorMessage } from "@xgovformbuilder/govuk-react-jsx";
 import classNames from "classnames";
 import { i18n } from "../i18n";
-import { allInputs } from "../data/component/inputs";
+import { allInputs } from "../formComponentCreationForm/componentData/inputs";
 
 type State = {};
 

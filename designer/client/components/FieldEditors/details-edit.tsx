@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { ComponentContext } from "../../reducers/component/componentReducer";
-import { Actions } from "../../reducers/component/types";
+import { ComponentContext } from "../../formComponentCreationForm/componentReducer/componentReducer";
+import { Actions } from "../../formComponentCreationForm/componentReducer/types";
 import { Input } from "@govuk-jsx/input";
 import { withI18n } from "../../i18n";
 import classNames from "classnames";
