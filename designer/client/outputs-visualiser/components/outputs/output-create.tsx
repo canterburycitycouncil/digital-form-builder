@@ -8,13 +8,13 @@ import { addLink, findOutput } from "../../../data/output";
 import { addOutput } from "../../../data/output/addOutput";
 import randomId from "../../../randomId";
 import logger from "../../../plugins/logger";
-import { Output, OutputType, responses } from "../../../outputs/types";
+import { Output, OutputType, responses } from "../../outputs/types";
 import { withI18n, WithI18nProps } from "../../../i18n";
-import NotifyEdit from "../../../outputs/notify-edit";
-import EmailEdit from "../../../outputs/email-edit";
-import FreshdeskEdit from "../../../outputs/freshdesk-edit";
-import S3FileUploadEdit from "../../../outputs/s3fileupload-edit";
-import WebhookEdit from "../../../outputs/webhook-edit";
+import NotifyEdit from "../../outputs/notify-edit";
+import EmailEdit from "../../outputs/email-edit";
+import FreshdeskEdit from "../../outputs/freshdesk-edit";
+import S3FileUploadEdit from "../../outputs/s3fileupload-edit";
+import WebhookEdit from "../../outputs/webhook-edit";
 
 interface State extends Output {
   errors: any;

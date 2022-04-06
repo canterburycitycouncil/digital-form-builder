@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { SortableHandle } from "react-sortable-hoc";
 import { Flyout } from "./components/Flyout";
 import { SearchIcon } from "./components/Icons";
-import ComponentEdit from "./ComponentEdit";
+import ComponentEdit from "./formComponentCreationForm/ComponentEdit";
 import { ComponentContextProvider } from "./formComponentCreationForm/componentReducer/componentReducer";
 import { i18n } from "./i18n";
 

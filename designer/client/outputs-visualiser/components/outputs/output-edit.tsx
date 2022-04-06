@@ -8,12 +8,12 @@ import { validateTitle, hasValidationErrors } from "../../../validations";
 import { DataContext } from "../../../context";
 import { findOutput, updateLinksTo } from "../../../data/output/findOutput";
 import logger from "../../../plugins/logger";
-import NotifyEdit from "../../../outputs/notify-edit";
-import EmailEdit from "../../../outputs/email-edit";
-import FreshdeskEdit from "../../../outputs/freshdesk-edit";
-import S3FileUploadEdit from "../../../outputs/s3fileupload-edit";
-import WebhookEdit from "../../../outputs/webhook-edit";
-import { OutputType, Output, responses } from "../../../outputs/types";
+import NotifyEdit from "../../outputs/notify-edit";
+import EmailEdit from "../../outputs/email-edit";
+import FreshdeskEdit from "../../outputs/freshdesk-edit";
+import S3FileUploadEdit from "../../outputs/s3fileupload-edit";
+import WebhookEdit from "../../outputs/webhook-edit";
+import { OutputType, Output, responses } from "../../outputs/types";
 
 interface OutputEditProps extends WithI18nProps {
   output: Output;
