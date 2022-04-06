@@ -2,7 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-import EmailEdit from "../client/outputs/email-edit";
+import EmailEdit from "../client/outputs-visualiser/outputs/email-edit";
 const { expect } = Code;
 const lab = Lab.script();
 exports.lab = lab;
