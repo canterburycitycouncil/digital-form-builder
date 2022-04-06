@@ -1,9 +1,8 @@
-import sinon from "sinon";
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-import * as Component from "../client/reducers/component/componentReducer";
+import * as Component from "../client/formComponentCreationForm/componentReducer/componentReducer";
 import { TextFieldEdit } from "../client/components/FieldEditors/text-field-edit";
 import { MultilineTextFieldEdit } from "../client/multiline-text-field-edit";
 const { expect } = Code;

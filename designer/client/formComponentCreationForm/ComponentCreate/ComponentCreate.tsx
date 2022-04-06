@@ -1,9 +1,9 @@
 import React from "react";
 import { i18n } from "../../i18n";
 import { ErrorSummary } from "../../error-summary";
-import ComponentTypeEdit from "../../ComponentTypeEdit";
+import ComponentTypeEdit from "../ComponentTypeEdit";
 import { ComponentCreateList } from "./ComponentCreateList";
-import { BackLink } from "../BackLink";
+import { BackLink } from "../../components/BackLink";
 import "./ComponentCreate.scss";
 import { useComponentCreate } from "./useComponentCreate";
 

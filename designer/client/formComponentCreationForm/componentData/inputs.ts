@@ -1,6 +1,6 @@
-import { Input, isNotContentType } from "../types";
-import { allPathsLeadingTo } from "../page";
-import { Path } from "../types";
+import { Input, isNotContentType } from "../../data/types";
+import { allPathsLeadingTo } from "../../data/page";
+import { Path } from "../../data/types";
 import { FormDefinition } from "@xgovformbuilder/model";
 
 export function allInputs(data: FormDefinition): Input[] {

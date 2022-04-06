@@ -7,8 +7,8 @@ import { ErrorSummary } from "../../client/error-summary";
 import { Data } from "@xgovformbuilder/model";
 import { assertSelectInput } from "../helpers/element-assertions";
 import { assertInputControlProp } from "../helpers/sub-component-assertions";
-import OutputEdit from "../../client/outputs/output-edit";
-import { Output } from "../../client/outputs/types";
+import OutputEdit from "../../client/outputs-visualiser/outputs/output-edit";
+import { Output } from "../../client/outputs-visualiser/outputs/types";
 
 const { expect } = Code;
 const lab = Lab.script();

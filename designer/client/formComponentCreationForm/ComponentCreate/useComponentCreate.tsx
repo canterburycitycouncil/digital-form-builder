@@ -8,9 +8,9 @@ import {
 import { ComponentDef, Page } from "@xgovformbuilder/model";
 import { hasValidationErrors } from "../../validations";
 import "./ComponentCreate.scss";
-import { Actions } from "../../reducers/component/types";
+import { Actions } from "../componentReducer/types";
 import { DataContext } from "../../context";
-import { ComponentContext } from "../../reducers/component/componentReducer";
+import { ComponentContext } from "../componentReducer/componentReducer";
 import { addComponent } from "../../data";
 import logger from "../../plugins/logger";
 
@@ -40,14 +40,12 @@ export const useComponentCreate = (props) => {
       setRenderTypeEdit(false);
     }
 
+    dispatch({ type: Actions.SET_PAGE, payload: page.path });
+
     return () => {
       isMounted = false;
     };
-  }, [selectedComponent?.type]);
-
-  useEffect(() => {
-    dispatch({ type: Actions.SET_PAGE, payload: page.path });
-  }, [page.path]);
+  }, [selectedComponent?.type, page.path]);
 
   useLayoutEffect(() => {
     if (hasValidated && !hasErrors) {

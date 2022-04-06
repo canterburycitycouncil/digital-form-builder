@@ -1,12 +1,12 @@
 import React, { memo, useContext, useLayoutEffect } from "react";
 import ComponentTypeEdit from "./ComponentTypeEdit";
-import { DataContext } from "./context";
-import { ComponentContext } from "./reducers/component/componentReducer";
-import { Actions } from "./reducers/component/types";
-import ErrorSummary from "./error-summary";
-import { hasValidationErrors } from "./validations";
+import { DataContext } from "../context";
+import { ComponentContext } from "./componentReducer/componentReducer";
+import { Actions } from "./componentReducer/types";
+import ErrorSummary from "../error-summary";
+import { hasValidationErrors } from "../validations";
 import { ComponentTypeEnum as Types } from "@xgovformbuilder/model";
-import { updateComponent } from "./data";
+import { updateComponent } from "../data";
 
 const LIST_TYPES = [
   Types.AutocompleteField,

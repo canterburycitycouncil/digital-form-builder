@@ -2,7 +2,7 @@ import React from "react";
 import { mount } from "enzyme";
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-import { ComponentContextProvider } from "../client/reducers/component/componentReducer";
+import { ComponentContextProvider } from "../client/formComponentCreationForm/componentReducer/componentReducer";
 import { FieldEdit } from "../client/field-edit";
 const { expect } = Code;
 const lab = Lab.script();

@@ -4,7 +4,7 @@
  */
 
 export * from "./types";
-export * from "./component";
+export * from "../formComponentCreationForm/componentData";
 export * from "./list";
 export * from "./page";
 export * from "./section";

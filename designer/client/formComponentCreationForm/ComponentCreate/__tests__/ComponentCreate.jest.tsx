@@ -3,11 +3,9 @@ import { render, screen } from "@testing-library/react";
 import userEvent, { TargetElement } from "@testing-library/user-event";
 
 import { ComponentCreate } from "../ComponentCreate";
-import { ComponentContextProvider } from "../../../reducers/component";
+import { ComponentContextProvider } from "../../componentReducer";
 import { DataContext } from "../../../context";
 import { DetailsComponent } from "@xgovformbuilder/model";
-import * as Data from "../../../data";
-import { addComponent } from "../../../data";
 
 describe("ComponentCreate:", () => {
   const data = {

@@ -19,10 +19,10 @@ import {
   validateNotEmpty,
   hasValidationErrors,
   validateRegex,
-} from "../validations";
-import ErrorSummary from "../error-summary";
-import { DataContext } from "../context";
-import logger from "../plugins/logger";
+} from "../../validations";
+import ErrorSummary from "../../error-summary";
+import { DataContext } from "../../context";
+import logger from "../../plugins/logger";
 import FreshdeskEdit from "./freshdesk-edit";
 import S3FileUploadEdit from "./s3fileupload-edit";
 

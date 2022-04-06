@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { ComponentContext } from "../../reducers/component/componentReducer";
+import { ComponentContext } from "../../formComponentCreationForm/componentReducer/componentReducer";
 import { DataContext } from "../../context";
 import Editor from "../../editor";
-import { Actions } from "../../reducers/component/types";
+import { Actions } from "../../formComponentCreationForm/componentReducer/types";
 import { ContentOptions } from "@xgovformbuilder/model";
 import { GovUKFieldWrapper } from "../govuk-fields";
 

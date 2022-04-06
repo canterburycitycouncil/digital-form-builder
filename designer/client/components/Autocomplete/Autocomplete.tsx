@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { ComponentContext } from "../../reducers/component/componentReducer";
-import { Actions } from "../../reducers/component/types";
+import { ComponentContext } from "../../formComponentCreationForm/componentReducer/componentReducer";
+import { Actions } from "../../formComponentCreationForm/componentReducer/types";
 import { GovUKInput } from "../govuk-fields";
 
 export function Autocomplete() {
@@ -22,27 +22,5 @@ export function Autocomplete() {
         })
       }
     />
-    // <div className="govuk-form-group">
-    //   <label
-    //     className="govuk-label govuk-label--s"
-    //     htmlFor="field-options-autocomplete"
-    //   >
-    //     {i18n("common.autocomplete.title")}
-    //   </label>
-    //   <span className="govuk-hint">{i18n("common.autocomplete.helpText")}</span>
-    //   <input
-    //     className="govuk-input"
-    //     id="field-options-autocomplete"
-    //     name="options.autocomplete"
-    //     type="text"
-    //     value={options.autocomplete || ""}
-    //     onChange={(e) =>
-    //       dispatch({
-    //         type: Actions.EDIT_OPTIONS_AUTOCOMPLETE,
-    //         payload: e.target.value,
-    //       })
-    //     }
-    //   />
-    // </div>
   );
 }

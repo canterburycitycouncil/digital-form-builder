@@ -2,13 +2,12 @@ import React, { useReducer } from "react";
 import { render } from "@testing-library/react";
 import userEvent, { TargetElement } from "@testing-library/user-event";
 import { DataContext } from "../../../context";
-import { Data } from "@xgovformbuilder/model";
 import { ComponentListSelect } from "../ComponentListSelect";
 import {
   ComponentContext,
   componentReducer,
   initComponentState,
-} from "../../../reducers/component/componentReducer";
+} from "../../../formComponentCreationForm/componentReducer/componentReducer";
 import { ListsEditorContextProvider } from "../../../reducers/list/listsEditorReducer";
 import { ListContextProvider } from "../../../reducers/listReducer";
 
@@ -149,7 +148,7 @@ describe("ComponentListSelect", () => {
   test("should display list error when state has errors", () => {
     // - when
     const errors = { list: "Select a list" };
-    const { container, getByText } = render(
+    const { container } = render(
       <TestComponentContextProvider
         dataValue={dataValue}
         componentValue={false}

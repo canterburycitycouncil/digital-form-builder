@@ -1,6 +1,6 @@
 import { FormDefinition } from "@xgovformbuilder/model";
 import { Found } from "..";
-import { Output } from "../../outputs/types";
+import { Output } from "../../outputs-visualiser/outputs/types";
 
 /**
  * @returns returns a tuple of [Page, number]

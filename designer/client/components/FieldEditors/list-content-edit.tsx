@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { ComponentContext } from "../../reducers/component/componentReducer";
-import { Actions } from "../../reducers/component/types";
+import { ComponentContext } from "../../formComponentCreationForm/componentReducer/componentReducer";
+import { Actions } from "../../formComponentCreationForm/componentReducer/types";
 
 type Props = {
   context: any; // TODO

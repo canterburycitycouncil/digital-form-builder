@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { ComponentContext } from "../../reducers/component/componentReducer";
-import { Actions } from "../../reducers/component/types";
+import { ComponentContext } from "../../formComponentCreationForm/componentReducer/componentReducer";
+import { Actions } from "../../formComponentCreationForm/componentReducer/types";
 import { CssClasses } from "../CssClasses";
 import { i18n } from "../../i18n";
 import { GovUKInput } from "../govuk-fields";

@@ -6,7 +6,7 @@ import { findOutput } from "../../data/output";
 import { updateLink } from "../../data/output";
 import logger from "../../plugins/logger";
 import { Edge } from "../types";
-import { Output, responses } from "../../outputs/types";
+import { Output, responses } from "../outputs/types";
 
 interface Props {
   edge: Edge;

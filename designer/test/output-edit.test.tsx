@@ -4,7 +4,7 @@ import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
 import sinon from "sinon";
 
-import OutputEdit from "../client/outputs/output-edit";
+import OutputEdit from "../client/outputs-visualiser/outputs/output-edit";
 
 const { expect } = Code;
 const lab = Lab.script();

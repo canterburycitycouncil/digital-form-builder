@@ -3,7 +3,7 @@ import {
   ComponentContext,
   componentReducer,
   initComponentState,
-} from "../../reducers/component/componentReducer";
+} from "../../formComponentCreationForm/componentReducer/componentReducer";
 import { DataContext } from "../../context";
 
 export function RenderWithContext({ children, stateProps = {} }) {
