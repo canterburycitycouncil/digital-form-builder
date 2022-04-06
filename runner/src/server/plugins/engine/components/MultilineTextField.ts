@@ -1,6 +1,9 @@
-import * as helpers from "./helpers";
-import { FormComponent } from "./FormComponent";
-import { FormData, FormSubmissionErrors } from "../types";
+import * as helpers from "runner/src/server/plugins/engine/components/helpers";
+import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
+import {
+  FormData,
+  FormSubmissionErrors,
+} from "runner/src/server/plugins/engine/types";
 
 export class MultilineTextField extends FormComponent {
   getFormSchemaKeys() {

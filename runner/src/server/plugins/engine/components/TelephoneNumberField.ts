@@ -1,9 +1,13 @@
-import { TelephoneNumberFieldComponent } from "@xgovformbuilder/model";
+import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
+import { FormModel } from "runner/src/server/plugins/engine/models";
+import { addClassOptionIfNone } from "runner/src/server/plugins/engine/components/helpers";
+import {
+  FormData,
+  FormSubmissionErrors,
+} from "runner/src/server/plugins/engine/types";
 
-import { FormComponent } from "./FormComponent";
-import { FormModel } from "../models";
-import { addClassOptionIfNone } from "./helpers";
-import { FormData, FormSubmissionErrors } from "../types";
+import { TelephoneNumberFieldComponent } from "@xgovformbuilder/components";
+
 import joi, { Schema } from "joi";
 
 const PATTERN = /^[0-9\\\s+()-]*$/;

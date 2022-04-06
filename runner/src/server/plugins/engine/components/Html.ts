@@ -1,5 +1,8 @@
-import { FormData, FormSubmissionErrors } from "../types";
-import { ComponentBase } from "./ComponentBase";
+import {
+  FormData,
+  FormSubmissionErrors,
+} from "runner/src/server/plugins/engine/types";
+import { ComponentBase } from "runner/src/server/plugins/engine/components/ComponentBase";
 
 export class Html extends ComponentBase {
   getViewModel(formData: FormData, errors: FormSubmissionErrors) {

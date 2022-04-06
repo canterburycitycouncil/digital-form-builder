@@ -1,6 +1,9 @@
-import { FormData, FormSubmissionErrors } from "../types";
-import { ComponentBase } from "./ComponentBase";
-import { Item, List } from "@xgovformbuilder/model";
+import {
+  FormData,
+  FormSubmissionErrors,
+} from "runner/src/server/plugins/engine/types";
+import { ComponentBase } from "runner/src/server/plugins/engine/components/ComponentBase";
+import { Item, List } from "@xgovformbuilder/data-model";
 
 export class FlashCard extends ComponentBase {
   list: List;

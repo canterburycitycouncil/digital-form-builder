@@ -1,13 +1,16 @@
-import { Schema as JoiSchema } from "joi";
+import { FormModel } from "runner/src/server/plugins/engine/models";
+import {
+  FormData,
+  FormSubmissionErrors,
+} from "runner/src/server/plugins/engine/types";
+import { ViewModel } from "runner/src/server/plugins/engine/components/types";
+
 import {
   ComponentDef,
   ContentComponentsDef,
   InputFieldsComponentsDef,
-} from "@xgovformbuilder/model";
-
-import { FormModel } from "../models";
-import { FormData, FormSubmissionErrors } from "../types";
-import { ViewModel } from "./types";
+} from "@xgovformbuilder/components";
+import { Schema as JoiSchema } from "joi";
 
 export class ComponentBase {
   type: ComponentDef["type"];
