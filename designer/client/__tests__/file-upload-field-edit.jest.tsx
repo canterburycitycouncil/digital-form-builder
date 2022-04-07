@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { FileUploadFieldEdit } from "../file-upload-field-edit";
+import { FileUploadFieldEdit } from "../components/FormComponent/FieldEditors/file-upload-field-edit";
 import { RenderWithContext } from "./helpers/renderers";
 
 describe("File upload", () => {

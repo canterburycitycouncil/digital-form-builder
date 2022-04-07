@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { i18n } from "../../i18n";
-import { GovUKInput } from "../govuk-fields";
+import { GovUKInput } from "../GovUKFields";
 
 interface Props {
   errors: any;

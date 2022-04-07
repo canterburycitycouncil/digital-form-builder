@@ -1,11 +1,11 @@
 import React, { useReducer } from "react";
 import { render } from "@testing-library/react";
-import ComponentTypeEdit from "../formComponentCreationForm/ComponentTypeEdit";
+import ComponentTypeEdit from "../components/FormComponent/ComponentTypeEdit";
 import {
   ComponentContext,
   componentReducer,
   initComponentState,
-} from "../formComponentCreationForm/componentReducer/componentReducer";
+} from "../components/FormComponent/componentReducer/componentReducer";
 import { DataContext } from "../context";
 import { Data } from "@xgovformbuilder/model";
 

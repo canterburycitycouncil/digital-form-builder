@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import * as formConfigurationApi from "../../load-form-configurations";
+import * as formConfigurationApi from "../../api/configuration-api";
 import { i18n } from "../../i18n";
 import { withRouter } from "react-router-dom";
 import { BackLink } from "../../components/BackLink";

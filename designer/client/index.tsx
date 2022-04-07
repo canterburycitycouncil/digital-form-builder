@@ -4,12 +4,12 @@ import { LandingChoice, NewConfig, ChooseExisting } from "./pages/LandingPage";
 import "./styles/index.scss";
 import { initI18n } from "./i18n";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Designer from "./designer";
+import Designer from "./pages/Designer/designer";
 import { SaveError } from "./pages/ErrorPages";
-import { OutputsDesigner } from "./outputs-visualiser";
-import { Submissions } from "./submissions";
-import { SubmissionView } from "./submissions/submission";
-import { Integration } from "./submissions/integration";
+import { OutputsDesigner } from "./pages/Outputs";
+import { Submissions } from "./pages/Submissions";
+import { SubmissionView } from "./pages/Submissions/submission";
+import { Integration } from "./pages/Submissions/integration";
 
 initI18n();
 

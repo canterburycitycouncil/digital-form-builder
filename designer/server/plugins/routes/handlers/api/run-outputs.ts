@@ -3,7 +3,7 @@ import {
   FreshdeskOutputConfiguration,
   WebhookOutputConfiguration,
   S3FileUploadOutputConfiguration,
-} from "../../../../../client/outputs-visualiser/outputs/types";
+} from "../../../../../client/pages/Outputs/outputs/types";
 import { FileResponse, FileUpload } from "../../../../lib/outputs/s3fileupload";
 import { OutputRequest, IntegrationLog } from "../../types";
 import { Request, ResponseToolkit } from "@hapi/hapi";

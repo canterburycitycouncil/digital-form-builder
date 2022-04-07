@@ -14,7 +14,7 @@ import {
   RelativeTimeValue,
   timeUnits,
 } from "@xgovformbuilder/model";
-import RelativeTimeValues from "../client/conditions/inline-conditions-relative-dates";
+import RelativeTimeValues from "../client/components/Conditions/inline-conditions-relative-dates";
 
 const { expect } = Code;
 const lab = Lab.script();

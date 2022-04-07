@@ -1,15 +1,14 @@
 import SummaryEdit from "../Summary/SummaryEdit";
 import { LogicExpressionsEdit } from "../LogicExpressions";
-import ListsEdit from "../../list/ListsEdit";
-import FeeEdit from "../../fee-edit";
+import ListsEdit from "../List/ListsEdit";
+import FeeEdit from "../Fees/fee-edit";
 import DeclarationEdit from "../../declaration-edit";
 import { FormDetails } from "../FormDetails";
-import PageCreate from "../../page-create";
-import LinkCreate from "../../link-create";
-import SectionsEdit from "../../section/sections-edit";
-import ConditionsEdit from "../../conditions/ConditionsEdit";
+import PageCreate from "../Page/page-create";
+import LinkCreate from "../Links/link-create";
+import SectionsEdit from "../Section/sections-edit";
+import ConditionsEdit from "../Conditions/ConditionsEdit";
 import { i18n } from "../../i18n";
-import React from "react";
 import { MenuItemHook } from "./useMenuItem";
 
 interface MenuItemObject {

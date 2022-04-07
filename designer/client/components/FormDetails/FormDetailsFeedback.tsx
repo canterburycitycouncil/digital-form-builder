@@ -4,7 +4,7 @@ import { Label } from "@govuk-jsx/label";
 import { FormConfiguration } from "@xgovformbuilder/model";
 
 import { i18n } from "../../i18n";
-import * as formConfigurationApi from "../../load-form-configurations";
+import * as formConfigurationApi from "../../api/configuration-api";
 
 interface Props {
   feedbackForm: any;
