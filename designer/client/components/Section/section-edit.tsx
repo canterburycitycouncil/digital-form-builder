@@ -1,7 +1,7 @@
 import React from "react";
 import { randomId } from "../../helpers";
-import { withI18n } from "../../i18n";
-import { Input } from "@govuk-jsx/input";
+import { I18n, withI18n } from "../../i18n";
+import { Input } from "govuk-react-jsx";
 import {
   validateName,
   validateTitle,
@@ -11,9 +11,30 @@ import ErrorSummary from "../../error-summary";
 import { DataContext } from "../../context";
 import { addSection } from "./data";
 import logger from "../../plugins/logger";
+import { Section, FormDefinition } from "@xgovformbuilder/model";
 
-class SectionEdit extends React.Component {
+interface Props {
+  closeFlyout: (name: string) => void;
+  section: Section;
+  data: FormDefinition;
+  i18n: I18n;
+}
+
+interface ErrorsObject {
+  [keyt: string]: any;
+}
+
+interface State {
+  name: string;
+  title: string;
+  errors: ErrorsObject;
+}
+
+class SectionEdit extends React.Component<Props, State> {
   static contextType = DataContext;
+  closeFlyout: (name: string) => void;
+  isNewSection: boolean;
+  nameRef: React.RefObject<unknown>;
 
   constructor(props) {
     super(props);

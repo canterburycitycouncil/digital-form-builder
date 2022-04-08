@@ -1,18 +1,31 @@
 import React from "react";
 import SelectConditions from "../Conditions/SelectConditions";
-import { ErrorMessage } from "@govuk-jsx/error-message";
-import { clone } from "@xgovformbuilder/model";
+import { ErrorMessage } from "govuk-react-jsx";
 import classNames from "classnames";
-
+import { Condition } from "@xgovformbuilder/model";
 import ErrorSummary from "../../error-summary";
 import { DataContext } from "../../context";
 import { i18n } from "../../i18n";
 import { addLink } from "../Page/data";
 import logger from "../../plugins/logger";
 
-class LinkCreate extends React.Component {
+interface Props {
+  onCreate: (e: any) => void;
+}
+
+interface Errors {
+  [key: string]: any;
+}
+
+interface State {
+  errors: Errors;
+  from: string;
+  to: string;
+  selectedCondition?: Condition;
+}
+
+class LinkCreate extends React.Component<Props, State> {
   static contextType = DataContext;
-  state = { errors: {} };
 
   constructor(props, context) {
     super(props, context);
@@ -52,7 +65,7 @@ class LinkCreate extends React.Component {
 
   validate = () => {
     const { from, to } = this.state;
-    let errors = {};
+    let errors: Errors = {};
     if (!from) {
       errors.from = { href: "#link-source", children: "Enter from" };
     }
@@ -149,6 +162,8 @@ class LinkCreate extends React.Component {
 
           {from && from.trim() !== "" && (
             <SelectConditions
+              data={data}
+              hints={[]}
               path={from}
               conditionsChange={this.conditionSelected}
               noFieldsHintText={i18n("addLink.noFieldsAvailable")}

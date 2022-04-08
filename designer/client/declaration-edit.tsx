@@ -1,11 +1,16 @@
 import React from "react";
 import Editor from "./editor";
-import { clone } from "@xgovformbuilder/model";
+import { clone, FormDefinition } from "@xgovformbuilder/model";
 
 import { DataContext } from "./context";
-import logger from "../client/plugins/logger";
+import logger from "./plugins/logger";
 
-class DeclarationEdit extends React.Component {
+interface Props {
+  data: FormDefinition;
+  toggleShowState: (value: string) => void;
+}
+
+class DeclarationEdit extends React.Component<Props> {
   static contextType = DataContext;
 
   constructor(props) {
@@ -25,7 +30,7 @@ class DeclarationEdit extends React.Component {
     copy.skipSummary = formData.get("skip-summary") === "on";
 
     save(copy)
-      .then((data) => {
+      .then(() => {
         toggleShowState("showEditSummaryBehaviour");
       })
       .catch((err) => {
@@ -75,7 +80,12 @@ class DeclarationEdit extends React.Component {
               class is available. Use this on a wrapping element to apply
               default govuk styles.
             </span>
-            <Editor name="declaration" value={declaration} />
+            <Editor
+              name="declaration"
+              value={declaration}
+              id="declaration"
+              required={true}
+            />
           </div>
 
           <button className="govuk-button" type="submit">

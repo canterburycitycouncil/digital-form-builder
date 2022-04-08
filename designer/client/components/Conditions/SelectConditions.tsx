@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from "react";
 import InlineConditions from "./InlineConditions";
-import { ConditionsModel, Data } from "@xgovformbuilder/model";
+import { ConditionsModel, Data, Condition } from "@xgovformbuilder/model";
 import { Flyout } from "../Flyout";
 import { Select } from "govuk-react-jsx";
 import { Hint } from "govuk-react-jsx";
@@ -20,7 +20,7 @@ interface Props {
 
 interface State {
   inline: boolean;
-  selectedCondition: string;
+  selectedCondition: Condition;
   fields: any;
 }
 

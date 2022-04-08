@@ -4,7 +4,19 @@ import core from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 
-class Editor extends React.Component {
+interface Props {
+  value: string;
+  name: string;
+  id: string;
+  required: boolean;
+  valueCallback?: (value: any) => void;
+}
+
+interface State {
+  value: string;
+}
+
+class Editor extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 
@@ -29,7 +41,7 @@ class Editor extends React.Component {
         value={this.state.value}
         required={this.props.required}
         highlight={(code) => core.highlight(code, core.languages.js)}
-        onValueChange={(value) => this.setState({ value })}
+        onValueChange={(value) => this.setState({ value }, () => {})}
         padding={5}
         style={{
           fontFamily: '"Fira code", "Fira Mono", monospace',

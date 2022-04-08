@@ -12,7 +12,7 @@ export function fetchConfigurations() {
       if (res.ok) {
         return res.json();
       } else {
-        throw res.error;
+        throw new Error("There was an unknown error");
       }
     });
 }

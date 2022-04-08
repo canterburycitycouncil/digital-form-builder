@@ -1,19 +1,38 @@
 import FeeItems from "./fee-items";
 import React from "react";
-import { clone } from "@xgovformbuilder/model";
-import { Input } from "@govuk-jsx/input";
+import { clone, Fee } from "@xgovformbuilder/model";
+import { Input } from "govuk-react-jsx";
 
 import ErrorSummary from "../../error-summary";
 import { DataContext } from "../../context";
 import logger from "../../plugins/logger";
-class FeeEdit extends React.Component {
+
+interface Props {
+  data: any;
+  fee: Fee;
+  onCreate: ({ data }) => void;
+  onEdit: ({ data }) => void;
+}
+
+interface Errors {
+  [key: string]: any;
+}
+
+interface State {
+  errors: Errors;
+  hasValidationErrors: boolean;
+}
+
+class FeeEdit extends React.Component<Props, State> {
   static contextType = DataContext;
+  feeItemsRef: React.RefObject<FeeItems>;
 
   constructor(props) {
     super(props);
     this.feeItemsRef = React.createRef();
     this.state = {
       errors: {},
+      hasValidationErrors: false,
     };
   }
 
@@ -25,10 +44,14 @@ class FeeEdit extends React.Component {
     const { save } = this.context;
 
     // Items
-    const payApiKey = formData.get("pay-api-key").trim();
-    const descriptions = formData.getAll("description").map((t) => t.trim());
-    const amount = formData.getAll("amount").map((t) => t.trim());
-    const conditions = formData.getAll("condition").map((t) => t.trim());
+    const payApiKey = (formData.get("pay-api-key") as string).trim();
+    const descriptions = (formData.getAll("description") as string[]).map((t) =>
+      t.trim()
+    );
+    const amount = (formData.getAll("amount") as string[]).map((t) => t.trim());
+    const conditions = (formData.getAll("condition") as string[]).map((t) =>
+      t.trim()
+    );
 
     let hasValidationErrors = this.validate(payApiKey, form);
     if (hasValidationErrors) return;
@@ -52,10 +75,10 @@ class FeeEdit extends React.Component {
 
   validate = (payApiKey, form) => {
     let apiKeyHasErrors = !payApiKey || payApiKey.length < 1;
-    let itemValidationErrors = this.feeItemsRef.current.validate(form);
+    let itemValidationErrors = this.feeItemsRef.current?.validate(form);
     let hasValidationErrors =
       apiKeyHasErrors || Object.keys(itemValidationErrors).length > 0;
-    let errors = {};
+    let errors: Errors = {};
     if (apiKeyHasErrors) {
       errors.payapi = { href: "#pay-api-key", children: "Enter Pay API key" };
     }
@@ -81,7 +104,7 @@ class FeeEdit extends React.Component {
     const { data, fee } = this.props;
     const copy = clone(data);
 
-    copy.fees.splice(data.fees.indexOf(fee), 1);
+    (copy.fees as Fee[]).splice(data.fees.indexOf(fee), 1);
 
     save(copy)
       .then((data) => {
@@ -94,7 +117,7 @@ class FeeEdit extends React.Component {
 
   render() {
     const { data } = this.props;
-    const { fees, conditions, payApiKey } = data;
+    const { fees, conditions, payApiKey, fee, onEdit } = data;
     const { errors, hasValidationErrors } = this.state;
     return (
       <div className="govuk-body">
@@ -120,9 +143,12 @@ class FeeEdit extends React.Component {
             }
           />
           <FeeItems
-            items={fees}
+            items={fees as Fee[]}
             conditions={conditions}
             ref={this.feeItemsRef}
+            data={data}
+            fee={fee}
+            onEdit={onEdit}
           />
 
           <button className="govuk-button" type="submit">

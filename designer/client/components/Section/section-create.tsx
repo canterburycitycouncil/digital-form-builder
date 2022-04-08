@@ -1,23 +1,33 @@
 import React from "react";
-import { clone } from "@xgovformbuilder/model";
-
 import { camelCase } from "../../helpers";
 import { DataContext } from "../../context";
 import { addSection } from "./data/addSection";
 import logger from "../../plugins/logger";
+import { FormDefinition } from "@xgovformbuilder/model";
 
-class SectionCreate extends React.Component {
+interface State {
+  name?: string;
+  title?: string;
+  generatedName?: string;
+}
+
+interface Props {
+  onCreate: (data: FormDefinition) => void;
+  onCancel: (e: any) => void;
+  data: FormDefinition;
+}
+
+class SectionCreate extends React.Component<Props, State> {
   static contextType = DataContext;
-  state = {};
+  state: State = {};
 
   async onSubmit(e) {
     e.preventDefault();
     const { data, save } = this.context;
     const { name, title, generatedName } = this.state;
-    const copy = { ...data };
     const updated = addSection(data, {
       name: name ?? generatedName,
-      title: title.trim(),
+      title: title?.trim(),
     });
 
     try {

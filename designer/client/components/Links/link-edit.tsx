@@ -1,13 +1,25 @@
 import React from "react";
 import SelectConditions from "../Conditions/SelectConditions";
-import { clone } from "@xgovformbuilder/model";
 import { i18n } from "../../i18n";
-
+import { Page, Condition } from "@xgovformbuilder/model";
 import { DataContext } from "../../context";
 import { updateLink, findPage } from "../Page/data";
 import logger from "../../plugins/logger";
+import { Edge } from "../../pages/Designer/Visualisation/types";
 
-class LinkEdit extends React.Component {
+interface Props {
+  edge: Edge;
+  onEdit: ({ data }) => void;
+  data: any;
+}
+
+interface State {
+  page: Page;
+  link: any;
+  selectedCondition: Condition;
+}
+
+class LinkEdit extends React.Component<Props, State> {
   static contextType = DataContext;
 
   constructor(props, context) {
@@ -37,7 +49,7 @@ class LinkEdit extends React.Component {
 
     try {
       await save(updatedData);
-      this.props.onEdit();
+      this.props.onEdit(updatedData);
     } catch (err) {
       logger.error("LinkEdit", err);
     }
@@ -73,7 +85,6 @@ class LinkEdit extends React.Component {
   render() {
     const { data, edge } = this.props;
     const { pages } = data;
-    const { selectedCondition } = this.state;
 
     return (
       <form onSubmit={(e) => this.onSubmit(e)} autoComplete="off">
@@ -115,7 +126,8 @@ class LinkEdit extends React.Component {
         </div>
         <SelectConditions
           path={edge.source}
-          selectedCondition={selectedCondition}
+          data={data}
+          hints={[]}
           conditionsChange={this.conditionSelected}
           noFieldsHintText={i18n("addLink.noFieldsAvailable")}
         />
