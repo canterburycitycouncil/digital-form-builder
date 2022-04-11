@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
-
-import { idFromFilename } from "../helpers";
+import { idFromFilename } from "runner/src/server/plugins/engine/helpers";
 
 const FORMS_FOLDER = path.join(__dirname, "..", "..", "..", "forms");
 

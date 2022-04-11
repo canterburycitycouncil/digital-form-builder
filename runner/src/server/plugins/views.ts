@@ -1,10 +1,9 @@
+import nunjucks from "nunjucks";
+import pkg from "package.json";
 import path from "path";
 import resolve from "resolve";
-import nunjucks from "nunjucks";
+import config from "runner/src/server/config";
 import vision from "vision";
-
-import config from "../config";
-import pkg from "../../../package.json";
 
 const basedir = path.join(process.cwd(), "..");
 

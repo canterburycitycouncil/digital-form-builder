@@ -1,6 +1,7 @@
-import config from "../config";
-import { get, postJson } from "./httpService";
 import { nanoid } from "nanoid";
+import { get, postJson } from "runner/src/server/services/httpService";
+
+import config from "../config";
 
 export type FeeDetails = {
   description: string;

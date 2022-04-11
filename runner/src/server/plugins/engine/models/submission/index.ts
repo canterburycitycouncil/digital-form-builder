@@ -1,3 +1,3 @@
-export { EmailModel } from "./EmailModel";
-export { FeesModel } from "./FeesModel";
-export { NotifyModel } from "./NotifyModel";
+export { EmailModel } from "runner/src/server/plugins/engine/models/submission/EmailModel";
+export { FeesModel } from "runner/src/server/plugins/engine/models/submission/FeesModel";
+export { NotifyModel } from "runner/src/server/plugins/engine/models/submission/NotifyModel";

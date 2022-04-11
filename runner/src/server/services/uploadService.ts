@@ -1,9 +1,12 @@
-import http from "http";
 import FormData from "form-data";
-
-import config from "../config";
-import { get, post } from "./httpService";
-import { HapiRequest, HapiResponseToolkit, HapiServer } from "../types";
+import http from "http";
+import config from "runner/src/server/config";
+import { get, post } from "runner/src/server/services/httpService";
+import {
+  HapiRequest,
+  HapiResponseToolkit,
+  HapiServer,
+} from "runner/src/server/types";
 
 type Payload = HapiRequest["payload"];
 
@@ -110,7 +113,7 @@ export class UploadService {
     if (!files.length && request.payload) {
       const fields = Object.entries(request.payload);
 
-      for (const [key, value] of fields) {
+      for (const [key, value] of fields as any) {
         if (value._data) {
           const originalFilename = originalFilenames[key];
           request.payload[key] =
@@ -158,7 +161,7 @@ export class UploadService {
             }
             try {
               return fileValue;
-            } catch (e) {
+            } catch (e: any) {
               request.pre.errors = [
                 ...(h.request.pre.errors || []),
                 parsedError(key, e),
@@ -181,7 +184,7 @@ export class UploadService {
               parsedError(key, error),
             ];
           }
-        } catch (e) {
+        } catch (e: any) {
           if (e.data && e.data.res) {
             const { error } = this.parsedDocumentUploadResponse(e.data.res);
             request.pre.errors = [

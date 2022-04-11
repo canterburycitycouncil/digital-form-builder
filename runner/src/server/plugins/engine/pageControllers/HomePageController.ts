@@ -1,5 +1,5 @@
-import { PageController } from "./PageController";
-import { HapiRequest, HapiResponseToolkit } from "server/types";
+import { PageController } from "runner/src/server/plugins/engine/pageControllers/PageController";
+import { HapiRequest, HapiResponseToolkit } from "runner/src/server/types";
 
 export class HomePageController extends PageController {
   get getRouteOptions() {

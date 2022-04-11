@@ -1,7 +1,6 @@
 import dotEnv from "dotenv";
 import Joi, { CustomHelpers } from "joi";
-
-import { isUrlSecure } from "src/server/utils/url";
+import { isUrlSecure } from "runner/src/server/utils/url";
 
 dotEnv.config({ path: ".env" });
 

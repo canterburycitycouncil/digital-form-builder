@@ -1,35 +1,34 @@
-import fs from "fs";
 import hapi, { ServerOptions } from "@hapi/hapi";
-
-import Scooter from "@hapi/scooter";
 import inert from "@hapi/inert";
-import Schmervice from "schmervice";
+import Scooter from "@hapi/scooter";
 import blipp from "blipp";
+import fs from "fs";
+import Schmervice from "schmervice";
 
-import { configureEnginePlugin } from "./plugins/engine";
-import { configureRateLimitPlugin } from "./plugins/rateLimit";
+import config from "./config";
+import pluginApplicationStatus from "./plugins/applicationStatus";
 import { configureBlankiePlugin } from "./plugins/blankie";
 import { configureCrumbPlugin } from "./plugins/crumb";
-import pluginLocale from "./plugins/locale";
-import pluginSession from "./plugins/session";
-import pluginViews from "./plugins/views";
-import pluginApplicationStatus from "./plugins/applicationStatus";
-import pluginRouter from "./plugins/router";
+import { configureEnginePlugin } from "./plugins/engine";
 import pluginErrorPages from "./plugins/errorPages";
+import pluginLocale from "./plugins/locale";
 import pluginLogging from "./plugins/logging";
 import pluginPulse from "./plugins/pulse";
+import { configureRateLimitPlugin } from "./plugins/rateLimit";
+import pluginRouter from "./plugins/router";
+import pluginSession from "./plugins/session";
+import pluginViews from "./plugins/views";
 import {
+  AddressService,
   CacheService,
   catboxProvider,
   EmailService,
   NotifyService,
   PayService,
+  StatusService,
   UploadService,
   WebhookService,
-  AddressService,
-  StatusService,
 } from "./services";
-import config from "./config";
 import { HapiRequest, HapiResponseToolkit, RouteConfig } from "./types";
 
 const serverOptions = (): ServerOptions => {
@@ -75,7 +74,7 @@ const serverOptions = (): ServerOptions => {
 
 async function createServer(routeConfig: RouteConfig) {
   const server = hapi.server(serverOptions());
-  const { formFileName, formFilePath, options } = routeConfig;
+  const { formFileName, formFilePath } = routeConfig;
 
   if (config.rateLimit) {
     await server.register(configureRateLimitPlugin(routeConfig));
@@ -130,9 +129,7 @@ async function createServer(routeConfig: RouteConfig) {
 
   await server.register(pluginLocale);
   await server.register(pluginViews);
-  await server.register(
-    configureEnginePlugin(formFileName, formFilePath, options)
-  );
+  await server.register(configureEnginePlugin(formFileName, formFilePath));
   await server.register(pluginApplicationStatus);
   await server.register(pluginRouter);
   await server.register(pluginErrorPages);
