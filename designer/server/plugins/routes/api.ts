@@ -36,7 +36,10 @@ export const runOutputs: ServerRoute = {
       maxBytes: 209715200,
     },
     cors: {
-      origin: ["http://localhost:8000"],
+      origin: [
+        "http://localhost:8000",
+        "http://canterbury-formbuilder.s3-website.eu-west-2.amazonaws.com",
+      ],
     },
     handler: runOutputsHandler,
   },
@@ -50,7 +53,10 @@ export const saveSubmission: ServerRoute = {
       parse: true,
     },
     cors: {
-      origin: ["http://localhost:8000"],
+      origin: [
+        "http://localhost:8000",
+        "http://canterbury-formbuilder.s3-website.eu-west-2.amazonaws.com",
+      ],
     },
     handler: saveSubmissionHandler,
   },
