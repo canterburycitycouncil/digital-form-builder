@@ -40,6 +40,13 @@ export const runOutputs: ServerRoute = {
         "http://localhost:8000",
         "http://canterbury-formbuilder.s3-website.eu-west-2.amazonaws.com",
       ],
+      headers: [
+        "Accept",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method",
+        "Origin",
+        "Content-Type",
+      ],
     },
     handler: runOutputsHandler,
   },
@@ -56,6 +63,13 @@ export const saveSubmission: ServerRoute = {
       origin: [
         "http://localhost:8000",
         "http://canterbury-formbuilder.s3-website.eu-west-2.amazonaws.com",
+      ],
+      headers: [
+        "Accept",
+        "Access-Control-Request-Headers",
+        "Access-Control-Request-Method",
+        "Origin",
+        "Content-Type",
       ],
     },
     handler: saveSubmissionHandler,
