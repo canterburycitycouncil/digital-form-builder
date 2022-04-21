@@ -2,3 +2,4 @@ docker-compose.yml
 docker-compose.aws.yml
 docker-compose.dev.yml
 Dockerfile
+gh-docs/*
