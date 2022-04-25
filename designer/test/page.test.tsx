@@ -2,10 +2,10 @@ import React from "react";
 import { shallow } from "enzyme";
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-import PageTranslated, { Page } from "../client/page";
+import PageTranslated, { Page } from "../client/components/Page/page";
 import { Flyout } from "../client/components/Flyout";
 import PageEdit from "../client/page-edit";
-import { ComponentCreate } from "../client/formComponentCreationForm/ComponentCreate";
+import { ComponentCreate } from "../client/components/FormComponent/ComponentCreate";
 import sinon from "sinon";
 
 const { expect } = Code;

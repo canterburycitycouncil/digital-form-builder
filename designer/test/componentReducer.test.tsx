@@ -3,8 +3,8 @@ import * as Lab from "@hapi/lab";
 import {
   componentReducer,
   getSubReducer,
-} from "../client/formComponentCreationForm/componentReducer/componentReducer";
-import { Actions } from "../client/formComponentCreationForm/componentReducer/types";
+} from "../client/components/FormComponent/componentReducer/componentReducer";
+import { Actions } from "../client/components/FormComponent/componentReducer/types";
 import {
   metaReducer,
   optionsReducer,
@@ -12,7 +12,7 @@ import {
   schemaReducer,
   componentListReducer,
   componentListItemReducer,
-} from "../client/formComponentCreationForm/componentReducer";
+} from "../client/components/FormComponent/componentReducer";
 
 const { expect } = Code;
 const lab = Lab.script();

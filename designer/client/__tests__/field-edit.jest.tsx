@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { FieldEdit } from "../field-edit";
+import { FieldEdit } from "../components/FormComponent/FieldEditors/field-edit";
 import { simplePageMock } from "./helpers/mocks";
 import { RenderWithContextAndDataContext } from "./helpers/renderers";
 

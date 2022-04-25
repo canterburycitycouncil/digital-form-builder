@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Flyout } from "../Flyout";
-import { ListsEditorContextProvider } from "../../reducers/list/listsEditorReducer";
-import { ListContextProvider } from "../../reducers/listReducer";
+import { ListsEditorContextProvider } from "../List/reducers/list/listsEditorReducer";
+import { ListContextProvider } from "../List/reducers/listReducer";
 import { DataContext } from "../../context";
 import { MenuItemHook, useMenuItem } from "./useMenuItem";
 import { SubMenu } from "./SubMenu";

@@ -12,7 +12,7 @@ import {
   assertText,
 } from "./helpers/element-assertions";
 import sinon from "sinon";
-import InlineConditionsEdit from "../client/conditions/inline-conditions-edit";
+import InlineConditionsEdit from "../client/components/Conditions/inline-conditions-edit";
 import {
   Condition,
   ConditionsModel,

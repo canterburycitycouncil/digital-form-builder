@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import * as formConfigurationsApi from "../load-form-configurations";
+import * as formConfigurationsApi from "../api/configuration-api";
 import { server } from "../../test/testServer";
 
 describe("Load form configurations", () => {

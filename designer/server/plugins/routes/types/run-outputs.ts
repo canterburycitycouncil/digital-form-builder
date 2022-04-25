@@ -2,7 +2,7 @@ import { FormDefinition } from "../../../../../model";
 import {
   OutputConfiguration,
   OutputType,
-} from "../../../../client/outputs-visualiser/outputs/types";
+} from "../../../../client/pages/Outputs/outputs/types";
 
 export interface OutputRequest {
   formScheme: FormDefinition;

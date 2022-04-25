@@ -5,8 +5,8 @@ import {
   ComponentContext,
   componentReducer,
   initComponentState,
-} from "../formComponentCreationForm/componentReducer/componentReducer";
-import { FieldEdit } from "../field-edit";
+} from "../components/FormComponent/componentReducer/componentReducer";
+import { FieldEdit } from "../components/FormComponent/FieldEditors/field-edit";
 
 describe("Field Edit", () => {
   let data = {

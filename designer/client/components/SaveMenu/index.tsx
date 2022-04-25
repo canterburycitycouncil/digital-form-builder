@@ -6,7 +6,9 @@ const SaveMenu = () => {
   const { data, upload } = useContext(DataContext);
   const saveForm = async () => {
     try {
-      const saved = await upload(data);
+      if (upload) {
+        await upload(data);
+      }
     } catch (err) {
       logger.error("FormDetails", err);
     }

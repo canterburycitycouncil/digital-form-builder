@@ -2,7 +2,7 @@ import { Request, ResponseToolkit } from "@hapi/hapi";
 import {
   Submission,
   SubmissionKey,
-} from "../../../../../client/submissions/types";
+} from "../../../../../client/pages/Submissions/types";
 import { returnResponse } from "../../helpers";
 import fetch from "node-fetch";
 
