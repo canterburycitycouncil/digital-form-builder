@@ -113,6 +113,13 @@ export type SpecialPages = {
   };
 };
 
+export type Fee = {
+  description: string;
+  amount: number;
+  multiplier?: string;
+  condition?: string;
+};
+
 export function isMultipleApiKey(
   payApiKey: string | MultipleApiKeys | undefined
 ): payApiKey is MultipleApiKeys {
@@ -133,7 +140,7 @@ export type FormDefinition = {
   name?: string | undefined;
   feedback?: Feedback;
   phaseBanner?: PhaseBanner;
-  fees: any[];
+  fees: Fee[];
   skipSummary?: boolean | undefined;
   outputs: Output[];
   declaration?: string | undefined;

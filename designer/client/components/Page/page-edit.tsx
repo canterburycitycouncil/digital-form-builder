@@ -1,13 +1,13 @@
 import React from "react";
-import { Input } from "@govuk-jsx/input";
-import { clone } from "@xgovformbuilder/model";
+import { Input } from "govuk-react-jsx";
+import { clone, Page, Section } from "@xgovformbuilder/model";
 import { randomId } from "../../helpers";
 
 import { toUrl } from "../../helpers";
 import { RenderInPortal } from "../RenderInPortal";
 import SectionEdit from "../Section/section-edit";
 import { Flyout } from "../Flyout";
-import { withI18n } from "../../i18n";
+import { I18n, withI18n } from "../../i18n";
 import ErrorSummary from "../../error-summary";
 import { validateTitle, hasValidationErrors } from "../../validations";
 import { DataContext } from "../../context";
@@ -17,8 +17,29 @@ import { FeatureFlags } from "../../context/FeatureFlagContext";
 import { findPage, updateLinksTo } from "./data";
 import logger from "../../plugins/logger";
 
-export class PageEdit extends React.Component {
+interface Props {
+  page: Page;
+  onEdit: ({ data }) => void;
+  i18n: I18n;
+}
+
+interface ErrorsObject {
+  [key: string]: any;
+}
+
+interface State {
+  path: string;
+  controller: string;
+  title: string;
+  section: Section;
+  isEditingSection: boolean;
+  isNewSection?: boolean;
+  errors: ErrorsObject;
+}
+
+export class PageEdit extends React.Component<Props, State> {
   static contextType = DataContext;
+  formEditSection: React.RefObject<unknown>;
 
   constructor(props) {
     super(props);
@@ -177,7 +198,6 @@ export class PageEdit extends React.Component {
   };
 
   closeFlyout = (sectionName) => {
-    const propSection = this.state.section ?? this.props.page?.section ?? "";
     this.setState({
       isEditingSection: false,
       section: sectionName,

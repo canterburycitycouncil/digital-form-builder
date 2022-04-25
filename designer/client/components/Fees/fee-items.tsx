@@ -1,6 +1,6 @@
 import React from "react";
-import { clone } from "@xgovformbuilder/model";
-import { ErrorMessage } from "@govuk-jsx/error-message";
+import { clone, Fee, Condition, FormDefinition } from "@xgovformbuilder/model";
+import { ErrorMessage } from "govuk-react-jsx";
 import classNames from "classnames";
 
 import { isEmpty } from "../../helpers";
@@ -15,6 +15,27 @@ function headDuplicate(arr) {
       }
     }
   }
+  return null;
+}
+
+interface Props {
+  items: Fee[];
+  conditions: Condition[];
+  ref: React.RefObject<FeeItems>;
+  data: FormDefinition;
+  fee: Fee;
+  onEdit: ({ data }) => void;
+}
+
+interface State {
+  items: Fee[];
+  errors: MissingError;
+}
+
+interface MissingError {
+  href?: string;
+  children?: string;
+  [key: string]: boolean | string | undefined | MissingError;
 }
 
 const MISSING_DESC = "missingDescription";
@@ -22,7 +43,7 @@ const INVALID_AMOUNT = "invalidAmount";
 const MISSING_COND = "missingCondition";
 const DUP_CONDITIONS = "dupConditions";
 
-class FeeItems extends React.Component {
+class FeeItems extends React.Component<Props, State> {
   static contextType = DataContext;
 
   constructor(props) {
@@ -37,13 +58,13 @@ class FeeItems extends React.Component {
     let errors = {};
     const formData = new window.FormData(form);
     let missingDescription = false;
-    let missingDescriptions = {};
+    let missingDescriptions: MissingError = {};
     let amountInvalid = false;
-    let amountsInvalid = {};
+    let amountsInvalid: MissingError = {};
     let missingCondition = false;
-    let missingConditions = {};
+    let missingConditions: MissingError = {};
     formData.getAll("description").forEach((d, i) => {
-      if (isEmpty(d)) {
+      if (isEmpty(d as string)) {
         missingDescriptions[i] = true;
         missingDescription = true;
       }
@@ -55,7 +76,7 @@ class FeeItems extends React.Component {
     }
 
     formData.getAll("condition").forEach((d, i) => {
-      if (isEmpty(d)) {
+      if (isEmpty(d as string)) {
         missingDescriptions[i] = true;
         missingCondition = true;
       }
@@ -67,7 +88,7 @@ class FeeItems extends React.Component {
     }
 
     formData.getAll("amount").forEach((d, i) => {
-      if (d < 0) {
+      if (((d as unknown) as number) < 0) {
         amountsInvalid[i] = true;
         amountInvalid = true;
       }
@@ -78,8 +99,12 @@ class FeeItems extends React.Component {
       errors[INVALID_AMOUNT] = amountsInvalid;
     }
 
-    const descriptions = formData.getAll("description").map((t) => t.trim());
-    const conditions = formData.getAll("condition").map((t) => t.trim());
+    const descriptions = formData
+      .getAll("description")
+      .map((t) => (t as string).trim());
+    const conditions = formData
+      .getAll("condition")
+      .map((t) => (t as string).trim());
 
     // Only validate dupes if there is more than one item
     if (descriptions.length >= 2 && headDuplicate(conditions)) {
@@ -108,7 +133,7 @@ class FeeItems extends React.Component {
   };
 
   removeItem = (idx) => {
-    this.setState((prevState, props) => ({
+    this.setState(() => ({
       items: this.state.items.filter((s, i) => i !== idx),
       errors: {},
     }));
@@ -126,7 +151,7 @@ class FeeItems extends React.Component {
     const copy = clone(data);
 
     // Remove the list
-    copy.fees.splice(data.fees.indexOf(fee), 1);
+    (copy.fees as Fee[]).splice(data.fees.indexOf(fee), 1);
 
     save(copy)
       .then((data) => {
@@ -144,7 +169,11 @@ class FeeItems extends React.Component {
     let hasValidationErrors = Object.keys(errors).length > 0;
 
     const errorMessages = Object.entries(errors).map(([key, value]) => {
-      return <ErrorMessage key={key}>{value?.children}</ErrorMessage>;
+      return (
+        <ErrorMessage key={key}>
+          {value ? (value as MissingError).children : null}
+        </ErrorMessage>
+      );
     });
 
     return (
@@ -182,11 +211,7 @@ class FeeItems extends React.Component {
           </thead>
           <tbody className="govuk-table__body">
             {items.map((item, index) => (
-              <tr
-                key={item.description + index}
-                className="govuk-table__row"
-                scope="row"
-              >
+              <tr key={item.description + index} className="govuk-table__row">
                 <td className="govuk-table__cell">
                   <input
                     className={classNames({

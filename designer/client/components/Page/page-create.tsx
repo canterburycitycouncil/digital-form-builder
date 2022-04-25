@@ -1,19 +1,61 @@
 import React from "react";
-import { Input } from "@govuk-jsx/input";
-
+import { Input } from "govuk-react-jsx";
+import {
+  Section,
+  Page,
+  ComponentDef,
+  FormDefinition,
+} from "@xgovformbuilder/model";
 import SelectConditions from "../Conditions/SelectConditions";
 import { toUrl, randomId } from "../../helpers";
 import { RenderInPortal } from "../RenderInPortal";
 import { Flyout } from "../Flyout";
 import SectionEdit from "../Section/section-edit";
-import { i18n, withI18n } from "../../i18n";
+import { withI18n, I18n } from "../../i18n";
 import ErrorSummary from "../../error-summary";
 import { validateTitle, hasValidationErrors } from "../../validations";
 import { DataContext } from "../../context";
-import { addLink, findPage, addPage } from "./data";
+import { addLink, addPage } from "./data";
 import logger from "../../plugins/logger";
+import { Path } from "../FormComponent/componentData/types";
 
-class PageCreate extends React.Component {
+interface DataProps {
+  value: PageValue;
+}
+
+interface Props {
+  page: Page;
+  onCreate: ({ value }: DataProps) => void;
+  data: FormDefinition;
+  i18n: I18n;
+}
+
+interface ErrorsObject {
+  [key: string]: any;
+}
+
+interface State {
+  path: string;
+  controller: string;
+  title: string;
+  section: Section;
+  isEditingSection: boolean;
+  errors: ErrorsObject;
+  linkFrom?: string;
+  pageType?: string;
+  selectedCondition?: string;
+}
+
+interface PageValue {
+  path: string;
+  title: string;
+  components: ComponentDef[];
+  next: Path[];
+  section?: Section;
+  controller?: string;
+}
+
+class PageCreate extends React.Component<Props, State> {
   static contextType = DataContext;
 
   constructor(props, context) {
@@ -44,7 +86,7 @@ class PageCreate extends React.Component {
     let validationErrors = this.validate(title, path);
     if (hasValidationErrors(validationErrors)) return;
 
-    const value = {
+    const value: PageValue = {
       path,
       title,
       components: [],
@@ -183,7 +225,7 @@ class PageCreate extends React.Component {
 
     return (
       <div>
-        {hasValidationErrors(errors) > 0 && (
+        {hasValidationErrors(errors) && (
           <ErrorSummary errorList={Object.values(errors)} />
         )}
         <form onSubmit={(e) => this.onSubmit(e)} autoComplete="off">
@@ -233,6 +275,7 @@ class PageCreate extends React.Component {
           {linkFrom && linkFrom.trim() !== "" && (
             <SelectConditions
               data={data}
+              hints={[]}
               path={linkFrom}
               conditionsChange={this.conditionSelected}
               noFieldsHintText={i18n("conditions.noFieldsAvailable")}
@@ -300,7 +343,7 @@ class PageCreate extends React.Component {
               <a
                 href="#"
                 className="govuk-link govuk-!-display-block"
-                onClick={this.editSection}
+                onClick={(e) => this.editSection(e, section)}
               >
                 Edit section
               </a>
@@ -308,7 +351,7 @@ class PageCreate extends React.Component {
             <a
               href="#"
               className="govuk-link govuk-!-display-block"
-              onClick={this.editSection}
+              onClick={(e) => this.editSection(e, section)}
             >
               Create section
             </a>

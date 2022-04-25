@@ -9,37 +9,72 @@ import { Flyout } from "../Flyout";
 import PageEdit from "./page-edit";
 import { Component } from "../FormComponent/component";
 import { ComponentCreate } from "../FormComponent/ComponentCreate";
-import { ComponentTypes, clone } from "@xgovformbuilder/model";
-import { withI18n } from "../../i18n";
+import {
+  ComponentTypes,
+  Page,
+  FormDefinition,
+  ComponentDef,
+} from "@xgovformbuilder/model";
+import { I18n, withI18n } from "../../i18n";
 import { DataContext } from "../../context";
 import { PageLinkage } from "./PageLinkage";
 import { ComponentContextProvider } from "../FormComponent/componentReducer";
 import { findPage } from "./data";
 
-const SortableItem = SortableElement(({ index, page, component, data }) => (
-  <div className="component-item">
-    <Component key={index} page={page} component={component} data={data} />
-  </div>
-));
+interface SortableElementProps {
+  index: number;
+  page: Page;
+  component: ComponentDef;
+  data: FormDefinition;
+}
 
-const SortableList = SortableContainer(({ page = {}, data }) => {
-  const { components = [] } = page;
-  return (
-    <div className="component-list">
-      {components.map((component, index) => (
-        <SortableItem
-          key={index}
-          index={index}
-          page={page}
-          component={component}
-          data={data}
-        />
-      ))}
+interface SortableContainerProps {
+  page: Page;
+  data: FormDefinition;
+}
+
+interface PageProps {
+  page: Page;
+  i18n: I18n;
+  previewUrl: string;
+  persona: any;
+  id: string;
+  layout: any;
+}
+
+interface PageState {
+  showEditor: boolean;
+  showAddComponent: boolean;
+}
+
+const SortableItem = SortableElement(
+  ({ index, page, component, data }: SortableElementProps) => (
+    <div className="component-item">
+      <Component key={index} page={page} component={component} data={data} />
     </div>
-  );
-});
+  )
+);
 
-export class Page extends React.Component {
+const SortableList = SortableContainer(
+  ({ page = {}, data }: SortableContainerProps) => {
+    const { components = [] } = page;
+    return (
+      <div className="component-list">
+        {components.map((component, index) => (
+          <SortableItem
+            key={index}
+            index={index}
+            page={page}
+            component={component}
+            data={data}
+          />
+        ))}
+      </div>
+    );
+  }
+);
+
+export class PageComponent extends React.Component<PageProps, PageState> {
   static contextType = DataContext;
 
   constructor(props, context) {
@@ -120,7 +155,7 @@ export class Page extends React.Component {
             {section && <span>{section.title}</span>}
             {pageTitle}
           </h3>
-          <PageLinkage page={page} data={data} layout={this.props.layout} />
+          <PageLinkage page={page} layout={this.props.layout} />
         </div>
 
         <SortableList
@@ -146,7 +181,7 @@ export class Page extends React.Component {
           </button>
           <a
             title={i18n("Preview page")}
-            href={previewHref}
+            href={previewHref.toString()}
             target="_blank"
             rel="noreferrer"
           >
@@ -179,4 +214,4 @@ export class Page extends React.Component {
   }
 }
 
-export default withI18n(Page);
+export default withI18n(PageComponent);

@@ -33,7 +33,7 @@ export function ComponentEdit(props) {
 
   useLayoutEffect(() => {
     if (hasValidated && !hasErrors) {
-      handleSubmit();
+      handleSubmit(null);
     }
   }, [hasValidated]);
 

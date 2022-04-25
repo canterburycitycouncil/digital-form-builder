@@ -1,11 +1,23 @@
 import React from "react";
 import Editor from "../../editor";
-import { clone, ConditionsWrapper } from "@xgovformbuilder/model";
+import { ConditionsWrapper, FormDefinition } from "@xgovformbuilder/model";
 import { DataContext } from "../../context";
-import { removeCondition, updateCondition } from "../data";
+import { removeCondition, updateCondition } from "./data";
 import logger from "../../plugins/logger";
 
-class ConditionEdit extends React.Component {
+interface Props {
+  data: FormDefinition;
+  onEdit: ({ data }) => void;
+  onCancel: (e) => void;
+  condition: any;
+}
+
+interface State {
+  displayName: string;
+  value: string;
+}
+
+class ConditionEdit extends React.Component<Props, State> {
   static contextType = DataContext;
 
   constructor(props) {

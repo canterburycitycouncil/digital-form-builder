@@ -20,6 +20,17 @@ interface Props {
   conditionsChange?: (event: MouseEvent) => void;
 }
 
+interface FieldInput {
+  label: string;
+  name: string;
+  type: string;
+  values: string[];
+}
+
+export interface FieldInputObject {
+  [key: string]: FieldInput;
+}
+
 interface State {
   editView?: boolean;
   conditions: ConditionsModel;
@@ -78,7 +89,7 @@ export class InlineConditions extends React.Component<Props, State> {
 
     const inputs = !!path ? inputsAccessibleAt(data, path) : allInputs(data);
 
-    const fieldInputs = inputs.map((input) => {
+    const fieldInputs: FieldInput[] = inputs.map((input) => {
       const label = [
         data.sections?.[input.page.section]?.title,
         input.title ?? input.name,
@@ -101,16 +112,18 @@ export class InlineConditions extends React.Component<Props, State> {
         values,
       };
     });
-    const conditionsInputs = data.conditions.map((condition) => ({
+    const conditionsInputs: FieldInput[] = data.conditions.map((condition) => ({
       label: condition.displayName,
       name: condition.name,
       type: "Condition",
     }));
 
-    return fieldInputs.concat(conditionsInputs).reduce((obj, item) => {
-      obj[item.name] = item;
-      return obj;
-    }, {});
+    return fieldInputs
+      .concat(conditionsInputs)
+      .reduce<FieldInputObject>((obj, item) => {
+        obj[item.name] = item;
+        return obj;
+      }, {});
   };
 
   toggleEdit = () => {
@@ -169,7 +182,7 @@ export class InlineConditions extends React.Component<Props, State> {
     });
   };
 
-  editCallback = (conditions) => {
+  editCallback = (conditions: ConditionsModel) => {
     this.setState({
       conditions: conditions,
     });
@@ -335,7 +348,7 @@ export class InlineConditions extends React.Component<Props, State> {
             conditions={conditions}
             fields={this.state.fields}
             saveCallback={this.editCallback}
-            exitCallback={this.toggleEdit}
+            cancelCallback={this.toggleEdit}
           />
         )}
       </div>

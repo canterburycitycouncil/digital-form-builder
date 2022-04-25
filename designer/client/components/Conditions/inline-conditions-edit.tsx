@@ -1,13 +1,31 @@
 import React from "react";
 import {
   ConditionGroupDef,
+  ConditionsModel,
+  Condition,
   toPresentationString,
   clone,
 } from "@xgovformbuilder/model";
 import InlineConditionsDefinition from "./InlineConditionsDefinition";
 import { EditIcon, MoveDownIcon, MoveUpIcon } from "../Icons";
+import { FieldInputObject } from "./InlineConditions";
 
-class InlineConditionsEdit extends React.Component {
+interface Props {
+  conditions: ConditionsModel;
+  cancelCallback: () => void;
+  saveCallback?: (conditions: ConditionsModel) => void;
+  fields: FieldInputObject;
+}
+
+interface State {
+  conditions: ConditionsModel;
+  selectedConditions: ConditionsModel;
+  condition?: Condition;
+  editingError?: string;
+  editingIndex?: number;
+}
+
+class InlineConditionsEdit extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 
@@ -25,40 +43,52 @@ class InlineConditionsEdit extends React.Component {
     } else {
       copy = copy.filter((it) => it !== index);
     }
-    this.setState({
-      selectedConditions: copy,
-    });
+    this.setState(
+      {
+        selectedConditions: copy,
+      },
+      () => {}
+    );
   };
 
   onClickGroup = (e) => {
     e?.preventDefault();
     if (this.state.selectedConditions?.length < 2) {
-      this.setState({
-        editingError: "Please select at least 2 items for grouping",
-      });
+      this.setState(
+        {
+          editingError: "Please select at least 2 items for grouping",
+        },
+        () => {}
+      );
     } else {
       const groups = this.groupWithConsecutiveConditions(
         this.state.selectedConditions
       );
       if (groups.find((group) => group.length === 1)) {
-        this.setState({
-          editingError: "Please select consecutive items to group",
-        });
+        this.setState(
+          {
+            editingError: "Please select consecutive items to group",
+          },
+          () => {}
+        );
       } else {
-        this.setState({
-          editingError: undefined,
-          selectedConditions: [],
-          conditions: this.state.conditions.addGroups(
-            groups
-              .sort((a, b) => a - b)
-              .reduce((groupDefs, group) => {
-                groupDefs.push(
-                  new ConditionGroupDef(group[0], group[group.length - 1])
-                );
-                return groupDefs;
-              }, [])
-          ),
-        });
+        this.setState(
+          {
+            editingError: undefined,
+            selectedConditions: [],
+            conditions: this.state.conditions.addGroups(
+              groups
+                .sort((a, b) => a - b)
+                .reduce((groupDefs, group) => {
+                  groupDefs.push(
+                    new ConditionGroupDef(group[0], group[group.length - 1])
+                  );
+                  return groupDefs;
+                }, [])
+            ),
+          },
+          () => {}
+        );
       }
     }
   };
@@ -66,24 +96,32 @@ class InlineConditionsEdit extends React.Component {
   onClickRemove = (e) => {
     e?.preventDefault();
     if (this.state.selectedConditions?.length < 1) {
-      this.setState({
-        editingError: "Please select at least 1 item to remove",
-      });
+      this.setState(
+        {
+          editingError: "Please select at least 1 item to remove",
+        },
+        () => {}
+      );
     } else {
-      this.setState({
-        editingError: undefined,
-        selectedConditions: [],
-        conditions: this.state.conditions.remove(this.state.selectedConditions),
-        condition: undefined,
-      });
+      this.setState(
+        {
+          editingError: undefined,
+          selectedConditions: [],
+          conditions: this.state.conditions.remove(
+            this.state.selectedConditions
+          ),
+          condition: undefined,
+        },
+        () => {}
+      );
     }
     if (!this.state.conditions.hasConditions) {
-      this.props.exitCallback();
+      this.props.cancelCallback();
     }
   };
 
   groupWithConsecutiveConditions(selectedConditions) {
-    const result = [];
+    const result: ConditionGroupDef[] = [];
     selectedConditions.sort((a, b) => a - b);
     selectedConditions.forEach((condition) => {
       const groupForCondition = result.find(
@@ -99,37 +137,49 @@ class InlineConditionsEdit extends React.Component {
     return result;
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps) {
     if (prevProps.conditions !== this.props.conditions) {
-      this.setState({
-        conditions: this.props.conditions,
-        selectedConditions: [],
-      });
+      this.setState(
+        {
+          conditions: this.props.conditions,
+          selectedConditions: [],
+        },
+        () => {}
+      );
     }
   }
 
   onClickCancelEditView = (e) => {
     e?.preventDefault();
-    this.setState({
-      selectedConditions: [],
-      editingIndex: undefined,
-    });
-    this.props.exitCallback();
+    this.setState(
+      {
+        selectedConditions: [],
+        editingIndex: undefined,
+      },
+      () => {}
+    );
+    this.props.cancelCallback();
   };
 
   onClickSplit(index) {
-    this.setState({
-      conditions: this.state.conditions.splitGroup(index),
-    });
+    this.setState(
+      {
+        conditions: this.state.conditions.splitGroup(index),
+      },
+      () => {}
+    );
   }
 
   onClickEdit(index) {
     const conditions = this.state.conditions.asPerUserGroupings;
     if (conditions.length > index) {
-      this.setState({
-        editingIndex: index,
-        condition: Object.assign({}, conditions[index]),
-      });
+      this.setState(
+        {
+          editingIndex: index,
+          condition: Object.assign({}, conditions[index]),
+        },
+        () => {}
+      );
     }
   }
 
@@ -137,38 +187,47 @@ class InlineConditionsEdit extends React.Component {
     event.preventDefault();
     const index = event.currentTarget.dataset.index;
     const conditions = this.state.conditions.moveEarlier(index);
-    this.setState({
-      conditions,
-      selectedConditions: [],
-    });
+    this.setState(
+      {
+        conditions,
+        selectedConditions: [],
+      },
+      () => {}
+    );
   };
 
   moveConditionLater = (event) => {
     event.preventDefault();
     const index = event.currentTarget.dataset.index;
     const conditions = this.state.conditions.moveLater(index);
-    this.setState({
-      conditions,
-      selectedConditions: [],
-    });
+    this.setState(
+      {
+        conditions,
+        selectedConditions: [],
+      },
+      () => {}
+    );
   };
 
   setState(state, callback) {
-    if (state.conditions) {
+    if (state.conditions && this.props.saveCallback) {
       this.props.saveCallback(state.conditions);
     }
     super.setState(state, callback);
   }
 
   saveCondition = (condition) => {
-    this.setState({
-      conditions: this.state.conditions.replace(
-        this.state.editingIndex,
-        condition
-      ),
-      condition: undefined,
-      editingIndex: undefined,
-    });
+    this.setState(
+      {
+        conditions: this.state.conditions.replace(
+          this.state.editingIndex,
+          condition
+        ),
+        condition: undefined,
+        editingIndex: undefined,
+      },
+      () => {}
+    );
   };
 
   render() {
@@ -307,7 +366,7 @@ class InlineConditionsEdit extends React.Component {
             </div>
           </fieldset>
         )}
-        {editingIndex >= 0 && (
+        {editingIndex && editingIndex >= 0 && (
           <InlineConditionsDefinition
             expectsCoordinator={editingIndex > 0}
             fields={this.props.fields}

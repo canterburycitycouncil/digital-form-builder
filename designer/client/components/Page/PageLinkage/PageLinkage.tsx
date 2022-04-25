@@ -2,11 +2,12 @@ import React, { useCallback, useState, Fragment, useContext } from "react";
 import { RenderInPortal } from "../../RenderInPortal";
 import { DataContext } from "../../../context";
 import { addLink } from "../data";
+import { Edge } from "../../../pages/Designer/Visualisation/types";
 
 export function PageLinkage({ page, layout }) {
   const { data, save } = useContext(DataContext);
-  const [lineStart, setLineStart] = useState(null);
-  const [lineEnd, setLineEnd] = useState(null);
+  const [lineStart, setLineStart] = useState<Edge["points"] | null>(null);
+  const [lineEnd, setLineEnd] = useState<Edge["points"] | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isDraggingOver, setIsDraggingOver] = useState(false);
 
@@ -24,7 +25,7 @@ export function PageLinkage({ page, layout }) {
     setIsDragging(true);
     setLineEnd({ x, y });
     setLineStart({ x, y });
-    event.dataTransfer.setData("linkingPage", JSON.stringify(page));
+    event.dataTransfer?.setData("linkingPage", JSON.stringify(page));
   }, []);
 
   const handleDrag = useCallback((event) => {

@@ -10,12 +10,24 @@ import {
 import { i18n } from "../../i18n";
 
 import { InlineConditionsDefinitionValue } from "./InlineConditionsDefinitionValue";
+import { FieldInputObject } from "./InlineConditions";
 
 function isCondition(fieldDef) {
   return fieldDef?.type === "Condition";
 }
 
-class InlineConditionsDefinition extends React.Component {
+interface Props {
+  expectsCoordinator: boolean;
+  fields: FieldInputObject;
+  saveCallback: (condition: Condition) => void;
+  conditionsChange?: (e) => void;
+}
+
+interface State {
+  condition: Condition;
+}
+
+class InlineConditionsDefinition extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +35,7 @@ class InlineConditionsDefinition extends React.Component {
     };
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps) {
     if (
       this.props.expectsCoordinator !== prevProps.expectsCoordinator ||
       this.props.fields !== prevProps.fields
@@ -32,30 +44,39 @@ class InlineConditionsDefinition extends React.Component {
       const newCondition = this.props.fields[condition?.field?.name]
         ? this.state.condition
         : {};
-      this.setState({
-        condition: newCondition,
-      });
+      this.setState(
+        {
+          condition: newCondition,
+        },
+        () => {}
+      );
     }
   }
 
   onChangeCoordinator = (e) => {
     const input = e.target;
-    let newCondition = {};
+    let newCondition: Condition = {};
 
     if (input.value && input.value.trim() !== "") {
       newCondition = clone(this.state.condition ?? {});
       newCondition.coordinator = input.value;
     }
-    this.setState({
-      condition: newCondition,
-    });
+    this.setState(
+      {
+        condition: newCondition,
+      },
+      () => {}
+    );
   };
 
   onClickFinalise = () => {
     const { condition } = this.state;
-    this.setState({
-      condition: {},
-    });
+    this.setState(
+      {
+        condition: {},
+      },
+      () => {}
+    );
 
     const fieldDef = this.props.fields[condition.field.name];
     if (isCondition(fieldDef)) {
@@ -120,9 +141,12 @@ class InlineConditionsDefinition extends React.Component {
   _updateCondition(condition, updates) {
     const copy = clone(condition);
     updates(copy);
-    this.setState({
-      condition: copy,
-    });
+    this.setState(
+      {
+        condition: copy,
+      },
+      () => {}
+    );
   }
 
   onChangeOperator = (e) => {
@@ -142,7 +166,10 @@ class InlineConditionsDefinition extends React.Component {
   };
 
   setState(state, callback) {
-    if (state.conditions || state.selectedCondition !== undefined) {
+    if (
+      state.conditions ||
+      (state.selectedCondition !== undefined && this.props.conditionsChange)
+    ) {
       this.props.conditionsChange(state.conditions, state.selectedCondition);
     }
     super.setState(state, callback);

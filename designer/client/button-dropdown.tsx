@@ -1,7 +1,19 @@
 import React from "react";
-import { withI18n } from "./i18n";
+import { I18n, withI18n } from "./i18n";
 
-class ButtonDropdown extends React.Component {
+interface Props {
+  updatePersona: (value: any) => void;
+  i18n: I18n;
+}
+
+interface State {
+  showPersonas: boolean;
+  value: {
+    [key: string]: any;
+  };
+}
+
+class ButtonDropdown extends React.Component<Props, State> {
   /* TODO:- generalise this */
   constructor(props) {
     super(props);
