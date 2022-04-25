@@ -52,4 +52,4 @@ Firstly, DynamoDB is incredibly fast. Due to the way data is stored in DynamoDB 
 Secondly, DynamoDB is very cheap. Due to the low latency of dynamoDB queries, combined with low object sizes and tables only being active when being used, the cost to use DynamoDB is much cheaper than using SQL and is on a par with using S3.
 Thirdly, with DynamoDB you can query objects using any field that is expected on the object, and only return certain fields. This will help with even further cost and performance improvements.
 
-For more information about dynamoDB visit the [DynamoDB sales pages.](https://aws.amazon.com/dynamodb/?trk=326727ca-4917-4e82-8113-929ad925b6a0&sc_channel=ps&sc_campaign=acquisition&sc_medium=ACQ-P|PS-GO|Brand|Desktop|SU|Database|DynamoDB|GB|EN|Text&s_kwcid=AL!4422!3!536393678524!e!!g!!dynamodb&ef_id=Cj0KCQjwgYSTBhDKARIsAB8Kukv0dTIlHSh8vocuXKtOa0ndQrVKhXwUvRVUNoohcMIvl_J5J_V3QncaAgFkEALw_wcB:G:s&s_kwcid=AL!4422!3!536393678524!e!!g!!dynamodb)
+For more information about dynamoDB visit the [DynamoDB sales pages.](https://aws.amazon.com/dynamodb)

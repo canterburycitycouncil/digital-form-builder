@@ -1,0 +1,34 @@
+- name: Home
+  link: /
+- name: Models package
+  link: /model
+- name: Designer package - Server
+  link: /designer/server.html
+  children:
+    - name: Server routing
+      link: /designer/server/routing.html
+    - name: Server config
+      link: /designer/server/config.html
+    - name: Server persistence services
+      link: /designer/server/persistence.html
+    - name: Server outputs
+      link: /designer/server/outputs.html
+- name: Designer package - Client
+  link: /designer/clienthtml
+  children:
+    - name: Designer page
+      link: /designer/client/designer.html
+    - name: Error pages
+      link: /designer/client/error-pages.html
+    - name: Landing page
+      link: /designer/client/landing-page.html
+    - name: Outputs designer
+      link: /designer/client/outputs-designer.html
+    - name: Submissions
+      link: /designer/client/submissions.html
+    - name: Translation
+      link: /designer/client/translation.html
+    - name: Contexts
+      link: /designer/client/contexts.html
+    - name: Reusable components
+      link: /designer/client/components.html
