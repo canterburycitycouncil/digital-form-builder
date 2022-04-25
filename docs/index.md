@@ -1,7 +1,3 @@
-layout: page
-title: "Welcome to Digital Form Builder"
-permalink: /
-
 # Digital Form Builder
 
 Welcome to the docs for Digital Form Builder. On this site you will find information on the codebase for the form builder, what each area is, what it contains, and how to use it and build on top of it.
