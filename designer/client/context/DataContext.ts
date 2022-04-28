@@ -1,5 +1,5 @@
+import { FormDefinition } from "@xgovformbuilder/data-model";
 import { createContext } from "react";
-import { FormDefinition } from "@xgovformbuilder/model";
 
 export const DataContext = createContext<{
   data: FormDefinition;

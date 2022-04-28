@@ -1,15 +1,15 @@
-import React, { useContext } from "react";
-import { ComponentContext } from "../../reducers/component/componentReducer";
-import { Actions } from "../../reducers/component/types";
-import { CssClasses } from "../CssClasses";
-import { i18n } from "../../i18n";
-import { Autocomplete } from "../Autocomplete";
-import { CustomValidationMessage } from "../CustomValidationMessage";
-import { GovUKInput } from "../govuk-fields";
+import { Autocomplete } from "designer/client/components/Autocomplete";
+import { CssClasses } from "designer/client/components/CssClasses";
+import { CustomValidationMessage } from "designer/client/components/CustomValidationMessage";
+import { GovUKInput } from "designer/client/components/govuk-fields";
+import { i18n } from "designer/client/i18n";
+import { ComponentContext } from "designer/client/reducers/component/componentReducer";
+import { Actions } from "designer/client/reducers/component/types";
+import React, { ReactNode, useContext } from "react";
 
 type Props = {
   context: any; // TODO
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export function TextFieldEdit({ children, context = ComponentContext }: Props) {
@@ -36,7 +36,7 @@ export function TextFieldEdit({ children, context = ComponentContext }: Props) {
         handleChange={(e) =>
           dispatch({
             type: Actions.EDIT_SCHEMA_MIN,
-            payload: e.target.value,
+            payload: e.target.nodeValue,
           })
         }
       />
@@ -50,7 +50,7 @@ export function TextFieldEdit({ children, context = ComponentContext }: Props) {
         handleChange={(e) =>
           dispatch({
             type: Actions.EDIT_SCHEMA_MAX,
-            payload: e.target.value,
+            payload: e.target.nodeValue,
           })
         }
       />
@@ -64,7 +64,7 @@ export function TextFieldEdit({ children, context = ComponentContext }: Props) {
         handleChange={(e) =>
           dispatch({
             type: Actions.EDIT_SCHEMA_LENGTH,
-            payload: e.target.value,
+            payload: e.target.nodeValue,
           })
         }
       />
@@ -78,7 +78,7 @@ export function TextFieldEdit({ children, context = ComponentContext }: Props) {
         handleChange={(e) =>
           dispatch({
             type: Actions.EDIT_SCHEMA_REGEX,
-            payload: e.target.value,
+            payload: e.target.nodeValue,
           })
         }
       />

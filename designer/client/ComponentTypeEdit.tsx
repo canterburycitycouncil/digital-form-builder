@@ -1,16 +1,16 @@
+import { ComponentTypes } from "@xgovformbuilder/components";
+import { DateFieldEdit } from "designer/client/components/FieldEditors/date-field-edit";
+import DetailsEdit from "designer/client/components/FieldEditors/details-edit";
+import ListFieldEdit from "designer/client/components/FieldEditors/list-field-edit";
+import { NumberFieldEdit } from "designer/client/components/FieldEditors/number-field-edit";
+import { ParaEdit } from "designer/client/components/FieldEditors/para-edit";
+import SelectFieldEdit from "designer/client/components/FieldEditors/select-field-edit";
+import { TextFieldEdit } from "designer/client/components/FieldEditors/text-field-edit";
+import FieldEdit from "designer/client/field-edit";
+import { FileUploadFieldEdit } from "designer/client/file-upload-field-edit";
+import { MultilineTextFieldEdit } from "designer/client/multiline-text-field-edit";
+import { ComponentContext } from "designer/client/reducers/component/componentReducer";
 import React, { useContext } from "react";
-import { ComponentTypes } from "@xgovformbuilder/model";
-import { ComponentContext } from "./reducers/component/componentReducer";
-import FieldEdit from "./field-edit";
-import ListFieldEdit from "./components/FieldEditors/list-field-edit";
-import SelectFieldEdit from "./components/FieldEditors/select-field-edit";
-import { TextFieldEdit } from "./components/FieldEditors/text-field-edit";
-import { MultilineTextFieldEdit } from "./multiline-text-field-edit";
-import { FileUploadFieldEdit } from "./file-upload-field-edit";
-import { NumberFieldEdit } from "./components/FieldEditors/number-field-edit";
-import { DateFieldEdit } from "./components/FieldEditors/date-field-edit";
-import { ParaEdit } from "./components/FieldEditors/para-edit";
-import DetailsEdit from "./components/FieldEditors/details-edit";
 
 const componentTypeEditors = {
   TextField: TextFieldEdit,

@@ -1,10 +1,11 @@
-import React from "react";
-import { Visualisation } from "../Visualisation";
 import { render, waitFor } from "@testing-library/react";
-import { DataContext } from "../../../context";
-import { Data } from "@xgovformbuilder/model";
-import { Router } from "react-router-dom";
+import { Data } from "@xgovformbuilder/data-model";
 import { createMemoryHistory } from "history";
+import React from "react";
+import { Router } from "react-router-dom";
+
+import { DataContext } from "../../../context";
+import { Visualisation } from "../Visualisation";
 
 const history = createMemoryHistory();
 history.push("");

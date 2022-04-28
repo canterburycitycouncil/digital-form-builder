@@ -1,8 +1,8 @@
-import React from "react";
-import { render, fireEvent } from "@testing-library/react";
-import LinkCreate from "../link-create";
-import { DataContext } from "../context";
 import { screen, within } from "@testing-library/dom";
+import { fireEvent, render } from "@testing-library/react";
+import { DataContext } from "designer/client/context";
+import LinkCreate from "designer/client/link-create";
+import React from "react";
 
 const rawData = {
   lists: [],
@@ -15,7 +15,7 @@ const rawData = {
     {
       title: "Summary",
       path: "/summary",
-      controller: "./pages/summary.js",
+      controller: "designer/client/__tests__/pages/summary.js",
       components: [],
     },
   ],

@@ -1,5 +1,6 @@
+import { FormDefinition } from "@xgovformbuilder/data-model";
+
 import { removeCondition } from "..";
-import { FormDefinition } from "@xgovformbuilder/model";
 
 const data: FormDefinition = {
   pages: [

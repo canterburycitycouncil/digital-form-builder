@@ -1,12 +1,12 @@
-import React, { useRef } from "react";
-import { useVisualisation } from "./useVisualisation";
+import "designer/client/components/Visualisation/visualisation.scss";
 
-import Page from "../../page";
-import { Lines } from "./Lines";
-import { Minimap } from "./Minimap";
-import { Info } from "./Info";
-import SaveMenu from "../SaveMenu";
-import "./visualisation.scss";
+import SaveMenu from "designer/client/components/SaveMenu";
+import { Info } from "designer/client/components/Visualisation/Info";
+import { Lines } from "designer/client/components/Visualisation/Lines";
+import { Minimap } from "designer/client/components/Visualisation/Minimap";
+import { useVisualisation } from "designer/client/components/Visualisation/useVisualisation";
+import Page from "designer/client/page";
+import React, { useRef } from "react";
 
 type Props = {
   updatedAt?: string;

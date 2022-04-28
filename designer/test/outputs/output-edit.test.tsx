@@ -1,14 +1,15 @@
-import React from "react";
-import { shallow, mount } from "enzyme";
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
+import { Data } from "@xgovformbuilder/data-model";
+import { mount, shallow } from "enzyme";
+import React from "react";
 import sinon from "sinon";
+
 import { ErrorSummary } from "../../client/error-summary";
-import { Data } from "@xgovformbuilder/model";
-import { assertSelectInput } from "../helpers/element-assertions";
-import { assertInputControlProp } from "../helpers/sub-component-assertions";
 import OutputEdit from "../../client/outputs/output-edit";
 import { Output } from "../../client/outputs/types";
+import { assertSelectInput } from "../helpers/element-assertions";
+import { assertInputControlProp } from "../helpers/sub-component-assertions";
 
 const { expect } = Code;
 const lab = Lab.script();

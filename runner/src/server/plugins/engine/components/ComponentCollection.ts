@@ -1,4 +1,9 @@
+import { ComponentDef } from "@xgovformbuilder/data-model";
+import joi, { Schema as JoiSchema } from "joi";
 import * as Components from "runner/src/server/plugins/engine/components";
+import { ComponentBase } from "runner/src/server/plugins/engine/components/ComponentBase";
+import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
+import { ComponentCollectionViewModel } from "runner/src/server/plugins/engine/components/types";
 import { FormModel } from "runner/src/server/plugins/engine/models";
 import {
   FormData,
@@ -6,13 +11,6 @@ import {
   FormSubmissionErrors,
   FormSubmissionState,
 } from "runner/src/server/plugins/engine/types";
-import { ComponentCollectionViewModel } from "runner/src/server/plugins/engine/components/types";
-import { ComponentBase } from "runner/src/server/plugins/engine/components/ComponentBase";
-import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
-
-import { ComponentDef } from "@xgovformbuilder/components";
-
-import joi, { Schema as JoiSchema } from "joi";
 
 export class ComponentCollection {
   items: (ComponentBase | ComponentCollection | FormComponent)[];

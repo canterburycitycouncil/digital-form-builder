@@ -1,11 +1,12 @@
+import OutputCreate from "designer/client/components/outputs/output-create";
 import React, { useContext } from "react";
-import { Flyout } from "../components/Flyout";
-import LinkCreate from "../link-create";
-import { i18n } from "../i18n";
-import { DataContext } from "../context";
-import { useMenuItem } from "../components/Menu/useMenuItem";
 import { useHistory, useLocation } from "react-router-dom";
-import OutputCreate from "./components/outputs/output-create";
+
+import { Flyout } from "../components/Flyout";
+import { useMenuItem } from "../components/Menu/useMenuItem";
+import { DataContext } from "../context";
+import { i18n } from "../i18n";
+import LinkCreate from "../link-create";
 
 // Should probably configure TS base url to avoid having to go back folders instead linking them is a lot simpler.
 

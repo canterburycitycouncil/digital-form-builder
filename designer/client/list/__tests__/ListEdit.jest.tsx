@@ -1,8 +1,9 @@
-import { customRenderForLists } from "./helpers";
-import { Data } from "@xgovformbuilder/model";
+import { Data } from "@xgovformbuilder/data-model";
 import React from "react";
-import { ListEdit } from "../ListEdit";
+
 import { ListContext } from "../../reducers/listReducer";
+import { ListEdit } from "../ListEdit";
+import { customRenderForLists } from "./helpers";
 
 const data = {
   pages: [],

@@ -1,11 +1,12 @@
-import React from "react";
-import { i18n } from "../../i18n";
-import { ErrorSummary } from "../../error-summary";
-import ComponentTypeEdit from "../../ComponentTypeEdit";
-import { ComponentCreateList } from "./ComponentCreateList";
-import { BackLink } from "../BackLink";
 import "./ComponentCreate.scss";
-import { useComponentCreate } from "./useComponentCreate";
+
+import { BackLink } from "designer/client/components/BackLink";
+import { ComponentCreateList } from "designer/client/components/ComponentCreate/ComponentCreateList";
+import { useComponentCreate } from "designer/client/components/ComponentCreate/useComponentCreate";
+import ComponentTypeEdit from "designer/client/ComponentTypeEdit";
+import { ErrorSummary } from "designer/client/error-summary";
+import { i18n } from "designer/client/i18n";
+import React from "react";
 
 export function ComponentCreate(props) {
   const {

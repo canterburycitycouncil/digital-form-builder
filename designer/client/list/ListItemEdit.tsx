@@ -1,16 +1,17 @@
+import { Input } from "govuk-react-jsx";
+import { Textarea } from "govuk-react-jsx";
+import { Label } from "govuk-react-jsx";
+import { Hint } from "govuk-react-jsx";
 import React, { memo, useContext } from "react";
-import { i18n } from "./../i18n";
-import { Input } from "@govuk-jsx/input";
-import { Textarea } from "@govuk-jsx/textarea";
-import { Label } from "@govuk-jsx/label";
-import { Hint } from "@govuk-jsx/hint";
+
 import { DataContext } from "../context";
+import { useListItem } from "../hooks/list/useListItem";
 import {
   ListsEditorContext,
   ListsEditorStateActions,
 } from "../reducers/list/listsEditorReducer";
-import { useListItem } from "../hooks/list/useListItem";
 import { ListContext } from "../reducers/listReducer";
+import { i18n } from "./../i18n";
 
 export function ListItemEdit() {
   const { dispatch: listsEditorDispatch } = useContext(ListsEditorContext);

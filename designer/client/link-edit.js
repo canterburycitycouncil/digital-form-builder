@@ -1,12 +1,12 @@
+import { clone } from "@xgovformbuilder/data-model";
 import React from "react";
-import SelectConditions from "./conditions/SelectConditions";
-import { clone } from "@xgovformbuilder/model";
-import { i18n } from "./i18n";
 
+import logger from "../client/plugins/logger";
+import SelectConditions from "./conditions/SelectConditions";
 import { DataContext } from "./context";
 import { findPage } from "./data";
 import { updateLink } from "./data/page";
-import logger from "../client/plugins/logger";
+import { i18n } from "./i18n";
 
 class LinkEdit extends React.Component {
   static contextType = DataContext;

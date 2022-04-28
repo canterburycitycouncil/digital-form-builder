@@ -1,12 +1,13 @@
+import { clone, FormDefinition } from "@xgovformbuilder/data-model";
+
+import { addList, findList } from "../../../data";
 import { ListActions } from "../../../reducers/listActions";
 import {
   hasValidationErrors,
   validateNotEmpty,
   validateTitle,
 } from "../../../validations";
-import { clone, FormDefinition } from "@xgovformbuilder/model";
 import { ListItemHook } from "./types";
-import { addList, findList } from "../../../data";
 
 export function useListItem(state, dispatch): ListItemHook {
   const { selectedItem = {} } = state;

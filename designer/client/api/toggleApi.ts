@@ -1,4 +1,4 @@
-import logger from "../plugins/logger";
+import logger from "designer/client/plugins/logger";
 export class FeatureToggleApi {
   async fetch() {
     try {

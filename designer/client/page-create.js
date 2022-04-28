@@ -1,19 +1,21 @@
+import { Flyout } from "designer/client/components/Flyout";
+import { RenderInPortal } from "designer/client/components/RenderInPortal";
+import SelectConditions from "designer/client/conditions/SelectConditions";
+import { DataContext } from "designer/client/context";
+import { addLink, findPage } from "designer/client/data";
+import { addPage } from "designer/client/data/page/addPage";
+import ErrorSummary from "designer/client/error-summary";
+import { toUrl } from "designer/client/helpers";
+import { i18n, withI18n } from "designer/client/i18n";
+import logger from "designer/client/plugins/logger";
+import randomId from "designer/client/randomId";
+import SectionEdit from "designer/client/section/section-edit";
+import {
+  hasValidationErrors,
+  validateTitle,
+} from "designer/client/validations";
+import { Input } from "govuk-react-jsx";
 import React from "react";
-import { Input } from "@govuk-jsx/input";
-
-import SelectConditions from "./conditions/SelectConditions";
-import { toUrl } from "./helpers";
-import { RenderInPortal } from "./components/RenderInPortal";
-import { Flyout } from "./components/Flyout";
-import SectionEdit from "./section/section-edit";
-import { i18n, withI18n } from "./i18n";
-import ErrorSummary from "./error-summary";
-import { validateTitle, hasValidationErrors } from "./validations";
-import { DataContext } from "./context";
-import { addLink, findPage } from "./data";
-import { addPage } from "./data/page/addPage";
-import randomId from "./randomId";
-import logger from "../client/plugins/logger";
 
 class PageCreate extends React.Component {
   static contextType = DataContext;

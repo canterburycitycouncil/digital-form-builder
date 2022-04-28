@@ -1,6 +1,7 @@
-import { Path } from "../types";
-import { ComponentDef } from "@xgovformbuilder/model";
+import { ComponentDef } from "@xgovformbuilder/data-model";
+
 import { findPage } from "../page";
+import { Path } from "../types";
 
 export function updateComponent(
   data,

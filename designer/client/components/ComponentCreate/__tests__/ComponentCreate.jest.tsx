@@ -1,13 +1,10 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import userEvent, { TargetElement } from "@testing-library/user-event";
-
-import { ComponentCreate } from "../ComponentCreate";
-import { ComponentContextProvider } from "../../../reducers/component";
-import { DataContext } from "../../../context";
-import { DetailsComponent } from "@xgovformbuilder/model";
-import * as Data from "../../../data";
-import { addComponent } from "../../../data";
+import userEvent from "@testing-library/user-event";
+import { DetailsComponent } from "@xgovformbuilder/components";
+import { ComponentCreate } from "designer/client/components/ComponentCreate/ComponentCreate";
+import { DataContext } from "designer/client/context";
+import { ComponentContextProvider } from "designer/client/reducers/component";
+import React from "react";
 
 describe("ComponentCreate:", () => {
   const data = {
@@ -60,11 +57,11 @@ describe("ComponentCreate:", () => {
 
     userEvent.click(getByText("Details"));
 
-    const titleInput = (await screen.findByLabelText("Title")) as TargetElement;
+    const titleInput = (await screen.findByLabelText("Title")) as Element;
     const contentTextArea = container.querySelector(
       "#field-content"
-    ) as TargetElement;
-    const saveBtn = container.querySelector("button") as TargetElement;
+    ) as Element;
+    const saveBtn = container.querySelector("button") as Element;
 
     userEvent.type(titleInput, "Details");
     userEvent.type(contentTextArea, "content");
@@ -91,13 +88,13 @@ describe("ComponentCreate:", () => {
 
     expect(queryByTestId("component-create-list")).toBeInTheDocument();
 
-    userEvent.click(queryByText("Details") as TargetElement);
+    userEvent.click(queryByText("Details") as Element);
 
     // - then
     expect(queryByTestId("component-create-list")).toBeNull();
     expect(queryByText(backBtnTxt)).toBeInTheDocument();
 
-    userEvent.click(queryByText(backBtnTxt) as TargetElement);
+    userEvent.click(queryByText(backBtnTxt) as Element);
 
     expect(queryByTestId("component-create-list")).toBeInTheDocument();
     expect(queryByText(backBtnTxt)).toBeNull();
@@ -113,9 +110,9 @@ describe("ComponentCreate:", () => {
 
     expect(queryByRole("alert")).toBeNull();
 
-    userEvent.click(getByText("Details") as TargetElement);
+    userEvent.click(getByText("Details") as Element);
     await screen.findByLabelText("Title");
-    userEvent.click(container.querySelector("button") as TargetElement);
+    userEvent.click(container.querySelector("button") as Element);
 
     // - then
     expect(queryByRole("alert")).toBeInTheDocument();

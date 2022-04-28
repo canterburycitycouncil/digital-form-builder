@@ -1,16 +1,15 @@
-import SummaryEdit from "../Summary/SummaryEdit";
-import { LogicExpressionsEdit } from "../LogicExpressions";
-import ListsEdit from "../../list/ListsEdit";
-import FeeEdit from "../../fee-edit";
-import DeclarationEdit from "../../declaration-edit";
-import { FormDetails } from "../FormDetails";
-import PageCreate from "../../page-create";
-import LinkCreate from "../../link-create";
-import SectionsEdit from "../../section/sections-edit";
-import ConditionsEdit from "../../conditions/ConditionsEdit";
-import { i18n } from "../../i18n";
-import React from "react";
-import { MenuItemHook } from "./useMenuItem";
+import { FormDetails } from "designer/client/components/FormDetails";
+import { LogicExpressionsEdit } from "designer/client/components/LogicExpressions";
+import { MenuItemHook } from "designer/client/components/Menu/useMenuItem";
+import SummaryEdit from "designer/client/components/Summary/SummaryEdit";
+import ConditionsEdit from "designer/client/conditions/ConditionsEdit";
+import DeclarationEdit from "designer/client/declaration-edit";
+import FeeEdit from "designer/client/fee-edit";
+import { i18n } from "designer/client/i18n";
+import LinkCreate from "designer/client/link-create";
+import ListsEdit from "designer/client/list/ListsEdit";
+import PageCreate from "designer/client/page-create";
+import SectionsEdit from "designer/client/section/sections-edit";
 
 interface MenuItemObject {
   [key: string]: {

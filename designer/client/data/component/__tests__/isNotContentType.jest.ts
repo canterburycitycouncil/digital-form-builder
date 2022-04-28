@@ -1,7 +1,8 @@
 import {
   ContentComponentsDef,
   InputFieldsComponentsDef,
-} from "@xgovformbuilder/model";
+} from "@xgovformbuilder/data-model";
+
 import { isNotContentType } from "../../types";
 test("isNotContentType type guard catches content types", () => {
   const contentBase: ContentComponentsDef = {

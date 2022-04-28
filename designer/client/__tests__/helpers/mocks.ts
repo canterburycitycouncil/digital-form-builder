@@ -1,5 +1,3 @@
-import { Data } from "@xgovformbuilder/model";
-
 export function simplePageMock() {
   return {
     pages: [
@@ -7,7 +5,7 @@ export function simplePageMock() {
         title: "First page",
         path: "/first-page",
         components: [],
-        controller: "./pages/summary.js",
+        controller: "designer/client/__tests__/pages/summary.js",
         section: "home",
       },
     ],

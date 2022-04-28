@@ -1,13 +1,12 @@
-import * as helpers from "runner/src/server/plugins/engine/components/helpers";
+import { InputFieldsComponentsDef } from "@xgovformbuilder/data-model";
 import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
-import { FormModel } from "runner/src/server/plugins/engine/models";
+import * as helpers from "runner/src/server/plugins/engine/components/helpers";
 import { addClassOptionIfNone } from "runner/src/server/plugins/engine/components/helpers";
+import { FormModel } from "runner/src/server/plugins/engine/models";
 import {
   FormData,
   FormSubmissionErrors,
 } from "runner/src/server/plugins/engine/types";
-
-import { InputFieldsComponentsDef } from "@xgovformbuilder/components";
 
 export class TimeField extends FormComponent {
   constructor(def: InputFieldsComponentsDef, model: FormModel) {

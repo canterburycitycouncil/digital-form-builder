@@ -1,6 +1,6 @@
+import { DataPrettyPrint } from "designer/client/components/DataPrettyPrint/DataPrettyPrint";
+import { Tabs, useTabs } from "designer/client/components/Menu/useTabs";
 import React from "react";
-import { DataPrettyPrint } from "../DataPrettyPrint/DataPrettyPrint";
-import { Tabs, useTabs } from "../Menu/useTabs";
 
 export interface SummaryEditProps {
   data: any;

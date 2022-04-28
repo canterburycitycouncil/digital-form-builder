@@ -1,19 +1,17 @@
+import { InputFieldsComponentsDef } from "@xgovformbuilder/data-model";
+import moment from "moment";
+import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
 import {
+  addClassOptionIfNone,
   getFormSchemaKeys,
   getStateSchemaKeys,
-  addClassOptionIfNone,
 } from "runner/src/server/plugins/engine/components/helpers";
-import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
+import { FormModel } from "runner/src/server/plugins/engine/models";
 import {
   FormData,
   FormSubmissionErrors,
   FormSubmissionState,
 } from "runner/src/server/plugins/engine/types";
-import { FormModel } from "runner/src/server/plugins/engine/models";
-
-import { InputFieldsComponentsDef } from "@xgovformbuilder/components";
-
-import moment from "moment";
 
 export class DateField extends FormComponent {
   constructor(def: InputFieldsComponentsDef, model: FormModel) {

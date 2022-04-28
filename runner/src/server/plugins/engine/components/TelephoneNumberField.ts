@@ -1,14 +1,12 @@
+import { TelephoneNumberFieldComponent } from "@xgovformbuilder/data-model";
+import joi, { Schema } from "joi";
 import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
-import { FormModel } from "runner/src/server/plugins/engine/models";
 import { addClassOptionIfNone } from "runner/src/server/plugins/engine/components/helpers";
+import { FormModel } from "runner/src/server/plugins/engine/models";
 import {
   FormData,
   FormSubmissionErrors,
 } from "runner/src/server/plugins/engine/types";
-
-import { TelephoneNumberFieldComponent } from "@xgovformbuilder/components";
-
-import joi, { Schema } from "joi";
 
 const PATTERN = /^[0-9\\\s+()-]*$/;
 const DEFAULT_MESSAGE = "Enter a telephone number in the correct format";

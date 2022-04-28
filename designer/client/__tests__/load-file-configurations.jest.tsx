@@ -1,6 +1,6 @@
+import * as formConfigurationsApi from "designer/client/load-form-configurations";
+import { server } from "designer/test/testServer";
 import { rest } from "msw";
-import * as formConfigurationsApi from "../load-form-configurations";
-import { server } from "../../test/testServer";
 
 describe("Load form configurations", () => {
   beforeAll(() => server.listen());

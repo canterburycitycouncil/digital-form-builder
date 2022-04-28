@@ -1,4 +1,4 @@
-import { FormDefinition } from "@xgovformbuilder/model";
+import { FormDefinition } from "@xgovformbuilder/data-model";
 
 export type ListItemHook = {
   handleTitleChange: (e) => void;

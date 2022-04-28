@@ -1,9 +1,9 @@
-import React, { useReducer } from "react";
 import { render } from "@testing-library/react";
 import userEvent, { TargetElement } from "@testing-library/user-event";
+import { Data } from "@xgovformbuilder/data-model";
+import React, { useReducer } from "react";
+
 import { DataContext } from "../../../context";
-import { Data } from "@xgovformbuilder/model";
-import { ComponentListSelect } from "../ComponentListSelect";
 import {
   ComponentContext,
   componentReducer,
@@ -11,6 +11,7 @@ import {
 } from "../../../reducers/component/componentReducer";
 import { ListsEditorContextProvider } from "../../../reducers/list/listsEditorReducer";
 import { ListContextProvider } from "../../../reducers/listReducer";
+import { ComponentListSelect } from "../ComponentListSelect";
 
 describe("ComponentListSelect", () => {
   let data = {

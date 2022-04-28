@@ -1,9 +1,9 @@
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-import { S3PersistenceService } from "../server/lib/persistence/s3PersistenceService";
-
+import { FormConfiguration } from "@xgovformbuilder/data-model";
 import sinon from "sinon";
-import { FormConfiguration } from "@xgovformbuilder/model";
+
+import { S3PersistenceService } from "../server/lib/persistence/s3PersistenceService";
 const lab = Lab.script();
 exports.lab = lab;
 const { afterEach, suite, describe, test } = lab;

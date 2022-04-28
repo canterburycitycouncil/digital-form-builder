@@ -1,18 +1,20 @@
-import {
-  useEffect,
-  useContext,
-  useState,
-  useLayoutEffect,
-  FormEvent,
-} from "react";
-import { ComponentDef, Page } from "@xgovformbuilder/model";
-import { hasValidationErrors } from "../../validations";
 import "./ComponentCreate.scss";
-import { Actions } from "../../reducers/component/types";
-import { DataContext } from "../../context";
-import { ComponentContext } from "../../reducers/component/componentReducer";
-import { addComponent } from "../../data";
-import logger from "../../plugins/logger";
+
+import { ComponentDef } from "@xgovformbuilder/components";
+import { Page } from "@xgovformbuilder/data-model";
+import { DataContext } from "designer/client/context";
+import { addComponent } from "designer/client/data";
+import logger from "designer/client/plugins/logger";
+import { ComponentContext } from "designer/client/reducers/component/componentReducer";
+import { Actions } from "designer/client/reducers/component/types";
+import { hasValidationErrors } from "designer/client/validations";
+import {
+  FormEvent,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 
 export const useComponentCreate = (props) => {
   const [renderTypeEdit, setRenderTypeEdit] = useState<boolean>(false);

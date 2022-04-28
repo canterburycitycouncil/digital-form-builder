@@ -1,4 +1,4 @@
-import { FormConfiguration } from "@xgovformbuilder/model";
+import { FormConfiguration } from "@xgovformbuilder/data-model";
 
 export interface PersistenceService {
   logger: any;

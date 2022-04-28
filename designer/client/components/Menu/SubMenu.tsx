@@ -1,7 +1,7 @@
+import { whichMigrations } from "@xgovformbuilder/migration";
+import { DataContext } from "designer/client/context";
+import logger from "designer/client/plugins/logger";
 import React, { useContext, useRef } from "react";
-import { DataContext } from "../../context";
-import { whichMigrations } from "@xgovformbuilder/model";
-import logger from "../../plugins/logger";
 
 export function migrate(form) {
   const { version = 0 } = form;

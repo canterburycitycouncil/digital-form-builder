@@ -1,14 +1,14 @@
-import React from "react";
-import SelectConditions from "./conditions/SelectConditions";
-import { ErrorMessage } from "@govuk-jsx/error-message";
-import { clone } from "@xgovformbuilder/model";
+import { clone } from "@xgovformbuilder/data-model";
 import classNames from "classnames";
+import { ErrorMessage } from "govuk-react-jsx";
+import React from "react";
 
-import ErrorSummary from "./error-summary";
-import { DataContext } from "./context";
-import { i18n } from "./i18n";
-import { addLink } from "./data/page";
 import logger from "../client/plugins/logger";
+import SelectConditions from "./conditions/SelectConditions";
+import { DataContext } from "./context";
+import { addLink } from "./data/page";
+import ErrorSummary from "./error-summary";
+import { i18n } from "./i18n";
 
 class LinkCreate extends React.Component {
   static contextType = DataContext;

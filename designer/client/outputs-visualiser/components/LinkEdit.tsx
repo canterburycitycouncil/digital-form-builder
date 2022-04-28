@@ -1,12 +1,12 @@
+import { FormDefinition } from "@xgovformbuilder/data-model";
 import React from "react";
-import { FormDefinition } from "@xgovformbuilder/model";
 
 import { DataContext } from "../../context";
 import { findOutput } from "../../data/output";
 import { updateLink } from "../../data/output";
+import { Output, responses } from "../../outputs/types";
 import logger from "../../plugins/logger";
 import { Edge } from "../types";
-import { Output, responses } from "../../outputs/types";
 
 interface Props {
   edge: Edge;

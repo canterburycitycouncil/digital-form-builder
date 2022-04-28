@@ -1,4 +1,4 @@
-import { WebhookOutputConfiguration } from "@xgovformbuilder/model";
+import { WebhookOutputConfiguration } from "@xgovformbuilder/data-model";
 export const webhook = (
   config: WebhookOutputConfiguration,
   formValues

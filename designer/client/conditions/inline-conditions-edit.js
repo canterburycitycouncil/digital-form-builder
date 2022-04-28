@@ -1,11 +1,12 @@
-import React from "react";
 import {
+  clone,
   ConditionGroupDef,
   toPresentationString,
-  clone,
-} from "@xgovformbuilder/model";
-import InlineConditionsDefinition from "./InlineConditionsDefinition";
+} from "@xgovformbuilder/data-model";
+import React from "react";
+
 import { EditIcon, MoveDownIcon, MoveUpIcon } from "../components/Icons";
+import InlineConditionsDefinition from "./InlineConditionsDefinition";
 
 class InlineConditionsEdit extends React.Component {
   constructor(props) {

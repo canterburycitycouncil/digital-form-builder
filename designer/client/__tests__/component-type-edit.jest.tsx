@@ -1,13 +1,13 @@
-import React, { useReducer } from "react";
 import { render } from "@testing-library/react";
-import ComponentTypeEdit from "../ComponentTypeEdit";
+import { Data } from "@xgovformbuilder/data-model";
+import ComponentTypeEdit from "designer/client/ComponentTypeEdit";
+import { DataContext } from "designer/client/context";
 import {
   ComponentContext,
   componentReducer,
   initComponentState,
-} from "../reducers/component/componentReducer";
-import { DataContext } from "../context";
-import { Data } from "@xgovformbuilder/model";
+} from "designer/client/reducers/component/componentReducer";
+import React, { useReducer } from "react";
 
 describe("ComponentTypeEdit", () => {
   let mockData: Data;
@@ -36,7 +36,7 @@ describe("ComponentTypeEdit", () => {
           title: "First page",
           path: "/first-page",
           components: [],
-          controller: "./pages/summary.js",
+          controller: "designer/client/__tests__/pages/summary.js",
           section: "home",
         },
       ],

@@ -1,4 +1,5 @@
-import { FormDefinition, Link } from "@xgovformbuilder/model";
+import { FormDefinition, Link } from "@xgovformbuilder/data-model";
+
 import { ConditionName, Path } from "../types";
 import { findPage } from "./findPage";
 

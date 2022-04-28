@@ -1,8 +1,9 @@
-import React from "react";
 import { render } from "@testing-library/react";
-import SelectConditions from "./../SelectConditions";
+import { Data } from "@xgovformbuilder/data-model";
+import React from "react";
+
 import { DataContext } from "../../context";
-import { Data } from "@xgovformbuilder/model";
+import SelectConditions from "./../SelectConditions";
 
 const dataValue = {
   data: {

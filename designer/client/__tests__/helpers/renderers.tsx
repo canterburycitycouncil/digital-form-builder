@@ -1,10 +1,10 @@
-import React, { useReducer } from "react";
+import { DataContext } from "designer/client/context";
 import {
   ComponentContext,
   componentReducer,
   initComponentState,
-} from "../../reducers/component/componentReducer";
-import { DataContext } from "../../context";
+} from "designer/client/reducers/component/componentReducer";
+import React, { useReducer } from "react";
 
 export function RenderWithContext({ children, stateProps = {} }) {
   const [state, dispatch] = useReducer(

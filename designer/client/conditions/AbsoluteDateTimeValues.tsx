@@ -1,13 +1,19 @@
-import React from "react";
-import { AbsoluteDateValues, YearMonthDay } from "./AbsoluteDateValues";
-import { AbsoluteTimeValues, HourMinute } from "./AbsoluteTimeValues";
 import isValid from "date-fns/isValid";
-import { i18n } from "../i18n";
-import { isInt } from "./inline-condition-helpers";
+import {
+  AbsoluteDateValues,
+  YearMonthDay,
+} from "designer/client/conditions/AbsoluteDateValues";
+import {
+  AbsoluteTimeValues,
+  HourMinute,
+} from "designer/client/conditions/AbsoluteTimeValues";
+import { isInt } from "designer/client/conditions/inline-condition-helpers";
+import { i18n } from "designer/client/i18n";
+import React from "react";
 
 interface Props {
   value?: Date;
-  updateValue: (date) => void;
+  updateValue: (date: Date) => void;
 }
 
 export const AbsoluteDateTimeValues = ({ value, updateValue }: Props) => {

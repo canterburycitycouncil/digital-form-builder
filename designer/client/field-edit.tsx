@@ -1,13 +1,14 @@
+import { ComponentTypes } from "@xgovformbuilder/components";
+import { ErrorMessage } from "designer/client/components/ErrorMessage";
+import { Textarea } from "govuk-react-jsx";
+import { Input } from "govuk-react-jsx";
+import { Select } from "govuk-react-jsx";
 import React, { useContext } from "react";
-import { ComponentContext } from "./reducers/component/componentReducer";
-import { ComponentTypes } from "@xgovformbuilder/model";
-import { Actions } from "./reducers/component/types";
-import { Textarea } from "@govuk-jsx/textarea";
-import { Input } from "@govuk-jsx/input";
-import { Select } from "@govuk-jsx/select";
-import { i18n } from "./i18n";
-import { ErrorMessage } from "./components/ErrorMessage";
+
 import { DataContext } from "./context";
+import { i18n } from "./i18n";
+import { ComponentContext } from "./reducers/component/componentReducer";
+import { Actions } from "./reducers/component/types";
 
 type Props = {
   isContentField?: boolean;
@@ -29,9 +30,6 @@ export function FieldEdit({ isContentField = false }: Props) {
     variable = "",
   } = options;
   const isFileUploadField = selectedComponent.type === "FileUploadField";
-  const fieldTitle =
-    ComponentTypes.find((componentType) => componentType.name === type)
-      ?.title ?? "";
   let emptyVariableOption = [
     {
       children: "-Please select-",

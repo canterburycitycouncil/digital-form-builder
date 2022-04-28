@@ -1,14 +1,12 @@
+import { ListComponentsDef } from "@xgovformbuilder/data-model";
+import joi from "joi";
+import { SelectionControlField } from "runner/src/server/plugins/engine/components/SelectionControlField";
+import { FormModel } from "runner/src/server/plugins/engine/models";
 import {
   FormData,
   FormSubmissionErrors,
   FormSubmissionState,
 } from "runner/src/server/plugins/engine/types";
-import { FormModel } from "runner/src/server/plugins/engine/models";
-import { SelectionControlField } from "runner/src/server/plugins/engine/components/SelectionControlField";
-
-import { ListComponentsDef } from "@xgovformbuilder/components";
-
-import joi from "joi";
 
 export class CheckboxesField extends SelectionControlField {
   constructor(def: ListComponentsDef, model: FormModel) {

@@ -1,9 +1,9 @@
+import { CssClasses } from "designer/client/components/CssClasses";
 import React, { useContext } from "react";
+
+import { i18n } from "./i18n";
 import { ComponentContext } from "./reducers/component/componentReducer";
 import { Actions } from "./reducers/component/types";
-
-import { CssClasses } from "./components/CssClasses";
-import { i18n } from "./i18n";
 
 export function FileUploadFieldEdit() {
   const { state, dispatch } = useContext(ComponentContext);

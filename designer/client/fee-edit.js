@@ -1,11 +1,11 @@
-import FeeItems from "./fee-items";
+import { clone } from "@xgovformbuilder/data-model";
+import { Input } from "govuk-react-jsx";
 import React from "react";
-import { clone } from "@xgovformbuilder/model";
-import { Input } from "@govuk-jsx/input";
 
-import ErrorSummary from "./error-summary";
-import { DataContext } from "./context";
 import logger from "../client/plugins/logger";
+import { DataContext } from "./context";
+import ErrorSummary from "./error-summary";
+import FeeItems from "./fee-items";
 class FeeEdit extends React.Component {
   static contextType = DataContext;
 

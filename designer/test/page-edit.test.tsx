@@ -1,18 +1,14 @@
-import React from "react";
-import { mount, shallow } from "enzyme";
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
+import { DataContext } from "designer/client/context";
+import { initI18n } from "designer/client/i18n";
+import PageEdit from "designer/client/page-edit";
+import { assertSelectInput } from "designer/test/helpers/element-assertions";
+import { assertInputControlValue } from "designer/test/helpers/sub-component-assertions";
+import { mount } from "enzyme";
+import { Input } from "govuk-react-jsx";
+import React from "react";
 import sinon from "sinon";
-import PageEdit from "../client/page-edit";
-import { ErrorSummary } from "../client/error-summary";
-import { assertSelectInput } from "./helpers/element-assertions";
-import {
-  assertInputControlValue,
-  assertInputControlProp,
-} from "./helpers/sub-component-assertions";
-import { Input } from "@govuk-jsx/input";
-import { initI18n } from "../client/i18n";
-import { DataContext } from "../client/context";
 
 const { expect } = Code;
 const lab = Lab.script();

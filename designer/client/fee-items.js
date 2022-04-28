@@ -1,11 +1,11 @@
-import React from "react";
-import { clone } from "@xgovformbuilder/model";
-import { ErrorMessage } from "@govuk-jsx/error-message";
+import { clone } from "@xgovformbuilder/data-model";
 import classNames from "classnames";
+import { ErrorMessage } from "govuk-react-jsx";
+import React from "react";
 
-import { isEmpty } from "./helpers";
-import { DataContext } from "./context";
 import logger from "../client/plugins/logger";
+import { DataContext } from "./context";
+import { isEmpty } from "./helpers";
 
 function headDuplicate(arr) {
   for (let i = 0; i < arr.length; i++) {

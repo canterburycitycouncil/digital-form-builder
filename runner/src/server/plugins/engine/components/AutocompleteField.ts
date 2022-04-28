@@ -1,8 +1,7 @@
-import { ListComponentsDef } from "@xgovformbuilder/components";
-
+import { ListComponentsDef } from "@xgovformbuilder/data-model";
+import { addClassOptionIfNone } from "runner/src/server/plugins/engine/components/helpers";
 import { SelectField } from "runner/src/server/plugins/engine/components/SelectField";
 import { FormModel } from "runner/src/server/plugins/engine/models";
-import { addClassOptionIfNone } from "runner/src/server/plugins/engine/components/helpers";
 
 export class AutocompleteField extends SelectField {
   constructor(def: ListComponentsDef, model: FormModel) {

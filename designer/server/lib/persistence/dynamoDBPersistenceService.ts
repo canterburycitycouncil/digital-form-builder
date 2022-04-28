@@ -1,9 +1,10 @@
+import { FormConfiguration, Logger } from "@xgovformbuilder/data-model";
 import * as AWS from "aws-sdk";
+import { DocumentClient } from "aws-sdk/clients/dynamodb";
+import { ConfigurationOptions } from "aws-sdk/lib/config-base";
+
 import config from "../../config";
 import { PersistenceService } from "./persistenceService";
-import { Logger, FormConfiguration } from "@xgovformbuilder/model";
-import { ConfigurationOptions } from "aws-sdk/lib/config-base";
-import { DocumentClient } from "aws-sdk/clients/dynamodb";
 
 const awsConfig: ConfigurationOptions = {
   region: "eu-west-2",

@@ -1,9 +1,10 @@
-import React from "react";
 import { render } from "@testing-library/react";
+import { Data } from "@xgovformbuilder/data-model";
+import React from "react";
+
+import { DataContext } from "../../../context";
 import { ComponentContext } from "../../../reducers/component/componentReducer";
 import { ParaEdit } from "../para-edit";
-import { Data } from "@xgovformbuilder/model";
-import { DataContext } from "../../../context";
 
 describe("para edit", () => {
   function TestComponentWithContext({ children }) {

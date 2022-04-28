@@ -1,8 +1,9 @@
-import randomId from "../randomId";
+import { DataContext } from "designer/client/context";
+import { arrayMove } from "designer/client/helpers";
+import { ListActions } from "designer/client/reducers/listActions";
 import React, { createContext, useContext, useReducer } from "react";
-import { DataContext } from "../context";
-import { ListActions } from "./listActions";
-import { arrayMove } from "../helpers";
+
+import randomId from "../randomId";
 
 export interface ListState {
   selectedList?: any; // TODO:- type

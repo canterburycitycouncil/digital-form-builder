@@ -1,9 +1,10 @@
+import { clone, ConditionsWrapper } from "@xgovformbuilder/data-model";
 import React from "react";
-import Editor from "./editor";
-import { clone, ConditionsWrapper } from "@xgovformbuilder/model";
+
+import logger from "../client/plugins/logger";
 import { DataContext } from "./context";
 import { removeCondition, updateCondition } from "./data";
-import logger from "../client/plugins/logger";
+import Editor from "./editor";
 
 class ConditionEdit extends React.Component {
   static contextType = DataContext;

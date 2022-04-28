@@ -1,7 +1,8 @@
+import { FormConfiguration, Logger } from "@xgovformbuilder/data-model";
 import S3 from "aws-sdk/clients/s3";
+
 import config from "../../config";
 import { PersistenceService } from "./persistenceService";
-import { Logger, FormConfiguration } from "@xgovformbuilder/model";
 
 const TYPE_METADATA_KEY = "x-amz-meta-type";
 

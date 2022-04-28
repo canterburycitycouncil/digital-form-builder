@@ -1,4 +1,5 @@
-import { FormDefinition, List } from "@xgovformbuilder/model";
+import { FormDefinition, List } from "@xgovformbuilder/data-model";
+
 import { Found } from "../types";
 
 export function findList(

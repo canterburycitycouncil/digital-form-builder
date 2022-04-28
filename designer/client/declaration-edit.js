@@ -1,9 +1,9 @@
+import { clone } from "@xgovformbuilder/data-model";
 import React from "react";
-import Editor from "./editor";
-import { clone } from "@xgovformbuilder/model";
 
-import { DataContext } from "./context";
 import logger from "../client/plugins/logger";
+import { DataContext } from "./context";
+import Editor from "./editor";
 
 class DeclarationEdit extends React.Component {
   static contextType = DataContext;

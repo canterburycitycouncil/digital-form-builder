@@ -1,7 +1,8 @@
-import React from "react";
-import { mount } from "enzyme";
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
+import { mount } from "enzyme";
+import React from "react";
+
 import { RenderInPortal } from "../client/components/RenderInPortal";
 
 const { expect } = Code;
@@ -13,7 +14,7 @@ suite("Component RenderInPortal", () => {
   test("renders paragraph inside portal", () => {
     let portalRoot = document.querySelector("#portal-root");
 
-    expect(portalRoot.innerHTML).to.equal("");
+    expect(portalRoot?.innerHTML).to.equal("");
 
     const wrapper = mount(
       <RenderInPortal>
@@ -21,13 +22,13 @@ suite("Component RenderInPortal", () => {
       </RenderInPortal>
     );
     portalRoot = document.querySelector("#portal-root");
-    expect(portalRoot.innerHTML).to.equal(
+    expect(portalRoot?.innerHTML).to.equal(
       '<div><p id="test-paragraph">Test</p></div>'
     );
 
     wrapper.unmount();
     portalRoot = document.querySelector("#portal-root");
-    expect(portalRoot.innerHTML).to.equal("");
+    expect(portalRoot?.innerHTML).to.equal("");
   });
 
   test("renders multiple portals in parallel", () => {
@@ -43,18 +44,18 @@ suite("Component RenderInPortal", () => {
     );
 
     let portalRoot = document.querySelector("#portal-root");
-    expect(portalRoot.innerHTML).to.equal(
+    expect(portalRoot?.innerHTML).to.equal(
       '<div><p id="test-paragraph1">Test 1</p></div><div><p id="test-paragraph2">Test 2</p></div>'
     );
 
     wrapper1.unmount();
     portalRoot = document.querySelector("#portal-root");
-    expect(portalRoot.innerHTML).to.equal(
+    expect(portalRoot?.innerHTML).to.equal(
       '<div><p id="test-paragraph2">Test 2</p></div>'
     );
 
     wrapper2.unmount();
     portalRoot = document.querySelector("#portal-root");
-    expect(portalRoot.innerHTML).to.equal("");
+    expect(portalRoot?.innerHTML).to.equal("");
   });
 });

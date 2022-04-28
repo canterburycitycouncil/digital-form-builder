@@ -1,10 +1,10 @@
+import { clone } from "@xgovformbuilder/data-model";
 import React from "react";
-import { clone } from "@xgovformbuilder/model";
 
-import { camelCase } from "./helpers";
+import logger from "../client/plugins/logger";
 import { DataContext } from "./context";
 import { addSection } from "./data/section/addSection";
-import logger from "../client/plugins/logger";
+import { camelCase } from "./helpers";
 
 class SectionCreate extends React.Component {
   static contextType = DataContext;

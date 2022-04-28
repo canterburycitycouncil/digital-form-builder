@@ -1,19 +1,19 @@
-import { ListActions } from "../../reducers/listActions";
-import { DataContext } from "../../context";
-import React, { useContext, useEffect, useState } from "react";
-import { ComponentContext } from "../../reducers/component/componentReducer";
-import { Label } from "@govuk-jsx/label";
-import { i18n } from "../../i18n";
-import { ListContext } from "../../reducers/listReducer";
+import { ListComponentsDef } from "@xgovformbuilder/components";
+import classNames from "classnames";
+import { DataContext } from "designer/client/context";
+import { findList } from "designer/client/data";
+import { i18n } from "designer/client/i18n";
+import logger from "designer/client/plugins/logger";
+import { ComponentContext } from "designer/client/reducers/component/componentReducer";
+import { Actions as ComponentActions } from "designer/client/reducers/component/types";
 import {
   ListsEditorContext,
   ListsEditorStateActions,
-} from "../../reducers/list/listsEditorReducer";
-import classNames from "classnames";
-import { ListComponentsDef } from "@xgovformbuilder/model";
-import { findList } from "../../data";
-import { Actions as ComponentActions } from "./../../reducers/component/types";
-import logger from "../../plugins/logger";
+} from "designer/client/reducers/list/listsEditorReducer";
+import { ListActions } from "designer/client/reducers/listActions";
+import { ListContext } from "designer/client/reducers/listReducer";
+import { Label } from "govuk-react-jsx";
+import React, { useContext, useEffect, useState } from "react";
 export function ComponentListSelect() {
   const { data } = useContext(DataContext);
   const { state: listsEditorState, dispatch: listsEditorDispatch } = useContext(
@@ -86,7 +86,7 @@ export function ComponentListSelect() {
       <div
         className={classNames({
           "govuk-form-group": true,
-          "govuk-form-group--error": errors?.list,
+          "govuk-form-group--error": errors,
         })}
       >
         <Label htmlFor="field-options-list" className="govuk-label--s">

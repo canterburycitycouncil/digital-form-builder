@@ -1,21 +1,20 @@
+import { clone } from "@xgovformbuilder/data-model";
+import { Flyout } from "designer/client/components/Flyout";
+import { RenderInPortal } from "designer/client/components/RenderInPortal";
+import { Input } from "govuk-react-jsx";
 import React from "react";
-import { Input } from "@govuk-jsx/input";
-import { clone } from "@xgovformbuilder/model";
-import randomId from "./randomId";
 
-import { toUrl } from "./helpers";
-import { RenderInPortal } from "./components/RenderInPortal";
-import SectionEdit from "./section/section-edit";
-import { Flyout } from "./components/Flyout";
-import { withI18n } from "./i18n";
-import ErrorSummary from "./error-summary";
-import { validateTitle, hasValidationErrors } from "./validations";
+import logger from "../client/plugins/logger";
 import { DataContext } from "./context";
-
-import FeatureToggle from "./FeatureToggle";
 import { FeatureFlags } from "./context/FeatureFlagContext";
 import { findPage, updateLinksTo } from "./data";
-import logger from "../client/plugins/logger";
+import ErrorSummary from "./error-summary";
+import FeatureToggle from "./FeatureToggle";
+import { toUrl } from "./helpers";
+import { withI18n } from "./i18n";
+import randomId from "./randomId";
+import SectionEdit from "./section/section-edit";
+import { hasValidationErrors, validateTitle } from "./validations";
 
 export class PageEdit extends React.Component {
   static contextType = DataContext;

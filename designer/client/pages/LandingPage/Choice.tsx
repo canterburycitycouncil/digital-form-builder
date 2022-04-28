@@ -1,8 +1,10 @@
-import React, { ReactElement, useState } from "react";
-import { i18n } from "../../i18n";
-import { withRouter } from "react-router-dom";
-import { Radios } from "@govuk-jsx/radios";
 import "./LandingPage.scss";
+
+import { Radios } from "govuk-react-jsx";
+import React, { ReactElement, useState } from "react";
+import { withRouter } from "react-router-dom";
+
+import { i18n } from "../../i18n";
 
 interface Props {
   history: any;

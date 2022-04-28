@@ -1,8 +1,9 @@
-import React from "react";
 import { fireEvent, render } from "@testing-library/react";
-import ConditionsEdit from "../ConditionsEdit";
+import { FormDefinition } from "@xgovformbuilder/data-model";
+import React from "react";
+
 import { DataContext, FlyoutContext } from "../../context";
-import { FormDefinition } from "@xgovformbuilder/model";
+import ConditionsEdit from "../ConditionsEdit";
 
 const flyoutValue = {
   increment: jest.fn(),

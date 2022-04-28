@@ -1,19 +1,21 @@
-import React, { useContext } from "react";
-import ListEdit from "./ListEdit";
-import { RenderInPortal } from "../components/RenderInPortal";
-import { Flyout } from "../components/Flyout";
-import ListItemEdit from "./ListItemEdit";
-import ListSelect from "./ListSelect";
+import { Page } from "@xgovformbuilder/data-model";
+import { Flyout } from "designer/client/components/Flyout";
+import { RenderInPortal } from "designer/client/components/RenderInPortal";
+import { i18n } from "designer/client/i18n";
+import ListEdit from "designer/client/list/ListEdit";
+import ListItemEdit from "designer/client/list/ListItemEdit";
+import ListSelect from "designer/client/list/ListSelect";
+import { Warning } from "designer/client/list/Warning";
 import {
   ListsEditorContext,
   ListsEditorStateActions,
-} from "../reducers/list/listsEditorReducer";
-import { Warning } from "./Warning";
-import { i18n } from "./../i18n";
-import { ListContext } from "../reducers/listReducer";
+} from "designer/client/reducers/list/listsEditorReducer";
+import { ListContext } from "designer/client/reducers/listReducer";
+import React, { useContext } from "react";
 
 type Props = {
   showEditLists: boolean;
+  page: Page;
 };
 
 const useListsEdit = () => {

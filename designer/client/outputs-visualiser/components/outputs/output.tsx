@@ -1,14 +1,14 @@
+import { Output } from "@xgovformbuilder/data-model";
 import React from "react";
 import { SortableContainer } from "react-sortable-hoc";
-import { Point } from "../../types";
 
 import { Flyout } from "../../../components/Flyout";
-import { withI18n, WithI18nProps } from "../../../i18n";
 import { DataContext } from "../../../context";
 import { findOutput } from "../../../data/output/findOutput";
-import { Output } from "@xgovformbuilder/model";
-import { OutputLinkage } from "./OutputLinkage";
+import { withI18n, WithI18nProps } from "../../../i18n";
+import { Point } from "../../types";
 import { OutputEdit } from "./output-edit";
+import { OutputLinkage } from "./OutputLinkage";
 
 interface Props extends WithI18nProps {
   output: Output;

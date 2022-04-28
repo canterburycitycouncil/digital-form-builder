@@ -1,15 +1,14 @@
-import { ListComponentsDef } from "@xgovformbuilder/components";
-import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
-import {
-  FormSubmissionState,
-  FormSubmissionErrors,
-  FormData,
-} from "runner/src/server/plugins/engine/types";
-import { FormModel } from "runner/src/server/plugins/engine/models";
-import { ListItem } from "runner/src/server/plugins/engine/components/types";
-
-import { List, Item } from "@xgovformbuilder/data-model";
+import { ListComponentsDef } from "@xgovformbuilder/data-model";
+import { Item, List } from "@xgovformbuilder/data-model";
 import joi, { Schema } from "joi";
+import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
+import { ListItem } from "runner/src/server/plugins/engine/components/types";
+import { FormModel } from "runner/src/server/plugins/engine/models";
+import {
+  FormData,
+  FormSubmissionErrors,
+  FormSubmissionState,
+} from "runner/src/server/plugins/engine/types";
 
 export class ListFormComponent extends FormComponent {
   list: List;

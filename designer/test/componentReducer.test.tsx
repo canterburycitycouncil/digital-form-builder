@@ -1,18 +1,19 @@
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
 import {
+  componentListItemReducer,
+  componentListReducer,
+  fieldsReducer,
+  metaReducer,
+  optionsReducer,
+  schemaReducer,
+} from "designer/client/reducers/component";
+
+import {
   componentReducer,
   getSubReducer,
 } from "../client/reducers/component/componentReducer";
 import { Actions } from "../client/reducers/component/types";
-import {
-  metaReducer,
-  optionsReducer,
-  fieldsReducer,
-  schemaReducer,
-  componentListReducer,
-  componentListItemReducer,
-} from "../client/reducers/component";
 
 const { expect } = Code;
 const lab = Lab.script();

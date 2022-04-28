@@ -1,6 +1,5 @@
+import { GovUKInput } from "designer/client/components/govuk-fields";
 import React, { ChangeEvent } from "react";
-import { i18n } from "../../i18n";
-import { GovUKInput } from "../govuk-fields";
 
 interface Props {
   errors: any;
@@ -8,7 +7,7 @@ interface Props {
   title: string;
 }
 export const FormDetailsTitle = (props: Props) => {
-  const { title, errors, handleTitleInputBlur } = props;
+  const { title, handleTitleInputBlur } = props;
 
   return (
     <GovUKInput

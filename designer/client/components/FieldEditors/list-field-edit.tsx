@@ -1,14 +1,14 @@
-import React from "react";
-
-import ListsEdit from "../../list/ListsEdit";
-import { ListContextProvider } from "../../reducers/listReducer";
-import { ListsEditorContextProvider } from "../../reducers/list/listsEditorReducer";
-import { RenderInPortal } from "../RenderInPortal";
-import ComponentListSelect from "../ComponentListSelect/ComponentListSelect";
+import { Page } from "@xgovformbuilder/data-model";
+import ComponentListSelect from "designer/client/components/ComponentListSelect/ComponentListSelect";
+import { RenderInPortal } from "designer/client/components/RenderInPortal";
+import ListsEdit from "designer/client/list/ListsEdit";
+import { ListsEditorContextProvider } from "designer/client/reducers/list/listsEditorReducer";
+import { ListContextProvider } from "designer/client/reducers/listReducer";
+import React, { ReactNode } from "react";
 
 type Props = {
-  children: any; // TODO
-  page: any; // TODO
+  children: ReactNode;
+  page: Page;
 };
 
 function ListFieldEdit({ children, page }: Props) {

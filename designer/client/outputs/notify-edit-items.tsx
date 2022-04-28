@@ -1,5 +1,6 @@
-import React, { MouseEvent, ChangeEvent } from "react";
-import { clone } from "@xgovformbuilder/model";
+import { clone } from "@xgovformbuilder/data-model";
+import React, { ChangeEvent, MouseEvent } from "react";
+
 import { DataContext } from "../context";
 import logger from "../plugins/logger";
 

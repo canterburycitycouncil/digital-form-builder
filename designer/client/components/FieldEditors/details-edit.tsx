@@ -1,9 +1,10 @@
+import classNames from "classnames";
+import { Input } from "govuk-react-jsx";
 import React, { useContext } from "react";
+
+import { withI18n } from "../../i18n";
 import { ComponentContext } from "../../reducers/component/componentReducer";
 import { Actions } from "../../reducers/component/types";
-import { Input } from "@govuk-jsx/input";
-import { withI18n } from "../../i18n";
-import classNames from "classnames";
 import { ErrorMessage } from "../ErrorMessage";
 
 type Props = {
@@ -61,7 +62,7 @@ function DetailsEdit({ i18n, context = ComponentContext }: Props) {
           id="field-content"
           name="content"
           defaultValue={selectedComponent.content}
-          rows="10"
+          rows={10}
           onChange={(e) =>
             dispatch({
               type: Actions.EDIT_CONTENT,

@@ -1,13 +1,14 @@
+import { FormDefinition } from "@xgovformbuilder/data-model";
 import React, { Component } from "react";
-import Menu from "./outputs-menu";
-import { Visualisation } from "./outputs-visualiser";
-import { FormDefinition } from "@xgovformbuilder/model";
-import { FlyoutContext, DataContext } from "../context";
-import { FeatureFlagProvider } from "../context/FeatureFlagContext";
+import { Prompt } from "react-router-dom";
+
 import newFormJson from "../../new-form.json";
 import { DesignerApi } from "../api/designerApi";
+import { DataContext, FlyoutContext } from "../context";
+import { FeatureFlagProvider } from "../context/FeatureFlagContext";
 import { i18n } from "../i18n";
-import { Prompt } from "react-router-dom";
+import Menu from "./outputs-menu";
+import { Visualisation } from "./outputs-visualiser";
 
 interface Props {
   match?: any;

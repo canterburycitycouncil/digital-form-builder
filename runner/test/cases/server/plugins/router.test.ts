@@ -1,7 +1,7 @@
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
 
-import createServer from "src/server";
+import createServer from "../../../../../runner/src/server";
 
 const { expect } = Code;
 const lab = Lab.script();

@@ -1,17 +1,15 @@
+import { ComponentDef } from "@xgovformbuilder/data-model";
+import joi, { Schema } from "joi";
 import { ComponentBase } from "runner/src/server/plugins/engine/components/ComponentBase";
 import { optionalText } from "runner/src/server/plugins/engine/components/constants";
-import {
-  FormSubmissionState,
-  FormSubmissionErrors,
-  FormData,
-  FormPayload,
-} from "runner/src/server/plugins/engine/types";
 import { ViewModel } from "runner/src/server/plugins/engine/components/types";
 import { FormModel } from "runner/src/server/plugins/engine/models";
-
-import { ComponentDef } from "@xgovformbuilder/components";
-
-import joi, { Schema } from "joi";
+import {
+  FormData,
+  FormPayload,
+  FormSubmissionErrors,
+  FormSubmissionState,
+} from "runner/src/server/plugins/engine/types";
 
 export class FormComponent extends ComponentBase {
   isFormComponent: boolean = true;

@@ -1,5 +1,5 @@
+import { i18n } from "designer/client/i18n";
 import React from "react";
-import { i18n } from "../../i18n";
 
 interface MenuButtonProps {
   dataTestId: string;

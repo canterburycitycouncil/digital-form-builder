@@ -1,1 +1,1 @@
-export { Autocomplete } from "./Autocomplete";
+export { Autocomplete } from "designer/client/components/Autocomplete/Autocomplete";
