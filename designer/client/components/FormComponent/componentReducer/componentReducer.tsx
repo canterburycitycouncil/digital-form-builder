@@ -1,15 +1,15 @@
-import React, { useReducer, createContext } from "react";
-import { randomId } from "../../../helpers";
-import { schemaReducer } from "./componentReducer.schema";
-import { optionsReducer } from "./componentReducer.options";
-import { metaReducer } from "./componentReducer.meta";
-import { fieldsReducer } from "./componentReducer.fields";
+import { ComponentDef } from "@xgovformbuilder/data-model";
+import { ErrorListItem } from "designer/client/error-summary";
+import logger from "designer/client/plugins/logger";
+import randomId from "designer/client/randomId";
+import { fieldsReducer } from "designer/client/reducers/component/componentReducer.fields";
+import { metaReducer } from "designer/client/reducers/component/componentReducer.meta";
+import { optionsReducer } from "designer/client/reducers/component/componentReducer.options";
+import { schemaReducer } from "designer/client/reducers/component/componentReducer.schema";
+import type { ComponentActions } from "designer/client/reducers/component/types";
+import React, { createContext, useReducer } from "react";
 
-import type { ComponentActions } from "./types";
-import { Meta, Schema, Fields, Options, Actions } from "./types";
-import { ComponentDef } from "@xgovformbuilder/model";
-import logger from "../../../plugins/logger";
-import { ErrorListItem } from "../../../error-summary";
+import { Actions, Fields, Meta, Options, Schema } from "./types";
 
 type ComponentState = {
   selectedComponent: Partial<ComponentDef>;

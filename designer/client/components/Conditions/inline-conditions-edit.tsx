@@ -1,14 +1,14 @@
-import React from "react";
 import {
+  clone,
+  Condition,
   ConditionGroupDef,
   ConditionsModel,
-  Condition,
   toPresentationString,
-  clone,
-} from "@xgovformbuilder/model";
+} from "@xgovformbuilder/data-model";
+import React from "react";
+
+import { EditIcon, MoveDownIcon, MoveUpIcon } from "../components/Icons";
 import InlineConditionsDefinition from "./InlineConditionsDefinition";
-import { EditIcon, MoveDownIcon, MoveUpIcon } from "../Icons";
-import { FieldInputObject } from "./InlineConditions";
 
 interface Props {
   conditions: ConditionsModel;

@@ -1,9 +1,10 @@
-import React from "react";
-import { Visualisation } from "../Visualisation";
 import { render, waitFor } from "@testing-library/react";
-import { DataContext } from "../../../../context";
-import { Router } from "react-router-dom";
+import { DataContext } from "designer/client/context";
 import { createMemoryHistory } from "history";
+import React from "react";
+import { Router } from "react-router-dom";
+
+import { Visualisation } from "../Visualisation";
 
 const history = createMemoryHistory();
 history.push("");

@@ -1,6 +1,6 @@
+import { DataContext } from "designer/client/context";
+import logger from "designer/client/plugins/logger";
 import React, { useContext } from "react";
-import { DataContext } from "../../context";
-import logger from "../../plugins/logger";
 
 const SaveMenu = () => {
   const { data, upload } = useContext(DataContext);

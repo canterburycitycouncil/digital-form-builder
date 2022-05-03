@@ -1,10 +1,10 @@
+import { GovUKInput } from "designer/client/components/GovUKFields";
+import { i18n } from "designer/client/i18n";
 import React, { useContext } from "react";
+
 import { ComponentContext } from "../componentReducer/componentReducer";
 import { Actions } from "../componentReducer/types";
-
 import { CssClasses } from "../components/CssClasses";
-import { i18n } from "../../../i18n";
-import { GovUKInput } from "../../GovUKFields";
 
 type Props = {
   context: any; // TODO
@@ -35,7 +35,7 @@ export function NumberFieldEdit({ context = ComponentContext }: Props) {
         handleChange={(e) =>
           dispatch({
             type: Actions.EDIT_SCHEMA_MIN,
-            payload: e.target.value,
+            payload: e.target.nodeValue,
           })
         }
       />
@@ -50,7 +50,7 @@ export function NumberFieldEdit({ context = ComponentContext }: Props) {
         handleChange={(e) =>
           dispatch({
             type: Actions.EDIT_SCHEMA_MAX,
-            payload: e.target.value,
+            payload: e.target.nodeValue,
           })
         }
       />
@@ -65,7 +65,7 @@ export function NumberFieldEdit({ context = ComponentContext }: Props) {
         handleChange={(e) =>
           dispatch({
             type: Actions.EDIT_SCHEMA_PRECISION,
-            payload: e.target.value,
+            payload: e.target.nodeValue,
           })
         }
       />

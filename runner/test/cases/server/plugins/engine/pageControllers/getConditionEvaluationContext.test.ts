@@ -1,9 +1,8 @@
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-import formJson from "../../../../../../src/server/forms/get-condition-evaluation-context.json";
-
-import { FormModel } from "../../../../../../src/server/plugins/engine/models";
-import { PageController } from "server/plugins/engine/pageControllers";
+import formJson from "runner/src/server/forms/get-condition-evaluation-context.json";
+import { FormModel } from "runner/src/server/plugins/engine/models";
+import { PageController } from "runner/src/server/plugins/engine/pageControllers";
 
 const lab = Lab.script();
 exports.lab = lab;

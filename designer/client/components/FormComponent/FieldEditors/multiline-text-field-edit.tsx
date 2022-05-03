@@ -1,8 +1,8 @@
+import { TextFieldEdit } from "designer/client/components/FormComponent/FieldEditors/text-field-edit";
 import React, { useContext } from "react";
+
 import { ComponentContext } from "../componentReducer/componentReducer";
 import { Actions } from "../componentReducer/types";
-
-import { TextFieldEdit } from "./text-field-edit";
 
 export function MultilineTextFieldEdit({ context = ComponentContext }) {
   const { state, dispatch } = useContext(context);
@@ -10,7 +10,7 @@ export function MultilineTextFieldEdit({ context = ComponentContext }) {
   const { options = {} } = selectedComponent;
 
   return (
-    <TextFieldEdit>
+    <TextFieldEdit context={context}>
       <input
         className="govuk-input govuk-input--width-3"
         id="field-options-rows"

@@ -1,8 +1,9 @@
-import React, { useCallback, useState, Fragment, useContext } from "react";
-import { RenderInPortal } from "../../RenderInPortal";
-import { DataContext } from "../../../context";
+import { RenderInPortal } from "designer/client/components/RenderInPortal";
+import { DataContext } from "designer/client/context";
+import { Edge } from "designer/client/pages/Designer/Visualisation/types";
+import React, { Fragment, useCallback, useContext, useState } from "react";
+
 import { addLink } from "../data";
-import { Edge } from "../../../pages/Designer/Visualisation/types";
 
 export function PageLinkage({ page, layout }) {
   const { data, save } = useContext(DataContext);

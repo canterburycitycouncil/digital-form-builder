@@ -1,4 +1,4 @@
-import { FreshdeskOutputConfiguration } from "@xgovformbuilder/model";
+import { FreshdeskOutputConfiguration } from "@xgovformbuilder/data-model";
 const fetch = require("node-fetch");
 
 export const freshdesk = async (

@@ -1,10 +1,11 @@
-import React from "react";
-import { mount } from "enzyme";
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-import * as Component from "../client/components/FormComponent/componentReducer/componentReducer";
-import { TextFieldEdit } from "../client/components/FormComponent/FieldEditors/text-field-edit";
-import { MultilineTextFieldEdit } from "../client/components/FormComponent/FieldEditors/multiline-text-field-edit";
+import { mount } from "enzyme";
+import React from "react";
+
+import { TextFieldEdit } from "../client/components/FieldEditors/text-field-edit";
+import { MultilineTextFieldEdit } from "../client/multiline-text-field-edit";
+import * as Component from "../client/reducers/component/componentReducer";
 const { expect } = Code;
 const lab = Lab.script();
 exports.lab = lab;

@@ -1,17 +1,21 @@
-import React, { MouseEvent, ChangeEvent } from "react";
+import { clone, ConditionsModel, Item } from "@xgovformbuilder/data-model";
 import classNames from "classnames";
-import { ConditionsModel, clone, Item } from "@xgovformbuilder/model";
+import React, { ChangeEvent, MouseEvent } from "react";
 
-import InlineConditionsDefinition from "./InlineConditionsDefinition";
+import { ErrorMessage } from "../components/ErrorMessage";
+import { DataContext } from "../context";
+import {
+  addCondition,
+  allInputs,
+  findList,
+  inputsAccessibleAt,
+  updateCondition,
+} from "../data";
+import ErrorSummary, { ErrorListItem } from "../error-summary";
+import { i18n } from "../i18n";
+import randomId from "../randomId";
 import InlineConditionsEdit from "./inline-conditions-edit";
-import { DataContext } from "../../context";
-import ErrorSummary, { ErrorListItem } from "../../error-summary";
-import { i18n } from "../../i18n";
-import { ErrorMessage } from "../ErrorMessage";
-import { addCondition, updateCondition } from "./data";
-import { allInputs, inputsAccessibleAt } from "../FormComponent/componentData";
-import { findList } from "../List/data";
-import { randomId } from "../../helpers";
+import InlineConditionsDefinition from "./InlineConditionsDefinition";
 
 interface Props {
   path: string;

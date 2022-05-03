@@ -1,8 +1,8 @@
+import { TelephoneNumberFieldComponent } from "@xgovformbuilder/components";
+import { ComponentContext } from "designer/client/components/FormComponent/componentReducer/componentReducer";
+import { Actions } from "designer/client/components/FormComponent/componentReducer/types";
+import { GovUKInput } from "designer/client/components/GovUKFields";
 import React, { useContext } from "react";
-import { ComponentContext } from "../../componentReducer/componentReducer";
-import { Actions } from "../../componentReducer/types";
-import { TelephoneNumberFieldComponent } from "@xgovformbuilder/model";
-import { GovUKInput } from "../../../GovUKFields";
 
 export function CustomValidationMessage() {
   const { state, dispatch } = useContext(ComponentContext);

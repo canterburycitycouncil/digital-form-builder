@@ -1,19 +1,23 @@
-import React from "react";
+import { FormDefinition } from "@xgovformbuilder/data-model";
 import { Input } from "@xgovformbuilder/govuk-react-jsx";
-import { FormDefinition } from "@xgovformbuilder/model";
-import ErrorSummary from "../../../../error-summary";
-import { validateTitle, hasValidationErrors } from "../../../../validations";
-import { DataContext } from "../../../../context";
+import { DataContext } from "designer/client/context";
+import ErrorSummary from "designer/client/error-summary";
+import { randomId } from "designer/client/helpers";
+import { withI18n, WithI18nProps } from "designer/client/i18n";
+import logger from "designer/client/plugins/logger";
+import {
+  hasValidationErrors,
+  validateTitle,
+} from "designer/client/validations";
+import React from "react";
+
 import { addLink, findOutput } from "../../data";
 import { addOutput } from "../../data/addOutput";
-import { randomId } from "../../../../helpers";
-import logger from "../../../../plugins/logger";
-import { Output, OutputType, responses } from "../../outputs/types";
-import { withI18n, WithI18nProps } from "../../../../i18n";
-import NotifyEdit from "../../outputs/notify-edit";
 import EmailEdit from "../../outputs/email-edit";
 import FreshdeskEdit from "../../outputs/freshdesk-edit";
+import NotifyEdit from "../../outputs/notify-edit";
 import S3FileUploadEdit from "../../outputs/s3fileupload-edit";
+import { Output, OutputType, responses } from "../../outputs/types";
 import WebhookEdit from "../../outputs/webhook-edit";
 
 interface State extends Output {

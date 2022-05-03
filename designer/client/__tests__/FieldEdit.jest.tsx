@@ -1,12 +1,12 @@
-import React, { useReducer } from "react";
 import { render } from "@testing-library/react";
-import { DataContext } from "../context";
+import { DataContext } from "designer/client/context";
+import { FieldEdit } from "designer/client/field-edit";
 import {
   ComponentContext,
   componentReducer,
   initComponentState,
-} from "../components/FormComponent/componentReducer/componentReducer";
-import { FieldEdit } from "../components/FormComponent/FieldEditors/field-edit";
+} from "designer/client/reducers/component/componentReducer";
+import React, { useReducer } from "react";
 
 describe("Field Edit", () => {
   let data = {

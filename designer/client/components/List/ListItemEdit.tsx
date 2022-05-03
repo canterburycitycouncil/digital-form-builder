@@ -1,15 +1,16 @@
+import { DataContext } from "designer/client/context";
+import { useListItem } from "designer/client/hooks/list/useListItem";
+import { i18n } from "designer/client/i18n";
+import { Input } from "govuk-react-jsx";
+import { Textarea } from "govuk-react-jsx";
+import { Label } from "govuk-react-jsx";
+import { Hint } from "govuk-react-jsx";
 import React, { memo, useContext } from "react";
-import { i18n } from "../../i18n";
-import { Input } from "@govuk-jsx/input";
-import { Textarea } from "@govuk-jsx/textarea";
-import { Label } from "@govuk-jsx/label";
-import { Hint } from "@govuk-jsx/hint";
-import { DataContext } from "../../context";
+
 import {
   ListsEditorContext,
   ListsEditorStateActions,
 } from "./reducers/list/listsEditorReducer";
-import { useListItem } from "../../hooks/list/useListItem";
 import { ListContext } from "./reducers/listReducer";
 
 export function ListItemEdit() {

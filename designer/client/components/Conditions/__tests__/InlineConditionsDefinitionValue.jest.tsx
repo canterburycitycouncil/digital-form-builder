@@ -1,14 +1,15 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import React from "react";
-import { InlineConditionsDefinitionValue } from "../InlineConditionsDefinitionValue";
+import userEvent from "@testing-library/user-event";
 import {
   ConditionValue,
   dateTimeUnits,
   dateUnits,
   relativeDateOrTimeOperatorNames,
   timeUnits,
-} from "@xgovformbuilder/model";
-import userEvent from "@testing-library/user-event";
+} from "@xgovformbuilder/data-model";
+import React from "react";
+
+import { InlineConditionsDefinitionValue } from "../InlineConditionsDefinitionValue";
 
 describe.skip("AbsoluteDateTimeValues", () => {
   afterEach(() => jest.resetAllMocks());

@@ -1,6 +1,8 @@
-import pkg from "../../package.json";
-import { newConfig, api, app } from "./routes";
+import { api, app, newConfig } from "designer/server/plugins/routes";
 import { envStore, flagg } from "flagg";
+import pkg from "package.json";
+
+import { HapiServer } from "../types";
 
 export const designerPlugin = {
   plugin: {
@@ -8,7 +10,7 @@ export const designerPlugin = {
     version: pkg.version,
     multiple: true,
     dependencies: "vision",
-    register: async (server) => {
+    register: async (server: HapiServer) => {
       server.route({
         method: "get",
         path: "/",
@@ -35,7 +37,7 @@ export const designerPlugin = {
         method: "GET",
         path: "/feature-toggles",
         options: {
-          handler: async (h) => {
+          handler: async (request, h) => {
             const featureFlags = flagg({
               store: envStore(process.env),
               definitions: {

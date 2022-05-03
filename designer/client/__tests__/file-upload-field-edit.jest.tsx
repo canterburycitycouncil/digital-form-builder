@@ -1,7 +1,7 @@
-import React from "react";
 import { render } from "@testing-library/react";
-import { FileUploadFieldEdit } from "../components/FormComponent/FieldEditors/file-upload-field-edit";
-import { RenderWithContext } from "./helpers/renderers";
+import { RenderWithContext } from "designer/client/__tests__/helpers/renderers";
+import { FileUploadFieldEdit } from "designer/client/file-upload-field-edit";
+import React from "react";
 
 describe("File upload", () => {
   describe("File upload Field", () => {

@@ -1,17 +1,18 @@
-import React from "react";
-import { shallow } from "enzyme";
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-import { assertLink, assertSelectInput } from "./helpers/element-assertions";
-import sinon from "sinon";
-import InlineConditionsDefinition from "../client/components/Conditions/InlineConditionsDefinition";
 import {
   Condition,
   ConditionField,
   ConditionRef,
   ConditionValue,
   getOperatorNames,
-} from "@xgovformbuilder/model";
+} from "@xgovformbuilder/data-model";
+import { shallow } from "enzyme";
+import React from "react";
+import sinon from "sinon";
+
+import InlineConditionsDefinition from "../client/conditions/InlineConditionsDefinition";
+import { assertLink, assertSelectInput } from "./helpers/element-assertions";
 
 const { expect } = Code;
 const lab = Lab.script();

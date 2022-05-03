@@ -1,21 +1,23 @@
-import React from "react";
+import { Page } from "@xgovformbuilder/data-model";
+import { clone } from "@xgovformbuilder/utils";
+import { Flyout } from "designer/client/components/Flyout";
+import { RenderInPortal } from "designer/client/components/RenderInPortal";
+import SectionEdit from "designer/client/components/Section/section-edit";
+import { DataContext } from "designer/client/context";
+import { FeatureFlags } from "designer/client/context/FeatureFlagContext";
+import ErrorSummary from "designer/client/error-summary";
+import FeatureToggle from "designer/client/FeatureToggle";
+import { randomId, toUrl } from "designer/client/helpers";
+import { I18n, withI18n } from "designer/client/i18n";
+import logger from "designer/client/plugins/logger";
+import {
+  hasValidationErrors,
+  validateTitle,
+} from "designer/client/validations";
 import { Input } from "govuk-react-jsx";
-import { clone, Page, Section } from "@xgovformbuilder/model";
-import { randomId } from "../../helpers";
+import React from "react";
 
-import { toUrl } from "../../helpers";
-import { RenderInPortal } from "../RenderInPortal";
-import SectionEdit from "../Section/section-edit";
-import { Flyout } from "../Flyout";
-import { I18n, withI18n } from "../../i18n";
-import ErrorSummary from "../../error-summary";
-import { validateTitle, hasValidationErrors } from "../../validations";
-import { DataContext } from "../../context";
-
-import FeatureToggle from "../../FeatureToggle";
-import { FeatureFlags } from "../../context/FeatureFlagContext";
 import { findPage, updateLinksTo } from "./data";
-import logger from "../../plugins/logger";
 
 interface Props {
   page: Page;
@@ -31,7 +33,7 @@ interface State {
   path: string;
   controller: string;
   title: string;
-  section: Section;
+  section: string;
   isEditingSection: boolean;
   isNewSection?: boolean;
   errors: ErrorsObject;
@@ -77,10 +79,10 @@ export class PageEdit extends React.Component<Props, State> {
     }
 
     copyPage.title = title;
-    section ? (copyPage.section = section) : delete copyPage.section;
+    section ? (copyPage.section = section) : (copyPage.section = "");
     controller
       ? (copyPage.controller = controller)
-      : delete copyPage.controller;
+      : (copyPage.controller = "");
 
     copy.pages[copyIndex] = copyPage;
     try {
@@ -152,7 +154,7 @@ export class PageEdit extends React.Component<Props, State> {
     const copy = clone(data);
     const duplicatedPage = clone(page);
     duplicatedPage.path = `${duplicatedPage.path}-${randomId()}`;
-    duplicatedPage.components.forEach((component) => {
+    duplicatedPage.components?.forEach((component) => {
       component.name = `${duplicatedPage.path}-${randomId()}`;
     });
     copy.pages.push(duplicatedPage);
@@ -354,8 +356,8 @@ export class PageEdit extends React.Component<Props, State> {
           <RenderInPortal>
             <Flyout
               title={
-                section?.name
-                  ? i18n("section.editingTitle", { title: section.title })
+                section
+                  ? i18n("section.editingTitle", { title: section })
                   : i18n("section.newTitle")
               }
               onHide={this.closeFlyout}

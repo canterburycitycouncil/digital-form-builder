@@ -1,11 +1,11 @@
-import FeeItems from "./fee-items";
-import React from "react";
 import { clone, Fee } from "@xgovformbuilder/model";
 import { Input } from "govuk-react-jsx";
+import React from "react";
 
-import ErrorSummary from "../../error-summary";
 import { DataContext } from "../../context";
+import ErrorSummary from "../../error-summary";
 import logger from "../../plugins/logger";
+import FeeItems from "./fee-items";
 
 interface Props {
   data: any;

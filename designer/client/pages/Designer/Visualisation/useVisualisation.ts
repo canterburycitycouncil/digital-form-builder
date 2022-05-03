@@ -1,7 +1,8 @@
-import { useEffect, useContext, useState } from "react";
+import { DataContext } from "designer/client/context";
+import { useContext, useEffect, useState } from "react";
+
 import { getLayout } from "./getLayout";
 import { Pos } from "./types";
-import { DataContext } from "../../../context";
 
 export function useVisualisation(ref) {
   const { data } = useContext(DataContext);

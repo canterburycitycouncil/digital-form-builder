@@ -1,20 +1,21 @@
-import React from "react";
-import { shallow } from "enzyme";
-import * as Lab from "@hapi/lab";
 import * as Code from "@hapi/code";
-import {
-  assertRequiredTextInput,
-  assertSelectInput,
-} from "./helpers/element-assertions";
-import sinon from "sinon";
+import * as Lab from "@hapi/lab";
 import {
   DateDirections,
   dateTimeUnits,
   dateUnits,
   RelativeTimeValue,
   timeUnits,
-} from "@xgovformbuilder/model";
-import RelativeTimeValues from "../client/components/Conditions/inline-conditions-relative-dates";
+} from "@xgovformbuilder/data-model";
+import { shallow } from "enzyme";
+import React from "react";
+import sinon from "sinon";
+
+import RelativeTimeValues from "../client/conditions/inline-conditions-relative-dates";
+import {
+  assertRequiredTextInput,
+  assertSelectInput,
+} from "./helpers/element-assertions";
 
 const { expect } = Code;
 const lab = Lab.script();

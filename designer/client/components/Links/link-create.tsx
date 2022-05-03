@@ -1,13 +1,13 @@
-import React from "react";
-import SelectConditions from "../Conditions/SelectConditions";
-import { ErrorMessage } from "govuk-react-jsx";
+import { Condition } from "@xgovformbuilder/conditions";
 import classNames from "classnames";
-import { Condition } from "@xgovformbuilder/model";
-import ErrorSummary from "../../error-summary";
-import { DataContext } from "../../context";
-import { i18n } from "../../i18n";
-import { addLink } from "../Page/data";
-import logger from "../../plugins/logger";
+import SelectConditions from "designer/client/components/Conditions/SelectConditions";
+import { addLink } from "designer/client/components/Page/data";
+import { DataContext } from "designer/client/context";
+import ErrorSummary from "designer/client/error-summary";
+import { i18n } from "designer/client/i18n";
+import logger from "designer/client/plugins/logger";
+import { ErrorMessage } from "govuk-react-jsx";
+import React from "react";
 
 interface Props {
   onCreate: (e: any) => void;

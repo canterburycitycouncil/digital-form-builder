@@ -1,12 +1,13 @@
-import { ListActions } from "../../../components/List/reducers/listActions";
+import { FormDefinition } from "@xgovformbuilder/data-model";
+import { addList, findList } from "designer/client/components/List/data";
+import { ListActions } from "designer/client/components/List/reducers/listActions";
+
 import {
   hasValidationErrors,
   validateNotEmpty,
   validateTitle,
 } from "../../../validations";
-import { FormDefinition } from "@xgovformbuilder/model";
 import { ListItemHook } from "./types";
-import { addList, findList } from "../../../components/List/data";
 
 export function useListItem(state, dispatch): ListItemHook {
   const { selectedItem = {} } = state;

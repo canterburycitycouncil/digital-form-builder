@@ -1,6 +1,7 @@
+import { FormDefinition } from "@xgovformbuilder/data-model";
 import dagre from "dagre";
-import { FormDefinition } from "@xgovformbuilder/model";
-import { Point, Pos, Layout } from "./types";
+
+import { Layout, Point, Pos } from "./types";
 
 type GetLayout = (data: FormDefinition, el: HTMLDivElement) => Layout;
 

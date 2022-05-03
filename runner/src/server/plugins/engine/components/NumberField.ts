@@ -1,6 +1,13 @@
-import { FormData, FormSubmissionErrors, FormSubmissionState } from "../types";
-import { FormComponent } from "./FormComponent";
-import { getFormSchemaKeys, getStateSchemaKeys } from "./helpers";
+import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
+import {
+  getFormSchemaKeys,
+  getStateSchemaKeys,
+} from "runner/src/server/plugins/engine/components/helpers";
+import {
+  FormData,
+  FormSubmissionErrors,
+  FormSubmissionState,
+} from "runner/src/server/plugins/engine/types";
 
 export class NumberField extends FormComponent {
   getFormSchemaKeys() {

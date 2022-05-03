@@ -1,5 +1,5 @@
-import { ConditionRawData } from ".";
 import { ComponentDef } from "../components/types";
+import { ConditionRawData } from ".";
 
 export interface Next {
   path: string;
@@ -105,6 +105,9 @@ export type Output = {
   type: OutputType;
   outputConfiguration: OutputConfiguration;
   logicExpression: LogicExpression;
+  previous: string[];
+  previousValues: string[];
+  next: string[];
 };
 
 export type SpecialPages = {

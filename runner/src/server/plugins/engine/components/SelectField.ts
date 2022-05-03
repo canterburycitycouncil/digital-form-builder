@@ -1,6 +1,9 @@
-import { ListFormComponent } from "./ListFormComponent";
-import { FormData, FormSubmissionErrors } from "server/plugins/engine/types";
-import { SelectFieldComponent } from "@xgovformbuilder/model";
+import { SelectFieldComponent } from "@xgovformbuilder/data-model";
+import { ListFormComponent } from "runner/src/server/plugins/engine/components/ListFormComponent";
+import {
+  FormData,
+  FormSubmissionErrors,
+} from "runner/src/server/plugins/engine/types";
 
 export class SelectField extends ListFormComponent {
   getViewModel(formData: FormData, errors: FormSubmissionErrors) {

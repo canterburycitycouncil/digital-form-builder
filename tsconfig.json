@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     /* Basic Options */
-    "target": "ES2015",
+    "target": "es6",
     "module": "commonjs",
     "allowJs": true,
     "checkJs": false,
@@ -10,7 +10,7 @@
     "sourceMap": true,
     "jsx": "react",
     "resolveJsonModule": true,
-
+    "noEmit": true,
 
     /* Strict Type-Checking Options */
     "strict": true,
@@ -33,7 +33,16 @@
     "forceConsistentCasingInFileNames": true,
 
     /* Libs */
-    "lib": ["es2019"]
+    "lib": ["dom"],
+
+    "baseUrl": "./",
+    "paths": {
+      "@xgovformbuilder/*": ["model/src/*"]
+    }
   },
-  "exclude": ["webpack.config.js", "node_modules", "babel*", "test", "node_modules/"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": ["webpack.config.js", "node_modules", "babel*", "test", "node_modules/", "**/*.jest.**", "**/*.test.**"],
 }

@@ -1,4 +1,4 @@
-import { S3FileUploadOutputConfiguration } from "@xgovformbuilder/model";
+import { S3FileUploadOutputConfiguration } from "@xgovformbuilder/data-model";
 const fetch = require("node-fetch");
 
 async function getPresignedUploadUrl(

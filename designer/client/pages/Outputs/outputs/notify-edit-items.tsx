@@ -1,7 +1,7 @@
-import React, { MouseEvent, ChangeEvent } from "react";
-import { clone } from "@xgovformbuilder/model";
-import { DataContext } from "../../../context";
-import logger from "../../../plugins/logger";
+import { clone } from "@xgovformbuilder/utils";
+import { DataContext } from "designer/client/context";
+import logger from "designer/client/plugins/logger";
+import React, { ChangeEvent, MouseEvent } from "react";
 
 type State = {
   items: string[];

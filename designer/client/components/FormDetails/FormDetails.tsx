@@ -1,15 +1,16 @@
-import React, { Component, ChangeEvent, ContextType, FormEvent } from "react";
-import { FormConfiguration, FormDefinition } from "@xgovformbuilder/model";
-import isFunction from "lodash/isFunction";
-import ErrorSummary from "../../error-summary";
-import { DataContext } from "../../context";
-import { i18n } from "../../i18n";
+import "designer/client/components/FormDetails/FormDetails.scss";
 
-import { FormDetailsFeedback } from "./FormDetailsFeedback";
-import { FormDetailsPhaseBanner } from "./FormDetailsPhaseBanner";
-import { FormDetailsInternalOnly } from "./FormDetailsInternalOnly";
-import "./FormDetails.scss";
-import logger from "../../plugins/logger";
+import { FormDefinition } from "@xgovformbuilder/data-model";
+import { FormConfiguration } from "@xgovformbuilder/form";
+import { FormDetailsFeedback } from "designer/client/components/FormDetails/FormDetailsFeedback";
+import { FormDetailsInternalOnly } from "designer/client/components/FormDetails/FormDetailsInternalOnly";
+import { FormDetailsPhaseBanner } from "designer/client/components/FormDetails/FormDetailsPhaseBanner";
+import { DataContext } from "designer/client/context";
+import ErrorSummary from "designer/client/error-summary";
+import { i18n } from "designer/client/i18n";
+import logger from "designer/client/plugins/logger";
+import isFunction from "lodash/isFunction";
+import React, { ChangeEvent, Component, ContextType, FormEvent } from "react";
 type PhaseBanner = Exclude<FormDefinition["phaseBanner"], undefined>;
 type Phase = PhaseBanner["phase"];
 

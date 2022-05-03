@@ -1,14 +1,18 @@
-import React, { ChangeEvent } from "react";
-import InlineConditions from "./InlineConditions";
-import { ConditionsModel, Data, Condition } from "@xgovformbuilder/model";
-import { Flyout } from "../Flyout";
+import { ConditionsModel, Data } from "@xgovformbuilder/data-model";
 import { Select } from "govuk-react-jsx";
 import { Hint } from "govuk-react-jsx";
-import { i18n } from "../../i18n";
-import { DataContext } from "../../context";
-import { RenderInPortal } from "../RenderInPortal";
-import { hasConditions as dataHasConditions } from "./data";
-import { allInputs, inputsAccessibleAt } from "../FormComponent/componentData";
+import React, { ChangeEvent } from "react";
+
+import { Flyout } from "../components/Flyout";
+import { RenderInPortal } from "../components/RenderInPortal";
+import { DataContext } from "../context";
+import {
+  allInputs,
+  hasConditions as dataHasConditions,
+  inputsAccessibleAt,
+} from "../data";
+import { i18n } from "../i18n";
+import InlineConditions from "./InlineConditions";
 
 interface Props {
   path: string;

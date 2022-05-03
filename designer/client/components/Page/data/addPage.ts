@@ -1,4 +1,4 @@
-import { FormDefinition, Page } from "@xgovformbuilder/model";
+import { FormDefinition, Page } from "@xgovformbuilder/data-model";
 
 export function addPage(data: FormDefinition, page: Page): FormDefinition {
   const index = data.pages.findIndex((pg) => pg.path === page.path);

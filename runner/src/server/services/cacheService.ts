@@ -1,11 +1,10 @@
-import hoek from "hoek";
-import CatboxRedis from "@hapi/catbox-redis";
 import CatboxMemory from "@hapi/catbox-memory";
+import CatboxRedis from "@hapi/catbox-redis";
+import hoek from "hoek";
 import Redis from "ioredis";
-
-import config from "../config";
-import { HapiRequest, HapiServer } from "../types";
-import { FormSubmissionState } from "../plugins/engine/types";
+import config from "runner/src/server/config";
+import { FormSubmissionState } from "runner/src/server/plugins/engine/types";
+import { HapiRequest, HapiServer } from "runner/src/server/types";
 
 const {
   redisHost,

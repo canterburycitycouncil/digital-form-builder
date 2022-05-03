@@ -1,5 +1,5 @@
-import { clone } from "../utils/helpers";
 import { ComponentDef } from "../components/types";
+import { clone } from "../utils/helpers";
 import { Page } from "./types";
 
 export class InputWrapper {
@@ -7,7 +7,7 @@ export class InputWrapper {
   title: string | undefined = undefined;
   type: string | undefined = undefined;
   propertyPath: string | undefined;
-  #parentItemName: string | undefined;
+  parentItemName: string | undefined;
   page: Page;
 
   constructor(
@@ -25,12 +25,12 @@ export class InputWrapper {
       !options.ignoreSection && page.section
         ? `${page.section}.${this.name}`
         : this.name;
-    this.#parentItemName = options.parentItemName;
+    this.parentItemName = options.parentItemName;
   }
 
   get displayName(): string | undefined {
-    const titleWithContext = this.#parentItemName
-      ? `${this.title} under ${this.#parentItemName}`
+    const titleWithContext = this.parentItemName
+      ? `${this.title} under ${this.parentItemName}`
       : this.title;
 
     return this.page.section

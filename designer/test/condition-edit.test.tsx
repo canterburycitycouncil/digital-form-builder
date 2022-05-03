@@ -1,10 +1,11 @@
-import React from "react";
-import { shallow } from "enzyme";
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-import ConditionEdit from "../client/components/Conditions/condition-edit";
-import { Data, FormDefinition } from "@xgovformbuilder/model";
+import { Data, FormDefinition } from "@xgovformbuilder/data-model";
+import { shallow } from "enzyme";
+import React from "react";
 import sinon from "sinon";
+
+import ConditionEdit from "../client/condition-edit";
 import { assertTextInput } from "./helpers/element-assertions";
 
 const { expect } = Code;

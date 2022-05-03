@@ -4,7 +4,7 @@ import {
   InputFieldsComponentsDef,
   ListComponentsDef,
   Page,
-} from "@xgovformbuilder/model";
+} from "@xgovformbuilder/data-model";
 
 export const isNotContentType = (
   obj: ComponentDef

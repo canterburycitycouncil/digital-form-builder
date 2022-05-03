@@ -1,7 +1,8 @@
-import { customRenderForLists } from "./helpers";
-import { Data } from "@xgovformbuilder/model";
+import { Data } from "@xgovformbuilder/data-model";
 import React from "react";
+
 import { Warning } from "../Warning";
+import { customRenderForLists } from "./helpers";
 
 const data = {
   pages: [],

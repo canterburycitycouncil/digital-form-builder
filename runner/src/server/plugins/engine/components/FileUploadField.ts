@@ -1,8 +1,10 @@
-import { FormData, FormSubmissionErrors } from "../types";
-import { FormComponent } from "./FormComponent";
-import * as helpers from "./helpers";
-
-import { ViewModel } from "./types";
+import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
+import * as helpers from "runner/src/server/plugins/engine/components/helpers";
+import { ViewModel } from "runner/src/server/plugins/engine/components/types";
+import {
+  FormData,
+  FormSubmissionErrors,
+} from "runner/src/server/plugins/engine/types";
 
 export class FileUploadField extends FormComponent {
   getFormSchemaKeys() {

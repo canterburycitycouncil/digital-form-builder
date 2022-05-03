@@ -1,4 +1,5 @@
-import { FormDefinition } from "@xgovformbuilder/model";
+import { FormDefinition } from "@xgovformbuilder/data-model";
+
 import { allPathsLeadingTo } from "..";
 
 test("allPathsLeadingTo should work with cycle in paths", () => {

@@ -1,6 +1,7 @@
-import { FormDefinition, Link } from "@xgovformbuilder/model";
-import { ConditionName, Path } from "./types";
+import { FormDefinition, Link } from "@xgovformbuilder/data-model";
+
 import { findPage } from "./findPage";
+import { ConditionName, Path } from "./types";
 
 /**
  * @param data - Data from DataContext

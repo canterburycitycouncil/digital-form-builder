@@ -1,12 +1,12 @@
-import React from "react";
-import { shallow } from "enzyme";
 import * as Code from "@hapi/code";
-import * as Lab from "@hapi/lab";
-import PageTranslated, { Page } from "../client/components/Page/page";
-import { Flyout } from "../client/components/Flyout";
-import PageEdit from "../client/page-edit";
-import { ComponentCreate } from "../client/components/FormComponent/ComponentCreate";
+import { shallow } from "enzyme";
+import React from "react";
 import sinon from "sinon";
+
+import { ComponentCreate } from "../client/components/ComponentCreate";
+import { Flyout } from "../client/components/Flyout";
+import PageTranslated, { Page } from "../client/page";
+import PageEdit from "../client/page-edit";
 
 const { expect } = Code;
 const lab = Lab.script();

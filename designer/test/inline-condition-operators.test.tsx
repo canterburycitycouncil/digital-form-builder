@@ -1,16 +1,15 @@
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-
 import {
   ComponentTypes,
-  getExpression,
-  getOperatorNames,
+  ConditionValue,
   DateDirections,
   dateUnits,
-  timeUnits,
-  ConditionValue,
+  getExpression,
+  getOperatorNames,
   RelativeTimeValue,
-} from "@xgovformbuilder/model";
+  timeUnits,
+} from "@xgovformbuilder/data-model";
 
 const { expect } = Code;
 const lab = Lab.script();

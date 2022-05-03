@@ -1,7 +1,7 @@
-import { FormModel } from "server/plugins/engine/models";
-import { FormSubmissionState } from "server/plugins/engine/types";
+import { NotifyOutputConfiguration } from "@xgovformbuilder/data-model/types";
 import { reach } from "hoek";
-import { NotifyOutputConfiguration } from "@xgovformbuilder/model";
+import { FormModel } from "runner/src/server/plugins/engine/models";
+import { FormSubmissionState } from "runner/src/server/plugins/engine/types";
 
 export type NotifyModel = Omit<NotifyOutputConfiguration, "emailField"> & {
   emailAddress: string;

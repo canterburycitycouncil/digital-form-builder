@@ -1,10 +1,11 @@
+import { ContentOptions } from "@xgovformbuilder/components";
+import { GovUKFieldWrapper } from "designer/client/components/GovUKFields";
+import { DataContext } from "designer/client/context";
+import Editor from "designer/client/editor";
 import React, { useContext } from "react";
+
 import { ComponentContext } from "../componentReducer/componentReducer";
-import { DataContext } from "../../../context";
-import Editor from "../../../editor";
 import { Actions } from "../componentReducer/types";
-import { ContentOptions } from "@xgovformbuilder/model";
-import { GovUKFieldWrapper } from "../../GovUKFields";
 
 type Props = {
   context: any; // TODO

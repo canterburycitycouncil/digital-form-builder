@@ -1,8 +1,9 @@
-import React from "react";
 import { render } from "@testing-library/react";
+import React from "react";
+
+import { DataContext } from "../../../../context";
 import { ComponentContext } from "../../componentReducer/componentReducer";
 import { ParaEdit } from "../para-edit";
-import { DataContext } from "../../../../context";
 
 describe("para edit", () => {
   function TestComponentWithContext({ children }) {

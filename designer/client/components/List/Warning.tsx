@@ -1,11 +1,12 @@
+import { clone } from "@xgovformbuilder/utils";
+import { DataContext } from "designer/client/context";
+import { i18n } from "designer/client/i18n";
 import React, { useContext } from "react";
-import { i18n } from "../../i18n";
+
 import {
   ListsEditorContext,
   ListsEditorStateActions,
 } from "./reducers/list/listsEditorReducer";
-import { DataContext } from "../../context";
-import { clone } from "@xgovformbuilder/model";
 
 export function useWarning() {
   const { state, dispatch } = useContext(ListsEditorContext);

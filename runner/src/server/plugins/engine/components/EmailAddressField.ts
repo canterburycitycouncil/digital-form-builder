@@ -1,13 +1,15 @@
-import { InputFieldsComponentsDef } from "@xgovformbuilder/model";
-
-import { FormModel } from "../models";
-import { FormData, FormSubmissionErrors } from "../types";
-import { FormComponent } from "./FormComponent";
+import { InputFieldsComponentsDef } from "@xgovformbuilder/data-model";
+import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
 import {
-  getStateSchemaKeys,
-  getFormSchemaKeys,
   addClassOptionIfNone,
-} from "./helpers";
+  getFormSchemaKeys,
+  getStateSchemaKeys,
+} from "runner/src/server/plugins/engine/components/helpers";
+import { FormModel } from "runner/src/server/plugins/engine/models";
+import {
+  FormData,
+  FormSubmissionErrors,
+} from "runner/src/server/plugins/engine/types";
 
 export class EmailAddressField extends FormComponent {
   constructor(def: InputFieldsComponentsDef, model: FormModel) {

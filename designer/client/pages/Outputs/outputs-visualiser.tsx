@@ -1,12 +1,13 @@
+import "../components/Visualisation/visualisation.scss";
+
+import { DataContext } from "designer/client/context";
+import { Minimap } from "designer/client/pages/Designer/Visualisation/Minimap";
 import React, { useContext, useEffect, useRef, useState } from "react";
 
-import Output from "./components/outputs/output";
 import { Lines } from "./components/OutputLines";
-import { Minimap } from "../Designer/Visualisation/Minimap";
+import Output from "./components/outputs/output";
 import { getOutputsLayout } from "./getOutputsLayout";
 import { Pos } from "./types";
-import { DataContext } from "../../context";
-import "../Designer/Visualisation/visualisation.scss";
 
 type Props = {
   updatedAt?: string;

@@ -1,19 +1,23 @@
-import React from "react";
 import { Input } from "@xgovformbuilder/govuk-react-jsx";
-import { clone } from "@xgovformbuilder/model";
-import { randomId } from "../../../../helpers";
-import { withI18n, WithI18nProps } from "../../../../i18n";
-import ErrorSummary from "../../../../error-summary";
-import { validateTitle, hasValidationErrors } from "../../../../validations";
-import { DataContext } from "../../../../context";
+import { clone } from "@xgovformbuilder/utils";
+import { DataContext } from "designer/client/context";
+import ErrorSummary from "designer/client/error-summary";
+import { randomId } from "designer/client/helpers";
+import { withI18n, WithI18nProps } from "designer/client/i18n";
+import logger from "designer/client/plugins/logger";
+import {
+  hasValidationErrors,
+  validateTitle,
+} from "designer/client/validations";
+import React from "react";
+
 import { findOutput, updateLinksTo } from "../../data/findOutput";
-import logger from "../../../../plugins/logger";
-import NotifyEdit from "../../outputs/notify-edit";
 import EmailEdit from "../../outputs/email-edit";
 import FreshdeskEdit from "../../outputs/freshdesk-edit";
+import NotifyEdit from "../../outputs/notify-edit";
 import S3FileUploadEdit from "../../outputs/s3fileupload-edit";
+import { Output, OutputType, responses } from "../../outputs/types";
 import WebhookEdit from "../../outputs/webhook-edit";
-import { OutputType, Output, responses } from "../../outputs/types";
 
 interface OutputEditProps extends WithI18nProps {
   output: Output;

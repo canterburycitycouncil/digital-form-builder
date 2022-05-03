@@ -1,4 +1,4 @@
-import { useFeatures } from "./hooks/featureToggling";
+import { useFeatures } from "designer/client/hooks/featureToggling";
 
 const FeatureToggle = ({ feature, children }) => {
   const features = useFeatures();

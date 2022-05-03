@@ -1,23 +1,23 @@
-import React from "react";
-import { Input } from "govuk-react-jsx";
+import { ComponentDef } from "@xgovformbuilder/components";
+import { FormDefinition, Page } from "@xgovformbuilder/data-model";
+import SelectConditions from "designer/client/components/Conditions/SelectConditions";
+import { Flyout } from "designer/client/components/Flyout";
+import { RenderInPortal } from "designer/client/components/RenderInPortal";
+import SectionEdit from "designer/client/components/Section/section-edit";
+import { DataContext } from "designer/client/context";
+import ErrorSummary from "designer/client/error-summary";
+import { toUrl } from "designer/client/helpers";
+import { randomId } from "designer/client/helpers";
+import { I18n, withI18n } from "designer/client/i18n";
+import logger from "designer/client/plugins/logger";
 import {
-  Section,
-  Page,
-  ComponentDef,
-  FormDefinition,
-} from "@xgovformbuilder/model";
-import SelectConditions from "../Conditions/SelectConditions";
-import { toUrl, randomId } from "../../helpers";
-import { RenderInPortal } from "../RenderInPortal";
-import { Flyout } from "../Flyout";
-import SectionEdit from "../Section/section-edit";
-import { withI18n, I18n } from "../../i18n";
-import ErrorSummary from "../../error-summary";
-import { validateTitle, hasValidationErrors } from "../../validations";
-import { DataContext } from "../../context";
+  hasValidationErrors,
+  validateTitle,
+} from "designer/client/validations";
+import { Input } from "govuk-react-jsx";
+import React from "react";
+
 import { addLink, addPage } from "./data";
-import logger from "../../plugins/logger";
-import { Path } from "../FormComponent/componentData/types";
 
 interface DataProps {
   value: PageValue;
@@ -38,7 +38,7 @@ interface State {
   path: string;
   controller: string;
   title: string;
-  section: Section;
+  section: string;
   isEditingSection: boolean;
   errors: ErrorsObject;
   linkFrom?: string;
@@ -50,9 +50,9 @@ interface PageValue {
   path: string;
   title: string;
   components: ComponentDef[];
-  next: Path[];
-  section?: Section;
-  controller?: string;
+  next: Page["next"];
+  section: string;
+  controller: string;
 }
 
 class PageCreate extends React.Component<Props, State> {
@@ -65,7 +65,7 @@ class PageCreate extends React.Component<Props, State> {
       path: "/",
       controller: page?.controller ?? "",
       title: page?.title,
-      section: page?.section ?? {},
+      section: page?.section ?? "",
       isEditingSection: false,
       errors: {},
     };
@@ -78,7 +78,7 @@ class PageCreate extends React.Component<Props, State> {
 
     const title = this.state.title?.trim();
     const linkFrom = this.state.linkFrom?.trim();
-    const section = this.state.section?.name?.trim();
+    const section = this.state.section?.trim();
     const pageType = this.state.pageType?.trim();
     const selectedCondition = this.state.selectedCondition?.trim();
     const path = this.state.path;
@@ -91,6 +91,8 @@ class PageCreate extends React.Component<Props, State> {
       title,
       components: [],
       next: [],
+      section: "",
+      controller: "",
     };
     if (section) {
       value.section = section;
@@ -149,7 +151,7 @@ class PageCreate extends React.Component<Props, State> {
 
   onChangeSection = (e) => {
     this.setState({
-      section: this.findSectionWithName(e.target.value),
+      section: this.findSectionWithName(e.target.value)?.name?.trim() ?? "",
     });
   };
 
@@ -205,7 +207,7 @@ class PageCreate extends React.Component<Props, State> {
     this.setState({
       isEditingSection: false,
       section: sectionName
-        ? this.findSectionWithName(sectionName)
+        ? this.findSectionWithName(sectionName)?.name?.trim() ?? ""
         : propSection,
     });
   };
@@ -328,7 +330,7 @@ class PageCreate extends React.Component<Props, State> {
                 className="govuk-select"
                 id="page-section"
                 name="section"
-                value={section?.name}
+                value={section}
                 onChange={this.onChangeSection}
               >
                 <option />
@@ -339,7 +341,7 @@ class PageCreate extends React.Component<Props, State> {
                 ))}
               </select>
             )}
-            {section?.name && (
+            {section && (
               <a
                 href="#"
                 className="govuk-link govuk-!-display-block"
@@ -364,9 +366,7 @@ class PageCreate extends React.Component<Props, State> {
         {isEditingSection && (
           <RenderInPortal>
             <Flyout
-              title={`${
-                section?.name ? `Editing ${section.name}` : "Add a new section"
-              }`}
+              title={`${section ? `Editing ${section}` : "Add a new section"}`}
               onHide={this.closeFlyout}
               show={true}
             >

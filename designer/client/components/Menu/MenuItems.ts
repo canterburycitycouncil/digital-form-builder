@@ -1,15 +1,15 @@
-import SummaryEdit from "../Summary/SummaryEdit";
-import { LogicExpressionsEdit } from "../LogicExpressions";
-import ListsEdit from "../List/ListsEdit";
-import FeeEdit from "../Fees/fee-edit";
-import DeclarationEdit from "../../declaration-edit";
-import { FormDetails } from "../FormDetails";
-import PageCreate from "../Page/page-create";
-import LinkCreate from "../Links/link-create";
-import SectionsEdit from "../Section/sections-edit";
-import ConditionsEdit from "../Conditions/ConditionsEdit";
-import { i18n } from "../../i18n";
-import { MenuItemHook } from "./useMenuItem";
+import ConditionsEdit from "designer/client/components/Conditions/ConditionsEdit";
+import FeeEdit from "designer/client/components/Fees/fee-edit";
+import { FormDetails } from "designer/client/components/FormDetails";
+import LinkCreate from "designer/client/components/Links/link-edit";
+import ListsEdit from "designer/client/components/List/ListsEdit";
+import { LogicExpressionsEdit } from "designer/client/components/LogicExpressions";
+import { MenuItemHook } from "designer/client/components/Menu/useMenuItem";
+import PageCreate from "designer/client/components/Page/page-create";
+import SectionsEdit from "designer/client/components/Section/sections-edit";
+import SummaryEdit from "designer/client/components/Summary/SummaryEdit";
+import DeclarationEdit from "designer/client/declaration-edit";
+import { i18n } from "designer/client/i18n";
 
 interface MenuItemObject {
   [key: string]: {

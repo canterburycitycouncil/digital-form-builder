@@ -1,12 +1,13 @@
-import React, { useRef } from "react";
-import { useVisualisation } from "./useVisualisation";
+import "designer/client/components/Visualisation/visualisation.scss";
 
-import Page from "../../../components/Page/page";
+import Page from "designer/client/components/Page/page";
+import SaveMenu from "designer/client/components/SaveMenu";
+import React, { useRef } from "react";
+
+import { Info } from "./Info";
 import { Lines } from "./Lines";
 import { Minimap } from "./Minimap";
-import { Info } from "./Info";
-import SaveMenu from "../../../components/SaveMenu";
-import "./visualisation.scss";
+import { useVisualisation } from "./useVisualisation";
 
 type Props = {
   updatedAt?: string;
@@ -46,9 +47,9 @@ export function Visualisation(props: Props) {
                 key={index}
                 page={page}
                 persona={persona}
-                previewUrl={previewUrl}
+                previewUrl={previewUrl as string}
                 layout={layout?.nodes[index]}
-                id={id}
+                id={id as string}
               />
             ))}
 

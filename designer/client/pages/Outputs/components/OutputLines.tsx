@@ -1,14 +1,14 @@
+import { FormDefinition } from "@xgovformbuilder/data-model";
+import { Flyout } from "designer/client/components/Flyout";
+import { DataContext } from "designer/client/context";
 import React from "react";
-import { Data } from "@xgovformbuilder/model";
 
-import { Flyout } from "../../../components/Flyout";
+import { Edge, Layout } from "../types";
 import LinkEdit from "./LinkEdit";
-import { Layout, Edge } from "../types";
-import { DataContext } from "../../../context";
 
 type Props = {
   layout: Layout["pos"];
-  data: Data;
+  data: FormDefinition;
   persona: any;
 };
 

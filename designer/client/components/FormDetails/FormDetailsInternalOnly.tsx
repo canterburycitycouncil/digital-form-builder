@@ -1,5 +1,5 @@
+import { i18n } from "designer/client/i18n";
 import React, { ChangeEvent } from "react";
-import { i18n } from "../../i18n";
 
 interface Props {
   handleInternalOnlyInputBlur: (event: ChangeEvent<HTMLInputElement>) => void;

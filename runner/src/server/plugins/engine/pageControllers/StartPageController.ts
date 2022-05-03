@@ -1,5 +1,6 @@
+import { PageController } from "runner/src/server/plugins/engine/pageControllers/PageController";
+
 import { FormData, FormSubmissionErrors } from "../types";
-import { PageController } from "./PageController";
 
 export class StartPageController extends PageController {
   /**

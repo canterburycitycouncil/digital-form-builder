@@ -1,9 +1,10 @@
+import { clone, ConditionsWrapper } from "@xgovformbuilder/data-model";
 import React from "react";
-import Editor from "../../editor";
-import { ConditionsWrapper, FormDefinition } from "@xgovformbuilder/model";
-import { DataContext } from "../../context";
+
+import logger from "../client/plugins/logger";
+import { DataContext } from "./context";
 import { removeCondition, updateCondition } from "./data";
-import logger from "../../plugins/logger";
+import Editor from "./editor";
 
 interface Props {
   data: FormDefinition;

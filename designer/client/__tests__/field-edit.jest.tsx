@@ -1,8 +1,8 @@
-import React from "react";
 import { render } from "@testing-library/react";
-import { FieldEdit } from "../components/FormComponent/FieldEditors/field-edit";
-import { simplePageMock } from "./helpers/mocks";
-import { RenderWithContextAndDataContext } from "./helpers/renderers";
+import { simplePageMock } from "designer/client/__tests__/helpers/mocks";
+import { RenderWithContextAndDataContext } from "designer/client/__tests__/helpers/renderers";
+import { FieldEdit } from "designer/client/field-edit";
+import React from "react";
 
 describe("Field edit", () => {
   const mockData = simplePageMock();

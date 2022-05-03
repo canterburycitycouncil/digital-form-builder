@@ -1,25 +1,21 @@
+import { ComponentDef, ComponentTypes } from "@xgovformbuilder/components";
+import { FormDefinition, Page } from "@xgovformbuilder/data-model";
+import { Component } from "designer/client/components/FormComponent/component";
+import { ComponentContextProvider } from "designer/client/components/FormComponent/componentReducer/componentReducer";
+import { DataContext } from "designer/client/context";
+import { I18n, withI18n } from "designer/client/i18n";
 import React from "react";
 import {
+  arrayMove,
   SortableContainer,
   SortableElement,
-  arrayMove,
 } from "react-sortable-hoc";
 
 import { Flyout } from "../Flyout";
-import PageEdit from "./page-edit";
-import { Component } from "../FormComponent/component";
 import { ComponentCreate } from "../FormComponent/ComponentCreate";
-import {
-  ComponentTypes,
-  Page,
-  FormDefinition,
-  ComponentDef,
-} from "@xgovformbuilder/model";
-import { I18n, withI18n } from "../../i18n";
-import { DataContext } from "../../context";
-import { PageLinkage } from "./PageLinkage";
-import { ComponentContextProvider } from "../FormComponent/componentReducer";
 import { findPage } from "./data";
+import PageEdit from "./page-edit";
+import { PageLinkage } from "./PageLinkage";
 
 interface SortableElementProps {
   index: number;
@@ -56,7 +52,7 @@ const SortableItem = SortableElement(
 );
 
 const SortableList = SortableContainer(
-  ({ page = {}, data }: SortableContainerProps) => {
+  ({ page, data }: SortableContainerProps) => {
     const { components = [] } = page;
     return (
       <div className="component-list">
@@ -91,8 +87,13 @@ export class PageComponent extends React.Component<PageProps, PageState> {
     const { page } = this.props;
 
     const copy = { ...data };
-    const [copyPage, index] = findPage(page, page.path);
-    copyPage.components = arrayMove(copyPage.components, oldIndex, newIndex);
+    const [copyPage, index] = findPage(data, page.path);
+    copyPage.components &&
+      (copyPage.components = arrayMove(
+        copyPage.components,
+        oldIndex,
+        newIndex
+      ));
     copy.pages[index] = copyPage;
     save(copy);
   };
@@ -129,13 +130,15 @@ export class PageComponent extends React.Component<PageProps, PageState> {
 
     let pageTitle =
       page.title ||
-      (formComponents.length === 1 && page.components[0] === formComponents[0]
+      (formComponents.length === 1 &&
+      page.components &&
+      page.components[0] === formComponents[0]
         ? formComponents[0].title
         : page.title);
 
-    if (pageTitle && typeof pageTitle === "object") {
-      pageTitle = pageTitle.en;
-    }
+    // if (pageTitle && typeof pageTitle === "object") {
+    //   pageTitle = pageTitle.en;
+    // }
 
     const highlight = persona?.paths?.includes(page.path);
     const pageClassName = [

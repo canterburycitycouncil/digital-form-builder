@@ -1,4 +1,4 @@
-import { isEmpty } from "../helpers";
+import { isEmpty } from "designer/client/helpers";
 
 test("isEmpty returns the correct value", () => {
   // @ts-ignore

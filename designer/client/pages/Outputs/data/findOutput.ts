@@ -1,6 +1,7 @@
-import { FormDefinition } from "@xgovformbuilder/model";
-import { Found } from "./types";
+import { FormDefinition } from "@xgovformbuilder/data-model";
+
 import { Output } from "../outputs/types";
+import { Found } from "./types";
 
 /**
  * @returns returns a tuple of [Page, number]
@@ -27,6 +28,7 @@ export function updateLinksTo(
         previous:
           output.previous?.map((link) => (link === oldName ? newName : link)) ??
           [],
+        previousValues: output.previousValues,
         next:
           output.next?.map((link) => (link === oldName ? newName : link)) ?? [],
       })

@@ -1,9 +1,10 @@
+import { FormDefinition } from "@xgovformbuilder/data-model";
+import { clone } from "@xgovformbuilder/utils";
 import React from "react";
-import Editor from "./editor";
-import { clone, FormDefinition } from "@xgovformbuilder/model";
 
+import logger from "../client/plugins/logger";
 import { DataContext } from "./context";
-import logger from "./plugins/logger";
+import Editor from "./editor";
 
 interface Props {
   data: FormDefinition;
@@ -26,7 +27,7 @@ class DeclarationEdit extends React.Component<Props> {
     const { save } = this.context;
     const copy = clone(data);
 
-    copy.declaration = formData.get("declaration");
+    copy.declaration = formData.get("declaration") as string;
     copy.skipSummary = formData.get("skip-summary") === "on";
 
     save(copy)
@@ -82,7 +83,7 @@ class DeclarationEdit extends React.Component<Props> {
             </span>
             <Editor
               name="declaration"
-              value={declaration}
+              value={declaration ?? ""}
               id="declaration"
               required={true}
             />

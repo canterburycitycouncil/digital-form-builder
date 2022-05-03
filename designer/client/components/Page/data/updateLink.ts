@@ -1,6 +1,7 @@
-import { ConditionRawData, FormDefinition } from "@xgovformbuilder/model";
-import { Path } from "./types";
+import { ConditionRawData, FormDefinition } from "@xgovformbuilder/data-model";
+
 import { findPage } from "./findPage";
+import { Path } from "./types";
 
 export function updateLink(
   data: FormDefinition,

@@ -1,30 +1,31 @@
+import { DataContext } from "designer/client/context";
+import ErrorSummary from "designer/client/error-summary";
+import logger from "designer/client/plugins/logger";
+import {
+  hasValidationErrors,
+  validateNotEmpty,
+  validateRegex,
+} from "designer/client/validations";
+import { Input } from "govuk-react-jsx";
 import React, {
-  Component,
-  MouseEvent,
   ChangeEvent,
+  Component,
   FormEvent,
+  MouseEvent,
   ReactNode,
 } from "react";
-import NotifyEdit from "./notify-edit";
+
 import EmailEdit from "./email-edit";
-import { Input } from "@govuk-jsx/input";
-import WebhookEdit from "./webhook-edit";
+import FreshdeskEdit from "./freshdesk-edit";
+import NotifyEdit from "./notify-edit";
+import S3FileUploadEdit from "./s3fileupload-edit";
 import {
-  OutputType,
-  OutputConfiguration,
   Output,
+  OutputConfiguration,
+  OutputType,
   ValidationErrors,
 } from "./types";
-import {
-  validateNotEmpty,
-  hasValidationErrors,
-  validateRegex,
-} from "../../../validations";
-import ErrorSummary from "../../../error-summary";
-import { DataContext } from "../../../context";
-import logger from "../../../plugins/logger";
-import FreshdeskEdit from "./freshdesk-edit";
-import S3FileUploadEdit from "./s3fileupload-edit";
+import WebhookEdit from "./webhook-edit";
 
 type State = {
   outputType: OutputType;
