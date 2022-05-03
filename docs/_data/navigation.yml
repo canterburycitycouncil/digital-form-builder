@@ -1,7 +1,7 @@
 - name: Home
   link: /
 - name: Models package
-  link: /model
+  link: /model.html
 - name: Designer package - Server
   link: /designer/server.html
   children:
@@ -14,7 +14,7 @@
     - name: Server outputs
       link: /designer/server/outputs.html
 - name: Designer package - Client
-  link: /designer/clienthtml
+  link: /designer/client.html
   children:
     - name: Designer page
       link: /designer/client/designer.html

@@ -44,7 +44,7 @@ export function ErrorSummary({
       className={`govuk-error-summary ${className || ""}`}
       aria-labelledby="error-summary-title"
       role="alert"
-      tabIndex="-1"
+      tabIndex={-1}
       data-module="govuk-error-summary"
       ref={errorSummaryRef}
     >

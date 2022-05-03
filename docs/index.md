@@ -2,7 +2,7 @@
 
 Welcome to the docs for Digital Form Builder. On this site you will find information on the codebase for the form builder, what each area is, what it contains, and how to use it and build on top of it.
 
-**This site is for developers that plan on making changes to the docebase of the form builder. To see information on how to build forms using the digital form builder, please refer to [https://www.canterbury.gov.uk](The Digital Form Builder user's guide.)**
+**This site is for developers that plan on making changes to the codebase of the form builder. To see information on how to build forms using the digital form builder, please refer to [https://www.canterbury.gov.uk](The Digital Form Builder user's guide.)**
 
 ## Key Concepts
 

@@ -3,11 +3,18 @@
     <head>
         <meta charset="utf-8">
         <title>{{ page.title }}</title>
-        <link rel="stylesheet" href="/digital-form-builder/assets/css/styles.css">
+        <link rel="stylesheet" href="/assets/css/styles.css">
     </head>
     <body>
-        {% include navigation.html %}
-        {{ content }}
-        <script src="/digital-form-builder/assets/js/custom.js"></script>
+        <header id="header_wrap">
+            <div class="inner"></div>
+        </header>
+        <div id="main_content_wrap">
+            {% include navigation.html %}
+            <div class="inner">
+                {{ content }}
+            </div>
+        </div>
+        <script src="/assets/js/custom.js"></script>
     </body>
 </html>
