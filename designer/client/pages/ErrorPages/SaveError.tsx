@@ -1,8 +1,9 @@
+import "./ErrorPage.scss";
+
+import { BackLink } from "@xgovformbuilder/designer/client/components/BackLink";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import React, { ReactElement } from "react";
 import { withRouter } from "react-router-dom";
-import { BackLink } from "../../components/BackLink";
-import { i18n } from "../../i18n";
-import "./ErrorPage.scss";
 
 interface Props {
   history: any;

@@ -1,6 +1,9 @@
-import { ComponentBase } from "./ComponentBase";
-import { FormData, FormSubmissionErrors } from "../types";
-import { Item } from "@xgovformbuilder/model";
+import { Item } from "@xgovformbuilder/model/src";
+import { ComponentBase } from "runner/src/server/plugins/engine/components/ComponentBase";
+import {
+  FormData,
+  FormSubmissionErrors,
+} from "runner/src/server/plugins/engine/types";
 
 export class List extends ComponentBase {
   list: List;

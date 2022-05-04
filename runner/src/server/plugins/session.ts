@@ -1,4 +1,4 @@
-import config from "../config";
+import config from "runner/src/server/config";
 
 export default {
   plugin: require("@hapi/yar"),

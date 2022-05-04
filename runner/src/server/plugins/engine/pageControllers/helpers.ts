@@ -1,13 +1,13 @@
-import path from "path";
+import { Page } from "@xgovformbuilder/model/src";
 import { camelCase, upperFirst } from "lodash";
-import { DobPageController } from "./DobPageController";
-import { HomePageController } from "./HomePageController";
-import { PageController } from "./PageController";
-import { StartDatePageController } from "./StartDatePageController";
-import { StartPageController } from "./StartPageController";
-import { SummaryPageController } from "./SummaryPageController";
-import { PageControllerBase } from "./PageControllerBase";
-import { Page } from "@xgovformbuilder/model";
+import path from "path";
+import { DobPageController } from "runner/src/server/plugins/engine/pageControllers/DobPageController";
+import { HomePageController } from "runner/src/server/plugins/engine/pageControllers/HomePageController";
+import { PageController } from "runner/src/server/plugins/engine/pageControllers/PageController";
+import { PageControllerBase } from "runner/src/server/plugins/engine/pageControllers/PageControllerBase";
+import { StartDatePageController } from "runner/src/server/plugins/engine/pageControllers/StartDatePageController";
+import { StartPageController } from "runner/src/server/plugins/engine/pageControllers/StartPageController";
+import { SummaryPageController } from "runner/src/server/plugins/engine/pageControllers/SummaryPageController";
 
 const PageControllers = {
   DobPageController,

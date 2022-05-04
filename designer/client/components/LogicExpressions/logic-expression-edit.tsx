@@ -1,10 +1,14 @@
+import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
+import { ValidationErrors } from "@xgovformbuilder/designer/client/pages/Outputs/outputs/types";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
+import {
+  hasValidationErrors,
+  validateNotEmpty,
+} from "@xgovformbuilder/designer/client/validations";
+import { Input, Select } from "govuk-react-jsx";
 import React, { useState } from "react";
-import { Select, Input } from "@xgovformbuilder/govuk-react-jsx";
+
 import { LogicExpressionProps } from "./types";
-import logger from "../../plugins/logger";
-import { ValidationErrors } from "../../outputs-visualiser/outputs/types";
-import { validateNotEmpty, hasValidationErrors } from "../../validations";
-import ErrorSummary from "../../error-summary";
 
 export const LogicExpressionEdit = ({
   data,

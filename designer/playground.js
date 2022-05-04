@@ -1,5 +1,5 @@
 const joi = require("joi");
-const { schema } = require("@xgovformbuilder/model");
+const { schema } = require("@xgovformbuilder/components");
 const pkg = require("./package.json");
 
 module.exports = {

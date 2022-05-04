@@ -1,12 +1,10 @@
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-
+import * as PageControllers from "runner/src/server/plugins/engine/pageControllers";
 import {
   controllerNameFromPath,
   getPageController,
-} from "server/plugins/engine/pageControllers/helpers";
-
-import * as PageControllers from "server/plugins/engine/pageControllers";
+} from "runner/src/server/plugins/engine/pageControllers/helpers";
 
 const lab = Lab.script();
 exports.lab = lab;

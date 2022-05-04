@@ -1,5 +1,5 @@
-import { post } from "./httpService";
-import { HapiServer } from "../types";
+import { post } from "runner/src/server/services/httpService";
+import { HapiServer } from "runner/src/server/types";
 
 const DEFAULT_OPTIONS = {
   headers: {

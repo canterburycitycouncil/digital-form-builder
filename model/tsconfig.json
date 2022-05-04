@@ -6,7 +6,8 @@
     "rootDir": "src",
     "composite": true,
     "declaration": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noEmit": false
   },
   "include": ["./src"],
   "exclude": [

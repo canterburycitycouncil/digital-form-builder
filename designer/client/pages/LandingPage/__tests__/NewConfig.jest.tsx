@@ -1,8 +1,9 @@
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React from "react";
-import { NewConfig } from "../NewConfig";
-import { render, fireEvent, screen, waitFor } from "@testing-library/react";
-import { server, rest } from "../../../../test/testServer";
 import { MemoryRouter } from "react-router-dom";
+
+import { rest, server } from "../../../../test/testServer";
+import { NewConfig } from "../NewConfig";
 
 describe("Newconfig", () => {
   beforeAll(() => server.listen());
@@ -32,7 +33,7 @@ describe("Newconfig", () => {
     });
     fireEvent.click(screen.getByText("Next"));
     await waitFor(() => expect(push).toHaveBeenCalledTimes(1));
-    expect(push).toBeCalledWith("designer/somekey");
+    expect(push).toBeCalledWith("@xgovformbuilder/designer/somekey");
 
     expect(postBodyMatched).toBe(true);
   });

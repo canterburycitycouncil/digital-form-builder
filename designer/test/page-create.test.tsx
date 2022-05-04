@@ -1,15 +1,15 @@
-import React from "react";
-import { shallow } from "enzyme";
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-import PageCreate from "../client/page-create";
+import { shallow } from "enzyme";
+import { Input } from "govuk-react-jsx";
+import React from "react";
 import sinon from "sinon";
+
+import { ErrorSummary } from "../client/error-summary";
+import { initI18n } from "../client/i18n";
+import PageCreate from "../client/page-create";
 import { assertSelectInput } from "./helpers/element-assertions";
 import { assertInputControlValue } from "./helpers/sub-component-assertions";
-import { Input } from "@govuk-jsx/input";
-
-import { initI18n } from "../client/i18n";
-import { ErrorSummary } from "../client/error-summary";
 
 const { expect } = Code;
 const lab = Lab.script();

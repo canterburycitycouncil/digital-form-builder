@@ -1,5 +1,5 @@
-import { ConditionRawData } from ".";
 import { ComponentDef } from "../components/types";
+import { ConditionRawData } from ".";
 
 export interface Next {
   path: string;
@@ -104,13 +104,22 @@ export type Output = {
   title: string;
   type: OutputType;
   outputConfiguration: OutputConfiguration;
-  logicExpression: LogicExpression;
+  previous: string;
+  previousValues: string[];
+  next: string[];
 };
 
 export type SpecialPages = {
   confirmationPage?: {
     components: ComponentDef[];
   };
+};
+
+export type Fee = {
+  description: string;
+  amount: number;
+  multiplier?: string;
+  condition?: string;
 };
 
 export function isMultipleApiKey(
@@ -124,6 +133,7 @@ export function isMultipleApiKey(
  * `FormDefinition` is a typescript representation of `Schema`
  */
 export type FormDefinition = {
+  id: string;
   internalOnly: boolean;
   pages: Page[];
   conditions: ConditionRawData[];
@@ -133,7 +143,7 @@ export type FormDefinition = {
   name?: string | undefined;
   feedback?: Feedback;
   phaseBanner?: PhaseBanner;
-  fees: any[];
+  fees: Fee[];
   skipSummary?: boolean | undefined;
   outputs: Output[];
   declaration?: string | undefined;

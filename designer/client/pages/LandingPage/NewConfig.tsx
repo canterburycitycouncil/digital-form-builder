@@ -1,12 +1,14 @@
-import React, { Component, MouseEvent } from "react";
-import * as formConfigurationApi from "../../load-form-configurations";
-import { withRouter } from "react-router-dom";
-import { BackLink } from "../../components/BackLink";
-import { i18n } from "../../i18n";
 import "./LandingPage.scss";
-import { isEmpty } from "../../helpers";
-import { Input } from "@govuk-jsx/input";
+
+import * as formConfigurationApi from "@xgovformbuilder/designer/client/api/configuration-api";
+import { Input } from "govuk-react-jsx";
+import React, { Component, MouseEvent } from "react";
+import { withRouter } from "react-router-dom";
+
+import { BackLink } from "../../components/BackLink";
 import ErrorSummary from "../../error-summary";
+import { isEmpty } from "../../helpers";
+import { i18n } from "../../i18n";
 
 type Props = {
   history: any;

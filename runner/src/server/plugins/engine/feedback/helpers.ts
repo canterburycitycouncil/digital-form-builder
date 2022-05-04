@@ -1,5 +1,5 @@
 import atob from "atob";
-import { FeedbackContextInfo } from "./FeedbackContextInfo";
+import { FeedbackContextInfo } from "runner/src/server/plugins/engine/feedback/FeedbackContextInfo";
 
 export function decodeFeedbackContextInfo(
   encoded: string | Buffer | undefined | null

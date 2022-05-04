@@ -2,7 +2,7 @@ import pino from "pino";
 const logLevel = process.env.REACT_LOG_LEVEL;
 
 export default pino({
-  name: "designer",
+  name: "@xgovformbuilder/designer",
   browser: {
     asObject: true,
     transmit: {

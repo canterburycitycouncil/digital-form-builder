@@ -1,7 +1,8 @@
+import { FormConfiguration, Logger } from "@xgovformbuilder/model/src";
 import S3 from "aws-sdk/clients/s3";
+
 import config from "../../config";
 import { PersistenceService } from "./persistenceService";
-import { Logger, FormConfiguration } from "@xgovformbuilder/model";
 
 const TYPE_METADATA_KEY = "x-amz-meta-type";
 
@@ -84,6 +85,20 @@ export class S3PersistenceService implements PersistenceService {
       );
     }
     return response;
+  }
+
+  async deleteConfiguration(configurationId: string): Promise<any> {
+    configurationId = this._ensureJsonExtension(configurationId);
+    const response = await this.bucket
+      .deleteObject({
+        Key: configurationId,
+      })
+      .promise();
+    if (response.error) {
+      this.logger.error(
+        `error deleting configuration with id: ${configurationId}, ${response.error.message}`
+      );
+    }
   }
 
   _createMetadata(configuration: string) {

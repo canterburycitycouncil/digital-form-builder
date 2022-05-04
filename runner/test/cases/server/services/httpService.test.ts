@@ -3,14 +3,12 @@ import * as Lab from "@hapi/lab";
 import sinon from "sinon";
 import wreck from "wreck";
 
-import { post } from "server/services/httpService";
+import { post } from "../../../../src/server/services/httpService";
 
 const { expect } = Code;
 const lab = Lab.script();
 exports.lab = lab;
-const { afterEach, beforeEach, suite, test } = lab;
-
-const sandbox = sinon.createSandbox();
+const { afterEach, suite, test } = lab;
 
 suite("Http Service", () => {
   afterEach(() => {
@@ -25,6 +23,7 @@ suite("Http Service", () => {
       })
     );
     const result = await post("/test", {});
+    // @ts-ignore
     expect(result).to.equal({ res: {}, payload: { reference: "1234" } });
   });
 });

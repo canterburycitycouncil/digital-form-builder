@@ -1,7 +1,7 @@
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
+import { TextField } from "runner/src/server/plugins/engine/components/TextField";
 import sinon from "sinon";
-import { TextField } from "server/plugins/engine/components/TextField";
 
 const lab = Lab.script();
 exports.lab = lab;

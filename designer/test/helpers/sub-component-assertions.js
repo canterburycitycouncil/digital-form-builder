@@ -1,5 +1,5 @@
-import { Input } from "@govuk-jsx/input";
 import * as Code from "@hapi/code";
+import { Input } from "govuk-react-jsx";
 
 const { expect } = Code;
 

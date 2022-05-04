@@ -1,5 +1,5 @@
 import { IntegrationLog } from "../../server/plugins/routes/types";
-import { Submission, SubmissionKey } from "../submissions/types";
+import { Submission, SubmissionKey } from "../pages/Submissions/types";
 
 interface AllSubmissionsResponse {
   submissions: Submission[];

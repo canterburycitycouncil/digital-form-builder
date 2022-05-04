@@ -1,12 +1,13 @@
-import { FreshdeskOutputConfiguration } from "@xgovformbuilder/model";
-const fetch = require("node-fetch");
+import { FreshdeskOutputConfiguration } from "@xgovformbuilder/model/src";
+// import fetch from 'node-fetch';
 
 export const freshdesk = async (
-  config: FreshdeskOutputConfiguration,
-  submission,
-  formValues
+  _config: FreshdeskOutputConfiguration,
+  _submission,
+  _formValues
 ): Promise<string> => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
+    resolve("hello");
     // try {
     //   const endpointUrl =
     //     "https://bxz1wuvcx5.execute-api.eu-west-2.amazonaws.com/alpha/ticket";

@@ -1,5 +1,5 @@
-import { RelativeUrl } from "./feedback";
-import { HapiRequest, HapiResponseToolkit } from "server/types";
+import { RelativeUrl } from "runner/src/server/plugins/engine/feedback";
+import { HapiRequest, HapiResponseToolkit } from "runner/src/server/types";
 
 export const feedbackReturnInfoKey = "f_t";
 

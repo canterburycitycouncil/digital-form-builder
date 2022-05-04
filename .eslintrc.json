@@ -3,7 +3,7 @@
     "prettier",
     "plugin:json/recommended"
   ],
-  "plugins": ["@babel", "prettier"],
+  "plugins": ["@babel", "prettier", "simple-import-sort"],
   "parser": "babel-eslint",
   "env": {
     "browser": true,
@@ -51,5 +51,8 @@
       }
     }
   ],
-  "root": true
+  "root": true,
+  "rules": {
+    "simple-import-sort/imports": "error"
+  }
 }

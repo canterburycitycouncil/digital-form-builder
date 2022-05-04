@@ -1,12 +1,17 @@
-import path from "path";
-import { configure } from "nunjucks";
-import { redirectTo } from "./helpers";
-import { FormConfiguration } from "@xgovformbuilder/model";
-import { HapiServer, HapiRequest, HapiResponseToolkit } from "server/types";
-
-import { FormModel } from "./models";
-import Boom from "boom";
 import { PluginSpecificConfiguration } from "@hapi/hapi";
+import { FormConfiguration } from "@xgovformbuilder/form";
+import Boom from "boom";
+import { configure } from "nunjucks";
+import path from "path";
+// import { FormConfiguration } from "@xgovformbuilder/model/src";
+import {
+  HapiRequest,
+  HapiResponseToolkit,
+  HapiServer,
+} from "runner/src/server/types";
+
+import { redirectTo } from "./helpers";
+import { FormModel } from "./models";
 import { FormPayload } from "./types";
 
 configure([

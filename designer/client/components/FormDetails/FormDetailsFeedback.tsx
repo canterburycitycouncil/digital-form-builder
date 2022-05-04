@@ -1,10 +1,10 @@
+import { FormConfiguration } from "@xgovformbuilder/model/src";
+import { Radios } from "govuk-react-jsx";
+import { Label } from "govuk-react-jsx";
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { Radios } from "@govuk-jsx/radios";
-import { Label } from "@govuk-jsx/label";
-import { FormConfiguration } from "@xgovformbuilder/model";
 
+import * as formConfigurationApi from "../../api/configuration-api";
 import { i18n } from "../../i18n";
-import * as formConfigurationApi from "../../load-form-configurations";
 
 interface Props {
   feedbackForm: any;

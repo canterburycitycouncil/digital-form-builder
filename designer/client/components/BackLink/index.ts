@@ -1,1 +1,1 @@
-export { BackLink } from "./BackLink";
+export { BackLink } from "@xgovformbuilder/designer/client/components/BackLink/BackLink";

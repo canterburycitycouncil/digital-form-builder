@@ -1,12 +1,11 @@
 import path from "path";
-import { plugin } from "./plugin";
-
+import config from "runner/src/server/config";
+import { idFromFilename } from "runner/src/server/plugins/engine/helpers";
+import { plugin } from "runner/src/server/plugins/engine/plugin";
 import {
-  loadPreConfiguredForms,
   FormConfiguration,
-} from "./services/configurationService";
-import { idFromFilename } from "./helpers";
-import config from "../../config";
+  loadPreConfiguredForms,
+} from "runner/src/server/plugins/engine/services/configurationService";
 
 type ConfigureEnginePlugin = (
   formFileName?: string,

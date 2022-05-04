@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import classNames from "classnames";
-import { i18n } from "../../i18n";
+import React, { FC } from "react";
 
 interface Props {
   className?: string;

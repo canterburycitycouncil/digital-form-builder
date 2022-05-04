@@ -1,6 +1,6 @@
-import { PageControllerBase } from "./PageControllerBase";
-import { HapiRequest, HapiResponseToolkit } from "server/types";
-import { FormModel } from "../models";
+import { FormModel } from "runner/src/server/plugins/engine/models";
+import { PageControllerBase } from "runner/src/server/plugins/engine/pageControllers/PageControllerBase";
+import { HapiRequest, HapiResponseToolkit } from "runner/src/server/types";
 
 export class PageController extends PageControllerBase {
   constructor(model: FormModel, pageDef: any) {

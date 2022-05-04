@@ -34,7 +34,7 @@ WORKDIR /usr/src/app
 #TODO:- remove - should already be copied in s2
 COPY --chown=appuser:appuser ./model ./model/
 USER 1001
-RUN yarn workspaces focus @xgovformbuilder/model && yarn model build
+RUN yarn workspaces focus @xgovformbuilder/components && yarn model build
 
 # ----------------------------
 # Stage 4

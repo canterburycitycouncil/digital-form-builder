@@ -1,8 +1,7 @@
+import { Request, ResponseObject, ResponseToolkit, Server } from "@hapi/hapi";
 import yar from "@hapi/yar";
-import { Request, ResponseToolkit, Server, ResponseObject } from "@hapi/hapi";
 import { Logger } from "pino";
-
-import { RateOptions } from "./plugins/rateLimit";
+import { RateOptions } from "runner/src/server/plugins/rateLimit";
 import {
   CacheService,
   EmailService,
@@ -11,7 +10,7 @@ import {
   StatusService,
   UploadService,
   WebhookService,
-} from "./services";
+} from "runner/src/server/services";
 
 type Services = (
   services: string[]
