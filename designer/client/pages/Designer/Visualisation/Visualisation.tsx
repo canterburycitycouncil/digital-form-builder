@@ -1,7 +1,7 @@
-import "designer/client/components/Visualisation/visualisation.scss";
+import "./visualisation.scss";
 
-import Page from "designer/client/components/Page/page";
-import SaveMenu from "designer/client/components/SaveMenu";
+import Page from "@xgovformbuilder/designer/client/components/Page/page";
+import SaveMenu from "@xgovformbuilder/designer/client/components/SaveMenu";
 import React, { useRef } from "react";
 
 import { Info } from "./Info";
@@ -30,39 +30,44 @@ export function Visualisation(props: Props) {
     id,
     needsUpload,
   } = props;
-  const { pages } = data;
 
   const wrapperStyle = layout && {
     width: layout?.width,
     height: layout?.height,
   };
 
-  return (
-    <>
-      <div className="visualisation">
-        <div className="visualisation__pages-wrapper">
-          <div ref={ref} style={wrapperStyle}>
-            {pages.map((page, index) => (
-              <Page
-                key={index}
-                page={page}
-                persona={persona}
-                previewUrl={previewUrl as string}
-                layout={layout?.nodes[index]}
-                id={id as string}
-              />
-            ))}
+  if (data) {
+    const { pages } = data;
+    return (
+      <>
+        <div className="visualisation">
+          <div className="visualisation__pages-wrapper">
+            <div ref={ref} style={wrapperStyle}>
+              {pages.map((page, index) => (
+                <Page
+                  key={index}
+                  page={page}
+                  persona={persona}
+                  previewUrl={previewUrl as string}
+                  layout={layout?.nodes[index]}
+                  id={id as string}
+                />
+              ))}
 
-            {layout && <Lines layout={layout} data={data} persona={persona} />}
+              {layout && (
+                <Lines layout={layout} data={data} persona={persona} />
+              )}
+            </div>
           </div>
+
+          {needsUpload && <SaveMenu />}
+
+          {layout && <Info downloadedAt={downloadedAt} updatedAt={updatedAt} />}
+
+          {layout && <Minimap layout={layout} />}
         </div>
-
-        {needsUpload && <SaveMenu />}
-
-        {layout && <Info downloadedAt={downloadedAt} updatedAt={updatedAt} />}
-
-        {layout && <Minimap layout={layout} />}
-      </div>
-    </>
-  );
+      </>
+    );
+  }
+  return <></>;
 }

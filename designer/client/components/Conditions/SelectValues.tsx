@@ -1,4 +1,4 @@
-import { ConditionValue } from "@xgovformbuilder/data-model";
+import { ConditionValue } from "@xgovformbuilder/model/src";
 import React from "react";
 
 export const SelectValues = (props) => {

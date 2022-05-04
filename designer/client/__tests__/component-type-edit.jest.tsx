@@ -1,12 +1,12 @@
 import { render } from "@testing-library/react";
-import { Data } from "@xgovformbuilder/data-model";
-import ComponentTypeEdit from "designer/client/ComponentTypeEdit";
-import { DataContext } from "designer/client/context";
+import ComponentTypeEdit from "@xgovformbuilder/designer/client/ComponentTypeEdit";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
 import {
   ComponentContext,
   componentReducer,
   initComponentState,
-} from "designer/client/reducers/component/componentReducer";
+} from "@xgovformbuilder/designer/client/reducers/component/componentReducer";
+import { Data } from "@xgovformbuilder/model";
 import React, { useReducer } from "react";
 
 describe("ComponentTypeEdit", () => {
@@ -36,7 +36,8 @@ describe("ComponentTypeEdit", () => {
           title: "First page",
           path: "/first-page",
           components: [],
-          controller: "designer/client/__tests__/pages/summary.js",
+          controller:
+            "@xgovformbuilder/designer/client/__tests__/pages/summary.js",
           section: "home",
         },
       ],

@@ -1,7 +1,7 @@
 import { within } from "@testing-library/dom";
 import { fireEvent, render } from "@testing-library/react";
-import { DataContext } from "designer/client/context";
-import LinkCreate from "designer/client/link-create";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import LinkCreate from "@xgovformbuilder/designer/client/link-create";
 import React from "react";
 
 const data = {

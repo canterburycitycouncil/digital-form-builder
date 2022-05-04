@@ -1,6 +1,6 @@
 import "./LandingPage.scss";
 
-import * as formConfigurationApi from "designer/client/api/configuration-api";
+import * as formConfigurationApi from "@xgovformbuilder/designer/client/api/configuration-api";
 import { Input } from "govuk-react-jsx";
 import React, { Component, MouseEvent } from "react";
 import { withRouter } from "react-router-dom";

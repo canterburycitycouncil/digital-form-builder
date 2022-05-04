@@ -1,13 +1,18 @@
 import {
+  EditIcon,
+  MoveDownIcon,
+  MoveUpIcon,
+} from "@xgovformbuilder/designer/client/components/Icons";
+import {
   clone,
   Condition,
   ConditionGroupDef,
   ConditionsModel,
   toPresentationString,
-} from "@xgovformbuilder/data-model";
+} from "@xgovformbuilder/model/src";
 import React from "react";
 
-import { EditIcon, MoveDownIcon, MoveUpIcon } from "../components/Icons";
+import { FieldInputObject } from "./InlineConditions";
 import InlineConditionsDefinition from "./InlineConditionsDefinition";
 
 interface Props {

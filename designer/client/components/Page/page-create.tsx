@@ -1,19 +1,19 @@
-import { ComponentDef } from "@xgovformbuilder/components";
-import { FormDefinition, Page } from "@xgovformbuilder/data-model";
-import SelectConditions from "designer/client/components/Conditions/SelectConditions";
-import { Flyout } from "designer/client/components/Flyout";
-import { RenderInPortal } from "designer/client/components/RenderInPortal";
-import SectionEdit from "designer/client/components/Section/section-edit";
-import { DataContext } from "designer/client/context";
-import ErrorSummary from "designer/client/error-summary";
-import { toUrl } from "designer/client/helpers";
-import { randomId } from "designer/client/helpers";
-import { I18n, withI18n } from "designer/client/i18n";
-import logger from "designer/client/plugins/logger";
+import SelectConditions from "@xgovformbuilder/designer/client/components/Conditions/SelectConditions";
+import { Flyout } from "@xgovformbuilder/designer/client/components/Flyout";
+import { RenderInPortal } from "@xgovformbuilder/designer/client/components/RenderInPortal";
+import SectionEdit from "@xgovformbuilder/designer/client/components/Section/section-edit";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
+import { toUrl } from "@xgovformbuilder/designer/client/helpers";
+import { randomId } from "@xgovformbuilder/designer/client/helpers";
+import { I18n, withI18n } from "@xgovformbuilder/designer/client/i18n";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
 import {
   hasValidationErrors,
   validateTitle,
-} from "designer/client/validations";
+} from "@xgovformbuilder/designer/client/validations";
+import { ComponentDef, Section } from "@xgovformbuilder/model/src";
+import { FormDefinition, Page } from "@xgovformbuilder/model/src";
 import { Input } from "govuk-react-jsx";
 import React from "react";
 
@@ -104,7 +104,12 @@ class PageCreate extends React.Component<Props, State> {
     let copy = addPage({ ...data }, value);
 
     if (linkFrom) {
-      copy = addLink(copy, linkFrom, path, selectedCondition);
+      let linkSuccessful = addLink(copy, linkFrom, path, selectedCondition);
+      if (linkSuccessful instanceof Error) {
+        throw linkSuccessful;
+      } else {
+        copy = linkSuccessful;
+      }
     }
     try {
       await save(copy);
@@ -371,7 +376,7 @@ class PageCreate extends React.Component<Props, State> {
               show={true}
             >
               <SectionEdit
-                section={section}
+                section={this.findSectionWithName(section) as Section}
                 data={data}
                 closeFlyout={this.closeFlyout}
               />

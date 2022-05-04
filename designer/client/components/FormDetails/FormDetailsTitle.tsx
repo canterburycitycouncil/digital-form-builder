@@ -1,4 +1,4 @@
-import { GovUKInput } from "designer/client/components/GovUKFields";
+import { GovUKInput } from "@xgovformbuilder/designer/client/components/GovUKFields";
 import React, { ChangeEvent } from "react";
 
 interface Props {

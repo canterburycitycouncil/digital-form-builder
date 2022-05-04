@@ -1,4 +1,4 @@
-import { ConditionRawData, FormDefinition } from "@xgovformbuilder/data-model";
+import { ConditionRawData, FormDefinition } from "@xgovformbuilder/model/src";
 
 export function addCondition(
   data: FormDefinition,

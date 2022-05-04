@@ -1,7 +1,7 @@
-import { Page } from "@xgovformbuilder/data-model";
-import { Flyout } from "designer/client/components/Flyout";
-import { RenderInPortal } from "designer/client/components/RenderInPortal";
-import { i18n } from "designer/client/i18n";
+import { Flyout } from "@xgovformbuilder/designer/client/components/Flyout";
+import { RenderInPortal } from "@xgovformbuilder/designer/client/components/RenderInPortal";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import { Page } from "@xgovformbuilder/model/src";
 import React, { useContext } from "react";
 
 import ListEdit from "./ListEdit";

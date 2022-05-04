@@ -1,4 +1,4 @@
-import { isEmpty } from "designer/client/helpers";
+import { isEmpty } from "@xgovformbuilder/designer/client/helpers";
 
 test("isEmpty returns the correct value", () => {
   // @ts-ignore

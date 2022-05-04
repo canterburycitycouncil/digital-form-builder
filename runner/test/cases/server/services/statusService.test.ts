@@ -1,6 +1,6 @@
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-import { HapiServer } from "designer/server/types";
+import { HapiServer } from "@xgovformbuilder/designer/server/types";
 import { FormModel } from "runner/src/server/plugins/engine/models";
 import { StatusService } from "runner/src/server/services/statusService";
 import sinon from "sinon";

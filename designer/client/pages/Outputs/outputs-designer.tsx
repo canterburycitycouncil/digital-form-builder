@@ -1,9 +1,12 @@
-import { FormDefinition } from "@xgovformbuilder/data-model";
-import { DesignerApi } from "designer/client/api/designerApi";
-import { DataContext, FlyoutContext } from "designer/client/context";
-import { FeatureFlagProvider } from "designer/client/context/FeatureFlagContext";
-import { i18n } from "designer/client/i18n";
-import newFormJson from "designer/new-form.json";
+import { DesignerApi } from "@xgovformbuilder/designer/client/api/designerApi";
+import {
+  DataContext,
+  FlyoutContext,
+} from "@xgovformbuilder/designer/client/context";
+import { FeatureFlagProvider } from "@xgovformbuilder/designer/client/context/FeatureFlagContext";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import newFormJson from "@xgovformbuilder/designer/new-form.json";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 import React, { Component } from "react";
 import { Prompt } from "react-router-dom";
 

@@ -1,5 +1,5 @@
-import * as formConfigurationsApi from "designer/client/load-form-configurations";
-import { server } from "designer/test/testServer";
+import * as formConfigurationsApi from "@xgovformbuilder/designer/client/load-form-configurations";
+import { server } from "@xgovformbuilder/designer/test/testServer";
 import { rest } from "msw";
 
 describe("Load form configurations", () => {

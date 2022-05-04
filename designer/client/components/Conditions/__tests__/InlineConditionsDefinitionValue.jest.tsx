@@ -6,7 +6,7 @@ import {
   dateUnits,
   relativeDateOrTimeOperatorNames,
   timeUnits,
-} from "@xgovformbuilder/data-model";
+} from "@xgovformbuilder/model/src";
 import React from "react";
 
 import { InlineConditionsDefinitionValue } from "../InlineConditionsDefinitionValue";

@@ -1,7 +1,7 @@
-import { TelephoneNumberFieldComponent } from "@xgovformbuilder/components";
-import { ComponentContext } from "designer/client/components/FormComponent/componentReducer/componentReducer";
-import { Actions } from "designer/client/components/FormComponent/componentReducer/types";
-import { GovUKInput } from "designer/client/components/GovUKFields";
+import { ComponentContext } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/componentReducer";
+import { Actions } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/types";
+import { GovUKInput } from "@xgovformbuilder/designer/client/components/GovUKFields";
+import { TelephoneNumberFieldComponent } from "@xgovformbuilder/model/src";
 import React, { useContext } from "react";
 
 export function CustomValidationMessage() {

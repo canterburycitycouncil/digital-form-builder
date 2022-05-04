@@ -1,6 +1,6 @@
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-import { Data, FormDefinition } from "@xgovformbuilder/data-model";
+import { Data, FormDefinition } from "@xgovformbuilder/model/src";
 import { shallow } from "enzyme";
 import React from "react";
 import sinon from "sinon";

@@ -17,4 +17,7 @@ export class BlobPersistenceService implements PersistenceService {
   copyConfiguration(_configurationId: string, _newName: string) {
     return Promise.resolve("");
   }
+  deleteConfiguration(_configurationId: string): Promise<any> {
+    return Promise.resolve(undefined);
+  }
 }

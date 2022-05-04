@@ -1,10 +1,10 @@
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-import { DataContext } from "designer/client/context";
-import { initI18n } from "designer/client/i18n";
-import PageEdit from "designer/client/page-edit";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { initI18n } from "@xgovformbuilder/designer/client/i18n";
+import PageEdit from "@xgovformbuilder/designer/client/page-edit";
+import { assertInputControlValue } from "@xgovformbuilder/designer/test/helpers/sub-component-assertions";
 import { assertSelectInput } from "designer/test/helpers/element-assertions";
-import { assertInputControlValue } from "designer/test/helpers/sub-component-assertions";
 import { mount } from "enzyme";
 import { Input } from "govuk-react-jsx";
 import React from "react";

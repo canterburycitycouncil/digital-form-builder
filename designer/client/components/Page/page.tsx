@@ -1,9 +1,9 @@
-import { ComponentDef, ComponentTypes } from "@xgovformbuilder/components";
-import { FormDefinition, Page } from "@xgovformbuilder/data-model";
-import { Component } from "designer/client/components/FormComponent/component";
-import { ComponentContextProvider } from "designer/client/components/FormComponent/componentReducer/componentReducer";
-import { DataContext } from "designer/client/context";
-import { I18n, withI18n } from "designer/client/i18n";
+import { Component } from "@xgovformbuilder/designer/client/components/FormComponent/component";
+import { ComponentContextProvider } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/componentReducer";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { I18n, withI18n } from "@xgovformbuilder/designer/client/i18n";
+import { ComponentDef, ComponentTypes } from "@xgovformbuilder/model/src";
+import { FormDefinition, Page } from "@xgovformbuilder/model/src";
 import React from "react";
 import {
   arrayMove,

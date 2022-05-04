@@ -1,7 +1,10 @@
-import { ComponentTypeEnum as Types } from "@xgovformbuilder/components";
-import { DataContext } from "designer/client/context";
-import ErrorSummary from "designer/client/error-summary";
-import { hasValidationErrors } from "designer/client/validations";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
+import { hasValidationErrors } from "@xgovformbuilder/designer/client/validations";
+import {
+  ComponentTypeEnum as Types,
+  FormDefinition,
+} from "@xgovformbuilder/model/src";
 import React, { memo, useContext, useLayoutEffect } from "react";
 
 import { updateComponent } from "./componentData";
@@ -74,12 +77,12 @@ export function ComponentEdit(props) {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    const copy = { ...data };
+    const copy = { ...(data as FormDefinition) };
     const indexOfPage = copy.pages.findIndex((p) => p.path === page.path);
-    const indexOfComponent = copy.pages[indexOfPage]?.components.findIndex(
+    const indexOfComponent = copy.pages[indexOfPage].components?.findIndex(
       (component) => component.name === selectedComponent.initialName
     );
-    copy.pages[indexOfPage].components.splice(indexOfComponent, 1);
+    copy.pages[indexOfPage].components?.splice(indexOfComponent, 1);
     await save(copy);
     toggleShowEditor();
   };

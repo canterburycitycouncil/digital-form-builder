@@ -10,7 +10,8 @@
     "sourceMap": true,
     "jsx": "react",
     "resolveJsonModule": true,
-    "noEmit": true,
+    "noEmit": false,
+    "skipLibCheck": true,
 
     /* Strict Type-Checking Options */
     "strict": true,
@@ -36,13 +37,18 @@
     "lib": ["dom"],
 
     "baseUrl": "./",
-    "paths": {
-      "@xgovformbuilder/*": ["model/src/*"]
-    }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx"
   ],
   "exclude": ["webpack.config.js", "node_modules", "babel*", "test", "node_modules/", "**/*.jest.**", "**/*.test.**"],
+  "references": [
+    {
+      "path": "./model"
+    },
+    {
+      "path": "./designer"
+    }
+  ]
 }

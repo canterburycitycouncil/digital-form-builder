@@ -1,19 +1,23 @@
-import { clone, ConditionsModel, Item } from "@xgovformbuilder/data-model";
+import {
+  addCondition,
+  updateCondition,
+} from "@xgovformbuilder/designer/client/components/Conditions/data";
+import { ErrorMessage } from "@xgovformbuilder/designer/client/components/ErrorMessage";
+import {
+  allInputs,
+  inputsAccessibleAt,
+} from "@xgovformbuilder/designer/client/components/FormComponent/componentData";
+import { findList } from "@xgovformbuilder/designer/client/components/List/data";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import ErrorSummary, {
+  ErrorListItem,
+} from "@xgovformbuilder/designer/client/error-summary";
+import { randomId } from "@xgovformbuilder/designer/client/helpers";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import { clone, ConditionsModel, Item } from "@xgovformbuilder/model/src";
 import classNames from "classnames";
 import React, { ChangeEvent, MouseEvent } from "react";
 
-import { ErrorMessage } from "../components/ErrorMessage";
-import { DataContext } from "../context";
-import {
-  addCondition,
-  allInputs,
-  findList,
-  inputsAccessibleAt,
-  updateCondition,
-} from "../data";
-import ErrorSummary, { ErrorListItem } from "../error-summary";
-import { i18n } from "../i18n";
-import randomId from "../randomId";
 import InlineConditionsEdit from "./inline-conditions-edit";
 import InlineConditionsDefinition from "./InlineConditionsDefinition";
 
@@ -43,7 +47,7 @@ interface State {
   validationErrors: ErrorListItem[];
 }
 
-const yesNoValues: Readonly<Item> = [
+const yesNoValues: Readonly<Item[]> = [
   {
     text: "Yes",
     value: true,

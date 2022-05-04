@@ -1,4 +1,4 @@
-import { FormDefinition } from "@xgovformbuilder/data-model";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 import dagre from "dagre";
 
 import { Layout, Point, Pos } from "./types";

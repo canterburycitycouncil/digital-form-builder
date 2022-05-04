@@ -1,4 +1,7 @@
-import { Tabs, useTabs } from "designer/client/components/Menu/useTabs";
+import {
+  Tabs,
+  useTabs,
+} from "@xgovformbuilder/designer/client/components/Menu/useTabs";
 import React from "react";
 
 import { DataPrettyPrint } from "./DataPrettyPrint/DataPrettyPrint";

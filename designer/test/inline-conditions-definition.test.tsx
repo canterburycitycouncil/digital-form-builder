@@ -6,7 +6,7 @@ import {
   ConditionRef,
   ConditionValue,
   getOperatorNames,
-} from "@xgovformbuilder/data-model";
+} from "@xgovformbuilder/model/src";
 import { shallow } from "enzyme";
 import React from "react";
 import sinon from "sinon";

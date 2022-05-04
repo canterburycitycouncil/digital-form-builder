@@ -1,5 +1,5 @@
-import { GovUKInput } from "designer/client/components/GovUKFields";
-import { i18n } from "designer/client/i18n";
+import { GovUKInput } from "@xgovformbuilder/designer/client/components/GovUKFields";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import React, { ReactNode, useContext } from "react";
 
 import { ComponentContext } from "../componentReducer/componentReducer";

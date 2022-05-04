@@ -4,7 +4,7 @@ import {
   getOperatorConfig,
   relativeDateOrTimeOperatorNames,
   timeUnits,
-} from "@xgovformbuilder/data-model";
+} from "@xgovformbuilder/model/src";
 import React from "react";
 
 import { AbsoluteDateTimeValues } from "./AbsoluteDateTimeValues";

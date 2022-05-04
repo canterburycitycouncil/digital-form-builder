@@ -1,14 +1,14 @@
-import { FormDefinition } from "@xgovformbuilder/data-model";
-import { Input } from "@xgovformbuilder/govuk-react-jsx";
-import { DataContext } from "designer/client/context";
-import ErrorSummary from "designer/client/error-summary";
-import { randomId } from "designer/client/helpers";
-import { withI18n, WithI18nProps } from "designer/client/i18n";
-import logger from "designer/client/plugins/logger";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
+import { randomId } from "@xgovformbuilder/designer/client/helpers";
+import { withI18n, WithI18nProps } from "@xgovformbuilder/designer/client/i18n";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
 import {
   hasValidationErrors,
   validateTitle,
-} from "designer/client/validations";
+} from "@xgovformbuilder/designer/client/validations";
+import { Input } from "@xgovformbuilder/govuk-react-jsx";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 import React from "react";
 
 import { addLink, findOutput } from "../../data";
@@ -57,21 +57,23 @@ class OutputCreate extends React.Component<Props> {
 
     const title = this.state.title?.trim();
     const previous = this.state.previous?.trim();
-    const type = this.state.type?.trim();
+    const type = this.state.type;
     const name = this.state.name;
     const previousValues = this.state.previousValues;
     const outputConfiguration = this.state.outputConfiguration;
+    const next = this.state.next;
 
     let validationErrors = this.validate(title, name);
     if (hasValidationErrors(validationErrors)) return;
 
-    const value = {
+    const value: Output = {
       name,
       title,
       previous,
       type,
       outputConfiguration,
       previousValues,
+      next,
     };
 
     let copy = addOutput({ ...data }, value);
@@ -238,6 +240,8 @@ class OutputCreate extends React.Component<Props> {
       previousValues: previousValues,
       next: next,
     };
+
+    console.log(previous);
 
     let outputEdit: React.ReactNode;
 

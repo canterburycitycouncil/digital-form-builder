@@ -1,5 +1,5 @@
-import { Page } from "@xgovformbuilder/data-model";
-import { i18n } from "designer/client/i18n";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import { Page } from "@xgovformbuilder/model/src";
 import React from "react";
 
 import { Autocomplete } from "../components/Autocomplete";

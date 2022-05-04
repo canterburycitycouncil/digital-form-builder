@@ -45,7 +45,7 @@ export type Output = {
   title: string;
   type: OutputType;
   outputConfiguration: OutputConfiguration;
-  previous: string[];
+  previous: string;
   previousValues: string[];
   next: string[];
 };

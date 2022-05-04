@@ -1,7 +1,7 @@
-import { FormDefinition } from "@xgovformbuilder/data-model";
-import { DataContext } from "designer/client/context";
-import { camelCase } from "designer/client/helpers";
-import logger from "designer/client/plugins/logger";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { camelCase } from "@xgovformbuilder/designer/client/helpers";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 import React from "react";
 
 import { addSection } from "./data/addSection";

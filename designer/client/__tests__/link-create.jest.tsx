@@ -1,7 +1,7 @@
 import { screen, within } from "@testing-library/dom";
 import { fireEvent, render } from "@testing-library/react";
-import { DataContext } from "designer/client/context";
-import LinkCreate from "designer/client/link-create";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import LinkCreate from "@xgovformbuilder/designer/client/link-create";
 import React from "react";
 
 const rawData = {
@@ -15,7 +15,7 @@ const rawData = {
     {
       title: "Summary",
       path: "/summary",
-      controller: "designer/client/__tests__/pages/summary.js",
+      controller: "@xgovformbuilder/designer/client/__tests__/pages/summary.js",
       components: [],
     },
   ],

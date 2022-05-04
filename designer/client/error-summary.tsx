@@ -1,4 +1,4 @@
-import { i18n } from "designer/client/i18n";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import React, { useEffect, useRef } from "react";
 
 export interface ErrorListItem {

@@ -1,4 +1,4 @@
-import { useFeatures } from "designer/client/hooks/featureToggling";
+import { useFeatures } from "@xgovformbuilder/designer/client/hooks/featureToggling";
 
 const FeatureToggle = ({ feature, children }) => {
   const features = useFeatures();

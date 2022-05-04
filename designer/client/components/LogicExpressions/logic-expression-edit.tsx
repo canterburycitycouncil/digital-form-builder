@@ -1,10 +1,10 @@
-import ErrorSummary from "designer/client/error-summary";
-import { ValidationErrors } from "designer/client/pages/Outputs/outputs/types";
-import logger from "designer/client/plugins/logger";
+import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
+import { ValidationErrors } from "@xgovformbuilder/designer/client/pages/Outputs/outputs/types";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
 import {
   hasValidationErrors,
   validateNotEmpty,
-} from "designer/client/validations";
+} from "@xgovformbuilder/designer/client/validations";
 import { Input, Select } from "govuk-react-jsx";
 import React, { useState } from "react";
 

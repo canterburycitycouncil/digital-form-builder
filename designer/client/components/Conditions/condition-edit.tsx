@@ -1,10 +1,10 @@
-import { clone, ConditionsWrapper } from "@xgovformbuilder/data-model";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import Editor from "@xgovformbuilder/designer/client/editor";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
+import { ConditionsWrapper, FormDefinition } from "@xgovformbuilder/model/src";
 import React from "react";
 
-import logger from "../client/plugins/logger";
-import { DataContext } from "./context";
 import { removeCondition, updateCondition } from "./data";
-import Editor from "./editor";
 
 interface Props {
   data: FormDefinition;
@@ -137,6 +137,7 @@ class ConditionEdit extends React.Component<Props, State> {
             Value
           </label>
           <Editor
+            id="condition-edit"
             name="value"
             required
             value={wrappedCondition.expression}

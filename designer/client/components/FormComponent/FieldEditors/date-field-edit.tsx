@@ -1,8 +1,8 @@
-import { ComponentContext } from "designer/client/components/FormComponent/componentReducer/componentReducer";
-import { Actions } from "designer/client/components/FormComponent/componentReducer/types";
-import { CssClasses } from "designer/client/components/FormComponent/components/CssClasses";
-import { GovUKInput } from "designer/client/components/GovUKFields";
-import { i18n } from "designer/client/i18n";
+import { ComponentContext } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/componentReducer";
+import { Actions } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/types";
+import { CssClasses } from "@xgovformbuilder/designer/client/components/FormComponent/components/CssClasses";
+import { GovUKInput } from "@xgovformbuilder/designer/client/components/GovUKFields";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import React, { useContext } from "react";
 
 type Props = {

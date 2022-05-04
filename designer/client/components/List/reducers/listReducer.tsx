@@ -1,6 +1,6 @@
-import { DataContext } from "designer/client/context";
-import { arrayMove } from "designer/client/helpers";
-import { randomId } from "designer/client/helpers";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { arrayMove } from "@xgovformbuilder/designer/client/helpers";
+import { randomId } from "@xgovformbuilder/designer/client/helpers";
 import React, { createContext, useContext, useReducer } from "react";
 
 import { ListActions } from "./listActions";

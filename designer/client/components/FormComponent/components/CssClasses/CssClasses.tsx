@@ -1,6 +1,6 @@
-import { ComponentContext } from "designer/client/components/FormComponent/componentReducer/componentReducer";
-import { Actions } from "designer/client/components/FormComponent/componentReducer/types";
-import { i18n } from "designer/client/i18n";
+import { ComponentContext } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/componentReducer";
+import { Actions } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/types";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import React, { useContext } from "react";
 
 export function CssClasses() {

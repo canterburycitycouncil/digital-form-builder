@@ -1,4 +1,4 @@
-import { InputFieldsComponentsDef } from "@xgovformbuilder/data-model";
+import { InputFieldsComponentsDef } from "@xgovformbuilder/model/src";
 import { Schema } from "joi";
 import moment from "moment";
 import { ComponentCollection } from "runner/src/server/plugins/engine/components/ComponentCollection";

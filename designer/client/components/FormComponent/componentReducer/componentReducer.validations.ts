@@ -1,14 +1,14 @@
-import { ComponentTypeEnum as Types } from "@xgovformbuilder/data-model";
-import { isEmpty } from "designer/client/helpers";
-import { i18n } from "designer/client/i18n";
-import { validateTitle } from "designer/client/validations";
+import { isEmpty } from "@xgovformbuilder/designer/client/helpers";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import { validateTitle } from "@xgovformbuilder/designer/client/validations";
+import { ComponentTypeEnum as Types } from "@xgovformbuilder/model/src";
 
 export interface ValidationError {
   href?: string;
   children: string | [string, Record<string, string>];
 }
 
-// TODO move validations to "designer/client/validations"
+// TODO move validations to "@xgovformbuilder/designer/client/validations"
 const validateName = ({ name }) => {
   //TODO:- should also validate uniqueness.
   const errors: any = {};

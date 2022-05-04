@@ -1,7 +1,7 @@
 import "./ErrorPage.scss";
 
-import { BackLink } from "designer/client/components/BackLink";
-import { i18n } from "designer/client/i18n";
+import { BackLink } from "@xgovformbuilder/designer/client/components/BackLink";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import React, { ReactElement } from "react";
 import { withRouter } from "react-router-dom";
 

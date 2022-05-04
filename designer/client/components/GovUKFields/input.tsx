@@ -1,6 +1,7 @@
-import { GovUKFieldWrapper } from "designer/client/components/govuk-fields/field-wrapper";
-import { convertFieldNameToCamelCase } from "designer/client/components/govuk-fields/helpers";
 import React, { ChangeEventHandler } from "react";
+
+import { GovUKFieldWrapper } from "./field-wrapper";
+import { convertFieldNameToCamelCase } from "./helpers";
 
 interface InputProps {
   translationNamespace: string;

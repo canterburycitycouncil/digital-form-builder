@@ -1,14 +1,14 @@
-import { Input } from "@xgovformbuilder/govuk-react-jsx";
-import { clone } from "@xgovformbuilder/utils";
-import { DataContext } from "designer/client/context";
-import ErrorSummary from "designer/client/error-summary";
-import { randomId } from "designer/client/helpers";
-import { withI18n, WithI18nProps } from "designer/client/i18n";
-import logger from "designer/client/plugins/logger";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
+import { randomId } from "@xgovformbuilder/designer/client/helpers";
+import { withI18n, WithI18nProps } from "@xgovformbuilder/designer/client/i18n";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
 import {
   hasValidationErrors,
   validateTitle,
-} from "designer/client/validations";
+} from "@xgovformbuilder/designer/client/validations";
+import { Input } from "@xgovformbuilder/govuk-react-jsx";
+import { clone } from "@xgovformbuilder/model/src";
 import React from "react";
 
 import { findOutput, updateLinksTo } from "../../data/findOutput";

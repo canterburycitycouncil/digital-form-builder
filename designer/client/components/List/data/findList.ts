@@ -1,4 +1,4 @@
-import { FormDefinition, List } from "@xgovformbuilder/data-model";
+import { FormDefinition, List } from "@xgovformbuilder/model/src";
 
 import { Found } from "./types";
 

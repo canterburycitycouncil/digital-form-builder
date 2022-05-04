@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { DetailsComponent } from "@xgovformbuilder/components";
-import { ComponentCreate } from "designer/client/components/ComponentCreate/ComponentCreate";
-import { DataContext } from "designer/client/context";
-import { ComponentContextProvider } from "designer/client/reducers/component";
+import { ComponentCreate } from "@xgovformbuilder/designer/client/components/ComponentCreate/ComponentCreate";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { ComponentContextProvider } from "@xgovformbuilder/designer/client/reducers/component";
+import { DetailsComponent } from "@xgovformbuilder/model/src";
 import React from "react";
 
 describe("ComponentCreate:", () => {

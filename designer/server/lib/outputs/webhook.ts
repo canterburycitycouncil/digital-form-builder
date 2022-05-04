@@ -1,7 +1,7 @@
-import { WebhookOutputConfiguration } from "@xgovformbuilder/data-model";
+import { WebhookOutputConfiguration } from "@xgovformbuilder/model/src";
 export const webhook = (
-  config: WebhookOutputConfiguration,
-  formValues
+  _config: WebhookOutputConfiguration,
+  _formValues
 ): Promise<string> => {
   return new Promise((resolve, reject) => {
     resolve("hello");

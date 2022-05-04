@@ -1,7 +1,7 @@
-import { Output } from "@xgovformbuilder/data-model";
-import { Flyout } from "designer/client/components/Flyout";
-import { DataContext } from "designer/client/context";
-import { withI18n, WithI18nProps } from "designer/client/i18n";
+import { Flyout } from "@xgovformbuilder/designer/client/components/Flyout";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { withI18n, WithI18nProps } from "@xgovformbuilder/designer/client/i18n";
+import { Output } from "@xgovformbuilder/model/src";
 import React from "react";
 import { SortableContainer } from "react-sortable-hoc";
 
@@ -39,7 +39,7 @@ export class OutputDisplay extends React.Component<Props> {
     const { output } = this.props;
 
     const copy = { ...data };
-    const [copyOutput, index] = findOutput(output, output.name);
+    const [copyOutput, index] = findOutput(data, output.name);
     copy.outputs[index] = copyOutput;
     save(copy);
   };

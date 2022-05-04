@@ -1,6 +1,6 @@
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-import { ListComponentsDef } from "@xgovformbuilder/data-model";
+import { ListComponentsDef } from "@xgovformbuilder/model/src";
 import sinon from "sinon";
 
 import { SelectField } from "../../../../../../src/server/plugins/engine/components";

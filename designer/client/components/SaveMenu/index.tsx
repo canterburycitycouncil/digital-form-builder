@@ -1,12 +1,12 @@
-import { DataContext } from "designer/client/context";
-import logger from "designer/client/plugins/logger";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
 import React, { useContext } from "react";
 
 const SaveMenu = () => {
   const { data, upload } = useContext(DataContext);
   const saveForm = async () => {
     try {
-      if (upload) {
+      if (upload && data) {
         await upload(data);
       }
     } catch (err) {

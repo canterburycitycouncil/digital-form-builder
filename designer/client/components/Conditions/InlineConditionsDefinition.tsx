@@ -1,3 +1,4 @@
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import {
   clone,
   Condition,
@@ -5,10 +6,9 @@ import {
   ConditionRef,
   conditionValueFrom,
   getOperatorNames,
-} from "@xgovformbuilder/data-model";
+} from "@xgovformbuilder/model/src";
 import React from "react";
 
-import { i18n } from "../i18n";
 import { FieldInputObject } from "./InlineConditions";
 import { InlineConditionsDefinitionValue } from "./InlineConditionsDefinitionValue";
 

@@ -104,8 +104,7 @@ export type Output = {
   title: string;
   type: OutputType;
   outputConfiguration: OutputConfiguration;
-  logicExpression: LogicExpression;
-  previous: string[];
+  previous: string;
   previousValues: string[];
   next: string[];
 };
@@ -134,6 +133,7 @@ export function isMultipleApiKey(
  * `FormDefinition` is a typescript representation of `Schema`
  */
 export type FormDefinition = {
+  id: string;
   internalOnly: boolean;
   pages: Page[];
   conditions: ConditionRawData[];

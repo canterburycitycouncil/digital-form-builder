@@ -1,4 +1,4 @@
-import { FormDefinition } from "@xgovformbuilder/data-model";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 
 import { allInputs } from "../inputs";
 test("should return all inputs from the page model", () => {

@@ -2,7 +2,7 @@ import {
   ComponentDef,
   ContentComponentsDef,
   InputFieldsComponentsDef,
-} from "@xgovformbuilder/data-model";
+} from "@xgovformbuilder/model/src";
 import { Schema as JoiSchema } from "joi";
 import { ViewModel } from "runner/src/server/plugins/engine/components/types";
 import { FormModel } from "runner/src/server/plugins/engine/models";

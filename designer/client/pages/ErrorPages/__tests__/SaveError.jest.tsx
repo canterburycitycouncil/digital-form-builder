@@ -1,12 +1,13 @@
-import React from "react";
-import { SaveError } from "../SaveError";
 import {
-  render,
   cleanup,
   fireEvent,
+  render,
   screen,
   waitFor,
 } from "@testing-library/react";
+import React from "react";
+
+import { SaveError } from "../SaveError";
 
 describe("SaveErrorPage", () => {
   afterEach(() => jest.resetAllMocks());
@@ -61,6 +62,6 @@ describe("SaveErrorPage", () => {
 
     fireEvent.click(screen.getByText("Back to Designer"));
     await waitFor(() => expect(push).toHaveBeenCalledTimes(1));
-    expect(push).toBeCalledWith("designer/testid");
+    expect(push).toBeCalledWith("@xgovformbuilder/designer/testid");
   });
 });

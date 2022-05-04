@@ -1,4 +1,4 @@
-import { FormDefinition, Page } from "@xgovformbuilder/data-model";
+import { FormDefinition, Page } from "@xgovformbuilder/model/src";
 
 import { Path } from "./types";
 

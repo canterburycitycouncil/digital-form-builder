@@ -1,19 +1,19 @@
-import { Page } from "@xgovformbuilder/data-model";
-import { clone } from "@xgovformbuilder/utils";
-import { Flyout } from "designer/client/components/Flyout";
-import { RenderInPortal } from "designer/client/components/RenderInPortal";
-import SectionEdit from "designer/client/components/Section/section-edit";
-import { DataContext } from "designer/client/context";
-import { FeatureFlags } from "designer/client/context/FeatureFlagContext";
-import ErrorSummary from "designer/client/error-summary";
-import FeatureToggle from "designer/client/FeatureToggle";
-import { randomId, toUrl } from "designer/client/helpers";
-import { I18n, withI18n } from "designer/client/i18n";
-import logger from "designer/client/plugins/logger";
+import { Flyout } from "@xgovformbuilder/designer/client/components/Flyout";
+import { RenderInPortal } from "@xgovformbuilder/designer/client/components/RenderInPortal";
+import SectionEdit from "@xgovformbuilder/designer/client/components/Section/section-edit";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { FeatureFlags } from "@xgovformbuilder/designer/client/context/FeatureFlagContext";
+import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
+import FeatureToggle from "@xgovformbuilder/designer/client/FeatureToggle";
+import { randomId, toUrl } from "@xgovformbuilder/designer/client/helpers";
+import { I18n, withI18n } from "@xgovformbuilder/designer/client/i18n";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
 import {
   hasValidationErrors,
   validateTitle,
-} from "designer/client/validations";
+} from "@xgovformbuilder/designer/client/validations";
+import { Page } from "@xgovformbuilder/model/src";
+import { clone } from "@xgovformbuilder/model/src";
 import { Input } from "govuk-react-jsx";
 import React from "react";
 

@@ -1,8 +1,9 @@
-import { Flyout } from "designer/client/components/Flyout";
-import LinkCreate from "designer/client/components/Links/link-create";
-import { useMenuItem } from "designer/client/components/Menu/useMenuItem";
-import { DataContext } from "designer/client/context";
-import { i18n } from "designer/client/i18n";
+import { Flyout } from "@xgovformbuilder/designer/client/components/Flyout";
+import LinkCreate from "@xgovformbuilder/designer/client/components/Links/link-create";
+import { useMenuItem } from "@xgovformbuilder/designer/client/components/Menu/useMenuItem";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 import React, { useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
@@ -48,7 +49,7 @@ export default function Menu() {
       {output.isVisible && (
         <Flyout title={i18n("menu.outputs")} onHide={output.hide}>
           <OutputCreate
-            data={data}
+            data={data as FormDefinition}
             onCreate={(e) => {
               output.hide(e);
             }}
@@ -58,7 +59,7 @@ export default function Menu() {
 
       {link.isVisible && (
         <Flyout title={i18n("menu.links")} onHide={link.hide}>
-          <LinkCreate data={data} onCreate={() => link.hide} />
+          <LinkCreate onCreate={() => link.hide} />
         </Flyout>
       )}
     </nav>

@@ -1,4 +1,4 @@
-import { Data } from "@xgovformbuilder/data-model";
+import { Data } from "@xgovformbuilder/model/src";
 import { Radios } from "govuk-react-jsx";
 import { Label } from "govuk-react-jsx";
 import React, { ChangeEvent } from "react";

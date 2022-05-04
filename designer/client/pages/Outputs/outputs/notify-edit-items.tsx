@@ -1,6 +1,6 @@
-import { clone } from "@xgovformbuilder/utils";
-import { DataContext } from "designer/client/context";
-import logger from "designer/client/plugins/logger";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
+import { clone } from "@xgovformbuilder/model/src";
 import React, { ChangeEvent, MouseEvent } from "react";
 
 type State = {
@@ -102,7 +102,7 @@ class NotifyItems extends React.Component<Props, State> {
         </thead>
         <tbody className="govuk-table__body">
           {items.map((item, index) => (
-            <tr key={item + index} className="govuk-table__row" scope="row">
+            <tr key={item + index} className="govuk-table__row">
               <td className="govuk-table__cell">
                 <select
                   className="govuk-select"

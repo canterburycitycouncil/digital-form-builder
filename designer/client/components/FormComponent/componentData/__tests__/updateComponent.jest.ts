@@ -1,4 +1,4 @@
-import { FormDefinition } from "@xgovformbuilder/data-model";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 
 import { updateComponent } from "..";
 

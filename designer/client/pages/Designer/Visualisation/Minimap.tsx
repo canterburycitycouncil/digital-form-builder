@@ -25,13 +25,13 @@ export const Minimap = ({ layout, scale = 0.05 }: Props) => (
       {layout.nodes.map((node, index) => {
         return (
           <g key={node + index}>
-            <a xlinkHref={`#${node.node.label}`}>
+            <a href={`#${node.node.label}`}>
               <rect
                 x={parseFloat(node.left) * scale}
                 y={parseFloat(node.top) * scale}
                 width={node.node.width * scale}
                 height={node.node.height * scale}
-                title={node.node.label}
+                // title={node.node.label}
               />
             </a>
           </g>

@@ -1,0 +1,68 @@
+{
+    "name": "@xgovformbuilder/model",
+    "version": "3.0.0",
+    "description": "A hapi plugin providing the model for XGov digital form builder based applications",
+    "main": "dist/module/index.js",
+    "browser": "./dist/browser/index.js",
+    "engines": {
+        "node": ">=12"
+    },
+    "scripts": {
+        "lint": "yarn run eslint .",
+        "fix-lint": "yarn run eslint . --fix",
+        "test": "yarn lint && yarn type-check &&  yarn test-cov",
+        "test:dev": "jest --watch",
+        "test-cov": "jest --coverage",
+        "build": "yarn run build:types && yarn run build:node && yarn run build:browser",
+        "build:node": "BABEL_ENV=node babel --extensions '.ts' src --out-dir dist/module",
+        "build:browser": "BABEL_ENV=browser babel --extensions '.ts' src --out-dir dist/browser",
+        "build:types": "yarn run build:types:node && yarn run build:types:browser",
+        "build:types:node": "tsc --emitDeclarationOnly --declarationDir ./dist/module ",
+        "build:types:browser": "tsc --emitDeclarationOnly --declarationDir dist/browser ",
+        "type-check": "tsc --noEmit",
+        "generate-docs": "typedoc src --tsconfig tsconfig.json --out ../docs/model/typedoc --exclude '**/*+(index|.test|.jest).ts'"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/XGovFormBuilder/digital-form-builder/tree/main/model"
+    },
+    "license": "SEE LICENSE IN LICENSE",
+    "dependencies": {
+        "@babel/eslint-plugin": "^7.11.3",
+        "@babel/runtime": "^7.11.2",
+        "boom": "7.3.0",
+        "btoa": "^1.2.1",
+        "depth-first": "^4.0.0",
+        "eslint-plugin-import": "^2.22.0",
+        "expr-eval": "2.0.2",
+        "govuk-frontend": "^3.10.1",
+        "hmpo-components": "2.6.5",
+        "joi": "17.2.1",
+        "moment": "2.24.0",
+        "nanoid": "^3.1.20",
+        "nunjucks": "3.2.1",
+        "path": "0.12.7",
+        "wreck": "14.2.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.10.5",
+        "@babel/core": "^7.11.1",
+        "@babel/eslint-parser": "^7.11.3",
+        "@babel/plugin-proposal-class-properties": "7.10.1",
+        "@babel/plugin-proposal-export-default-from": "^7.10.1",
+        "@babel/plugin-proposal-private-methods": "^7.10.1",
+        "@babel/plugin-transform-runtime": "^7.10.1",
+        "@babel/preset-env": "^7.10.2",
+        "@babel/preset-typescript": "^7.10.4",
+        "@types/jest": "^26.0.20",
+        "@xgovformbuilder/lab-babel": "2.1.2",
+        "babel-eslint": "^10.1.0",
+        "babel-jest": "^26.6.3",
+        "cross-env": "^7.0.2",
+        "eslint": "^7.6.0",
+        "eslint-plugin-tsdoc": "^0.2.14",
+        "jest": "^26.6.3",
+        "ts-jest": "^26.4.4",
+        "typescript": "^4.0.3"
+    }
+}

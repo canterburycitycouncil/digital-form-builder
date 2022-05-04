@@ -1,7 +1,7 @@
-import { clone } from "@xgovformbuilder/utils";
-import { DataContext } from "designer/client/context";
-import { useListItem } from "designer/client/hooks/list/useListItem";
-import { i18n, withI18n } from "designer/client/i18n";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { useListItem } from "@xgovformbuilder/designer/client/hooks/list/useListItem";
+import { i18n, withI18n } from "@xgovformbuilder/designer/client/i18n";
+import { clone } from "@xgovformbuilder/model/src";
 import React, { useContext } from "react";
 import {
   SortableContainer,

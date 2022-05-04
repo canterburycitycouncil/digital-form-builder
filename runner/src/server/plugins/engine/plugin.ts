@@ -3,7 +3,7 @@ import { FormConfiguration } from "@xgovformbuilder/form";
 import Boom from "boom";
 import { configure } from "nunjucks";
 import path from "path";
-// import { FormConfiguration } from "@xgovformbuilder/data-model";
+// import { FormConfiguration } from "@xgovformbuilder/model/src";
 import {
   HapiRequest,
   HapiResponseToolkit,

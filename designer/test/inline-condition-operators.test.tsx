@@ -9,7 +9,7 @@ import {
   getOperatorNames,
   RelativeTimeValue,
   timeUnits,
-} from "@xgovformbuilder/data-model";
+} from "@xgovformbuilder/model/src";
 
 const { expect } = Code;
 const lab = Lab.script();

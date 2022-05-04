@@ -1,6 +1,6 @@
-import { Flyout } from "designer/client/components/Flyout";
-import { SearchIcon } from "designer/client/components/Icons";
-import { i18n } from "designer/client/i18n";
+import { Flyout } from "@xgovformbuilder/designer/client/components/Flyout";
+import { SearchIcon } from "@xgovformbuilder/designer/client/components/Icons";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import React, { useState } from "react";
 import { SortableHandle } from "react-sortable-hoc";
 

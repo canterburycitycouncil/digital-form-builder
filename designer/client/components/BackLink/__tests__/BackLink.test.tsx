@@ -1,6 +1,6 @@
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-import { BackLink } from "designer/client/components/BackLink";
+import { BackLink } from "@xgovformbuilder/designer/client/components/BackLink";
 import { shallow } from "enzyme";
 import React from "react";
 import sinon from "sinon";

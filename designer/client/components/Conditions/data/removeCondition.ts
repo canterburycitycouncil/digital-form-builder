@@ -1,4 +1,4 @@
-import { FormDefinition } from "@xgovformbuilder/data-model";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 
 export function removeCondition(data: FormDefinition, name) {
   const pages = [...data.pages].map((page) => {

@@ -1,17 +1,17 @@
-import { ListComponentsDef } from "@xgovformbuilder/components";
-import classNames from "classnames";
-import { ComponentContext } from "designer/client/components/FormComponent/componentReducer/componentReducer";
-import { Actions as ComponentActions } from "designer/client/components/FormComponent/componentReducer/types";
-import { findList } from "designer/client/components/List/data";
+import { ComponentContext } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/componentReducer";
+import { Actions as ComponentActions } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/types";
+import { findList } from "@xgovformbuilder/designer/client/components/List/data";
 import {
   ListsEditorContext,
   ListsEditorStateActions,
-} from "designer/client/components/List/reducers/list/listsEditorReducer";
-import { ListActions } from "designer/client/components/List/reducers/listActions";
-import { ListContext } from "designer/client/components/List/reducers/listReducer";
-import { DataContext } from "designer/client/context";
-import { i18n } from "designer/client/i18n";
-import logger from "designer/client/plugins/logger";
+} from "@xgovformbuilder/designer/client/components/List/reducers/list/listsEditorReducer";
+import { ListActions } from "@xgovformbuilder/designer/client/components/List/reducers/listActions";
+import { ListContext } from "@xgovformbuilder/designer/client/components/List/reducers/listReducer";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
+import { ListComponentsDef } from "@xgovformbuilder/model/src";
+import classNames from "classnames";
 import { Label } from "govuk-react-jsx";
 import React, { useContext, useEffect, useState } from "react";
 export function ComponentListSelect() {

@@ -1,4 +1,4 @@
-import { ComponentTypes } from "@xgovformbuilder/components";
+import { ComponentTypes } from "@xgovformbuilder/model/src";
 import React, { useContext } from "react";
 
 import { ComponentContext } from "./componentReducer/componentReducer";

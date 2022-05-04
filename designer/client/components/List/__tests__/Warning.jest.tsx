@@ -1,4 +1,4 @@
-import { Data } from "@xgovformbuilder/data-model";
+import { Data } from "@xgovformbuilder/model/src";
 import React from "react";
 
 import { Warning } from "../Warning";

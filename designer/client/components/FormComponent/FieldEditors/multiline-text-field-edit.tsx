@@ -1,4 +1,4 @@
-import { TextFieldEdit } from "designer/client/components/FormComponent/FieldEditors/text-field-edit";
+import { TextFieldEdit } from "@xgovformbuilder/designer/client/components/FormComponent/FieldEditors/text-field-edit";
 import React, { useContext } from "react";
 
 import { ComponentContext } from "../componentReducer/componentReducer";

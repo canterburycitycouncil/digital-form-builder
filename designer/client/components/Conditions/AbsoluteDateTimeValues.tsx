@@ -1,14 +1,14 @@
-import isValid from "date-fns/isValid";
 import {
   AbsoluteDateValues,
   YearMonthDay,
-} from "designer/client/conditions/AbsoluteDateValues";
+} from "@xgovformbuilder/designer/client/components/Conditions/AbsoluteDateValues";
 import {
   AbsoluteTimeValues,
   HourMinute,
-} from "designer/client/conditions/AbsoluteTimeValues";
-import { isInt } from "designer/client/conditions/inline-condition-helpers";
-import { i18n } from "designer/client/i18n";
+} from "@xgovformbuilder/designer/client/components/Conditions/AbsoluteTimeValues";
+import { isInt } from "@xgovformbuilder/designer/client/components/Conditions/inline-condition-helpers";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import isValid from "date-fns/isValid";
 import React from "react";
 
 interface Props {

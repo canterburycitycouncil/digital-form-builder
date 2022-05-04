@@ -1,4 +1,9 @@
-import { clone, Fee, FormDefinition } from "@xgovformbuilder/data-model";
+import {
+  clone,
+  Condition,
+  Fee,
+  FormDefinition,
+} from "@xgovformbuilder/model/src";
 import classNames from "classnames";
 import { ErrorMessage } from "govuk-react-jsx";
 import React from "react";

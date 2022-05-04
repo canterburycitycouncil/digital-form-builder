@@ -1,5 +1,5 @@
-import { ComponentTypes } from "@xgovformbuilder/components";
-import { ErrorMessage } from "designer/client/components/ErrorMessage";
+import { ErrorMessage } from "@xgovformbuilder/designer/client/components/ErrorMessage";
+import { ComponentTypes } from "@xgovformbuilder/model/src";
 import { Textarea } from "govuk-react-jsx";
 import { Input } from "govuk-react-jsx";
 import { Select } from "govuk-react-jsx";

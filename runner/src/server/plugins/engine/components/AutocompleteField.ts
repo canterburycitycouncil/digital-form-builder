@@ -1,4 +1,4 @@
-import { ListComponentsDef } from "@xgovformbuilder/data-model";
+import { ListComponentsDef } from "@xgovformbuilder/model/src";
 import { addClassOptionIfNone } from "runner/src/server/plugins/engine/components/helpers";
 import { SelectField } from "runner/src/server/plugins/engine/components/SelectField";
 import { FormModel } from "runner/src/server/plugins/engine/models";

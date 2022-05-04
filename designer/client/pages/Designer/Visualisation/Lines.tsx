@@ -1,10 +1,10 @@
-import { FormDefinition } from "@xgovformbuilder/data-model";
-import { Flyout } from "designer/client/components/Flyout";
-import LinkEdit from "designer/client/components/Links/link-edit";
-import { DataContext } from "designer/client/context";
+import { Flyout } from "@xgovformbuilder/designer/client/components/Flyout";
+import LinkEdit from "@xgovformbuilder/designer/client/components/Links/link-edit";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 import React from "react";
 
-import { Edge, Layout } from "./getLayout";
+import { Edge, Layout } from "./types";
 
 type Props = {
   layout: Layout["pos"];
@@ -13,13 +13,13 @@ type Props = {
 };
 
 type State = {
-  showEditor: Edge | boolean;
+  showEditor: Edge | false;
 };
 
 export class Lines extends React.Component<Props, State> {
   static contextType = DataContext;
 
-  state = {
+  state: State = {
     showEditor: false,
   };
 

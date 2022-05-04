@@ -17,14 +17,16 @@ export type Point = {
   left: string;
 };
 
+export type EdgePoint = {
+  y: number;
+  x: number;
+};
+
 export type Edge = {
   source: string;
   target: string;
   label: string;
-  points: {
-    y: number;
-    x: number;
-  }[];
+  points: EdgePoint[];
 };
 
 export type Pos = {

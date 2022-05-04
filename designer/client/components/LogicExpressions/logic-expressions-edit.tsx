@@ -1,6 +1,6 @@
-import { LogicExpression } from "@xgovformbuilder/data-model";
-import { LogicExpressionEdit } from "designer/client/components/LogicExpressions";
-import { DataContext } from "designer/client/context";
+import { LogicExpressionEdit } from "@xgovformbuilder/designer/client/components/LogicExpressions";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { LogicExpression } from "@xgovformbuilder/model/src";
 import React, { useContext, useState } from "react";
 
 export const LogicExpressionsEdit = () => {

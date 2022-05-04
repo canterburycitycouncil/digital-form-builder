@@ -1,5 +1,5 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
-import { FormDefinition } from "@xgovformbuilder/data-model";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 import React from "react";
 
 import { RenderWithContextAndDataContext } from "../../__tests__/helpers/renderers";

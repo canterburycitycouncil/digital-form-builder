@@ -1,5 +1,5 @@
-import { FeatureToggleApi } from "designer/client/api/toggleApi";
-import { server } from "designer/test/testServer";
+import { FeatureToggleApi } from "@xgovformbuilder/designer/client/api/toggleApi";
+import { server } from "@xgovformbuilder/designer/test/testServer";
 import { rest } from "msw";
 
 describe("Toggle API", () => {

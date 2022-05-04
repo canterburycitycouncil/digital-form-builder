@@ -1,7 +1,8 @@
-import React, { useCallback, useState, Fragment, useContext } from "react";
-import { RenderInPortal } from "../RenderInPortal";
+import React, { Fragment, useCallback, useContext, useState } from "react";
+
 import { DataContext } from "../../../../context";
 import { addLink } from "../../data";
+import { RenderInPortal } from "../RenderInPortal";
 
 type Position = {
   x: string;
@@ -64,7 +65,7 @@ export function OutputLinkage({ output, layout }) {
       const linkingoutput = JSON.parse(
         event.dataTransfer.getData("linkingoutput")
       );
-      if (linkingoutput.name !== output.name) {
+      if (linkingoutput.name !== output.name && data) {
         const updatedData = addLink(data, linkingoutput.name, output.name);
         await save(updatedData);
       }

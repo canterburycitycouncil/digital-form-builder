@@ -1,14 +1,14 @@
-import { ComponentDef } from "@xgovformbuilder/data-model";
-import { ErrorListItem } from "designer/client/error-summary";
-import logger from "designer/client/plugins/logger";
-import randomId from "designer/client/randomId";
-import { fieldsReducer } from "designer/client/reducers/component/componentReducer.fields";
-import { metaReducer } from "designer/client/reducers/component/componentReducer.meta";
-import { optionsReducer } from "designer/client/reducers/component/componentReducer.options";
-import { schemaReducer } from "designer/client/reducers/component/componentReducer.schema";
-import type { ComponentActions } from "designer/client/reducers/component/types";
+import { ErrorListItem } from "@xgovformbuilder/designer/client/error-summary";
+import { randomId } from "@xgovformbuilder/designer/client/helpers";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
+import { ComponentDef } from "@xgovformbuilder/model/src";
 import React, { createContext, useReducer } from "react";
 
+import { fieldsReducer } from "../componentReducer/componentReducer.fields";
+import { metaReducer } from "../componentReducer/componentReducer.meta";
+import { optionsReducer } from "../componentReducer/componentReducer.options";
+import { schemaReducer } from "../componentReducer/componentReducer.schema";
+import type { ComponentActions } from "../componentReducer/types";
 import { Actions, Fields, Meta, Options, Schema } from "./types";
 
 type ComponentState = {
@@ -82,7 +82,7 @@ export function componentReducer(
       ...subReducer(state, action),
     };
   } else {
-    logger.log("Unrecognised action:", action.type);
+    logger.info("Unrecognised action:", action.type);
     return { ...state, selectedComponent };
   }
 }

@@ -1,10 +1,11 @@
-import { Flyout } from "designer/client/components/Flyout";
-import { RenderInPortal } from "designer/client/components/RenderInPortal";
-import InlineConditions from "designer/client/conditions/InlineConditions";
-import { DataContext } from "designer/client/context";
-import { allInputs } from "designer/client/data";
-import { i18n } from "designer/client/i18n";
+import { Flyout } from "@xgovformbuilder/designer/client/components/Flyout";
+import { allInputs } from "@xgovformbuilder/designer/client/components/FormComponent/componentData";
+import { RenderInPortal } from "@xgovformbuilder/designer/client/components/RenderInPortal";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import React, { useContext, useState } from "react";
+
+import InlineConditions from "./InlineConditions";
 
 function useConditionsEditor() {
   const [editingCondition, setEditingCondition] = useState(null);

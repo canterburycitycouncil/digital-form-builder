@@ -1,10 +1,10 @@
-import { DataContext } from "designer/client/context";
-import ErrorSummary from "designer/client/error-summary";
-import { i18n } from "designer/client/i18n";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import {
   hasValidationErrors,
   validateTitle,
-} from "designer/client/validations";
+} from "@xgovformbuilder/designer/client/validations";
 import { Input } from "govuk-react-jsx";
 import React, { useContext } from "react";
 

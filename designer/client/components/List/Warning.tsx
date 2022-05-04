@@ -1,6 +1,6 @@
-import { clone } from "@xgovformbuilder/utils";
-import { DataContext } from "designer/client/context";
-import { i18n } from "designer/client/i18n";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import { clone, FormDefinition } from "@xgovformbuilder/model/src";
 import React, { useContext } from "react";
 
 import {
@@ -15,7 +15,7 @@ export function useWarning() {
   async function confirm(e) {
     e.preventDefault();
     const { initialName } = state;
-    const copy = clone(data);
+    const copy = clone(data as FormDefinition);
     const selectedListIndex = copy.lists.findIndex(
       (list) => list.name === initialName
     );

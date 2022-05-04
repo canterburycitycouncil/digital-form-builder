@@ -1,6 +1,7 @@
+import { ComponentDef } from "@xgovformbuilder/model/src";
 import React, { MouseEvent } from "react";
+
 import { i18n } from "../../../i18n/i18n";
-import { ComponentDef } from "@xgovformbuilder/model";
 
 interface CreateListItemProps {
   heading: string;

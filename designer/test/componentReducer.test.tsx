@@ -7,7 +7,7 @@ import {
   metaReducer,
   optionsReducer,
   schemaReducer,
-} from "designer/client/reducers/component";
+} from "@xgovformbuilder/designer/client/reducers/component";
 
 import {
   componentReducer,

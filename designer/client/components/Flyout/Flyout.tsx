@@ -1,7 +1,7 @@
 import "./Flyout.scss";
 
-import { FlyoutContext } from "designer/client/context";
-import { i18n } from "designer/client/i18n";
+import { FlyoutContext } from "@xgovformbuilder/designer/client/context";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import FocusTrap from "focus-trap-react";
 import React, { useContext, useLayoutEffect, useState } from "react";
 

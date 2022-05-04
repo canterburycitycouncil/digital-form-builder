@@ -1,4 +1,4 @@
-import { ComponentDef } from "@xgovformbuilder/data-model";
+import { ComponentDef } from "@xgovformbuilder/model/src";
 import joi, { Schema } from "joi";
 import { ComponentBase } from "runner/src/server/plugins/engine/components/ComponentBase";
 import { optionalText } from "runner/src/server/plugins/engine/components/constants";

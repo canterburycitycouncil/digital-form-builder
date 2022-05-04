@@ -1,12 +1,13 @@
 import "./ComponentCreate.scss";
 
-import { BackLink } from "designer/client/components/BackLink";
-import { ComponentCreateList } from "designer/client/components/ComponentCreate/ComponentCreateList";
-import { useComponentCreate } from "designer/client/components/ComponentCreate/useComponentCreate";
-import ComponentTypeEdit from "designer/client/ComponentTypeEdit";
-import { ErrorSummary } from "designer/client/error-summary";
-import { i18n } from "designer/client/i18n";
+import { BackLink } from "@xgovformbuilder/designer/client/components/BackLink";
+import { ErrorSummary } from "@xgovformbuilder/designer/client/error-summary";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import React from "react";
+
+import { ComponentCreateList } from "../ComponentCreate/ComponentCreateList";
+import { useComponentCreate } from "../ComponentCreate/useComponentCreate";
+import ComponentTypeEdit from "../ComponentTypeEdit";
 
 export function ComponentCreate(props) {
   const {

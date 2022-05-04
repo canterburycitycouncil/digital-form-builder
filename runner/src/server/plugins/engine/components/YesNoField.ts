@@ -1,4 +1,4 @@
-import { List } from "@xgovformbuilder/data-model";
+import { List } from "@xgovformbuilder/model/src";
 import joi, { Schema } from "joi";
 import * as helpers from "runner/src/server/plugins/engine/components/helpers";
 import { addClassOptionIfNone } from "runner/src/server/plugins/engine/components/helpers";

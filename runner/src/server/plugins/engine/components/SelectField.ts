@@ -1,4 +1,4 @@
-import { SelectFieldComponent } from "@xgovformbuilder/data-model";
+import { SelectFieldComponent } from "@xgovformbuilder/model/src";
 import { ListFormComponent } from "runner/src/server/plugins/engine/components/ListFormComponent";
 import {
   FormData,

@@ -1,9 +1,9 @@
-import { DataContext } from "designer/client/context";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
 import {
   ComponentContext,
   componentReducer,
   initComponentState,
-} from "designer/client/reducers/component/componentReducer";
+} from "@xgovformbuilder/designer/client/reducers/component/componentReducer";
 import React, { useReducer } from "react";
 
 export function RenderWithContext({ children, stateProps = {} }) {

@@ -1,14 +1,14 @@
-import { Flyout } from "designer/client/components/Flyout";
-import { ListsEditorContextProvider } from "designer/client/components/List/reducers/list/listsEditorReducer";
-import { ListContextProvider } from "designer/client/components/List/reducers/listReducer";
-import MenuButton from "designer/client/components/Menu/MenuButton";
-import getMenuItems from "designer/client/components/Menu/MenuItems";
-import { SubMenu } from "designer/client/components/Menu/SubMenu";
+import { Flyout } from "@xgovformbuilder/designer/client/components/Flyout";
+import { ListsEditorContextProvider } from "@xgovformbuilder/designer/client/components/List/reducers/list/listsEditorReducer";
+import { ListContextProvider } from "@xgovformbuilder/designer/client/components/List/reducers/listReducer";
+import MenuButton from "@xgovformbuilder/designer/client/components/Menu/MenuButton";
+import getMenuItems from "@xgovformbuilder/designer/client/components/Menu/MenuItems";
+import { SubMenu } from "@xgovformbuilder/designer/client/components/Menu/SubMenu";
 import {
   MenuItemHook,
   useMenuItem,
-} from "designer/client/components/Menu/useMenuItem";
-import { DataContext } from "designer/client/context";
+} from "@xgovformbuilder/designer/client/components/Menu/useMenuItem";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
 import React, { useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 

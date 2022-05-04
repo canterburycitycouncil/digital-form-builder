@@ -1,4 +1,7 @@
-import { isMultipleApiKey, MultipleApiKeys } from "model/src/data-model/types";
+import {
+  isMultipleApiKey,
+  MultipleApiKeys,
+} from "@xgovformbuilder/model/src/data-model/types";
 import { NotifyClient } from "notifications-node-client/client/notification";
 import config from "runner/src/server/config";
 import { HapiServer } from "runner/src/server/types";

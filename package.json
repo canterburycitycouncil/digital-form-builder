@@ -11,7 +11,6 @@
   },
   "workspaces": [
     "model",
-    "runner",
     "designer",
     "smoke-tests/designer"
   ],
@@ -26,7 +25,7 @@
     "runner": "yarn workspace @xgovformbuilder/runner",
     "designer": "yarn workspace @xgovformbuilder/designer",
     "smoke-test": "yarn workspace @xgovformbuilder/test",
-    "model": "yarn workspace @xgovformbuilder/components",
+    "model": "yarn workspace @xgovformbuilder/model",
     "test-cov": "yarn workspaces foreach run test-cov",
     "runner:start": "yarn workspace @xgovformbuilder/runner start",
     "type-check": "yarn workspaces foreach run tsc --noEmit",
@@ -135,6 +134,7 @@
     "react-router-dom": "^5.2.0",
     "schmervice": "^1.6.0",
     "sinon": "^13.0.1",
+    "usehooks-ts": "2.2.1",
     "vision": "^5.4.4",
     "wreck": "^14.2.0"
   },

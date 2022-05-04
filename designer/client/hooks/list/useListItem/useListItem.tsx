@@ -1,6 +1,9 @@
-import { FormDefinition } from "@xgovformbuilder/data-model";
-import { addList, findList } from "designer/client/components/List/data";
-import { ListActions } from "designer/client/components/List/reducers/listActions";
+import {
+  addList,
+  findList,
+} from "@xgovformbuilder/designer/client/components/List/data";
+import { ListActions } from "@xgovformbuilder/designer/client/components/List/reducers/listActions";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 
 import {
   hasValidationErrors,

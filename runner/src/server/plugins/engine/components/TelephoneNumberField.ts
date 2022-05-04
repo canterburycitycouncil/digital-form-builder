@@ -1,4 +1,4 @@
-import { TelephoneNumberFieldComponent } from "@xgovformbuilder/data-model";
+import { TelephoneNumberFieldComponent } from "@xgovformbuilder/model/src";
 import joi, { Schema } from "joi";
 import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
 import { addClassOptionIfNone } from "runner/src/server/plugins/engine/components/helpers";

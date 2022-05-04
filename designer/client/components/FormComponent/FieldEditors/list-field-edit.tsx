@@ -1,8 +1,8 @@
-import { Page } from "@xgovformbuilder/data-model";
-import ListsEdit from "designer/client/components/List/ListsEdit";
-import { ListsEditorContextProvider } from "designer/client/components/List/reducers/list/listsEditorReducer";
-import { ListContextProvider } from "designer/client/components/List/reducers/listReducer";
-import { RenderInPortal } from "designer/client/components/RenderInPortal";
+import ListsEdit from "@xgovformbuilder/designer/client/components/List/ListsEdit";
+import { ListsEditorContextProvider } from "@xgovformbuilder/designer/client/components/List/reducers/list/listsEditorReducer";
+import { ListContextProvider } from "@xgovformbuilder/designer/client/components/List/reducers/listReducer";
+import { RenderInPortal } from "@xgovformbuilder/designer/client/components/RenderInPortal";
+import { Page } from "@xgovformbuilder/model/src";
 import React, { ReactNode } from "react";
 
 import ComponentListSelect from "../components/ComponentListSelect/ComponentListSelect";

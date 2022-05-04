@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
-import { simplePageMock } from "designer/client/__tests__/helpers/mocks";
-import { RenderWithContextAndDataContext } from "designer/client/__tests__/helpers/renderers";
-import { FieldEdit } from "designer/client/field-edit";
+import { simplePageMock } from "@xgovformbuilder/designer/client/__tests__/helpers/mocks";
+import { RenderWithContextAndDataContext } from "@xgovformbuilder/designer/client/__tests__/helpers/renderers";
+import { FieldEdit } from "@xgovformbuilder/designer/client/field-edit";
 import React from "react";
 
 describe("Field edit", () => {
