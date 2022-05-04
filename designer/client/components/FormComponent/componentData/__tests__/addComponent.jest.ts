@@ -1,5 +1,6 @@
+import { FormDefinition } from "@xgovformbuilder/model/src";
+
 import { addComponent } from "..";
-import { FormDefinition } from "@xgovformbuilder/model";
 
 test("addComponent throws an error when no page can be found", () => {
   const data: FormDefinition = {

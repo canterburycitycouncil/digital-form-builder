@@ -1,6 +1,6 @@
-import { redirectTo } from "./engine";
-import { publicRoutes, healthCheckRoute } from "../routes";
-import { HapiRequest, HapiResponseToolkit } from "../types";
+import { redirectTo } from "runner/src/server/plugins/engine";
+import { healthCheckRoute, publicRoutes } from "runner/src/server/routes";
+import { HapiRequest, HapiResponseToolkit } from "runner/src/server/types";
 
 const routes = [...publicRoutes, healthCheckRoute];
 

@@ -1,4 +1,5 @@
-import { FormDefinition } from "@xgovformbuilder/model";
+import { FormDefinition } from "@xgovformbuilder/model/src";
+
 import { updateLinksTo } from "../updateLinksTo";
 
 const data: FormDefinition = {

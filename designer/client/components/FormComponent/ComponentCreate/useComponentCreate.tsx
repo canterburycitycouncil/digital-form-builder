@@ -1,18 +1,20 @@
-import {
-  useEffect,
-  useContext,
-  useState,
-  useLayoutEffect,
-  FormEvent,
-} from "react";
-import { ComponentDef, Page } from "@xgovformbuilder/model";
-import { hasValidationErrors } from "../../../validations";
 import "./ComponentCreate.scss";
-import { Actions } from "../componentReducer/types";
-import { DataContext } from "../../../context";
-import { ComponentContext } from "../componentReducer/componentReducer";
+
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
+import { hasValidationErrors } from "@xgovformbuilder/designer/client/validations";
+import { ComponentDef, FormDefinition, Page } from "@xgovformbuilder/model/src";
+import {
+  FormEvent,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
+
 import { addComponent } from "../componentData";
-import logger from "../../../plugins/logger";
+import { ComponentContext } from "../componentReducer/componentReducer";
+import { Actions } from "../componentReducer/types";
 
 export const useComponentCreate = (props) => {
   const [renderTypeEdit, setRenderTypeEdit] = useState<boolean>(false);
@@ -72,7 +74,7 @@ export const useComponentCreate = (props) => {
     setIsSaving(true);
     const { selectedComponent } = state;
     const updatedData = addComponent(
-      data,
+      data as FormDefinition,
       (page as Page).path,
       selectedComponent
     );

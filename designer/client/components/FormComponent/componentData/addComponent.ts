@@ -1,6 +1,8 @@
-import { ComponentDef, FormDefinition } from "@xgovformbuilder/model";
-import { Path } from "../../../data/types";
+import { FormDefinition } from "@xgovformbuilder/model/src";
+import { ComponentDef } from "@xgovformbuilder/model/src";
+
 import { findPage } from "../../Page/data";
+import { Path } from "../componentData/types";
 
 export function addComponent(
   data: FormDefinition,

@@ -1,10 +1,11 @@
+import { GovUKFieldWrapper } from "@xgovformbuilder/designer/client/components/GovUKFields";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import Editor from "@xgovformbuilder/designer/client/editor";
+import { ContentOptions, FormDefinition } from "@xgovformbuilder/model/src";
 import React, { useContext } from "react";
+
 import { ComponentContext } from "../componentReducer/componentReducer";
-import { DataContext } from "../../../context";
-import Editor from "../../../editor";
 import { Actions } from "../componentReducer/types";
-import { ContentOptions } from "@xgovformbuilder/model";
-import { GovUKFieldWrapper } from "../../GovUKFields";
 
 type Props = {
   context: any; // TODO
@@ -17,7 +18,7 @@ export function ParaEdit({ context = ComponentContext }: Props) {
   const { selectedComponent } = state;
   const { data } = useContext(DataContext);
   const { options = {} }: { options: ContentOptions } = selectedComponent;
-  const { conditions } = data;
+  const { conditions } = data as FormDefinition;
 
   return (
     <div>
@@ -25,6 +26,7 @@ export function ParaEdit({ context = ComponentContext }: Props) {
         <Editor
           id="field-content"
           name="content"
+          required={true}
           value={selectedComponent.content}
           valueCallback={(content) => {
             dispatch({

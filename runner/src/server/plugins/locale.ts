@@ -12,7 +12,7 @@ import path from "path";
 import lodash from "lodash";
 import headerParser from "accept-language-parser";
 import Joi from "joi";
-import pkg from "../../../package.json";
+import pkg from "package.json";
 
 /**
  * @typedef {Object}                    PluginOptions                   - Plugin configuration options.
@@ -363,7 +363,7 @@ const plugin = {
   register: async function (server, options) {
     try {
       var internal = new Internal(options);
-    } catch (err) {
+    } catch (err: any) {
       throw new boom.Boom(err);
     }
 

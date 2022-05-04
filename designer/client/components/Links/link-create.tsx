@@ -1,13 +1,13 @@
-import React from "react";
-import SelectConditions from "../Conditions/SelectConditions";
-import { ErrorMessage } from "govuk-react-jsx";
+import SelectConditions from "@xgovformbuilder/designer/client/components/Conditions/SelectConditions";
+import { addLink } from "@xgovformbuilder/designer/client/components/Page/data";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
+import { Condition } from "@xgovformbuilder/model/src";
 import classNames from "classnames";
-import { Condition } from "@xgovformbuilder/model";
-import ErrorSummary from "../../error-summary";
-import { DataContext } from "../../context";
-import { i18n } from "../../i18n";
-import { addLink } from "../Page/data";
-import logger from "../../plugins/logger";
+import { ErrorMessage } from "govuk-react-jsx";
+import React from "react";
 
 interface Props {
   onCreate: (e: any) => void;
@@ -39,15 +39,13 @@ class LinkCreate extends React.Component<Props, State> {
     if (hasValidationErrors) return;
 
     const copy = { ...data };
-    const { error, ...updatedData } = addLink(
-      copy,
-      from,
-      to,
-      selectedCondition
-    );
-    error && logger.error("LinkCreate", error);
-    const savedData = await save(updatedData);
-    this.props.onCreate({ data: savedData });
+    const linkRes = addLink(copy, from, to, selectedCondition);
+    if (linkRes instanceof Error) {
+      logger.error("LinkCreate", linkRes);
+    } else {
+      const savedData = await save({ ...linkRes });
+      this.props.onCreate({ data: savedData });
+    }
   };
 
   conditionSelected = (selectedCondition) => {

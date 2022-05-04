@@ -1,10 +1,15 @@
-import React from "react";
-import { clone, Fee, Condition, FormDefinition } from "@xgovformbuilder/model";
-import { ErrorMessage } from "govuk-react-jsx";
+import {
+  clone,
+  Condition,
+  Fee,
+  FormDefinition,
+} from "@xgovformbuilder/model/src";
 import classNames from "classnames";
+import { ErrorMessage } from "govuk-react-jsx";
+import React from "react";
 
-import { isEmpty } from "../../helpers";
 import { DataContext } from "../../context";
+import { isEmpty } from "../../helpers";
 import logger from "../../plugins/logger";
 
 function headDuplicate(arr) {

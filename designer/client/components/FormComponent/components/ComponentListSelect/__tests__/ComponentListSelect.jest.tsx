@@ -1,15 +1,16 @@
-import React, { useReducer } from "react";
 import { render } from "@testing-library/react";
 import userEvent, { TargetElement } from "@testing-library/user-event";
-import { DataContext } from "../../../../../context";
-import { ComponentListSelect } from "../ComponentListSelect";
+import { DataContext } from "@xgovformbuilder/designer/context";
+import React, { useReducer } from "react";
+
+import { ListsEditorContextProvider } from "../../../../List/reducers/list/listsEditorReducer";
+import { ListContextProvider } from "../../../../List/reducers/listReducer";
 import {
   ComponentContext,
   componentReducer,
   initComponentState,
 } from "../../../componentReducer/componentReducer";
-import { ListsEditorContextProvider } from "../../../../List/reducers/list/listsEditorReducer";
-import { ListContextProvider } from "../../../../List/reducers/listReducer";
+import { ComponentListSelect } from "../ComponentListSelect";
 
 describe("ComponentListSelect", () => {
   let data = {

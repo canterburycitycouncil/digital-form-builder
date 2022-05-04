@@ -1,14 +1,15 @@
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { camelCase } from "@xgovformbuilder/designer/client/helpers";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 import React from "react";
-import { camelCase } from "../../helpers";
-import { DataContext } from "../../context";
+
 import { addSection } from "./data/addSection";
-import logger from "../../plugins/logger";
-import { FormDefinition } from "@xgovformbuilder/model";
 
 interface State {
-  name?: string;
-  title?: string;
-  generatedName?: string;
+  name: string;
+  title: string;
+  generatedName: string;
 }
 
 interface Props {
@@ -19,7 +20,11 @@ interface Props {
 
 class SectionCreate extends React.Component<Props, State> {
   static contextType = DataContext;
-  state: State = {};
+  state: State = {
+    name: "",
+    title: "",
+    generatedName: "",
+  };
 
   async onSubmit(e) {
     e.preventDefault();

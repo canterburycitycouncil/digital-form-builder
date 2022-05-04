@@ -1,17 +1,15 @@
+import { ComponentDef } from "@xgovformbuilder/model/src";
 import joi, { Schema } from "joi";
-
-import { ComponentBase } from "./ComponentBase";
-import { optionalText } from "./constants";
-
+import { ComponentBase } from "runner/src/server/plugins/engine/components/ComponentBase";
+import { optionalText } from "runner/src/server/plugins/engine/components/constants";
+import { ViewModel } from "runner/src/server/plugins/engine/components/types";
+import { FormModel } from "runner/src/server/plugins/engine/models";
 import {
-  FormSubmissionState,
-  FormSubmissionErrors,
   FormData,
   FormPayload,
-} from "../types";
-import { ViewModel } from "./types";
-import { FormModel } from "../models";
-import { ComponentDef } from "@xgovformbuilder/model";
+  FormSubmissionErrors,
+  FormSubmissionState,
+} from "runner/src/server/plugins/engine/types";
 
 export class FormComponent extends ComponentBase {
   isFormComponent: boolean = true;
@@ -139,7 +137,7 @@ export class FormComponent extends ComponentBase {
     const isOptional = options.required === false;
     const optionalPostfix =
       isOptional && options.optionalText !== false ? optionalText : "";
-    this.lang = formData.lang;
+    this.lang = formData.lang as string;
     const label = options.hideTitle
       ? ""
       : `${this.localisedString(this.title)}${optionalPostfix}`;

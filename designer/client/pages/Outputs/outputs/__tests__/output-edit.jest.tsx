@@ -1,12 +1,12 @@
+import { fireEvent, render, waitFor } from "@testing-library/react";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 import React from "react";
-import { render, fireEvent, waitFor } from "@testing-library/react";
-import { RenderWithContextAndDataContext } from "../../../../__tests__/helpers/renderers";
-import { Data } from "@xgovformbuilder/model";
 
+import { RenderWithContextAndDataContext } from "../../__tests__/helpers/renderers";
 import OutputEdit from "../output-edit";
 
 describe("OutputEdit", () => {
-  let mockData: Data;
+  let mockData: FormDefinition;
   let mockSave: any;
 
   beforeEach(() => {

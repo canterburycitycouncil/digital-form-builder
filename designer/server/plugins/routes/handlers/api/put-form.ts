@@ -1,6 +1,7 @@
-import { returnResponse } from "../../helpers";
 import { Request, ResponseToolkit } from "@hapi/hapi";
-import { Schema } from "../../../../../../model";
+import { Schema } from "@xgovformbuilder/model/src";
+
+import { returnResponse } from "../../helpers";
 
 export const putFormWithIdHandler = async (
   request: Request,

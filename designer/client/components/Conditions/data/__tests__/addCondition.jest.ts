@@ -1,4 +1,5 @@
-import { ConditionRawData, FormDefinition } from "@xgovformbuilder/model";
+import { ConditionRawData, FormDefinition } from "@xgovformbuilder/model/src";
+
 import { addCondition } from "../addCondition";
 const data: FormDefinition = {
   conditions: [

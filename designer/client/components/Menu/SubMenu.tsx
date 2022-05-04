@@ -1,21 +1,21 @@
+// import { whichMigrations } from "@xgovformbuilder/migration";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+// import logger from "designer/client/plugins/logger";
 import React, { useContext, useRef } from "react";
-import { DataContext } from "../../context";
-import { whichMigrations } from "@xgovformbuilder/model";
-import logger from "../../plugins/logger";
 
-export function migrate(form) {
-  const { version = 0 } = form;
-  const migrationList = whichMigrations(version);
-  try {
-    let migratedJson = { ...form };
-    migrationList.forEach((migration) => {
-      migratedJson = migration(migratedJson);
-    });
-    return migratedJson;
-  } catch (e) {
-    logger.error("SubMenu", "failed to migrate json");
-  }
-}
+// export function migrate(form) {
+//   const { version = 0 } = form;
+//   const migrationList = whichMigrations(version);
+//   try {
+//     let migratedJson = { ...form };
+//     migrationList.forEach((migration) => {
+//       migratedJson = migration(migratedJson);
+//     });
+//     return migratedJson;
+//   } catch (e) {
+//     logger.error("SubMenu", "failed to migrate json");
+//   }
+// }
 
 type Props = {
   id?: string;
@@ -51,8 +51,8 @@ export function SubMenu({ id, updateDownloadedAt, history }: Props) {
     reader.onload = function (evt) {
       if (evt?.target?.result) {
         const content = JSON.parse(evt.target.result as string);
-        const migrated = migrate(content);
-        save(migrated);
+        // const migrated = migrate(content);
+        save(content);
       }
     };
   };
@@ -61,7 +61,7 @@ export function SubMenu({ id, updateDownloadedAt, history }: Props) {
     const answer = confirm(
       "Are you sure you want to delete this form?\nThis action cannot be undone"
     );
-    if (answer) {
+    if (answer && deleteForm) {
       deleteForm().then(() => {
         history.push("/");
       });

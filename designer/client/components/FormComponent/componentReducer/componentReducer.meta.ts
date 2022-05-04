@@ -1,8 +1,7 @@
-import { Meta } from "./types";
+import { randomId } from "@xgovformbuilder/designer/client/helpers";
 
-import { fieldComponentValidations } from "./componentReducer.validations";
-import { randomId } from "../../../helpers";
-
+import { fieldComponentValidations } from "../componentReducer/componentReducer.validations";
+import { Meta } from "../componentReducer/types";
 export function metaReducer(
   state,
   action: {

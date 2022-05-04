@@ -1,8 +1,8 @@
-import { customRenderForLists } from "./helpers";
-import { Data } from "@xgovformbuilder/model";
-
+import { Data } from "@xgovformbuilder/model/src";
 import React from "react";
+
 import { ListSelect } from "../ListSelect";
+import { customRenderForLists } from "./helpers";
 
 const data = {
   lists: [

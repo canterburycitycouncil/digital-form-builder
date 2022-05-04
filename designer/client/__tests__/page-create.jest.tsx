@@ -1,6 +1,6 @@
-import React from "react";
 import { render } from "@testing-library/react";
-import PageCreate from "../page-create";
+import PageCreate from "@xgovformbuilder/designer/client/page-create";
+import React from "react";
 
 describe("page create fields text", () => {
   test("displays field titles and help texts", () => {

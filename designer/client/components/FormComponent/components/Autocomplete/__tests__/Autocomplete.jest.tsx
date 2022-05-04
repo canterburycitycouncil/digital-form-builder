@@ -1,7 +1,7 @@
-import React from "react";
 import { render } from "@testing-library/react";
-import { Autocomplete } from "../Autocomplete";
-import { RenderWithContext } from "../../../../../__tests__/helpers/renderers";
+import { RenderWithContext } from "@xgovformbuilder/designer/client/__tests__/helpers/renderers";
+import { Autocomplete } from "@xgovformbuilder/designer/client/components/FormComponent/components/Autocomplete/Autocomplete";
+import React from "react";
 
 describe("AutocompleteField", () => {
   let stateProps;

@@ -1,10 +1,11 @@
+import { Flyout } from "@xgovformbuilder/designer/client/components/Flyout";
+import { SearchIcon } from "@xgovformbuilder/designer/client/components/Icons";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import React, { useState } from "react";
 import { SortableHandle } from "react-sortable-hoc";
-import { Flyout } from "../Flyout";
-import { SearchIcon } from "../Icons";
+
 import ComponentEdit from "./ComponentEdit";
 import { ComponentContextProvider } from "./componentReducer/componentReducer";
-import { i18n } from "../../i18n";
 
 const DragHandle = SortableHandle(() => (
   <span className="drag-handle">&#9776;</span>
@@ -292,7 +293,7 @@ export function Component(props) {
   const toggleShowEditor = (value) => {
     setShowEditor(value ?? !showEditor);
   };
-  const { data, page, component } = props;
+  const { page, component } = props;
   const TagName = componentTypes[`${component.type}`];
   const editFlyoutTitle = i18n("component.edit", {
     name: i18n(`fieldTypeToName.${component.type}`),

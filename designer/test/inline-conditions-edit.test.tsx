@@ -1,7 +1,17 @@
-import React from "react";
-import { shallow } from "enzyme";
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
+import {
+  Condition,
+  ConditionField,
+  ConditionsModel,
+  ConditionValue,
+  getOperatorNames,
+} from "@xgovformbuilder/model/src";
+import { shallow } from "enzyme";
+import React from "react";
+import sinon from "sinon";
+
+import InlineConditionsEdit from "../client/conditions/inline-conditions-edit";
 import {
   assertCheckboxInput,
   assertClasses,
@@ -11,15 +21,6 @@ import {
   assertSpan,
   assertText,
 } from "./helpers/element-assertions";
-import sinon from "sinon";
-import InlineConditionsEdit from "../client/components/Conditions/inline-conditions-edit";
-import {
-  Condition,
-  ConditionsModel,
-  ConditionField,
-  ConditionValue,
-  getOperatorNames,
-} from "@xgovformbuilder/model";
 
 const { expect } = Code;
 const lab = Lab.script();

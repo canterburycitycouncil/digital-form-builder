@@ -1,7 +1,10 @@
+import {
+  isMultipleApiKey,
+  MultipleApiKeys,
+} from "@xgovformbuilder/model/src/data-model/types";
 import { NotifyClient } from "notifications-node-client/client/notification";
-import { HapiServer } from "server/types";
-import { isMultipleApiKey, MultipleApiKeys } from "@xgovformbuilder/model";
-import config from "server/config";
+import config from "runner/src/server/config";
+import { HapiServer } from "runner/src/server/types";
 
 type Personalisation = {
   [propName: string]: any;
@@ -69,7 +72,7 @@ export class NotifyService {
             "Email sent successfully"
           );
         });
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(
         ["NotifyService", "sendNotification"],
         `Error processing output: ${error.message}`

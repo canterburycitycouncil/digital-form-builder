@@ -1,17 +1,18 @@
 import hapi from "@hapi/hapi";
 import inert from "@hapi/inert";
 import Scooter from "@hapi/scooter";
-import logging from "./plugins/logging";
-import router from "./plugins/router";
-import { viewPlugin } from "./plugins/view";
-import { designerPlugin } from "./plugins/designer";
 import Schmervice from "schmervice";
+
 import config from "./config";
 import { determinePersistenceService } from "./lib/persistence";
 import { configureBlankiePlugin } from "./plugins/blankie";
+import { designerPlugin } from "./plugins/designer";
+import logging from "./plugins/logging";
+import router from "./plugins/router";
 import { configureYarPlugin } from "./plugins/session";
+import { viewPlugin } from "./plugins/view";
 
-const serverOptions = () => {
+const serverOptions = (): hapi.ServerOptions => {
   return {
     port: process.env.PORT || 3000,
     routes: {

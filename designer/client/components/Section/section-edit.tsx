@@ -1,17 +1,18 @@
+import { FormDefinition, Section } from "@xgovformbuilder/model/src";
+import { Input } from "govuk-react-jsx";
 import React from "react";
+
+import { DataContext } from "../../context";
+import ErrorSummary from "../../error-summary";
 import { randomId } from "../../helpers";
 import { I18n, withI18n } from "../../i18n";
-import { Input } from "govuk-react-jsx";
+import logger from "../../plugins/logger";
 import {
+  hasValidationErrors,
   validateName,
   validateTitle,
-  hasValidationErrors,
 } from "../../validations";
-import ErrorSummary from "../../error-summary";
-import { DataContext } from "../../context";
 import { addSection } from "./data";
-import logger from "../../plugins/logger";
-import { Section, FormDefinition } from "@xgovformbuilder/model";
 
 interface Props {
   closeFlyout: (name: string) => void;
@@ -73,7 +74,7 @@ class SectionEdit extends React.Component<Props, State> {
         /**
          * @code removing any references to the section
          */
-        copy.pages.forEach((p) => {
+        updated.pages.forEach((p) => {
           if (p.section === previousName) {
             p.section = name;
           }
@@ -117,7 +118,7 @@ class SectionEdit extends React.Component<Props, State> {
     // Update any references to the section
     copy.pages.forEach((p) => {
       if (p.section === previousName) {
-        delete p.section;
+        p.section = "";
       }
     });
 

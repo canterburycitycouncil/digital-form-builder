@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
-import Menu from "./components/submissions-menu";
-import { Submission, SubmissionKey } from "./types";
-import { SubmissionApi } from "../../api/submissionApi";
-import { DesignerApi } from "../../api/designerApi";
-import { FormDefinition } from "@xgovformbuilder/model";
-import { LoadingBox } from "./components/loading-box";
-import { SubmissionsTable } from "./components/submissions-table";
 import "./submissions.scss";
+
+import { FormDefinition } from "@xgovformbuilder/model/src";
+import React, { useEffect, useState } from "react";
+
+import { DesignerApi } from "../../api/designerApi";
+import { SubmissionApi } from "../../api/submissionApi";
+import { LoadingBox } from "./components/loading-box";
+import Menu from "./components/submissions-menu";
+import { SubmissionsTable } from "./components/submissions-table";
+import { Submission, SubmissionKey } from "./types";
 
 interface Props {
   match?: any;
@@ -54,9 +56,7 @@ export const Submissions = (props: Props) => {
   }, [hasSearched, formConfiguration]);
 
   const getMoreSubs = async () => {
-    console.log("hello2");
-    console.log(lastEvaluatedKey);
-    if (lastEvaluatedKey) {
+    if (lastEvaluatedKey && formConfiguration) {
       setLoading(true);
       submissionApi
         .getSubmissionsForForm(

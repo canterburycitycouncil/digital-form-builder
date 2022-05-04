@@ -1,18 +1,26 @@
-import React, { ChangeEvent } from "react";
-import InlineConditions from "./InlineConditions";
-import { ConditionsModel, Data, Condition } from "@xgovformbuilder/model";
-import { Flyout } from "../Flyout";
+import { Flyout } from "@xgovformbuilder/designer/client/components/Flyout";
+import {
+  allInputs,
+  inputsAccessibleAt,
+} from "@xgovformbuilder/designer/client/components/FormComponent/componentData";
+import { RenderInPortal } from "@xgovformbuilder/designer/client/components/RenderInPortal";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import {
+  Condition,
+  ConditionsModel,
+  FormDefinition,
+} from "@xgovformbuilder/model/src";
 import { Select } from "govuk-react-jsx";
 import { Hint } from "govuk-react-jsx";
-import { i18n } from "../../i18n";
-import { DataContext } from "../../context";
-import { RenderInPortal } from "../RenderInPortal";
+import React, { ChangeEvent } from "react";
+
 import { hasConditions as dataHasConditions } from "./data";
-import { allInputs, inputsAccessibleAt } from "../FormComponent/componentData";
+import InlineConditions from "./InlineConditions";
 
 interface Props {
   path: string;
-  data: Data;
+  data: FormDefinition;
   conditionsChange: (selectedCondition: string) => void;
   hints: any[];
   noFieldsHintText?: string;

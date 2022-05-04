@@ -1,17 +1,19 @@
 import {
   InputFieldsComponentsDef,
   TextFieldComponent,
-} from "@xgovformbuilder/model";
-
-import { FormComponent } from "./FormComponent";
-import { FormData, FormSubmissionErrors } from "../types";
-import { FormModel } from "../models";
+} from "@xgovformbuilder/model/src";
+import { Schema } from "joi";
+import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
 import {
   addClassOptionIfNone,
   buildFormSchema,
   buildStateSchema,
-} from "./helpers";
-import { Schema } from "joi";
+} from "runner/src/server/plugins/engine/components/helpers";
+import { FormModel } from "runner/src/server/plugins/engine/models";
+import {
+  FormData,
+  FormSubmissionErrors,
+} from "runner/src/server/plugins/engine/types";
 
 export class TextField extends FormComponent {
   formSchema;

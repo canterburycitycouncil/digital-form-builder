@@ -1,5 +1,5 @@
-import { ConditionRawData } from ".";
 import { ComponentDef } from "../components/types";
+import { ConditionRawData } from ".";
 
 export interface Next {
   path: string;
@@ -104,7 +104,9 @@ export type Output = {
   title: string;
   type: OutputType;
   outputConfiguration: OutputConfiguration;
-  logicExpression: LogicExpression;
+  previous: string;
+  previousValues: string[];
+  next: string[];
 };
 
 export type SpecialPages = {
@@ -131,6 +133,7 @@ export function isMultipleApiKey(
  * `FormDefinition` is a typescript representation of `Schema`
  */
 export type FormDefinition = {
+  id: string;
   internalOnly: boolean;
   pages: Page[];
   conditions: ConditionRawData[];

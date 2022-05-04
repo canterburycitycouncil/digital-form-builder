@@ -1,6 +1,7 @@
 import React, { ChangeEventHandler } from "react";
-import { convertFieldNameToCamelCase } from "./helpers";
+
 import { GovUKFieldWrapper } from "./field-wrapper";
+import { convertFieldNameToCamelCase } from "./helpers";
 
 interface InputProps {
   translationNamespace: string;

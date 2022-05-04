@@ -1,5 +1,5 @@
+import { DateDirections, RelativeTimeValue } from "@xgovformbuilder/model/src";
 import React from "react";
-import { DateDirections, RelativeTimeValue } from "@xgovformbuilder/model";
 
 interface Props {
   value?: {

@@ -1,7 +1,6 @@
-import Blankie from "blankie";
 import { ServerRegisterPluginObject } from "@hapi/hapi";
-
-import { isUrlSecure } from "src/server/utils/url";
+import Blankie from "blankie";
+import { isUrlSecure } from "runner/src/server/utils/url";
 
 type Config = {
   matomoUrl?: string;

@@ -1,13 +1,14 @@
-import React, { useCallback, useState, Fragment, useContext } from "react";
-import { RenderInPortal } from "../../RenderInPortal";
-import { DataContext } from "../../../context";
+import { RenderInPortal } from "@xgovformbuilder/designer/client/components/RenderInPortal";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { EdgePoint } from "@xgovformbuilder/designer/client/pages/Designer/Visualisation/types";
+import React, { Fragment, useCallback, useContext, useState } from "react";
+
 import { addLink } from "../data";
-import { Edge } from "../../../pages/Designer/Visualisation/types";
 
 export function PageLinkage({ page, layout }) {
   const { data, save } = useContext(DataContext);
-  const [lineStart, setLineStart] = useState<Edge["points"] | null>(null);
-  const [lineEnd, setLineEnd] = useState<Edge["points"] | null>(null);
+  const [lineStart, setLineStart] = useState<EdgePoint | null>(null);
+  const [lineEnd, setLineEnd] = useState<EdgePoint | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isDraggingOver, setIsDraggingOver] = useState(false);
 
@@ -55,9 +56,9 @@ export function PageLinkage({ page, layout }) {
       event.preventDefault();
 
       const linkingPage = JSON.parse(event.dataTransfer.getData("linkingPage"));
-      if (linkingPage.path !== page.path) {
+      if (linkingPage.path !== page.path && data) {
         const updatedData = addLink(data, linkingPage.path, page.path);
-        await save(updatedData);
+        if (!(updatedData instanceof Error)) await save(updatedData);
       }
       reset();
     },

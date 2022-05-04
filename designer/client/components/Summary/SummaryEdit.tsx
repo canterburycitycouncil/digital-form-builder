@@ -1,6 +1,10 @@
+import {
+  Tabs,
+  useTabs,
+} from "@xgovformbuilder/designer/client/components/Menu/useTabs";
 import React from "react";
+
 import { DataPrettyPrint } from "./DataPrettyPrint/DataPrettyPrint";
-import { Tabs, useTabs } from "../Menu/useTabs";
 
 export interface SummaryEditProps {
   data: any;

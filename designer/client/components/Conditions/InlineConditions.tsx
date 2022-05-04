@@ -1,17 +1,25 @@
-import React, { MouseEvent, ChangeEvent } from "react";
+import {
+  addCondition,
+  updateCondition,
+} from "@xgovformbuilder/designer/client/components/Conditions/data";
+import { ErrorMessage } from "@xgovformbuilder/designer/client/components/ErrorMessage";
+import {
+  allInputs,
+  inputsAccessibleAt,
+} from "@xgovformbuilder/designer/client/components/FormComponent/componentData";
+import { findList } from "@xgovformbuilder/designer/client/components/List/data";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import ErrorSummary, {
+  ErrorListItem,
+} from "@xgovformbuilder/designer/client/error-summary";
+import { randomId } from "@xgovformbuilder/designer/client/helpers";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import { clone, ConditionsModel, Item } from "@xgovformbuilder/model/src";
 import classNames from "classnames";
-import { ConditionsModel, clone, Item } from "@xgovformbuilder/model";
+import React, { ChangeEvent, MouseEvent } from "react";
 
-import InlineConditionsDefinition from "./InlineConditionsDefinition";
 import InlineConditionsEdit from "./inline-conditions-edit";
-import { DataContext } from "../../context";
-import ErrorSummary, { ErrorListItem } from "../../error-summary";
-import { i18n } from "../../i18n";
-import { ErrorMessage } from "../ErrorMessage";
-import { addCondition, updateCondition } from "./data";
-import { allInputs, inputsAccessibleAt } from "../FormComponent/componentData";
-import { findList } from "../List/data";
-import { randomId } from "../../helpers";
+import InlineConditionsDefinition from "./InlineConditionsDefinition";
 
 interface Props {
   path: string;
@@ -39,7 +47,7 @@ interface State {
   validationErrors: ErrorListItem[];
 }
 
-const yesNoValues: Readonly<Item> = [
+const yesNoValues: Readonly<Item[]> = [
   {
     text: "Yes",
     value: true,

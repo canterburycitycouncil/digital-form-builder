@@ -1,13 +1,19 @@
-import React from "react";
-import { AbsoluteDateValues, YearMonthDay } from "./AbsoluteDateValues";
-import { AbsoluteTimeValues, HourMinute } from "./AbsoluteTimeValues";
+import {
+  AbsoluteDateValues,
+  YearMonthDay,
+} from "@xgovformbuilder/designer/client/components/Conditions/AbsoluteDateValues";
+import {
+  AbsoluteTimeValues,
+  HourMinute,
+} from "@xgovformbuilder/designer/client/components/Conditions/AbsoluteTimeValues";
+import { isInt } from "@xgovformbuilder/designer/client/components/Conditions/inline-condition-helpers";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import isValid from "date-fns/isValid";
-import { i18n } from "../../i18n";
-import { isInt } from "./inline-condition-helpers";
+import React from "react";
 
 interface Props {
   value?: Date;
-  updateValue: (date) => void;
+  updateValue: (date: Date) => void;
 }
 
 export const AbsoluteDateTimeValues = ({ value, updateValue }: Props) => {

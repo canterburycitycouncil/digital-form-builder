@@ -1,19 +1,19 @@
-import { ListActions } from "../../../List/reducers/listActions";
-import { DataContext } from "../../../../context";
-import React, { useContext, useEffect, useState } from "react";
-import { ComponentContext } from "../../componentReducer/componentReducer";
-import { Label } from "@govuk-jsx/label";
-import { i18n } from "../../../../i18n";
-import { ListContext } from "../../../List/reducers/listReducer";
+import { ComponentContext } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/componentReducer";
+import { Actions as ComponentActions } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/types";
+import { findList } from "@xgovformbuilder/designer/client/components/List/data";
 import {
   ListsEditorContext,
   ListsEditorStateActions,
-} from "../../../List/reducers/list/listsEditorReducer";
+} from "@xgovformbuilder/designer/client/components/List/reducers/list/listsEditorReducer";
+import { ListActions } from "@xgovformbuilder/designer/client/components/List/reducers/listActions";
+import { ListContext } from "@xgovformbuilder/designer/client/components/List/reducers/listReducer";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
+import { ListComponentsDef } from "@xgovformbuilder/model/src";
 import classNames from "classnames";
-import { ListComponentsDef } from "@xgovformbuilder/model";
-import { findList } from "../../../List/data";
-import { Actions as ComponentActions } from "../../componentReducer/types";
-import logger from "../../../../plugins/logger";
+import { Label } from "govuk-react-jsx";
+import React, { useContext, useEffect, useState } from "react";
 export function ComponentListSelect() {
   const { data } = useContext(DataContext);
   const { state: listsEditorState, dispatch: listsEditorDispatch } = useContext(
@@ -86,7 +86,7 @@ export function ComponentListSelect() {
       <div
         className={classNames({
           "govuk-form-group": true,
-          "govuk-form-group--error": errors?.list,
+          "govuk-form-group--error": errors,
         })}
       >
         <Label htmlFor="field-options-list" className="govuk-label--s">

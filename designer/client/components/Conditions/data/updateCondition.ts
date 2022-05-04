@@ -1,4 +1,4 @@
-import { ConditionRawData, FormDefinition } from "@xgovformbuilder/model";
+import { ConditionRawData, FormDefinition } from "@xgovformbuilder/model/src";
 
 /**
  * @param data

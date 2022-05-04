@@ -1,9 +1,8 @@
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
+import * as httpService from "runner/src/server/services/httpService";
+import { WebhookService } from "runner/src/server/services/webhookService";
 import sinon from "sinon";
-
-import { WebhookService } from "server/services/webhookService";
-import * as httpService from "server/services/httpService";
 
 const { expect } = Code;
 const lab = Lab.script();
@@ -17,6 +16,7 @@ suite("Server WebhookService Service", () => {
 
   test("Webhook returns correct reference when payload is string", async () => {
     sinon.stub(httpService, "post").returns(
+      // @ts-ignore
       Promise.resolve({
         res: {},
         payload: JSON.stringify({ reference: "1234" }),
@@ -35,6 +35,7 @@ suite("Server WebhookService Service", () => {
 
   test("Webhook returns correct reference when payload is object", async () => {
     sinon.stub(httpService, "post").returns(
+      // @ts-ignore
       Promise.resolve({
         res: {},
         payload: { reference: "ABCD" },

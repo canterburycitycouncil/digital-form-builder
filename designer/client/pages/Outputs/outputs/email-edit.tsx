@@ -1,6 +1,7 @@
+import { Input } from "govuk-react-jsx";
 import React from "react";
-import { Output, EmailOutputConfiguration, ValidationErrors } from "./types";
-import { Input } from "@govuk-jsx/input";
+
+import { EmailOutputConfiguration, Output, ValidationErrors } from "./types";
 
 type Props = {
   output: Output;

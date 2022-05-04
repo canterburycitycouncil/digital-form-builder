@@ -1,18 +1,19 @@
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
 import {
-  componentReducer,
-  getSubReducer,
-} from "../client/components/FormComponent/componentReducer/componentReducer";
-import { Actions } from "../client/components/FormComponent/componentReducer/types";
-import {
+  componentListItemReducer,
+  componentListReducer,
+  fieldsReducer,
   metaReducer,
   optionsReducer,
-  fieldsReducer,
   schemaReducer,
-  componentListReducer,
-  componentListItemReducer,
-} from "../client/components/FormComponent/componentReducer";
+} from "@xgovformbuilder/designer/client/reducers/component";
+
+import {
+  componentReducer,
+  getSubReducer,
+} from "../client/reducers/component/componentReducer";
+import { Actions } from "../client/reducers/component/types";
 
 const { expect } = Code;
 const lab = Lab.script();

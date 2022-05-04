@@ -1,11 +1,15 @@
+import SelectConditions from "@xgovformbuilder/designer/client/components/Conditions/SelectConditions";
+import {
+  findPage,
+  updateLink,
+} from "@xgovformbuilder/designer/client/components/Page/data";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import { Edge } from "@xgovformbuilder/designer/client/pages/Designer/Visualisation/types";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
+import { Condition } from "@xgovformbuilder/model/src";
+import { Page } from "@xgovformbuilder/model/src";
 import React from "react";
-import SelectConditions from "../Conditions/SelectConditions";
-import { i18n } from "../../i18n";
-import { Page, Condition } from "@xgovformbuilder/model";
-import { DataContext } from "../../context";
-import { updateLink, findPage } from "../Page/data";
-import logger from "../../plugins/logger";
-import { Edge } from "../../pages/Designer/Visualisation/types";
 
 interface Props {
   edge: Edge;

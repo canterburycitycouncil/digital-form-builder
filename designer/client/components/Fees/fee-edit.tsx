@@ -1,11 +1,11 @@
-import FeeItems from "./fee-items";
-import React from "react";
-import { clone, Fee } from "@xgovformbuilder/model";
+import { clone, Fee } from "@xgovformbuilder/model/src";
 import { Input } from "govuk-react-jsx";
+import React from "react";
 
-import ErrorSummary from "../../error-summary";
 import { DataContext } from "../../context";
+import ErrorSummary from "../../error-summary";
 import logger from "../../plugins/logger";
+import FeeItems from "./fee-items";
 
 interface Props {
   data: any;
@@ -77,7 +77,9 @@ class FeeEdit extends React.Component<Props, State> {
     let apiKeyHasErrors = !payApiKey || payApiKey.length < 1;
     let itemValidationErrors = this.feeItemsRef.current?.validate(form);
     let hasValidationErrors =
-      apiKeyHasErrors || Object.keys(itemValidationErrors).length > 0;
+      apiKeyHasErrors ||
+      (itemValidationErrors !== undefined &&
+        Object.keys(itemValidationErrors).length > 0);
     let errors: Errors = {};
     if (apiKeyHasErrors) {
       errors.payapi = { href: "#pay-api-key", children: "Enter Pay API key" };

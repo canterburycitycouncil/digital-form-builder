@@ -1,19 +1,23 @@
-import React from "react";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
+import { randomId } from "@xgovformbuilder/designer/client/helpers";
+import { withI18n, WithI18nProps } from "@xgovformbuilder/designer/client/i18n";
+import logger from "@xgovformbuilder/designer/client/plugins/logger";
+import {
+  hasValidationErrors,
+  validateTitle,
+} from "@xgovformbuilder/designer/client/validations";
 import { Input } from "@xgovformbuilder/govuk-react-jsx";
-import { FormDefinition } from "@xgovformbuilder/model";
-import ErrorSummary from "../../../../error-summary";
-import { validateTitle, hasValidationErrors } from "../../../../validations";
-import { DataContext } from "../../../../context";
+import { FormDefinition } from "@xgovformbuilder/model/src";
+import React from "react";
+
 import { addLink, findOutput } from "../../data";
 import { addOutput } from "../../data/addOutput";
-import { randomId } from "../../../../helpers";
-import logger from "../../../../plugins/logger";
-import { Output, OutputType, responses } from "../../outputs/types";
-import { withI18n, WithI18nProps } from "../../../../i18n";
-import NotifyEdit from "../../outputs/notify-edit";
 import EmailEdit from "../../outputs/email-edit";
 import FreshdeskEdit from "../../outputs/freshdesk-edit";
+import NotifyEdit from "../../outputs/notify-edit";
 import S3FileUploadEdit from "../../outputs/s3fileupload-edit";
+import { Output, OutputType, responses } from "../../outputs/types";
 import WebhookEdit from "../../outputs/webhook-edit";
 
 interface State extends Output {
@@ -53,21 +57,23 @@ class OutputCreate extends React.Component<Props> {
 
     const title = this.state.title?.trim();
     const previous = this.state.previous?.trim();
-    const type = this.state.type?.trim();
+    const type = this.state.type;
     const name = this.state.name;
     const previousValues = this.state.previousValues;
     const outputConfiguration = this.state.outputConfiguration;
+    const next = this.state.next;
 
     let validationErrors = this.validate(title, name);
     if (hasValidationErrors(validationErrors)) return;
 
-    const value = {
+    const value: Output = {
       name,
       title,
       previous,
       type,
       outputConfiguration,
       previousValues,
+      next,
     };
 
     let copy = addOutput({ ...data }, value);
@@ -234,6 +240,8 @@ class OutputCreate extends React.Component<Props> {
       previousValues: previousValues,
       next: next,
     };
+
+    console.log(previous);
 
     let outputEdit: React.ReactNode;
 

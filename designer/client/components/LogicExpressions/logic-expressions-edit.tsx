@@ -1,7 +1,7 @@
+import { LogicExpressionEdit } from "@xgovformbuilder/designer/client/components/LogicExpressions";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { LogicExpression } from "@xgovformbuilder/model/src";
 import React, { useContext, useState } from "react";
-import { DataContext } from "../../context";
-import { LogicExpressionEdit } from ".";
-import { LogicExpression } from "@xgovformbuilder/model";
 
 export const LogicExpressionsEdit = () => {
   const { data, save } = useContext(DataContext);
@@ -37,7 +37,7 @@ export const LogicExpressionsEdit = () => {
     setLogicExpression(null);
   };
 
-  const handleEdit = (e) => {
+  const handleEdit = (e: Event) => {
     if (e) {
       e.preventDefault();
     }
@@ -80,8 +80,8 @@ export const LogicExpressionsEdit = () => {
           logicExpression={logicExpression}
           data={data}
           save={save}
-          onEdit={(e) => handleEdit(e)}
-          onCancel={(e) => handleCancel(e)}
+          onEdit={(e: Event) => handleEdit(e)}
+          onCancel={(e: Event) => handleCancel(e)}
         />
       )}
     </div>

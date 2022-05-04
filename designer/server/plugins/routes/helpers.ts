@@ -1,8 +1,9 @@
-import Wreck from "@hapi/wreck";
-import config from "../../config";
-import { FormConfiguration } from "../../../../model";
 import { ResponseToolkit } from "@hapi/hapi";
+import Wreck from "@hapi/wreck";
+import { FormConfiguration } from "@xgovformbuilder/model/src";
 import * as _ from "lodash";
+
+import config from "../../config";
 
 export const getPublished = async function (id, persistenceService) {
   if (config.persistentBackend === "dynamoDB") {

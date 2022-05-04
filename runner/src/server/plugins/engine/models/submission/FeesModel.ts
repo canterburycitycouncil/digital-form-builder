@@ -1,7 +1,7 @@
-import { FormModel } from "server/plugins/engine/models";
-import { FormSubmissionState } from "server/plugins/engine/types";
-import { FeeDetails, Fees } from "server/services/payService";
 import { flatten } from "hoek";
+import { FormModel } from "runner/src/server/plugins/engine/models";
+import { FormSubmissionState } from "runner/src/server/plugins/engine/types";
+import { FeeDetails, Fees } from "runner/src/server/services/payService";
 
 /**
  * returns an object used for sending GOV.UK Pay requests Used by {@link SummaryViewModel}, {@link PayService}

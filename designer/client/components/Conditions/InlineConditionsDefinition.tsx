@@ -1,16 +1,16 @@
-import React from "react";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import {
+  clone,
   Condition,
   ConditionField,
   ConditionRef,
   conditionValueFrom,
   getOperatorNames,
-  clone,
-} from "@xgovformbuilder/model";
-import { i18n } from "../../i18n";
+} from "@xgovformbuilder/model/src";
+import React from "react";
 
-import { InlineConditionsDefinitionValue } from "./InlineConditionsDefinitionValue";
 import { FieldInputObject } from "./InlineConditions";
+import { InlineConditionsDefinitionValue } from "./InlineConditionsDefinitionValue";
 
 function isCondition(fieldDef) {
   return fieldDef?.type === "Condition";

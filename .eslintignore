@@ -4,3 +4,6 @@ docker-compose.dev.yml
 Dockerfile
 docs/*
 docs-old/*
+*.json
+*.lock
+*.svg

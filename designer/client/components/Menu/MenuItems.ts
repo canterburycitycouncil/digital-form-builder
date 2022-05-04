@@ -1,15 +1,15 @@
-import SummaryEdit from "../Summary/SummaryEdit";
-import { LogicExpressionsEdit } from "../LogicExpressions";
-import ListsEdit from "../List/ListsEdit";
-import FeeEdit from "../Fees/fee-edit";
-import DeclarationEdit from "../../declaration-edit";
-import { FormDetails } from "../FormDetails";
-import PageCreate from "../Page/page-create";
-import LinkCreate from "../Links/link-create";
-import SectionsEdit from "../Section/sections-edit";
-import ConditionsEdit from "../Conditions/ConditionsEdit";
-import { i18n } from "../../i18n";
-import { MenuItemHook } from "./useMenuItem";
+import ConditionsEdit from "@xgovformbuilder/designer/client/components/Conditions/ConditionsEdit";
+import FeeEdit from "@xgovformbuilder/designer/client/components/Fees/fee-edit";
+import { FormDetails } from "@xgovformbuilder/designer/client/components/FormDetails";
+import LinkCreate from "@xgovformbuilder/designer/client/components/Links/link-edit";
+import ListsEdit from "@xgovformbuilder/designer/client/components/List/ListsEdit";
+import { LogicExpressionsEdit } from "@xgovformbuilder/designer/client/components/LogicExpressions";
+import { MenuItemHook } from "@xgovformbuilder/designer/client/components/Menu/useMenuItem";
+import PageCreate from "@xgovformbuilder/designer/client/components/Page/page-create";
+import SectionsEdit from "@xgovformbuilder/designer/client/components/Section/sections-edit";
+import SummaryEdit from "@xgovformbuilder/designer/client/components/Summary/SummaryEdit";
+import DeclarationEdit from "@xgovformbuilder/designer/client/declaration-edit";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 
 interface MenuItemObject {
   [key: string]: {

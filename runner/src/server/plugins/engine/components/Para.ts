@@ -1,5 +1,8 @@
-import { ComponentBase } from "./ComponentBase";
-import { FormData, FormSubmissionErrors } from "../types";
+import { ComponentBase } from "runner/src/server/plugins/engine/components/ComponentBase";
+import {
+  FormData,
+  FormSubmissionErrors,
+} from "runner/src/server/plugins/engine/types";
 
 export class Para extends ComponentBase {
   getViewModel(formData: FormData, errors: FormSubmissionErrors) {

@@ -1,19 +1,19 @@
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { useListItem } from "@xgovformbuilder/designer/client/hooks/list/useListItem";
+import { i18n, withI18n } from "@xgovformbuilder/designer/client/i18n";
+import { clone } from "@xgovformbuilder/model/src";
 import React, { useContext } from "react";
 import {
   SortableContainer,
   SortableElement,
   SortableHandle,
 } from "react-sortable-hoc";
-import { i18n, withI18n } from "../../i18n";
-import { ListActions } from "./reducers/listActions";
+
 import {
   ListsEditorContext,
   ListsEditorStateActions,
 } from "./reducers/list/listsEditorReducer";
-
-import { DataContext } from "../../context";
-import { clone } from "@xgovformbuilder/model";
-import { useListItem } from "../../hooks/list/useListItem";
+import { ListActions } from "./reducers/listActions";
 import { ListContext } from "./reducers/listReducer";
 
 const DragHandle = SortableHandle(() => (

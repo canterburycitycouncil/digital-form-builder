@@ -1,10 +1,12 @@
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import { Page } from "@xgovformbuilder/model/src";
 import React from "react";
-import { i18n } from "../../../i18n";
+
 import { Autocomplete } from "../components/Autocomplete";
-import ListFieldEdit from "./list-field-edit";
+import ListFieldEdit from "../FieldEditors/list-field-edit";
 
 type Props = {
-  page: any; // TODO
+  page: Page;
 };
 
 function SelectFieldEdit({ page }: Props) {

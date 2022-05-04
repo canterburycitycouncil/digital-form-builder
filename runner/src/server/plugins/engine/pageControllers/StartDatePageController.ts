@@ -1,5 +1,5 @@
 import joi from "joi";
-import { PageController } from "./PageController";
+import { PageController } from "runner/src/server/plugins/engine/pageControllers/PageController";
 
 /**
  * DobPageController adds to the state a users ageGroup

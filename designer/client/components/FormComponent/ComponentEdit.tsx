@@ -1,12 +1,16 @@
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
+import { hasValidationErrors } from "@xgovformbuilder/designer/client/validations";
+import {
+  ComponentTypeEnum as Types,
+  FormDefinition,
+} from "@xgovformbuilder/model/src";
 import React, { memo, useContext, useLayoutEffect } from "react";
-import ComponentTypeEdit from "./ComponentTypeEdit";
-import { DataContext } from "../../context";
+
+import { updateComponent } from "./componentData";
 import { ComponentContext } from "./componentReducer/componentReducer";
 import { Actions } from "./componentReducer/types";
-import ErrorSummary from "../../error-summary";
-import { hasValidationErrors } from "../../validations";
-import { ComponentTypeEnum as Types } from "@xgovformbuilder/model";
-import { updateComponent } from "./componentData";
+import ComponentTypeEdit from "./ComponentTypeEdit";
 
 const LIST_TYPES = [
   Types.AutocompleteField,
@@ -73,12 +77,12 @@ export function ComponentEdit(props) {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    const copy = { ...data };
+    const copy = { ...(data as FormDefinition) };
     const indexOfPage = copy.pages.findIndex((p) => p.path === page.path);
-    const indexOfComponent = copy.pages[indexOfPage]?.components.findIndex(
+    const indexOfComponent = copy.pages[indexOfPage].components?.findIndex(
       (component) => component.name === selectedComponent.initialName
     );
-    copy.pages[indexOfPage].components.splice(indexOfComponent, 1);
+    copy.pages[indexOfPage].components?.splice(indexOfComponent, 1);
     await save(copy);
     toggleShowEditor();
   };

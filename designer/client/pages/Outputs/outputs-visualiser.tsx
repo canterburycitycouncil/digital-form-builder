@@ -1,12 +1,14 @@
+import "../Designer/Visualisation/visualisation.scss";
+
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { Minimap } from "@xgovformbuilder/designer/client/pages/Designer/Visualisation/Minimap";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 import React, { useContext, useEffect, useRef, useState } from "react";
 
-import Output from "./components/outputs/output";
 import { Lines } from "./components/OutputLines";
-import { Minimap } from "../Designer/Visualisation/Minimap";
+import Output from "./components/outputs/output";
 import { getOutputsLayout } from "./getOutputsLayout";
 import { Pos } from "./types";
-import { DataContext } from "../../context";
-import "../Designer/Visualisation/visualisation.scss";
 
 type Props = {
   updatedAt?: string;
@@ -21,7 +23,7 @@ export function useVisualisation(ref) {
   const [layout, setLayout] = useState<Pos>();
 
   useEffect(() => {
-    const layout = getOutputsLayout(data, ref.current!);
+    const layout = getOutputsLayout(data as FormDefinition, ref.current!);
     setLayout(layout.pos);
   }, [data, ref]);
 
@@ -33,33 +35,38 @@ export function Visualisation(props: Props) {
   const { layout } = useVisualisation(ref);
   const { data } = useContext(DataContext);
 
-  const { persona } = props;
-  const outputs = data.outputs;
+  if (data) {
+    const { persona } = props;
+    const outputs = data.outputs;
 
-  const wrapperStyle = layout && {
-    width: layout?.width,
-    height: layout?.height,
-  };
+    const wrapperStyle = layout && {
+      width: layout?.width,
+      height: layout?.height,
+    };
 
-  return (
-    <>
-      <div className="visualisation">
-        <div className="visualisation__pages-wrapper">
-          <div ref={ref} style={wrapperStyle}>
-            {outputs.map((output, index) => (
-              <Output
-                key={index}
-                output={output}
-                layout={layout?.nodes[index]}
-              />
-            ))}
+    return (
+      <>
+        <div className="visualisation">
+          <div className="visualisation__pages-wrapper">
+            <div ref={ref} style={wrapperStyle}>
+              {outputs.map((output, index) => (
+                <Output
+                  key={index}
+                  output={output}
+                  layout={layout?.nodes[index]}
+                />
+              ))}
 
-            {layout && <Lines layout={layout} data={data} persona={persona} />}
+              {layout && (
+                <Lines layout={layout} data={data} persona={persona} />
+              )}
+            </div>
           </div>
-        </div>
 
-        {layout && <Minimap layout={layout} />}
-      </div>
-    </>
-  );
+          {layout && <Minimap layout={layout} />}
+        </div>
+      </>
+    );
+  }
+  return <></>;
 }

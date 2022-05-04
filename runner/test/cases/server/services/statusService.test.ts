@@ -1,9 +1,9 @@
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
+import { HapiServer } from "@xgovformbuilder/designer/server/types";
+import { FormModel } from "runner/src/server/plugins/engine/models";
+import { StatusService } from "runner/src/server/services/statusService";
 import sinon from "sinon";
-
-import { StatusService } from "server/services/statusService";
-import { FormModel } from "../../../../src/server/plugins/engine/models";
 
 const form = require("./../status.test.json");
 
@@ -23,7 +23,7 @@ const yar = {
   id: "session_id",
 };
 
-const server = {
+const server: HapiServer = {
   services: () => ({
     cacheService,
     webhookService,
@@ -66,7 +66,7 @@ suite("Server StatusService", () => {
       sinon
         .stub(cacheService, "getState")
         .returns({ pay: { meta: { attempts: 1 } } });
-
+      // @ts-ignore
       sinon.stub(payService, "payStatus").returns({
         state: {
           status: "failed",
@@ -81,7 +81,7 @@ suite("Server StatusService", () => {
       sinon
         .stub(cacheService, "getState")
         .returns({ pay: { meta: { attempts: 1 } } });
-
+      // @ts-ignore
       sinon.stub(payService, "payStatus").returns({
         state: {
           status: "failed",
@@ -139,7 +139,7 @@ suite("Server StatusService", () => {
       const statusService = new StatusService(server);
       const res = await statusService.outputRequests({ yar });
 
-      const results = await res.results;
+      const results: any = await res.results;
       expect(res.reference).to.equal("abcd-ef-g");
       expect(results.length).to.equal(outputs.length - 1);
       expect(results.map((result) => result.status)).to.equal([
@@ -160,7 +160,7 @@ suite("Server StatusService", () => {
       const formModel = new FormModel(form, {});
       const statusService = new StatusService(server);
 
-      const lisbonViewModel = statusService.getViewModel(
+      const lisbonViewModel: any = statusService.getViewModel(
         stateForLisbon,
         formModel
       );
@@ -175,7 +175,7 @@ suite("Server StatusService", () => {
         whichConsulate: "portimao",
       };
 
-      const portimaoViewModel = statusService.getViewModel(
+      const portimaoViewModel: any = statusService.getViewModel(
         stateForPortimao,
         formModel
       );

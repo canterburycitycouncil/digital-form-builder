@@ -1,9 +1,8 @@
 import AWS from "aws-sdk";
 import MailComposer from "nodemailer/lib/mail-composer";
-import config from "../config";
-
-import { HapiServer } from "../types";
-import { UploadService } from "./uploadService";
+import config from "runner/src/server/config";
+import { UploadService } from "runner/src/server/services/uploadService";
+import { HapiServer } from "runner/src/server/types";
 
 export class EmailService {
   /**

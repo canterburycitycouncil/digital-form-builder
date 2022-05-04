@@ -1,9 +1,9 @@
+import { ComponentContext } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/componentReducer";
+import { Actions } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/types";
+import { CssClasses } from "@xgovformbuilder/designer/client/components/FormComponent/components/CssClasses";
+import { GovUKInput } from "@xgovformbuilder/designer/client/components/GovUKFields";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import React, { useContext } from "react";
-import { ComponentContext } from "../componentReducer/componentReducer";
-import { Actions } from "../componentReducer/types";
-import { CssClasses } from "../components/CssClasses";
-import { i18n } from "../../../i18n";
-import { GovUKInput } from "../../GovUKFields";
 
 type Props = {
   context: any; // TODO
@@ -34,7 +34,7 @@ export function DateFieldEdit({ context = ComponentContext }: Props) {
         handleChange={(e) =>
           dispatch({
             type: Actions.EDIT_OPTIONS_MAX_DAYS_IN_PAST,
-            payload: e.target.value,
+            payload: e.target.nodeValue,
           })
         }
       />
@@ -48,7 +48,7 @@ export function DateFieldEdit({ context = ComponentContext }: Props) {
         handleChange={(e) =>
           dispatch({
             type: Actions.EDIT_OPTIONS_MAX_DAYS_IN_FUTURE,
-            payload: e.target.value,
+            payload: e.target.nodeValue,
           })
         }
       />

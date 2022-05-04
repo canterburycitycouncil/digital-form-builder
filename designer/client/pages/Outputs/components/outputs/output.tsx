@@ -1,14 +1,14 @@
+import { Flyout } from "@xgovformbuilder/designer/client/components/Flyout";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { withI18n, WithI18nProps } from "@xgovformbuilder/designer/client/i18n";
+import { Output } from "@xgovformbuilder/model/src";
 import React from "react";
 import { SortableContainer } from "react-sortable-hoc";
-import { Point } from "../../types";
 
-import { Flyout } from "../../../../components/Flyout";
-import { withI18n, WithI18nProps } from "../../../../i18n";
-import { DataContext } from "../../../../context";
 import { findOutput } from "../../data/findOutput";
-import { Output } from "@xgovformbuilder/model";
-import { OutputLinkage } from "./OutputLinkage";
+import { Point } from "../../types";
 import { OutputEdit } from "./output-edit";
+import { OutputLinkage } from "./OutputLinkage";
 
 interface Props extends WithI18nProps {
   output: Output;
@@ -39,7 +39,7 @@ export class OutputDisplay extends React.Component<Props> {
     const { output } = this.props;
 
     const copy = { ...data };
-    const [copyOutput, index] = findOutput(output, output.name);
+    const [copyOutput, index] = findOutput(data, output.name);
     copy.outputs[index] = copyOutput;
     save(copy);
   };

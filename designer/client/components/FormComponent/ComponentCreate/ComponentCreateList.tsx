@@ -1,9 +1,9 @@
-import React, { MouseEvent, useCallback } from "react";
-import { ComponentTypes, ComponentDef } from "@xgovformbuilder/model";
-import { CreateListItem } from "./CreateListItem";
+import { ComponentDef, ComponentTypes } from "@xgovformbuilder/model/src";
 import sortBy from "lodash/sortBy";
+import React, { MouseEvent, useCallback } from "react";
 
 import { i18n } from "../../../i18n";
+import { CreateListItem } from "./CreateListItem";
 
 const SelectionFieldsTypes = [
   "CheckboxesField",
