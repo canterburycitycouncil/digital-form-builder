@@ -5,3 +5,4 @@ Dockerfile
 *.json
 *.lock
 *.svg
+docs/*
