@@ -53,17 +53,9 @@ export const designerPlugin = {
       });
 
       server.route(newConfig.registerNewFormWithRunner);
-      server.route(api.getFormWithId);
-      server.route(api.putFormWithId);
-      server.route(api.getAllPersistedConfigurations);
-      server.route(api.runOutputs);
-      server.route(api.saveSubmission);
-      server.route(api.getFormSubmissions);
-      server.route(api.getSubmission);
-      server.route(api.getIntegrationLogs);
-      server.route(api.getIntegrationLog);
-      server.route(api.deleteFormWithId);
-      server.route(api.log);
+      Object.keys(api).forEach((routeName) => {
+        server.route(api[routeName]);
+      });
     },
   },
 };
