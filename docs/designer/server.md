@@ -13,8 +13,18 @@ The Schmervice plugin is used for registering the persistence service that will 
 The designer plugin is used for creating and serving the routes for the designer. In this plugin, all routes for accessing form configurations, as well as the routes for serving the frontend are created and registered. When a new route is created, the route will need to be imported here and then created using server.route.
 Once the server has been created, the system is markedas online and users can start accessing the client side of the system.
 
+## server routing
+
+All backend functions which handle the processing, uploading and retrieving of data that need to be accessible by the designer frontend must be declared as routes. For more information, please go to the [server routing section.](/digital-form-builder/designer/server/routing.html)
+
 ## server config
 
-There are options you can pass to the designer in the form of environment variables which change how the system operates. For more information on these, please go to the [server config section.](/digital-form-builder/designer/server/server-config.html)
+There are options you can pass to the designer in the form of environment variables which change how the system operates. For more information on these, please go to the [server config section.](/digital-form-builder/designer/server/config.html)
 
-##
+## server persistence services
+
+Persistence services are used to store form configurations and send them through to the designer frontend. For more information, please go to the [server persistence services section.](/digital-form-builder/designer/server/persistence.html)
+
+## server outputs
+
+Outputs are operations that run on form completion to make changes to the submission or to push information into back office systems. For example, you might have an output which uploads files to a file system and then replaces the files in the submission to the uploaded urls. For more information, please go to the [server outputs section.](/digital-form-builder/designer/server/outputs.html)
