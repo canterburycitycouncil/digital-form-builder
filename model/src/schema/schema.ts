@@ -99,8 +99,8 @@ const nextSchema = joi.object().keys({
 const pageSchema = joi.object().keys({
   path: joi.string().required().disallow("/status"),
   title: localisedString,
-  section: joi.string(),
-  controller: joi.string(),
+  section: joi.string().allow("").optional(),
+  controller: joi.string().allow("").optional(),
   components: joi.array().items(componentSchema),
   next: joi.array().items(nextSchema),
   repeatField: joi.string().optional(),
@@ -142,6 +142,10 @@ const listSchema = joi.object().keys({
 const logicExpressionsSchema = joi.object().keys({
   label: joi.string().required(),
   variableName: joi.string().required(),
+  expressionType: joi
+    .string()
+    .required()
+    .valid("predefined", "literal", "mathematical", "conditional"),
   expression: joi.string().required(),
 });
 
@@ -184,15 +188,29 @@ const s3FileUploadSchema = joi.object().keys({
   endpoint: joi.string(),
 });
 
+const topdeskSchema = joi.object().keys({
+  endpoint: joi.string(),
+  username: joi.string(),
+  password: joi.string(),
+});
+
 const outputSchema = joi.object().keys({
   name: joi.string(),
   title: joi.string().optional(),
-  previous: joi.string().optional(),
+  previous: joi.string().allow("").optional(),
   next: joi.array().items(joi.string()).optional(),
   previousValues: joi.array().items(joi.string()).optional(),
   type: joi
     .string()
-    .allow("notify", "email", "webhook", "sheets", "freshdesk", "s3fileupload"),
+    .allow(
+      "notify",
+      "email",
+      "webhook",
+      "sheets",
+      "freshdesk",
+      "s3fileupload",
+      "topdesk"
+    ),
   outputConfiguration: joi
     .alternatives()
     .try(
@@ -200,7 +218,8 @@ const outputSchema = joi.object().keys({
       emailSchema,
       webhookSchema,
       freshdeskSchema,
-      s3FileUploadSchema
+      s3FileUploadSchema,
+      topdeskSchema
     ),
 });
 
