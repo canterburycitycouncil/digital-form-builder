@@ -1,4 +1,5 @@
 import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import { ValidationErrors } from "@xgovformbuilder/designer/client/pages/Outputs/outputs/types";
 import logger from "@xgovformbuilder/designer/client/plugins/logger";
 import {
@@ -6,9 +7,26 @@ import {
   validateNotEmpty,
 } from "@xgovformbuilder/designer/client/validations";
 import { Input, Select } from "govuk-react-jsx";
+import { LogicExpressionTypes } from "model/src";
 import React, { useState } from "react";
 
+import { ExpressionBuilder } from "./expression-builder";
 import { LogicExpressionProps } from "./types";
+
+const expressionTypes = [
+  {
+    children: "predefined",
+    value: "predefined",
+  },
+  {
+    children: "literal",
+    value: "literal",
+  },
+  {
+    children: "mathematical",
+    value: "mathematical",
+  },
+];
 
 export const LogicExpressionEdit = ({
   data,
@@ -24,21 +42,11 @@ export const LogicExpressionEdit = ({
   const [variableName, setVariableName] = useState<string>(
     logicExpression.variableName
   );
+  const [expressionType, setExpressionType] = useState<LogicExpressionTypes>(
+    "predefined"
+  );
   const [errors, setErrors] = useState<{}>({});
-  const logicExpressions = [
-    {
-      children: "logic expression one",
-      value: "{number_of_rooms} * 500",
-    },
-    {
-      children: "logic expression two",
-      value: "{number_of_rooms} * 1000",
-    },
-    {
-      children: "logic expression three",
-      value: "{number_of_rooms} * 2000",
-    },
-  ];
+  const logicExpressions = [];
 
   const validate = () => {
     const errors: ValidationErrors = {};
@@ -81,6 +89,7 @@ export const LogicExpressionEdit = ({
     const logicExpressionObject = {
       label: labelName,
       variableName: variableName,
+      expressionType: expressionType,
       expression: selectedExpression as any,
     };
     dataCopy?.logicExpressions?.push(logicExpressionObject);
@@ -145,15 +154,43 @@ export const LogicExpressionEdit = ({
         onChange={(e) => setVariableName(e.target.value)}
       />
       <Select
-        id="select-1"
-        items={logicExpressions}
+        id="expression-type"
+        items={expressionTypes}
         label={{
-          children: "Label text goes here",
+          className: "govuk-label--s",
+          children: [i18n("logicExpression.expressionTypes.title")],
         }}
-        name="select-1"
-        value={selectedExpression}
-        onChange={(e) => setSelectedExpression(e.target.value)}
+        hint={{
+          children: [i18n("logicExpression.expressionTypes.helpText")],
+        }}
+        name="predefined-expressions"
+        value={expressionType}
+        onChange={(e) => setExpressionType(e.target.value)}
       />
+      {expressionType === "predefined" ? (
+        <Select
+          id="predefined-expressions"
+          items={logicExpressions}
+          label={{
+            className: "govuk-label--s",
+            children: [i18n("logicExpression.predefinedExpressions.title")],
+          }}
+          hint={{
+            children: [i18n("logicExpression.predefinedExpressions.helpText")],
+          }}
+          name="predefined-expressions"
+          value={selectedExpression}
+          onChange={(e) => setSelectedExpression(e.target.value)}
+        />
+      ) : expressionType === "conditional" ? (
+        ""
+      ) : (
+        <ExpressionBuilder
+          expression={selectedExpression}
+          expressionType={expressionType}
+          onExpressionChange={setSelectedExpression}
+        />
+      )}
       <div className="govuk-form-group">
         <button className="govuk-button" onClick={(e) => onSave(e)}>
           save
