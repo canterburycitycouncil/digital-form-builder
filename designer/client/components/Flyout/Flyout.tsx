@@ -1,9 +1,10 @@
 import "./Flyout.scss";
 
-import { FlyoutContext } from "@xgovformbuilder/designer/client/context";
-import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import FocusTrap from "focus-trap-react";
 import React, { useContext, useLayoutEffect, useState } from "react";
+
+import { FlyoutContext } from "../../context";
+import { i18n } from "../../i18n";
 
 interface FlyoutProps {
   show: boolean;
@@ -60,7 +61,14 @@ export function useFlyoutEffect(props: FlyoutProps) {
     }
   };
 
-  return { style, width: props?.width, closeOnEnter, onHide, offset, show };
+  return {
+    style,
+    width: props?.width,
+    closeOnEnter,
+    onHide,
+    offset,
+    show,
+  };
 }
 
 export function Flyout(props) {
@@ -78,7 +86,11 @@ export function Flyout(props) {
   }
 
   return (
-    <FocusTrap>
+    <FocusTrap
+      focusTrapOptions={{
+        fallbackFocus: 'a[title="Close"]',
+      }}
+    >
       <div className="flyout show" data-testid={`flyout-${offset}`}>
         <div className={`flyout__container ${width}`} style={style}>
           <a
