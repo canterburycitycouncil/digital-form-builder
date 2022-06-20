@@ -107,7 +107,7 @@ export class InlineConditions extends React.Component<Props, State> {
 
       let list;
       if (input.list) {
-        list = findList(data, input.list);
+        list = findList(data, input.list)[0];
       }
 
       const values =
