@@ -1,4 +1,5 @@
 import { Request, ResponseObject, ResponseToolkit } from "@hapi/hapi";
+
 import { returnResponse } from "../../helpers";
 
 export const getAllPersistedConfigurationsHandler = async (

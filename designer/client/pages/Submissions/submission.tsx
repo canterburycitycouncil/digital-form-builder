@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Submission, submissionStatusClasses } from "./types";
-import { SubmissionApi } from "../../api/submissionApi";
-import SubmissionMenu from "./components/submission-menu";
-import { Tabs } from "govuk-react-jsx";
-import { SubmissionFormValues } from "./components/submission-form-values";
-import { IntegrationLog } from "../../../server/plugins/routes/types";
-import { IntegrationsTable } from "./components/integrations-table";
 import "./submissions.scss";
+
+import { Tabs } from "govuk-react-jsx";
+import React, { useEffect, useState } from "react";
+
+import { IntegrationLog } from "../../../server/plugins/routes/types";
+import { SubmissionApi } from "../../api/submissionApi";
+import { IntegrationsTable } from "./components/integrations-table";
+import { SubmissionFormValues } from "./components/submission-form-values";
+import SubmissionMenu from "./components/submission-menu";
+import { Submission, submissionStatusClasses } from "./types";
 
 interface Props {
   match?: any;
@@ -38,7 +40,6 @@ export const SubmissionView = (props: Props) => {
         });
     }
     if (integrationLogs.length === 0 && submission && !loading) {
-      console.log("hello");
       setLoading(true);
       api
         .getIntegrationLogs(
@@ -66,8 +67,6 @@ export const SubmissionView = (props: Props) => {
     let date = new Date(dateString);
     return date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
   };
-
-  console.log(submission);
 
   return (
     <React.Fragment>
