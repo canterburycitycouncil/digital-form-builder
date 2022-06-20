@@ -9,9 +9,9 @@ export interface OutputRequest {
   submission: {
     [key: string]: any;
   };
-  files: Buffer | Buffer[];
-  filenames: string | string[];
-  fileTypes: string | string[];
+  files?: Buffer | Buffer[];
+  filenames?: string | string[];
+  fileTypes?: string | string[];
 }
 
 export interface IntegrationLog {
