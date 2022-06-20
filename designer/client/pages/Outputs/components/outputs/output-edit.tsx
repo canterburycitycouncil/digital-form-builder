@@ -61,7 +61,6 @@ export class OutputEdit extends React.Component<OutputEditProps> {
 
     let copy = { ...data };
     const [copyOutput, copyIndex] = findOutput(data, output.name);
-    console.log(copyOutput);
     const nameChanged = name !== output.name;
 
     if (nameChanged) {
@@ -72,7 +71,6 @@ export class OutputEdit extends React.Component<OutputEditProps> {
     copyOutput.title = title;
     copyOutput.type = type;
     copyOutput.outputConfiguration = outputConfiguration;
-    console.log(copyOutput);
 
     copy.outputs[copyIndex] = copyOutput;
     try {
@@ -194,7 +192,6 @@ export class OutputEdit extends React.Component<OutputEditProps> {
 
   onChangePreviousValues = (e) => {
     let previousValuesCopy = [...this.state.previousValues];
-    console.log(e.target.name);
     if (
       !e.target.checked &&
       this.state.previousValues.findIndex(
@@ -223,8 +220,6 @@ export class OutputEdit extends React.Component<OutputEditProps> {
     const [previousOutput] = findOutput(data, previous);
     const previousOutputType = previousOutput.type;
     let responseFormat = responses[previousOutputType];
-    console.log(previousOutputType);
-    console.log(responseFormat);
     return (
       <div className="govuk-checkboxes govuk-form-group">
         <label className="govuk-label govuk-checkboxes__label">
@@ -300,7 +295,6 @@ export class OutputEdit extends React.Component<OutputEditProps> {
         />
       );
     } else if (type === OutputType.S3FileUpload) {
-      console.log("Inside S3FileUpload");
       outputEdit = (
         <S3FileUploadEdit
           apiKey={outputConfiguration?.["apiKey"]}

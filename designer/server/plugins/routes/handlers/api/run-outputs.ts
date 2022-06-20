@@ -1,14 +1,17 @@
-import { freshdesk, s3fileupload, webhook } from "../../../../lib/outputs";
+import { Request, ResponseToolkit } from "@hapi/hapi";
+import { TopdeskOutputConfiguration } from "model/src";
+import fetch from "node-fetch";
+
 import {
   FreshdeskOutputConfiguration,
-  WebhookOutputConfiguration,
   S3FileUploadOutputConfiguration,
+  WebhookOutputConfiguration,
 } from "../../../../../client/pages/Outputs/outputs/types";
+import { freshdesk, s3fileupload, webhook } from "../../../../lib/outputs";
 import { FileResponse, FileUpload } from "../../../../lib/outputs/s3fileupload";
-import { OutputRequest, IntegrationLog } from "../../types";
-import { Request, ResponseToolkit } from "@hapi/hapi";
+import { topdesk } from "../../../../lib/outputs/topdesk";
 import { getTrueSubmission, returnResponse } from "../../helpers";
-import fetch from "node-fetch";
+import { IntegrationLog, OutputRequest } from "../../types";
 
 export const runOutputsHandler = async (
   request: Request,
@@ -25,24 +28,26 @@ export const runOutputsHandler = async (
           fileTypes,
         } = request.payload as OutputRequest;
         let filesDecoded: FileUpload[] = [];
-        if (
-          Array.isArray(files) &&
-          Array.isArray(filenames) &&
-          Array.isArray(fileTypes)
-        ) {
-          filesDecoded = files.map((file, index) => {
-            return {
-              filename: filenames[index],
-              type: fileTypes[index],
-              fileContent: file,
-            };
-          });
-        } else {
-          filesDecoded.push({
-            filename: filenames as string,
-            type: fileTypes as string,
-            fileContent: files as Buffer,
-          });
+        if (files && filenames && fileTypes) {
+          if (
+            Array.isArray(files) &&
+            Array.isArray(filenames) &&
+            Array.isArray(fileTypes)
+          ) {
+            filesDecoded = files.map((file, index) => {
+              return {
+                filename: filenames[index],
+                type: fileTypes[index],
+                fileContent: file,
+              };
+            });
+          } else {
+            filesDecoded.push({
+              filename: filenames as string,
+              type: fileTypes as string,
+              fileContent: files as Buffer,
+            });
+          }
         }
         let integrationLogsArray: IntegrationLog[] = [];
         let promiseArray: Promise<string | FileResponse>[] = [];
@@ -96,6 +101,22 @@ export const runOutputsHandler = async (
                 request: {
                   submission: submission,
                   files: filesDecoded.map((file) => file.filename),
+                },
+              });
+              break;
+            case "topdesk":
+              let topdeskPromise = topdesk(
+                output.outputConfiguration as TopdeskOutputConfiguration,
+                submission.formValues
+              );
+              promiseArray.push(topdeskPromise);
+              integrationLogsArray.push({
+                submissionId: submission.submissionId,
+                integrationName: output.title,
+                integrationType: output.type,
+                configuration: output.outputConfiguration,
+                request: {
+                  submission: submission,
                 },
               });
               break;
@@ -158,6 +179,7 @@ export const runOutputsHandler = async (
               });
           })
           .catch((err) => {
+            console.log(err);
             resolve(returnResponse(h, err.message, 500, "application/json"));
           });
       } else {

@@ -4,6 +4,7 @@ export enum OutputType {
   Webhook = "webhook",
   Freshdesk = "freshdesk",
   S3FileUpload = "s3fileupload",
+  Topdesk = "topdesk",
 }
 
 export type EmailOutputConfiguration = {
@@ -33,12 +34,19 @@ export type S3FileUploadOutputConfiguration = {
   endpoint: string;
 };
 
+export type TopdeskOutputConfiguration = {
+  endpoint: string;
+  username: string;
+  password: string;
+};
+
 export type OutputConfiguration =
   | EmailOutputConfiguration
   | NotifyOutputConfiguration
   | WebhookOutputConfiguration
   | FreshdeskOutputConfiguration
-  | S3FileUploadOutputConfiguration;
+  | S3FileUploadOutputConfiguration
+  | TopdeskOutputConfiguration;
 
 export type Output = {
   name: string;
@@ -59,6 +67,9 @@ export type ValidationErrors = {
   title?: ValidationError;
   name?: ValidationError;
   email?: ValidationError;
+  endpoint?: ValidationError;
+  username?: ValidationError;
+  password?: ValidationError;
   templateId?: ValidationError;
   freshdeskHost?: ValidationError;
   apiKey?: ValidationError;

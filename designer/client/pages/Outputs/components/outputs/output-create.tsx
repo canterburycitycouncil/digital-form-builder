@@ -17,6 +17,7 @@ import EmailEdit from "../../outputs/email-edit";
 import FreshdeskEdit from "../../outputs/freshdesk-edit";
 import NotifyEdit from "../../outputs/notify-edit";
 import S3FileUploadEdit from "../../outputs/s3fileupload-edit";
+import TopdeskEdit from "../../outputs/topdesk-edit";
 import { Output, OutputType, responses } from "../../outputs/types";
 import WebhookEdit from "../../outputs/webhook-edit";
 
@@ -82,8 +83,6 @@ class OutputCreate extends React.Component<Props> {
       copy = addLink(copy, previous, name);
     }
 
-    console.log(copy);
-
     try {
       await save(copy);
       this.props.onCreate();
@@ -119,6 +118,7 @@ class OutputCreate extends React.Component<Props> {
   onChangeOutputType = (e) => {
     this.setState({
       type: e.target.value,
+      outputConfiguration: {},
     });
   };
 
@@ -241,8 +241,6 @@ class OutputCreate extends React.Component<Props> {
       next: next,
     };
 
-    console.log(previous);
-
     let outputEdit: React.ReactNode;
 
     if (type === OutputType.Notify) {
@@ -270,11 +268,20 @@ class OutputCreate extends React.Component<Props> {
         />
       );
     } else if (type === OutputType.S3FileUpload) {
-      console.log("Inside S3FileUpload");
       outputEdit = (
         <S3FileUploadEdit
           apiKey={outputConfiguration?.["apiKey"]}
           endpoint={outputConfiguration?.["endpoint"]}
+          errors={errors}
+          onChange={this.onChangeOutputConfiguration}
+        />
+      );
+    } else if (type === OutputType.Topdesk) {
+      outputEdit = (
+        <TopdeskEdit
+          endpoint={outputConfiguration?.["endpoint"]}
+          username={outputConfiguration?.["username"]}
+          password={outputConfiguration?.["password"]}
           errors={errors}
           onChange={this.onChangeOutputConfiguration}
         />
@@ -335,6 +342,7 @@ class OutputCreate extends React.Component<Props> {
               <option value="webhook">Webhook</option>
               <option value="freshdesk">Freshdesk</option>
               <option value="s3fileupload">Upload File to S3</option>
+              <option value="topdesk">Create topdesk ticket</option>
             </select>
           </div>
 
