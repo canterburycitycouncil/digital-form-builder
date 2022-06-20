@@ -1,6 +1,7 @@
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { useListItem } from "@xgovformbuilder/designer/client/hooks/list/useListItem";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 import { Input } from "govuk-react-jsx";
 import { Textarea } from "govuk-react-jsx";
 import { Label } from "govuk-react-jsx";
@@ -31,15 +32,20 @@ export function ListItemEdit() {
     hint,
   } = useListItem(state, dispatch);
 
-  const { conditions } = data;
+  const { conditions } = data as FormDefinition;
   const { listItemErrors: errors } = state;
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const copy = { ...data };
-    const hasErrors = validate(i18n);
-    if (hasErrors) return;
-    await save(prepareForSubmit(copy));
-    listsEditorDispatch([ListsEditorStateActions.IS_EDITING_LIST_ITEM, false]);
+    if (data) {
+      const copy = { ...data };
+      const hasErrors = validate(i18n);
+      if (hasErrors) return;
+      await save(prepareForSubmit(copy));
+      listsEditorDispatch([
+        ListsEditorStateActions.IS_EDITING_LIST_ITEM,
+        false,
+      ]);
+    }
   };
 
   return (
@@ -89,7 +95,7 @@ export function ListItemEdit() {
         >
           <option value="" />
           {conditions?.map((condition) => (
-            <option key={condition.name} value={condition}>
+            <option key={condition.name} value={condition.value as string}>
               {condition.name}
             </option>
           ))}

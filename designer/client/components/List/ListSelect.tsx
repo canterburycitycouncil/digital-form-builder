@@ -1,12 +1,13 @@
-import { ListActions } from "./reducers/listActions";
-import { DataContext } from "../../context";
 import React, { useContext } from "react";
+
+import { DataContext } from "../../context";
 import { i18n } from "../../i18n";
-import { ListContext } from "./reducers/listReducer";
 import {
   ListsEditorContext,
   ListsEditorStateActions,
 } from "./reducers/list/listsEditorReducer";
+import { ListActions } from "./reducers/listActions";
+import { ListContext } from "./reducers/listReducer";
 
 export function ListSelect() {
   const { data } = useContext(DataContext);
@@ -29,17 +30,19 @@ export function ListSelect() {
         <p>{i18n("list.hint.manage")}</p>
       </div>
       <ul className="govuk-list">
-        {data.lists.map((list) => (
-          <li key={list.name}>
-            <a
-              data-testid="edit-list"
-              href="#"
-              onClick={(e) => editList(e, list)}
-            >
-              {list.title || list.name}
-            </a>
-          </li>
-        ))}
+        {data &&
+          data.lists &&
+          data.lists.map((list) => (
+            <li key={list.name}>
+              <a
+                data-testid="edit-list"
+                href="#"
+                onClick={(e) => editList(e, list)}
+              >
+                {list.title || list.name}
+              </a>
+            </li>
+          ))}
         <li>
           <hr />
           <a

@@ -1,5 +1,8 @@
+import { FormConfiguration } from "@xgovformbuilder/model/src";
+
 import logger from "../plugins/logger";
-export function fetchConfigurations() {
+
+export function fetchConfigurations(): Promise<FormConfiguration[]> {
   return window
     .fetch("/api/configurations", {
       method: "get",
@@ -10,7 +13,7 @@ export function fetchConfigurations() {
     })
     .then((res) => {
       if (res.ok) {
-        return res.json();
+        return (res.json() as unknown) as FormConfiguration[];
       } else {
         throw new Error("There was an unknown error");
       }
@@ -20,10 +23,10 @@ export function fetchConfigurations() {
 export async function loadConfigurations() {
   return await fetchConfigurations()
     .then((data) => {
-      return Object.values(data) || [];
+      return Object.values(data) || ([] as FormConfiguration[]);
     })
     .catch((error) => {
       logger.error("loadConfigurations", error);
-      return [];
+      return [] as FormConfiguration[];
     });
 }

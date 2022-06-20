@@ -1,8 +1,9 @@
+import { FormDefinition, Page, Section } from "@xgovformbuilder/model/src";
 import React from "react";
-import SectionEdit from "./section-edit";
-import { RenderInPortal } from "../RenderInPortal";
+
 import { Flyout } from "../Flyout";
-import { Section, Page, FormDefinition } from "@xgovformbuilder/model";
+import { RenderInPortal } from "../RenderInPortal";
+import SectionEdit from "./section-edit";
 
 interface Props {
   page: Page;
@@ -17,7 +18,7 @@ interface State {
 class SectionsEdit extends React.Component<Props, State> {
   state: State = {};
 
-  onClickSection = (e, section = null) => {
+  onClickSection = (e, section?) => {
     e.preventDefault();
     this.setState({
       section,
@@ -32,7 +33,7 @@ class SectionsEdit extends React.Component<Props, State> {
       isEditingSection: false,
       section: sectionName
         ? this.findSectionWithName(sectionName)
-        : propSection,
+        : (propSection as Section),
     });
   };
 

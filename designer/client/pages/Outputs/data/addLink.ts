@@ -27,8 +27,6 @@ export function addLink(
     next: [...(fromOutput.next ?? []), link],
   };
 
-  console.log(updatedOutput);
-
   return {
     ...data,
     outputs: outputs.map((output, i) => (i === index ? updatedOutput : output)),

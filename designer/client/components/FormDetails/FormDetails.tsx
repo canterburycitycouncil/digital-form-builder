@@ -105,7 +105,6 @@ export class FormDetails extends Component<Props, State> {
   };
 
   handleInternalOnlyInputBlur = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.checked);
     this.setState({ internalOnly: event.target.checked });
   };
 

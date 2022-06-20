@@ -1,22 +1,20 @@
-import React, { Component } from "react";
-import * as formConfigurationApi from "../../api/configuration-api";
-import { i18n } from "../../i18n";
-import { withRouter } from "react-router-dom";
-import { BackLink } from "../../components/BackLink";
 import "./LandingPage.scss";
-import logger from "../../plugins/logger";
 
-type Props = {
-  history: any;
-};
+import React, { Component } from "react";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+
+import * as formConfigurationApi from "../../api/configuration-api";
+import { BackLink } from "../../components/BackLink";
+import { i18n } from "../../i18n";
+import logger from "../../plugins/logger";
 
 type State = {
   configs: { Key: string; DisplayName: string }[];
   loading?: boolean;
 };
 
-export class ChooseExisting extends Component<Props, State> {
-  constructor(props: Props) {
+export class ChooseExisting extends Component<RouteComponentProps, State> {
+  constructor(props: RouteComponentProps) {
     super(props);
 
     this.state = {
@@ -27,7 +25,6 @@ export class ChooseExisting extends Component<Props, State> {
 
   componentDidMount() {
     formConfigurationApi.loadConfigurations().then((configs) => {
-      console.log(configs);
       this.setState({
         loading: false,
         configs,
@@ -36,7 +33,6 @@ export class ChooseExisting extends Component<Props, State> {
   }
 
   selectForm = async (form) => {
-    console.log(form);
     try {
       const response = await window.fetch("/api/new", {
         method: "POST",

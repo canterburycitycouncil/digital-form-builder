@@ -7,20 +7,19 @@ import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import { Edge } from "@xgovformbuilder/designer/client/pages/Designer/Visualisation/types";
 import logger from "@xgovformbuilder/designer/client/plugins/logger";
-import { Condition } from "@xgovformbuilder/model/src";
-import { Page } from "@xgovformbuilder/model/src";
+import { FormDefinition, Page } from "@xgovformbuilder/model/src";
 import React from "react";
 
 interface Props {
   edge: Edge;
-  onEdit: ({ data }) => void;
+  onEdit: (data: FormDefinition) => void;
   data: any;
 }
 
 interface State {
   page: Page;
   link: any;
-  selectedCondition: Condition;
+  selectedCondition?: string;
 }
 
 class LinkEdit extends React.Component<Props, State> {
@@ -31,12 +30,12 @@ class LinkEdit extends React.Component<Props, State> {
     const { data } = this.context;
     const { edge } = this.props;
     const [page] = findPage(data, edge.source);
-    const link = page.next.find((n) => n.path === edge.target);
+    const link = page.next?.find((n) => n.path === edge.target);
 
     this.state = {
       page: page,
       link: link,
-      selectedCondition: link.condition,
+      selectedCondition: link?.condition,
     };
   }
 
@@ -71,15 +70,17 @@ class LinkEdit extends React.Component<Props, State> {
 
     const copy = { ...data };
     const [copyPage] = findPage(data, page.path);
-    const copyLinkIdx = copyPage.next.findIndex((n) => n.path === link.path);
-    copyPage.next.splice(copyLinkIdx, 1);
+    if (copyPage.next) {
+      const copyLinkIdx = copyPage.next.findIndex((n) => n.path === link.path);
+      copyPage.next.splice(copyLinkIdx, 1);
+    }
     copy.pages = copy.pages.map((page) =>
       page.path === copyPage.path ? copyPage : page
     );
 
     save(copy)
       .then((data) => {
-        this.props.onEdit({ data });
+        this.props.onEdit(data);
       })
       .catch((err) => {
         logger.error("LinkEdit", err);
@@ -129,7 +130,7 @@ class LinkEdit extends React.Component<Props, State> {
           </select>
         </div>
         <SelectConditions
-          path={edge.source}
+          path={edge.target ? edge.target : edge.source}
           data={data}
           hints={[]}
           conditionsChange={this.conditionSelected}

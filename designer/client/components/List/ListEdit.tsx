@@ -5,6 +5,7 @@ import {
   hasValidationErrors,
   validateTitle,
 } from "@xgovformbuilder/designer/client/validations";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 import { Input } from "govuk-react-jsx";
 import React, { useContext } from "react";
 
@@ -78,7 +79,7 @@ function useListEdit() {
       });
       return;
     }
-    let copy = { ...data };
+    let copy = { ...data } as FormDefinition;
     if (selectedList.isNew) {
       delete selectedList.isNew;
       copy = addList(copy, selectedList);
@@ -109,6 +110,7 @@ export function ListEdit() {
   const { selectedList, createItem } = useListItemActions(state, dispatch);
   const { errors } = state;
   const validationErrors = hasValidationErrors(errors);
+
   return (
     <>
       {validationErrors && <ErrorSummary errorList={Object.values(errors)} />}

@@ -76,7 +76,7 @@ export function ListsEdit({ showEditLists = false }: Props) {
             onHide={closeFlyout(ListsEditorStateActions.IS_EDITING_LIST)}
             width={""}
           >
-            {showWarning && <Warning />}
+            {showWarning ? <Warning /> : ""}
             <ListEdit />
           </Flyout>
         </RenderInPortal>

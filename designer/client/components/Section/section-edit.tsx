@@ -16,7 +16,7 @@ import { addSection } from "./data";
 
 interface Props {
   closeFlyout: (name: string) => void;
-  section: Section;
+  section?: Section;
   data: FormDefinition;
   i18n: I18n;
 }
@@ -113,20 +113,22 @@ class SectionEdit extends React.Component<Props, State> {
     const copy = { ...data };
     const previousName = this.props.section?.name;
 
-    copy.sections.splice(copy.sections.indexOf(section), 1);
+    if (section) {
+      copy.sections.splice(copy.sections.indexOf(section), 1);
 
-    // Update any references to the section
-    copy.pages.forEach((p) => {
-      if (p.section === previousName) {
-        p.section = "";
+      // Update any references to the section
+      copy.pages.forEach((p) => {
+        if (p.section === previousName) {
+          p.section = "";
+        }
+      });
+
+      try {
+        await save(copy);
+        this.closeFlyout("");
+      } catch (error) {
+        logger.error("SectionEdit", error);
       }
-    });
-
-    try {
-      await save(copy);
-      this.closeFlyout("");
-    } catch (error) {
-      logger.error("SectionEdit", error);
     }
   };
 

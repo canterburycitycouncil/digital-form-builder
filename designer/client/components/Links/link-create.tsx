@@ -29,6 +29,11 @@ class LinkCreate extends React.Component<Props, State> {
 
   constructor(props, context) {
     super(props, context);
+    this.state = {
+      errors: {},
+      from: "",
+      to: "",
+    };
   }
 
   onSubmit = async (e) => {

@@ -1,7 +1,7 @@
 import ConditionsEdit from "@xgovformbuilder/designer/client/components/Conditions/ConditionsEdit";
 import FeeEdit from "@xgovformbuilder/designer/client/components/Fees/fee-edit";
 import { FormDetails } from "@xgovformbuilder/designer/client/components/FormDetails";
-import LinkCreate from "@xgovformbuilder/designer/client/components/Links/link-edit";
+import LinkCreate from "@xgovformbuilder/designer/client/components/Links/link-create";
 import ListsEdit from "@xgovformbuilder/designer/client/components/List/ListsEdit";
 import { LogicExpressionsEdit } from "@xgovformbuilder/designer/client/components/LogicExpressions";
 import { MenuItemHook } from "@xgovformbuilder/designer/client/components/Menu/useMenuItem";
@@ -28,7 +28,7 @@ interface MenuItemObject {
 }
 
 export default function getMenuItems(
-  useMenuItem: Function,
+  useMenuItem: () => MenuItemHook,
   data: any
 ): MenuItemObject {
   return {

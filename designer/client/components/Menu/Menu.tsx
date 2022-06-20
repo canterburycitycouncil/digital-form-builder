@@ -4,10 +4,7 @@ import { ListContextProvider } from "@xgovformbuilder/designer/client/components
 import MenuButton from "@xgovformbuilder/designer/client/components/Menu/MenuButton";
 import getMenuItems from "@xgovformbuilder/designer/client/components/Menu/MenuItems";
 import { SubMenu } from "@xgovformbuilder/designer/client/components/Menu/SubMenu";
-import {
-  MenuItemHook,
-  useMenuItem,
-} from "@xgovformbuilder/designer/client/components/Menu/useMenuItem";
+import { useMenuItem } from "@xgovformbuilder/designer/client/components/Menu/useMenuItem";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import React, { useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
@@ -53,7 +50,7 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
           <MenuButton
             key={key}
             dataTestId={`menu-${key}`}
-            handleClick={(menuItemsObject[key].component as MenuItemHook).show}
+            handleClick={menuItemsObject[key].component.show}
             translationKey={`menu.${convertMenuItemName(key)}`}
           />
         ))}
@@ -72,7 +69,7 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
         const menuItem = menuItemsObject[key];
         if (key === "lists") {
           return (
-            <>
+            <React.Fragment key={`menu-area-${key}`}>
               {menuItem.component.isVisible && (
                 <Flyout
                   title={menuItem.flyout.title}
@@ -83,17 +80,16 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
                     <ListContextProvider>
                       <menuItem.flyout.component.type
                         {...menuItem.flyout.component.props}
-                        onCreate={() => menuItem.component.hide}
                       />
                     </ListContextProvider>
                   </ListsEditorContextProvider>
                 </Flyout>
               )}
-            </>
+            </React.Fragment>
           );
         }
         return (
-          <>
+          <React.Fragment key={`menu-area-${key}`}>
             {menuItem.component.isVisible && (
               <Flyout
                 title={menuItem.flyout.title}
@@ -106,7 +102,7 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
                 />
               </Flyout>
             )}
-          </>
+          </React.Fragment>
         );
       })}
       <SubMenu
