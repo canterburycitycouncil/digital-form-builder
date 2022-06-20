@@ -1,0 +1,12 @@
+.expressionBuilderActionsContainer {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  .expressionBuilderAction {
+    padding: 10px 15px;
+    margin: 0 10px;
+    border-radius: 5px;
+  }
+}
