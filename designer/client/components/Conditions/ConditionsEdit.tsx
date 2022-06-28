@@ -3,6 +3,7 @@ import { allInputs } from "@xgovformbuilder/designer/client/components/FormCompo
 import { RenderInPortal } from "@xgovformbuilder/designer/client/components/RenderInPortal";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import { FormDefinition } from "@xgovformbuilder/model/src";
 import React, { useContext, useState } from "react";
 
 import InlineConditions from "./InlineConditions";
@@ -54,8 +55,9 @@ export function ConditionsEdit({ path }: Props) {
     cancelInlineCondition,
   } = useConditionsEditor();
   const { data } = useContext(DataContext);
-  const { conditions } = data;
-  const inputs = allInputs(data);
+  const { conditions } = data as FormDefinition;
+  const inputs = allInputs(data as FormDefinition);
+  console.log(conditions);
   return (
     <div className="govuk-body">
       <div className="govuk-hint">{i18n("conditions.hint")}</div>
@@ -84,9 +86,9 @@ export function ConditionsEdit({ path }: Props) {
                   {condition.displayName}
                 </a>{" "}
                 <small>{condition.name}</small>
-                {"   ("}
+                {/* {"   ("}
                 <small>{condition.expression}</small>
-                {")"}
+                {")"} */}
               </li>
             ))}
             <li>

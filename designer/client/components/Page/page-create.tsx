@@ -19,13 +19,9 @@ import React from "react";
 
 import { addLink, addPage } from "./data";
 
-interface DataProps {
-  value: PageValue;
-}
-
 interface Props {
   page: Page;
-  onCreate: ({ value }: DataProps) => void;
+  onCreate: () => void;
   data: FormDefinition;
   i18n: I18n;
 }
@@ -113,7 +109,8 @@ class PageCreate extends React.Component<Props, State> {
     }
     try {
       await save(copy);
-      this.props.onCreate({ value });
+      console.log("time to do the create");
+      this.props.onCreate();
     } catch (err) {
       logger.error("PageCreate", err);
     }

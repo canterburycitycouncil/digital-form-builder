@@ -39,6 +39,7 @@ export const runOutputs: ServerRoute = {
     cors: {
       origin: [
         "http://localhost:8000",
+        "http://localhost:3001",
         "http://canterbury-formbuilder.s3-website.eu-west-2.amazonaws.com",
       ],
       headers: [
@@ -63,6 +64,7 @@ export const saveSubmission: ServerRoute = {
     cors: {
       origin: [
         "http://localhost:8000",
+        "http://localhost:3001",
         "http://canterbury-formbuilder.s3-website.eu-west-2.amazonaws.com",
       ],
       headers: [

@@ -111,9 +111,11 @@ export const InlineConditionsDefinitionValue = ({
   value,
   updateValue,
 }: Props) => {
-  const CustomComponent = DateTimeComponent(fieldDef.type, operator);
-  if (CustomComponent) {
-    return <CustomComponent value={value} updateValue={updateValue} />;
+  if (fieldDef) {
+    const CustomComponent = DateTimeComponent(fieldDef.type, operator);
+    if (CustomComponent) {
+      return <CustomComponent value={value} updateValue={updateValue} />;
+    }
   }
   return (fieldDef?.values?.length ?? 0) > 0 ? (
     <SelectValues

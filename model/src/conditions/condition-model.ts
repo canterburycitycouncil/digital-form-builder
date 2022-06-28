@@ -260,8 +260,8 @@ export class ConditionsModel {
     const name = this.conditionName;
     const conditions = this.userGroupedConditions;
     return {
-      name: name,
-      conditions: conditions.map((it) => it.clone()),
+      name: name ?? "",
+      conditions: conditions.map((it) => it.clone() as Condition),
     };
   }
 

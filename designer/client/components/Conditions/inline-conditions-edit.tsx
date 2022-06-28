@@ -258,7 +258,7 @@ class InlineConditionsEdit extends React.Component<Props, State> {
               </span>
             )}
             <div id="editing-checkboxes" className="govuk-checkboxes">
-              {conditions.asPerUserGroupings.map((condition, index) => {
+              {conditions.asPerUserGroupings.map((listCondition, index) => {
                 return (
                   <div
                     key={`condition-checkbox-${index}`}
@@ -278,13 +278,13 @@ class InlineConditionsEdit extends React.Component<Props, State> {
                       className="govuk-label govuk-checkboxes__label"
                       htmlFor={`condition-${index}`}
                     >
-                      {toPresentationString(condition)}
+                      {toPresentationString(listCondition)}
                     </label>
                     <span
                       id={`condition-${index}-actions`}
                       style={{ display: "inline-flex", flexGrow: 1 }}
                     >
-                      {condition.isGroup() && (
+                      {listCondition.isGroup() && (
                         <span style={{ flexGrow: 1 }}>
                           <a
                             href="#"
@@ -299,7 +299,7 @@ class InlineConditionsEdit extends React.Component<Props, State> {
                           </a>
                         </span>
                       )}
-                      {!condition.isGroup() && (
+                      {!listCondition.isGroup() && (
                         <span style={{ flexGrow: 1 }}>
                           <a
                             href="#"
@@ -371,7 +371,7 @@ class InlineConditionsEdit extends React.Component<Props, State> {
             </div>
           </fieldset>
         )}
-        {editingIndex && editingIndex >= 0 && (
+        {editingIndex !== undefined && editingIndex >= 0 && condition && (
           <InlineConditionsDefinition
             expectsCoordinator={editingIndex > 0}
             fields={this.props.fields}

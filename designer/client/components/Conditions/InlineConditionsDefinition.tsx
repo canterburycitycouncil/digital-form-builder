@@ -18,6 +18,7 @@ function isCondition(fieldDef) {
 
 interface Props {
   expectsCoordinator: boolean;
+  condition?: Condition;
   fields: FieldInputObject;
   saveCallback: (condition: Condition) => void;
   conditionsChange?: (e) => void;

@@ -14,8 +14,14 @@ import ErrorSummary, {
 } from "@xgovformbuilder/designer/client/error-summary";
 import { randomId } from "@xgovformbuilder/designer/client/helpers";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
-import { clone, ConditionsModel, Item } from "@xgovformbuilder/model/src";
+import {
+  clone,
+  ConditionRawData,
+  ConditionsModel,
+  Item,
+} from "@xgovformbuilder/model/src";
 import classNames from "classnames";
+import { ConditionWrapperValue } from "model/src/data-model";
 import React, { ChangeEvent, MouseEvent } from "react";
 
 import InlineConditionsEdit from "./inline-conditions-edit";
@@ -23,7 +29,7 @@ import InlineConditionsDefinition from "./InlineConditionsDefinition";
 
 interface Props {
   path: string;
-  condition?: any;
+  condition?: ConditionRawData;
   cancelCallback?: (event: MouseEvent) => void;
   conditionsChange?: (event: MouseEvent) => void;
 }
@@ -65,19 +71,28 @@ export class InlineConditions extends React.Component<Props, State> {
     super(props, context);
     const { path, condition } = this.props;
 
-    const conditions =
-      condition && typeof condition.value === "object"
-        ? ConditionsModel.from(condition.value)
-        : new ConditionsModel();
+    if (condition) {
+      const conditions =
+        condition && typeof condition.value === "object"
+          ? ConditionsModel.from(condition.value)
+          : new ConditionsModel();
 
-    conditions.name &&= condition.displayName;
+      conditions.name &&= condition.displayName;
 
-    this.state = {
-      validationErrors: [],
-      conditions: conditions,
-      fields: this.fieldsForPath(path),
-      conditionString: condition?.value,
-    };
+      this.state = {
+        validationErrors: [],
+        conditions: conditions,
+        fields: this.fieldsForPath(path),
+        conditionString: condition?.value,
+      };
+    } else {
+      this.state = {
+        validationErrors: [],
+        conditions: new ConditionsModel(),
+        fields: this.fieldsForPath(path),
+        conditionString: "",
+      };
+    }
   }
 
   componentDidUpdate = (prevProps) => {
@@ -165,7 +180,16 @@ export class InlineConditions extends React.Component<Props, State> {
     }
 
     if (condition) {
-      const updatedData = updateCondition(data, condition.name, conditions);
+      let conditionJson = conditions.toJSON();
+      let updatedCondition = {
+        displayName: conditionJson.name,
+        value: { ...conditionJson },
+      };
+      const updatedData = updateCondition(
+        data,
+        condition.name,
+        updatedCondition
+      );
       await save(updatedData);
       if (conditionsChange) {
         conditionsChange(event);
@@ -174,7 +198,7 @@ export class InlineConditions extends React.Component<Props, State> {
       const updatedData = addCondition(data, {
         displayName: conditions.name!,
         name: randomId(),
-        value: conditions.toJSON(),
+        value: conditions.toJSON() as ConditionWrapperValue,
       });
 
       await save(updatedData);
