@@ -98,7 +98,7 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
               >
                 <menuItem.flyout.component.type
                   {...menuItem.flyout.component.props}
-                  onCreate={() => menuItem.component.hide}
+                  onCreate={menuItem.component.hide}
                 />
               </Flyout>
             )}
