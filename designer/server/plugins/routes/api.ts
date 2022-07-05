@@ -41,6 +41,8 @@ export const runOutputs: ServerRoute = {
         "http://localhost:8000",
         "http://localhost:3001",
         "http://canterbury-formbuilder.s3-website.eu-west-2.amazonaws.com",
+        "https://staffroom.canterbury.gov.uk",
+        "https://staffbeta.canterbury.gov.uk",
       ],
       headers: [
         "Accept",
@@ -66,6 +68,8 @@ export const saveSubmission: ServerRoute = {
         "http://localhost:8000",
         "http://localhost:3001",
         "http://canterbury-formbuilder.s3-website.eu-west-2.amazonaws.com",
+        "https://staffroom.canterbury.gov.uk",
+        "https://staffbeta.canterbury.gov.uk",
       ],
       headers: [
         "Accept",
