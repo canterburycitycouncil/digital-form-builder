@@ -70,6 +70,7 @@ export enum OutputType {
   Freshdesk = "freshdesk",
   S3FileUpload = "s3fileupload",
   Topdesk = "topdesk",
+  TopdeskIncident = "topdesk-incident",
 }
 
 export type EmailOutputConfiguration = {
@@ -100,9 +101,14 @@ export type S3FileUploadOutputConfiguration = {
 };
 
 export type TopdeskOutputConfiguration = {
-  endpoint: string;
-  username: string;
-  password: string;
+  template: string;
+  email: string;
+  briefDescription?: string;
+};
+
+export type TopdeskIncidentOutputConfiguration = {
+  email: string;
+  briefDescription: string;
 };
 
 export type OutputConfiguration =
@@ -111,10 +117,12 @@ export type OutputConfiguration =
   | WebhookOutputConfiguration
   | FreshdeskOutputConfiguration
   | S3FileUploadOutputConfiguration
-  | TopdeskOutputConfiguration;
+  | TopdeskOutputConfiguration
+  | TopdeskIncidentOutputConfiguration;
 
 export type Output = {
   name: string;
+  condition?: string;
   title: string;
   type: OutputType;
   outputConfiguration: OutputConfiguration;
@@ -165,4 +173,5 @@ export type FormDefinition = {
   payApiKey?: string | MultipleApiKeys | undefined;
   specialPages?: SpecialPages;
   logicExpressions: LogicExpression[];
+  submissionMessage?: string;
 };

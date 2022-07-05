@@ -189,13 +189,19 @@ const s3FileUploadSchema = joi.object().keys({
 });
 
 const topdeskSchema = joi.object().keys({
-  endpoint: joi.string(),
-  username: joi.string(),
-  password: joi.string(),
+  template: joi.string(),
+  email: joi.string(),
+  briefDescription: joi.string().allow("").optional(),
+});
+
+const topdeskIncidentSchema = joi.object().keys({
+  email: joi.string(),
+  briefDescription: joi.string(),
 });
 
 const outputSchema = joi.object().keys({
   name: joi.string(),
+  condition: joi.string().allow("").optional(),
   title: joi.string().optional(),
   previous: joi.string().allow("").optional(),
   next: joi.array().items(joi.string()).optional(),
@@ -209,7 +215,8 @@ const outputSchema = joi.object().keys({
       "sheets",
       "freshdesk",
       "s3fileupload",
-      "topdesk"
+      "topdesk",
+      "topdesk-incident"
     ),
   outputConfiguration: joi
     .alternatives()
@@ -219,7 +226,8 @@ const outputSchema = joi.object().keys({
       webhookSchema,
       freshdeskSchema,
       s3FileUploadSchema,
-      topdeskSchema
+      topdeskSchema,
+      topdeskIncidentSchema
     ),
 });
 
@@ -273,6 +281,7 @@ export const Schema = joi
     totalSubs: joi.number().optional(),
     createdAt: joi.string().allow("").optional(),
     updatedAt: joi.string().allow("").optional(),
+    submissionMessage: joi.string().allow("").optional(),
   });
 
 /**
