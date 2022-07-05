@@ -27,6 +27,9 @@ export interface Config {
   lastTag: string;
   sessionTimeout: number;
   sessionCookiePassword: string;
+  topdeskUrl?: string;
+  topdeskUsername?: string;
+  topdeskPassword?: string;
 }
 
 // server-side storage expiration - defaults to 20 minutes
@@ -63,6 +66,9 @@ const schema = joi.object({
   lastTag: joi.string().default("undefined"),
   sessionTimeout: joi.number().default(sessionSTimeoutInMilliseconds),
   sessionCookiePassword: joi.string().optional(),
+  topdeskUrl: joi.string().optional(),
+  topdeskUsername: joi.string().optional(),
+  topdeskPassword: joi.string().optional(),
 });
 
 // Build config
@@ -87,6 +93,9 @@ const config = {
   lastTag: process.env.LAST_TAG || process.env.LAST_TAG_GH,
   sessionTimeout: process.env.SESSION_TIMEOUT,
   sessionCookiePassword: process.env.SESSION_COOKIE_PASSWORD,
+  topdeskUrl: process.env.TOPDESK_URL,
+  topdeskUsername: process.env.TOPDESK_USERNAME,
+  topdeskPassword: process.env.TOPDESK_PASSWORD,
 };
 
 // Validate config
