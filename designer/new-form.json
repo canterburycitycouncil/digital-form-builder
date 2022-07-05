@@ -2,6 +2,7 @@
   "metadata": {},
   "internalOnly": false,
   "startPage": "/first-page",
+  "submissionMessage": "",
   "pages": [
     {
       "title": "First page",
@@ -27,6 +28,11 @@
       "title": "Summary",
       "path": "/summary",
       "controller": "./pages/summary.js",
+      "components": []
+    },
+    {
+      "title": "Submitted",
+      "path": "/submitted",
       "components": []
     }
   ],
