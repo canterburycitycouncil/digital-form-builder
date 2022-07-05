@@ -1,5 +1,10 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
-import { TopdeskOutputConfiguration } from "model/src";
+import { topdeskIncident } from "@xgovformbuilder/designer/server/lib/outputs/topdesk-incident";
+import {
+  Condition,
+  ConditionValue,
+  TopdeskOutputConfiguration,
+} from "@xgovformbuilder/model/src";
 import fetch from "node-fetch";
 
 import {
@@ -51,7 +56,47 @@ export const runOutputsHandler = async (
         }
         let integrationLogsArray: IntegrationLog[] = [];
         let promiseArray: Promise<string | FileResponse>[] = [];
-        formScheme.outputs.forEach((output) => {
+        let flattenedFormValues = Object.keys(submission.formValues).reduce(
+          (acc, currentPage) => {
+            return {
+              ...acc,
+              ...submission.formValues[currentPage],
+            };
+          },
+          {}
+        );
+        let validOutputs = formScheme.outputs.filter((output) => {
+          if (output.condition) {
+            let condition = formScheme.conditions.find(
+              (searchCondition) => searchCondition.name === output.condition
+            );
+            if (condition) {
+              let conditionParts = (condition.value as any)
+                .conditions as Condition[];
+              let valid = true;
+              conditionParts.forEach((conditionPart) => {
+                if (
+                  (conditionPart.operator === "is" &&
+                    flattenedFormValues[
+                      conditionPart.field.name.split(".")[1]
+                    ] !== (conditionPart.value as ConditionValue).value) ||
+                  (conditionPart.operator === "is not" &&
+                    flattenedFormValues[
+                      conditionPart.field.name.split(".")[1]
+                    ] === (conditionPart.value as ConditionValue).value)
+                ) {
+                  valid = false;
+                }
+              });
+              return valid;
+            } else {
+              return true;
+            }
+          } else {
+            return true;
+          }
+        });
+        validOutputs.forEach((output) => {
           switch (output.type) {
             case "email":
               break;
@@ -107,9 +152,28 @@ export const runOutputsHandler = async (
             case "topdesk":
               let topdeskPromise = topdesk(
                 output.outputConfiguration as TopdeskOutputConfiguration,
-                submission.formValues
+                submission.formValues,
+                formScheme
               );
               promiseArray.push(topdeskPromise);
+              integrationLogsArray.push({
+                submissionId: submission.submissionId,
+                integrationName: output.title,
+                integrationType: output.type,
+                configuration: output.outputConfiguration,
+                request: {
+                  submission: submission,
+                },
+              });
+              break;
+            case "topdesk-incident":
+              let topdeskIncidentPromise = topdeskIncident(
+                output.outputConfiguration as TopdeskOutputConfiguration,
+                submission.formValues,
+                formScheme,
+                filesDecoded
+              );
+              promiseArray.push(topdeskIncidentPromise);
               integrationLogsArray.push({
                 submissionId: submission.submissionId,
                 integrationName: output.title,
