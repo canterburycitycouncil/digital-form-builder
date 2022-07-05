@@ -1,9 +1,9 @@
 import { ConditionRawData, FormDefinition } from "@xgovformbuilder/model/src";
 
 /**
- * @param data
- * @param conditionName
- * @param updatedPartial The condition name cannot be changed, hence Omit<ConditionRawData, "name">
+ * @param data -
+ * @param conditionName -
+ * @param updatedPartial - The condition name cannot be changed, hence Omit<ConditionRawData, "name">
  */
 export function updateCondition(
   data: FormDefinition,

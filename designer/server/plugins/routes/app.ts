@@ -1,5 +1,6 @@
 import { Request, ResponseToolkit, ServerRoute } from "@hapi/hapi";
 import JSZip from "jszip";
+
 import { designerViewHandler } from "./handlers";
 
 export const redirectNewToApp: ServerRoute = {
