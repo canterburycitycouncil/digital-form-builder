@@ -21,6 +21,7 @@ import InlineConditions from "./InlineConditions";
 interface Props {
   path: string;
   data: FormDefinition;
+  selectedCondition?: string;
   conditionsChange: (selectedCondition: string) => void;
   hints: any[];
   noFieldsHintText?: string;

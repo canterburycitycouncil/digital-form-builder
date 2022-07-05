@@ -34,7 +34,7 @@ interface Props {
   conditionsChange?: (event: MouseEvent) => void;
 }
 
-interface FieldInput {
+export interface FieldInput {
   label: string;
   name: string;
   type: string;
@@ -53,7 +53,7 @@ interface State {
   validationErrors: ErrorListItem[];
 }
 
-const yesNoValues: Readonly<Item[]> = [
+export const yesNoValues: Readonly<Item[]> = [
   {
     text: "Yes",
     value: true,
