@@ -1,3 +1,4 @@
+import SelectConditions from "@xgovformbuilder/designer/client/components/Conditions/SelectConditions";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
 import { randomId } from "@xgovformbuilder/designer/client/helpers";
@@ -18,6 +19,7 @@ import FreshdeskEdit from "../../outputs/freshdesk-edit";
 import NotifyEdit from "../../outputs/notify-edit";
 import S3FileUploadEdit from "../../outputs/s3fileupload-edit";
 import TopdeskEdit from "../../outputs/topdesk-edit";
+import TopdeskIncidentEdit from "../../outputs/topdesk-incident-edit";
 import { Output, OutputType, responses } from "../../outputs/types";
 import WebhookEdit from "../../outputs/webhook-edit";
 
@@ -39,6 +41,7 @@ class OutputCreate extends React.Component<Props> {
     super(props, context);
     this.state = {
       name: randomId(),
+      condition: "",
       title: "",
       type: OutputType.Webhook,
       outputConfiguration: {
@@ -60,6 +63,7 @@ class OutputCreate extends React.Component<Props> {
     const previous = this.state.previous?.trim();
     const type = this.state.type;
     const name = this.state.name;
+    const condition = this.state.condition;
     const previousValues = this.state.previousValues;
     const outputConfiguration = this.state.outputConfiguration;
     const next = this.state.next;
@@ -69,6 +73,7 @@ class OutputCreate extends React.Component<Props> {
 
     const value: Output = {
       name,
+      condition,
       title,
       previous,
       type,
@@ -137,6 +142,12 @@ class OutputCreate extends React.Component<Props> {
   onChangeName = (e) => {
     this.setState({
       name: e.target.value,
+    });
+  };
+
+  onConditionSelected = (condition) => {
+    this.setState({
+      condition: condition,
     });
   };
 
@@ -229,6 +240,7 @@ class OutputCreate extends React.Component<Props> {
       previousValues,
       next,
       errors,
+      condition,
     } = this.state;
 
     let currentOutput: Output = {
@@ -279,9 +291,18 @@ class OutputCreate extends React.Component<Props> {
     } else if (type === OutputType.Topdesk) {
       outputEdit = (
         <TopdeskEdit
-          endpoint={outputConfiguration?.["endpoint"]}
-          username={outputConfiguration?.["username"]}
-          password={outputConfiguration?.["password"]}
+          template={outputConfiguration?.["template"]}
+          email={outputConfiguration?.["email"]}
+          briefDescription={outputConfiguration?.["briefDecsription"]}
+          errors={errors}
+          onChange={this.onChangeOutputConfiguration}
+        />
+      );
+    } else if (type === OutputType.TopdeskIncident) {
+      outputEdit = (
+        <TopdeskIncidentEdit
+          email={outputConfiguration?.["email"]}
+          briefDescription={outputConfiguration?.["briefDecsription"]}
           errors={errors}
           onChange={this.onChangeOutputConfiguration}
         />
@@ -322,6 +343,14 @@ class OutputCreate extends React.Component<Props> {
             errorMessage={
               errors?.path ? { children: errors?.path?.children } : undefined
             }
+          />
+          <SelectConditions
+            data={data}
+            hints={[]}
+            path={""}
+            selectedCondition={condition}
+            conditionsChange={this.onConditionSelected}
+            noFieldsHintText={i18n("conditions.noFieldsAvailable")}
           />
           <div className="govuk-form-group">
             <label className="govuk-label govuk-label--s" htmlFor="output-type">

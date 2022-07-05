@@ -1,3 +1,4 @@
+import SelectConditions from "@xgovformbuilder/designer/client/components/Conditions/SelectConditions";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
 import { randomId } from "@xgovformbuilder/designer/client/helpers";
@@ -16,6 +17,7 @@ import EmailEdit from "../../outputs/email-edit";
 import FreshdeskEdit from "../../outputs/freshdesk-edit";
 import NotifyEdit from "../../outputs/notify-edit";
 import S3FileUploadEdit from "../../outputs/s3fileupload-edit";
+import TopdeskEdit from "../../outputs/topdesk-edit";
 import { Output, OutputType, responses } from "../../outputs/types";
 import WebhookEdit from "../../outputs/webhook-edit";
 
@@ -40,6 +42,7 @@ export class OutputEdit extends React.Component<OutputEditProps> {
     this.state = {
       name: output.name ?? "",
       title: output?.title ?? "",
+      condition: output?.condition ?? "",
       type: output?.type ?? "",
       previous: output?.previous ?? "",
       previousValues: output?.previousValues ?? [],
@@ -53,14 +56,14 @@ export class OutputEdit extends React.Component<OutputEditProps> {
   onSubmit = async (e) => {
     e.preventDefault();
     const { save, data } = this.context;
-    const { title, name, type, outputConfiguration } = this.state;
+    const { title, name, type, outputConfiguration, condition } = this.state;
     const { output } = this.props;
 
     let validationErrors = this.validate(title, name);
     if (hasValidationErrors(validationErrors)) return;
 
     let copy = { ...data };
-    const [copyOutput, copyIndex] = findOutput(data, output.name);
+    let [copyOutput, copyIndex] = findOutput(data, output.name);
     const nameChanged = name !== output.name;
 
     if (nameChanged) {
@@ -71,8 +74,10 @@ export class OutputEdit extends React.Component<OutputEditProps> {
     copyOutput.title = title;
     copyOutput.type = type;
     copyOutput.outputConfiguration = outputConfiguration;
+    copyOutput.condition = condition;
 
     copy.outputs[copyIndex] = copyOutput;
+    console.log(copy.outputs[copyIndex]);
     try {
       await save(copy);
       this.props.onEdit({ data });
@@ -163,6 +168,12 @@ export class OutputEdit extends React.Component<OutputEditProps> {
     const name = e.target.value;
     this.setState({
       name: name,
+    });
+  };
+
+  onConditionSelected = (condition) => {
+    this.setState({
+      condition: condition,
     });
   };
 
@@ -266,7 +277,14 @@ export class OutputEdit extends React.Component<OutputEditProps> {
   render() {
     const { data } = this.context;
     const { i18n } = this.props;
-    const { title, name, outputConfiguration, type, errors } = this.state;
+    const {
+      title,
+      name,
+      outputConfiguration,
+      type,
+      errors,
+      condition,
+    } = this.state;
 
     let outputEdit: React.ReactNode;
 
@@ -299,6 +317,16 @@ export class OutputEdit extends React.Component<OutputEditProps> {
         <S3FileUploadEdit
           apiKey={outputConfiguration?.["apiKey"]}
           endpoint={outputConfiguration?.["endpoint"]}
+          errors={errors}
+          onChange={this.onChangeOutputConfiguration}
+        />
+      );
+    } else if (type === OutputType.Topdesk) {
+      outputEdit = (
+        <TopdeskEdit
+          template={outputConfiguration?.["template"]}
+          email={outputConfiguration?.["email"]}
+          briefDescription={outputConfiguration?.["briefDecsription"]}
           errors={errors}
           onChange={this.onChangeOutputConfiguration}
         />
@@ -338,6 +366,14 @@ export class OutputEdit extends React.Component<OutputEditProps> {
               errors?.name ? { children: errors?.name.children } : undefined
             }
           />
+          <SelectConditions
+            data={data}
+            hints={[]}
+            path={""}
+            selectedCondition={condition}
+            conditionsChange={this.onConditionSelected}
+            noFieldsHintText={i18n("conditions.noFieldsAvailable")}
+          />
           <div className="govuk-form-group">
             <label className="govuk-label govuk-label--s" htmlFor="output-type">
               Output type
@@ -354,6 +390,7 @@ export class OutputEdit extends React.Component<OutputEditProps> {
               <option value="webhook">Webhook</option>
               <option value="freshdesk">Freshdesk</option>
               <option value="s3fileupload">Upload File to S3</option>
+              <option value="topdesk">Create topdesk ticket</option>
             </select>
           </div>
           {outputEdit}

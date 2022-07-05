@@ -1,6 +1,5 @@
 import { allInputs } from "@xgovformbuilder/designer/client/components/FormComponent/componentData";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
-import { topdeskTemplates } from "@xgovformbuilder/designer/server/lib/outputs/topdesk";
 import { Select } from "govuk-react-jsx";
 import React, { ChangeEvent } from "react";
 import { useContext } from "react";
@@ -8,7 +7,6 @@ import { useContext } from "react";
 import { ValidationErrors } from "./types";
 
 type Props = {
-  template: string;
   email: string;
   briefDescription: string;
   onChange: (e: ChangeEvent) => void;
@@ -29,8 +27,7 @@ const fieldsForPath = (data) => {
   return fieldInputs;
 };
 
-const TopdeskEdit = ({
-  template,
+const TopdeskIncidentEdit = ({
   email,
   briefDescription,
   onChange,
@@ -39,32 +36,6 @@ const TopdeskEdit = ({
   const { data } = useContext(DataContext);
   return (
     <div className="govuk-body email-edit">
-      <Select
-        id="template"
-        items={[
-          { children: "- Please select -", value: "" },
-          { children: "None", value: "none" },
-          ...topdeskTemplates.map((template) => ({
-            children: template.briefDescription,
-            value: template.number,
-          })),
-        ]}
-        label={{
-          className: "govuk-label--s",
-          children: ["Change template"],
-        }}
-        hint={{
-          children: [
-            "The template to be used for creating the change request in TOPdesk",
-          ],
-        }}
-        name="template"
-        value={template}
-        onChange={(e) => onChange(e)}
-        errorMessage={
-          errors?.url ? { children: errors?.url.children } : undefined
-        }
-      />
       <Select
         id="email"
         items={[
@@ -88,35 +59,33 @@ const TopdeskEdit = ({
           errors?.url ? { children: errors?.url.children } : undefined
         }
       />
-      {template === "none" && (
-        <Select
-          id="briefDescription"
-          items={[
-            {
-              children: "- Please select -",
-              value: "",
-            },
-            ...fieldsForPath(data),
-          ]}
-          label={{
-            className: "govuk-label--s",
-            children: ["Brief description"],
-          }}
-          hint={{
-            children: [
-              "Field to use for the brief description on the topdesk ticket to be populated from",
-            ],
-          }}
-          name="briefDescription"
-          value={briefDescription}
-          onChange={(e) => onChange(e)}
-          errorMessage={
-            errors?.url ? { children: errors?.url.children } : undefined
-          }
-        />
-      )}
+      <Select
+        id="briefDescription"
+        items={[
+          {
+            children: "- Please select -",
+            value: "",
+          },
+          ...fieldsForPath(data),
+        ]}
+        label={{
+          className: "govuk-label--s",
+          children: ["Brief description"],
+        }}
+        hint={{
+          children: [
+            "Field to use for the brief description on the topdesk ticket to be populated from",
+          ],
+        }}
+        name="briefDescription"
+        value={briefDescription}
+        onChange={(e) => onChange(e)}
+        errorMessage={
+          errors?.url ? { children: errors?.url.children } : undefined
+        }
+      />
     </div>
   );
 };
 
-export default TopdeskEdit;
+export default TopdeskIncidentEdit;
