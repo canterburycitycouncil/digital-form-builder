@@ -32,7 +32,8 @@
     "*.md",
     ".eslintrc.json",
     "yarn.lock",
-    "*.scss"
+    "*.scss",
+    "*.css"
   ],
   "overrides": [
     {
