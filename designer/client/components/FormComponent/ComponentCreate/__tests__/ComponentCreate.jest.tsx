@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { ComponentCreate } from "@xgovformbuilder/designer/client/components/ComponentCreate/ComponentCreate";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { ComponentContextProvider } from "@xgovformbuilder/designer/client/reducers/component";
-import { DetailsComponent } from "@xgovformbuilder/model/src";
+import { DetailsComponent } from "@xgovformbuilder/model";
 import React from "react";
 
 describe("ComponentCreate:", () => {

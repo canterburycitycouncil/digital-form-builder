@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import hapi from "@hapi/hapi";
 import inert from "@hapi/inert";
 import Scooter from "@hapi/scooter";

@@ -1,4 +1,3 @@
-import { Data } from "@xgovformbuilder/model/src";
 import React from "react";
 
 import { ListSelect } from "../ListSelect";

@@ -1,7 +1,7 @@
 import { ComponentContext } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/componentReducer";
 import { Actions } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/types";
 import { GovUKInput } from "@xgovformbuilder/designer/client/components/GovUKFields";
-import { TelephoneNumberFieldComponent } from "@xgovformbuilder/model/src";
+import { TelephoneNumberFieldComponent } from "@xgovformbuilder/model";
 import React, { useContext } from "react";
 
 export function CustomValidationMessage() {
@@ -16,7 +16,7 @@ export function CustomValidationMessage() {
       fieldParent="options"
       type="text"
       value={options.customValidation || ""}
-      handleChange={(e) =>
+      handleChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         dispatch({
           type: Actions.EDIT_OPTIONS_CUSTOM_MESSAGE,
           payload: e.target.value,

@@ -1,4 +1,4 @@
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 
 import { findOutput } from "./findOutput";
 

@@ -1,7 +1,7 @@
 import { isEmpty } from "@xgovformbuilder/designer/client/helpers";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import { validateTitle } from "@xgovformbuilder/designer/client/validations";
-import { ComponentTypeEnum as Types } from "@xgovformbuilder/model/src";
+import { ComponentTypeEnum as Types } from "@xgovformbuilder/model";
 
 export interface ValidationError {
   href?: string;
@@ -11,45 +11,45 @@ export interface ValidationError {
 // TODO move validations to "@xgovformbuilder/designer/client/validations"
 const validateName = ({ name }) => {
   //TODO:- should also validate uniqueness.
-  const errors: any = {};
+  const errors: ValidationError[] = [];
   const nameIsEmpty = isEmpty(name);
   const nameHasSpace = /\s/g.test(name);
   if (nameHasSpace) {
-    errors.name = {
+    errors.push({
       href: `#field-name`,
-      children: ["name.errors.whitespace"],
-    };
+      children: "name.errors.whitespace",
+    });
   } else if (nameIsEmpty) {
-    errors.name = {
+    errors.push({
       href: `#field-name`,
       children: ["errors.field", { field: "Component name" }],
-    };
+    });
   }
 
   return errors;
 };
 
 const validateContent = ({ content }) => {
-  const errors: any = {};
+  const errors: ValidationError[] = [];
   const contentIsEmpty = isEmpty(content);
 
   if (contentIsEmpty) {
-    errors.content = {
+    errors.push({
       href: `#field-content`,
       children: ["errors.field", { field: "Content" }],
-    };
+    });
   }
 
   return errors;
 };
 
 const validateList = (component) => {
-  const errors: any = {};
+  const errors: ValidationError[] = [];
   if ((component?.list ?? "-1") === "-1") {
-    errors.list = {
+    errors.push({
       href: `#field-options-list`,
-      children: ["list.errors.select"],
-    };
+      children: "list.errors.select",
+    });
   }
   return errors;
 };
@@ -88,9 +88,10 @@ export function fieldComponentValidations(component) {
     validations.push(validateList(component));
   }
 
-  const errors = validations.reduce((acc, error: ValidationError) => {
-    return !!error ? { ...acc, ...error } : acc;
-  }, {});
+  const errors = validations.reduce((acc, error: ValidationError[]) => {
+    console.log(error);
+    return !!error ? [...acc, ...error] : acc;
+  }, []);
 
   return errors;
 }

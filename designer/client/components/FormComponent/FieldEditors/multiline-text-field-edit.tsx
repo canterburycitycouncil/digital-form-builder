@@ -1,4 +1,5 @@
 import { TextFieldEdit } from "@xgovformbuilder/designer/client/components/FormComponent/FieldEditors/text-field-edit";
+import { MultilineTextFieldComponent } from "@xgovformbuilder/model";
 import React, { useContext } from "react";
 
 import { ComponentContext } from "../componentReducer/componentReducer";
@@ -17,7 +18,7 @@ export function MultilineTextFieldEdit({ context = ComponentContext }) {
         name="options.rows"
         type="text"
         data-cast="number"
-        value={options.rows || ""}
+        value={(options as MultilineTextFieldComponent["options"]).rows || ""}
         onChange={(e) =>
           dispatch({
             type: Actions.EDIT_OPTIONS_ROWS,

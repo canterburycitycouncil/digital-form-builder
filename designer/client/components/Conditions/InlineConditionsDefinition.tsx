@@ -6,7 +6,7 @@ import {
   ConditionRef,
   conditionValueFrom,
   getOperatorNames,
-} from "@xgovformbuilder/model/src";
+} from "@xgovformbuilder/model";
 import React from "react";
 
 import { FieldInputObject } from "./InlineConditions";
@@ -16,11 +16,14 @@ function isCondition(fieldDef) {
   return fieldDef?.type === "Condition";
 }
 
+interface blankObject {
+  [key: string]: any;
+}
 interface Props {
   expectsCoordinator: boolean;
   condition?: Condition;
   fields: FieldInputObject;
-  saveCallback: (condition: Condition) => void;
+  saveCallback: (condition: Condition | ConditionRef) => void;
   conditionsChange?: (e) => void;
 }
 
@@ -56,7 +59,7 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
 
   onChangeCoordinator = (e) => {
     const input = e.target;
-    let newCondition: Condition = {};
+    let newCondition: blankObject = {};
 
     if (input.value && input.value.trim() !== "") {
       newCondition = clone(this.state.condition ?? {});
@@ -168,10 +171,10 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
 
   setState(state, callback) {
     if (
-      state.conditions ||
-      (state.selectedCondition !== undefined && this.props.conditionsChange)
+      (state.conditions || state.selectedCondition !== undefined) &&
+      this.props.conditionsChange
     ) {
-      this.props.conditionsChange(state.conditions, state.selectedCondition);
+      this.props.conditionsChange(state.conditions);
     }
     super.setState(state, callback);
   }

@@ -1,7 +1,7 @@
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { useListItem } from "@xgovformbuilder/designer/client/hooks/list/useListItem";
 import { i18n, withI18n } from "@xgovformbuilder/designer/client/i18n";
-import { clone } from "@xgovformbuilder/model/src";
+import { clone, FormDefinition } from "@xgovformbuilder/model";
 import React, { useContext } from "react";
 import {
   SortableContainer,
@@ -22,7 +22,7 @@ const DragHandle = SortableHandle(() => (
 
 const SortableItem = SortableElement(({ item, removeItem, selectListItem }) => {
   return (
-    <tr className="govuk-table__row" scope="row">
+    <tr className="govuk-table__row">
       <td className="govuk-table__cell" width="20px">
         <DragHandle />
       </td>
@@ -88,7 +88,7 @@ function ListItems() {
   const { prepareForDelete } = useListItem(state, dispatch);
 
   function removeItem(index: number) {
-    const copy = clone(data);
+    const copy = clone(data as FormDefinition);
     save(prepareForDelete(copy, index));
   }
 
@@ -122,7 +122,7 @@ function ListItems() {
 
         {!hasListItems && (
           <tbody className="govuk-table__body">
-            <tr className="govuk-table__row" scope="row">
+            <tr className="govuk-table__row">
               <td className="govuk-body">{i18n("list.items.hintNoItems")}</td>
             </tr>
           </tbody>

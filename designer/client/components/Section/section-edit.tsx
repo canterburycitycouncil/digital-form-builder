@@ -1,4 +1,4 @@
-import { FormDefinition, Section } from "@xgovformbuilder/model/src";
+import { FormDefinition, Section } from "@xgovformbuilder/model";
 import { Input } from "govuk-react-jsx";
 import React from "react";
 

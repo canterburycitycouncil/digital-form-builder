@@ -1,4 +1,4 @@
-import { ConditionRawData, FormDefinition } from "@xgovformbuilder/model/src";
+import { ConditionRawData, FormDefinition } from "@xgovformbuilder/model";
 
 import { findPage } from "./findPage";
 import { Path } from "./types";

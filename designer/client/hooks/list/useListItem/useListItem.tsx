@@ -3,7 +3,7 @@ import {
   findList,
 } from "@xgovformbuilder/designer/client/components/List/data";
 import { ListActions } from "@xgovformbuilder/designer/client/components/List/reducers/listActions";
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 
 import {
   hasValidationErrors,
@@ -46,10 +46,10 @@ export function useListItem(state, dispatch): ListItemHook {
 
   function validate(i18nProp) {
     const title = state.selectedItem.text || "";
-    const errors = {
+    const errors = [
       ...validateTitle("title", title, i18nProp),
       ...validateNotEmpty("value", "value", "value", value),
-    };
+    ];
 
     const valErrors = hasValidationErrors(errors);
 

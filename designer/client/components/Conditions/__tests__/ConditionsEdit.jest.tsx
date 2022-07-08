@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react";
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 import React from "react";
 
 import { DataContext, FlyoutContext } from "../../context";

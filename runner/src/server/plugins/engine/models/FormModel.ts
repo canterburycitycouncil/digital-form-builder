@@ -4,8 +4,8 @@ import {
   FormDefinition,
   List,
   Page,
-} from "@xgovformbuilder/model/src";
-import { clone } from "@xgovformbuilder/model/src";
+} from "@xgovformbuilder/model";
+import { clone } from "@xgovformbuilder/model";
 import { Schema } from "@xgovformbuilder/schema";
 import { Parser } from "expr-eval";
 import joi from "joi";

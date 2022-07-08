@@ -1,4 +1,4 @@
-import { ComponentDef, ComponentTypes } from "@xgovformbuilder/model/src";
+import { ComponentDef, ComponentTypes } from "@xgovformbuilder/model";
 import sortBy from "lodash/sortBy";
 import React, { MouseEvent, useCallback } from "react";
 

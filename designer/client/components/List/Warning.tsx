@@ -1,6 +1,6 @@
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
-import { clone, FormDefinition } from "@xgovformbuilder/model/src";
+import { clone, FormDefinition } from "@xgovformbuilder/model";
 import React, { useContext } from "react";
 
 import {

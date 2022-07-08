@@ -1,5 +1,6 @@
-import config from "../config";
 import pino from "hapi-pino";
+
+import config from "../config";
 
 export default {
   plugin: pino,

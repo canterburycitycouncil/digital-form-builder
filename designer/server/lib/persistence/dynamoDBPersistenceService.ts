@@ -1,4 +1,4 @@
-import { FormConfiguration, Logger } from "@xgovformbuilder/model/src";
+import { FormConfiguration, Logger } from "@xgovformbuilder/model";
 import * as AWS from "aws-sdk";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import { ConfigurationOptions } from "aws-sdk/lib/config-base";

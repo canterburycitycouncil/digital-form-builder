@@ -1,15 +1,15 @@
 import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
-import { ValidationErrors } from "@xgovformbuilder/designer/client/pages/Outputs/outputs/types";
 import logger from "@xgovformbuilder/designer/client/plugins/logger";
 import {
   hasValidationErrors,
   validateNotEmpty,
 } from "@xgovformbuilder/designer/client/validations";
+import { LogicExpressionTypes } from "@xgovformbuilder/model";
 import { Input, Select } from "govuk-react-jsx";
-import { LogicExpressionTypes } from "model/src";
 import React, { useState } from "react";
 
+import { ValidationError } from "../FormComponent/componentReducer/componentReducer.validations";
 import { ExpressionBuilder } from "./expression-builder";
 import { LogicExpressionProps } from "./types";
 
@@ -45,31 +45,23 @@ export const LogicExpressionEdit = ({
   const [expressionType, setExpressionType] = useState<LogicExpressionTypes>(
     "predefined"
   );
-  const [errors, setErrors] = useState<{}>({});
+  const [errors, setErrors] = useState<ValidationError[]>([]);
   const logicExpressions = [];
 
   const validate = () => {
-    const errors: ValidationErrors = {};
+    const errors: ValidationError[] = [];
 
-    validateNotEmpty(
-      "label-name",
-      "expression label",
-      "label",
-      labelName,
-      errors
-    );
+    validateNotEmpty("label-name", "expression label", labelName, errors);
 
     validateNotEmpty(
       "variable-name",
       "expression variable name",
-      "variable name",
       variableName,
       errors
     );
 
     validateNotEmpty(
       "select-1",
-      "chosen expression",
       "chosen expression",
       selectedExpression,
       errors
@@ -125,9 +117,7 @@ export const LogicExpressionEdit = ({
 
   return (
     <div className="govuk-body">
-      {hasValidationErrors(errors) && (
-        <ErrorSummary errorList={Object.values(errors)} />
-      )}
+      {hasValidationErrors(errors) && <ErrorSummary errorList={errors} />}
       {onCancel && (
         <a className="govuk-back-link" href="#" onClick={(e) => onCancel(e)}>
           Back

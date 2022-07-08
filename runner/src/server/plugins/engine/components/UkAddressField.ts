@@ -1,4 +1,4 @@
-import { InputFieldsComponentsDef } from "@xgovformbuilder/model/src";
+import { InputFieldsComponentsDef } from "@xgovformbuilder/model";
 import joi from "joi";
 import { ComponentCollection } from "runner/src/server/plugins/engine/components/ComponentCollection";
 import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";

@@ -1,10 +1,13 @@
+// @ts-nocheck
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
 import { hasValidationErrors } from "@xgovformbuilder/designer/client/validations";
 import {
+  ComponentDef,
+  ComponentTypeEnum,
   ComponentTypeEnum as Types,
   FormDefinition,
-} from "@xgovformbuilder/model/src";
+} from "@xgovformbuilder/model";
 import React, { memo, useContext, useLayoutEffect } from "react";
 
 import { updateComponent } from "./componentData";
@@ -53,7 +56,10 @@ export function ComponentEdit(props) {
       return;
     }
 
-    if (LIST_TYPES.includes(selectedComponent.type)) {
+    if (
+      selectedComponent.type &&
+      LIST_TYPES.includes(selectedComponent.type as ComponentTypeEnum)
+    ) {
       if (selectedListName !== "static") {
         componentToSubmit.values = {
           type: "listRef",
@@ -65,13 +71,15 @@ export function ComponentEdit(props) {
       }
     }
 
-    const updatedData = updateComponent(
-      data,
-      page.path,
-      initialName,
-      componentToSubmit
-    );
-    await save(updatedData);
+    if (componentToSubmit && componentToSubmit.type) {
+      const updatedData = updateComponent(
+        data,
+        page.path,
+        initialName as string,
+        componentToSubmit as ComponentDef
+      );
+      await save(updatedData);
+    }
     toggleShowEditor();
   };
 
@@ -82,7 +90,7 @@ export function ComponentEdit(props) {
     const indexOfComponent = copy.pages[indexOfPage].components?.findIndex(
       (component) => component.name === selectedComponent.initialName
     );
-    copy.pages[indexOfPage].components?.splice(indexOfComponent, 1);
+    copy.pages[indexOfPage].components?.splice(indexOfComponent as number, 1);
     await save(copy);
     toggleShowEditor();
   };

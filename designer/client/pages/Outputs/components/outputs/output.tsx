@@ -1,7 +1,7 @@
 import { Flyout } from "@xgovformbuilder/designer/client/components/Flyout";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { withI18n, WithI18nProps } from "@xgovformbuilder/designer/client/i18n";
-import { Output } from "@xgovformbuilder/model/src";
+import { Output } from "@xgovformbuilder/model";
 import React from "react";
 import { SortableContainer } from "react-sortable-hoc";
 

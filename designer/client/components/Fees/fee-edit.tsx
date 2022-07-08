@@ -1,10 +1,11 @@
-import { clone, Fee } from "@xgovformbuilder/model/src";
+import { clone, Fee } from "@xgovformbuilder/model";
 import { Input } from "govuk-react-jsx";
 import React from "react";
 
 import { DataContext } from "../../context";
 import ErrorSummary from "../../error-summary";
 import logger from "../../plugins/logger";
+import { ValidationError } from "../FormComponent/componentReducer/componentReducer.validations";
 import FeeItems from "./fee-items";
 
 interface Props {
@@ -14,12 +15,8 @@ interface Props {
   onEdit: ({ data }) => void;
 }
 
-interface Errors {
-  [key: string]: any;
-}
-
 interface State {
-  errors: Errors;
+  errors: ValidationError[];
   hasValidationErrors: boolean;
 }
 
@@ -31,7 +28,7 @@ class FeeEdit extends React.Component<Props, State> {
     super(props);
     this.feeItemsRef = React.createRef();
     this.state = {
-      errors: {},
+      errors: [],
       hasValidationErrors: false,
     };
   }
@@ -75,20 +72,16 @@ class FeeEdit extends React.Component<Props, State> {
 
   validate = (payApiKey, form) => {
     let apiKeyHasErrors = !payApiKey || payApiKey.length < 1;
-    let itemValidationErrors = this.feeItemsRef.current?.validate(form);
+    let itemValidationErrors = this.feeItemsRef.current?.validate(form) ?? [];
     let hasValidationErrors =
       apiKeyHasErrors ||
-      (itemValidationErrors !== undefined &&
-        Object.keys(itemValidationErrors).length > 0);
-    let errors: Errors = {};
+      (itemValidationErrors !== undefined && itemValidationErrors.length > 0);
+    let errors: ValidationError[] = [];
     if (apiKeyHasErrors) {
-      errors.payapi = { href: "#pay-api-key", children: "Enter Pay API key" };
+      errors.push({ href: "#pay-api-key", children: "Enter Pay API key" });
     }
     this.setState({
-      errors: {
-        ...itemValidationErrors,
-        ...errors,
-      },
+      errors: [...itemValidationErrors, ...errors],
       hasValidationErrors,
     });
 
@@ -127,7 +120,7 @@ class FeeEdit extends React.Component<Props, State> {
           {hasValidationErrors && (
             <ErrorSummary
               titleChildren="There is a problem"
-              errorList={Object.values(errors)}
+              errorList={errors}
             />
           )}
           <Input
@@ -139,8 +132,12 @@ class FeeEdit extends React.Component<Props, State> {
             }}
             defaultValue={payApiKey}
             errorMessage={
-              errors?.payapi
-                ? { children: errors?.payapi?.children }
+              errors?.find((error) => error.href?.includes("pay-api-key"))
+                ? {
+                    children: errors?.find((error) =>
+                      error.href?.includes("pay-api-key")
+                    )?.children,
+                  }
                 : undefined
             }
           />

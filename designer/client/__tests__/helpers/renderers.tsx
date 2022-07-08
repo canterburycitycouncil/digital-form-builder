@@ -1,9 +1,10 @@
-import { DataContext } from "@xgovformbuilder/designer/client/context";
 import {
   ComponentContext,
   componentReducer,
   initComponentState,
-} from "@xgovformbuilder/designer/client/reducers/component/componentReducer";
+} from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/componentReducer";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { FormDefinition } from "@xgovformbuilder/model";
 import React, { useReducer } from "react";
 
 export function RenderWithContext({ children, stateProps = {} }) {
@@ -34,7 +35,9 @@ export function RenderWithContextAndDataContext({
   );
 
   return (
-    <DataContext.Provider value={{ data: mockData, save: mockSave }}>
+    <DataContext.Provider
+      value={{ data: mockData as FormDefinition, save: mockSave }}
+    >
       <ComponentContext.Provider value={{ state, dispatch }}>
         {children}
       </ComponentContext.Provider>

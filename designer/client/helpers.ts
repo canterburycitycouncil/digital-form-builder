@@ -9,9 +9,18 @@ export const randomId = customAlphabet(
   6
 );
 
+interface CurrentFormInterface {
+  options?: {
+    [key: string]: any;
+  };
+  schema?: {
+    [key: string]: any;
+  };
+}
+
 export function getFormData(form) {
   const formData = new window.FormData(form);
-  const currentForm = {
+  const currentForm: CurrentFormInterface = {
     options: {},
     schema: {},
   };
@@ -39,10 +48,12 @@ export function getFormData(form) {
     const optionsPrefix = "options.";
     const schemaPrefix = "schema.";
 
-    value = value.trim();
+    if (typeof value === "string") {
+      value = value.trim();
+    }
 
     if (value) {
-      if (key.startsWith(optionsPrefix)) {
+      if (key.startsWith(optionsPrefix) && currentForm.options) {
         if (key === `${optionsPrefix}required` && value === "on") {
           currentForm.options.required = false;
         } else if (key === `${optionsPrefix}optionalText` && value === "on") {
@@ -53,7 +64,7 @@ export function getFormData(form) {
             value
           );
         }
-      } else if (key.startsWith(schemaPrefix)) {
+      } else if (key.startsWith(schemaPrefix) && currentForm.schema) {
         currentForm.schema[key.substr(schemaPrefix.length)] = cast(key, value);
       } else if (value) {
         currentForm[key] = value;
@@ -62,8 +73,10 @@ export function getFormData(form) {
   });
 
   // Cleanup
-  if (!Object.keys(currentForm.schema).length) delete currentForm.schema;
-  if (!Object.keys(currentForm.options).length) delete currentForm.options;
+  if (currentForm.schema && !Object.keys(currentForm.schema).length)
+    delete currentForm.schema;
+  if (currentForm.options && !Object.keys(currentForm.options).length)
+    delete currentForm.options;
 
   return currentForm;
 }
@@ -79,7 +92,7 @@ export function camelCase(str) {
   return str
     .trim()
     .toLowerCase()
-    .replace(/[\s-_]+(.)/g, (m, chr) => chr.toUpperCase())
+    .replace(/[\s-_]+(.)/g, (_m, chr) => chr.toUpperCase())
     .replace(/[^a-zA-Z0-9]/g, "");
 }
 

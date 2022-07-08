@@ -1,5 +1,7 @@
+// @ts-nocheck
+
 import { ErrorMessage } from "@xgovformbuilder/designer/client/components/ErrorMessage";
-import { ComponentTypes } from "@xgovformbuilder/model/src";
+import { ComponentTypes } from "@xgovformbuilder/model";
 import { Textarea } from "govuk-react-jsx";
 import { Input } from "govuk-react-jsx";
 import { Select } from "govuk-react-jsx";
@@ -37,12 +39,14 @@ export function FieldEdit({ isContentField = false }: Props) {
     },
   ];
   const availableVariables = emptyVariableOption.concat(
-    data.logicExpressions.map((expression) => {
-      return {
-        children: expression.variableName,
-        value: expression.variableName,
-      };
-    })
+    data
+      ? data.logicExpressions.map((expression) => {
+          return {
+            children: expression.variableName,
+            value: expression.variableName,
+          };
+        })
+      : []
   );
 
   return (
@@ -66,8 +70,12 @@ export function FieldEdit({ isContentField = false }: Props) {
             });
           }}
           errorMessage={
-            errors?.title
-              ? { children: i18n(errors.title[0], errors.title[1]) }
+            errors?.find((error) => error.href?.includes("field-title"))
+              ? {
+                  children: errors?.find((error) =>
+                    error.href?.includes("field-title")
+                  )?.children,
+                }
               : undefined
           }
         />
@@ -120,19 +128,23 @@ export function FieldEdit({ isContentField = false }: Props) {
         </div>
         <div
           className={`govuk-form-group ${
-            errors?.name ? "govuk-form-group--error" : ""
+            errors?.find((error) => error.href?.includes("field-name"))
+              ? "govuk-form-group--error"
+              : ""
           }`}
         >
           <label className="govuk-label govuk-label--s" htmlFor="field-name">
             {i18n("common.componentNameField.title")}
           </label>
-          {errors?.name && (
+          {errors?.find((error) => error.href?.includes("field-name")) && (
             <ErrorMessage>{i18n("name.errors.whitespace")}</ErrorMessage>
           )}
           <span className="govuk-hint">{i18n("name.hint")}</span>
           <input
             className={`govuk-input govuk-input--width-20 ${
-              errors?.name ? "govuk-input--error" : ""
+              errors?.find((error) => error.href?.includes("field-name"))
+                ? "govuk-input--error"
+                : ""
             }`}
             id="field-name"
             name="name"
@@ -229,11 +241,6 @@ export function FieldEdit({ isContentField = false }: Props) {
                 payload: e.target.value,
               });
             }}
-            errorMessage={
-              errors?.title
-                ? { children: i18n(errors.title[0], errors.title[1]) }
-                : undefined
-            }
           />
         )}
         {!isContentField && (
@@ -255,11 +262,6 @@ export function FieldEdit({ isContentField = false }: Props) {
                 payload: e.target.value,
               });
             }}
-            errorMessage={
-              errors?.title
-                ? { children: i18n(errors.title[0], errors.title[1]) }
-                : undefined
-            }
           />
         )}
         {!isContentField && (

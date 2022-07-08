@@ -1,5 +1,5 @@
-import { ListComponentsDef } from "@xgovformbuilder/model/src";
-import { Item, List } from "@xgovformbuilder/model/src";
+import { ListComponentsDef } from "@xgovformbuilder/model";
+import { Item, List } from "@xgovformbuilder/model";
 import joi, { Schema } from "joi";
 import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
 import { ListItem } from "runner/src/server/plugins/engine/components/types";

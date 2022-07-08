@@ -15,7 +15,7 @@ const DEFAULT_SETTINGS: InitOptions = {
   debug: false,
   interpolation: {
     escapeValue: false,
-    format: function (value, format, lng) {
+    format: function (value, format, _lng) {
       return interpolationFormats[format as string]?.(value) ?? value;
     },
   },

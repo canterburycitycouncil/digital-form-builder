@@ -1,8 +1,4 @@
-import {
-  FormDefinition,
-  LogicExpression,
-  Page,
-} from "@xgovformbuilder/model/src";
+import { FormDefinition, LogicExpression, Page } from "@xgovformbuilder/model";
 
 export interface LogicExpressionProps {
   data: FormDefinition;

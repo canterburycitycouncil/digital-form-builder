@@ -1,4 +1,5 @@
-import { DateDirections, RelativeTimeValue } from "@xgovformbuilder/model/src";
+import { DateDirections, RelativeTimeValue } from "@xgovformbuilder/model";
+import { DateTimeUnitValues } from "@xgovformbuilder/model";
 import React from "react";
 
 interface Props {
@@ -7,6 +8,10 @@ interface Props {
     timeUnit: string;
     direction: string;
   };
+  units?: {
+    value: string;
+    display: string;
+  }[];
   updateValue: (value: RelativeTimeValue) => void;
   timeOnly?: boolean;
 }
@@ -39,8 +44,8 @@ class RelativeTimeValues extends React.Component<Props, State> {
       this.props.updateValue(
         new RelativeTimeValue(
           timePeriod,
-          timeUnits,
-          direction,
+          timeUnits as DateTimeUnitValues,
+          direction as DateDirections,
           this.props.timeOnly || false
         )
       );
@@ -72,13 +77,14 @@ class RelativeTimeValues extends React.Component<Props, State> {
           data-testid="cond-value-units"
         >
           <option />
-          {Object.values(this.props.units).map((unit) => {
-            return (
-              <option key={unit.value} value={unit.value}>
-                {unit.display}
-              </option>
-            );
-          })}
+          {this.props.units &&
+            Object.values(this.props.units).map((unit) => {
+              return (
+                <option key={unit.value} value={unit.value}>
+                  {unit.display}
+                </option>
+              );
+            })}
         </select>
 
         <select

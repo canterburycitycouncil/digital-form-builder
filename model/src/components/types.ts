@@ -59,6 +59,7 @@ export type ConditionalComponent = {
 
 export type ContentOptions = {
   condition?: string;
+  classes?: string;
 };
 
 /**
@@ -99,6 +100,7 @@ interface NumberFieldBase {
   hint: string;
   options: {
     parameterName?: string;
+    classes?: string;
     isInternal?: boolean;
     isExternal?: boolean;
     variable?: string;
@@ -154,6 +156,7 @@ interface DateFieldBase {
     isInternal?: boolean;
     isExternal?: boolean;
     variable?: string;
+    classes?: string;
   };
   schema: {};
 }
@@ -171,9 +174,9 @@ export interface NumberFieldComponent extends NumberFieldBase {
   type: "NumberField";
 }
 
-export interface MultilineTextFieldComponent {
-  type: "MultilineTextField";
-}
+// export interface MultilineTextFieldComponent {
+//   type: "MultilineTextField";
+// }
 
 export interface TelephoneNumberFieldComponent extends TextFieldBase {
   type: "TelephoneNumberField";

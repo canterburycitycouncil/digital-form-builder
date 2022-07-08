@@ -8,7 +8,7 @@ import { FeatureFlagProvider } from "@xgovformbuilder/designer/client/context/Fe
 import { formatForm } from "@xgovformbuilder/designer/client/helpers";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import newFormJson from "@xgovformbuilder/designer/new-form.json";
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 import React, { Component } from "react";
 import { Prompt } from "react-router-dom";
 

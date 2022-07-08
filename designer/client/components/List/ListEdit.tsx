@@ -5,7 +5,7 @@ import {
   hasValidationErrors,
   validateTitle,
 } from "@xgovformbuilder/designer/client/validations";
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 import { Input } from "govuk-react-jsx";
 import React, { useContext } from "react";
 

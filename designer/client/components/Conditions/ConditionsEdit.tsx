@@ -3,16 +3,19 @@ import { allInputs } from "@xgovformbuilder/designer/client/components/FormCompo
 import { RenderInPortal } from "@xgovformbuilder/designer/client/components/RenderInPortal";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { ConditionRawData, FormDefinition } from "@xgovformbuilder/model";
 import React, { useContext, useState } from "react";
 
 import InlineConditions from "./InlineConditions";
 
 function useConditionsEditor() {
-  const [editingCondition, setEditingCondition] = useState(null);
+  const [
+    editingCondition,
+    setEditingCondition,
+  ] = useState<null | ConditionRawData>(null);
   const [showAddCondition, setShowAddCondition] = useState(false);
 
-  function onClickCondition(e, condition) {
+  function onClickCondition(e, condition: ConditionRawData) {
     e.preventDefault();
     setEditingCondition(condition);
   }

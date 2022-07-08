@@ -12,8 +12,8 @@ import {
   hasValidationErrors,
   validateTitle,
 } from "@xgovformbuilder/designer/client/validations";
-import { Page } from "@xgovformbuilder/model/src";
-import { clone } from "@xgovformbuilder/model/src";
+import { Page } from "@xgovformbuilder/model";
+import { clone } from "@xgovformbuilder/model";
 import { Input } from "govuk-react-jsx";
 import React from "react";
 

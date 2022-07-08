@@ -1,6 +1,6 @@
 import * as Code from "@hapi/code";
 import * as Lab from "@hapi/lab";
-import { FormConfiguration } from "@xgovformbuilder/model/src";
+import { FormConfiguration } from "@xgovformbuilder/model";
 import sinon from "sinon";
 
 import { S3PersistenceService } from "../server/lib/persistence/s3PersistenceService";

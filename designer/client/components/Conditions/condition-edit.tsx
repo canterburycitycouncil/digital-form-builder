@@ -1,7 +1,7 @@
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import Editor from "@xgovformbuilder/designer/client/editor";
 import logger from "@xgovformbuilder/designer/client/plugins/logger";
-import { ConditionsWrapper, FormDefinition } from "@xgovformbuilder/model/src";
+import { ConditionsWrapper, FormDefinition } from "@xgovformbuilder/model";
 import React from "react";
 
 import { removeCondition, updateCondition } from "./data";

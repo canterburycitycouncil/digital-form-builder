@@ -1,4 +1,4 @@
-import { ConditionRawData } from "@xgovformbuilder/model/src";
+import { ConditionRawData } from "@xgovformbuilder/model";
 import { FeedbackContextInfo } from "runner/src/server/plugins/engine/feedback";
 import type { Fees } from "runner/src/server/services/payService";
 

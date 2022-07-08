@@ -1,4 +1,4 @@
-import { FormDefinition, isMultipleApiKey } from "@xgovformbuilder/model/src";
+import { FormDefinition, isMultipleApiKey } from "@xgovformbuilder/model";
 import { clone, reach } from "hoek";
 import config from "runner/src/server/config";
 import { decodeFeedbackContextInfo } from "runner/src/server/plugins/engine/feedback";

@@ -44,7 +44,6 @@ export enum actionColor {
 }
 
 export const ExpressionBuilder: FC<Props> = ({
-  expression,
   expressionType,
   onExpressionChange,
 }) => {

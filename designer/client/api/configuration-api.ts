@@ -1,4 +1,4 @@
-import { FormConfiguration } from "@xgovformbuilder/model/src";
+import { FormConfiguration } from "@xgovformbuilder/model";
 
 import logger from "../plugins/logger";
 

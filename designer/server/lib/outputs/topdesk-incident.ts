@@ -2,7 +2,7 @@ import {
   ComponentDef,
   FormDefinition,
   TopdeskOutputConfiguration,
-} from "@xgovformbuilder/model/src";
+} from "@xgovformbuilder/model";
 import btoa from "btoa";
 import FormData from "form-data";
 import fetch from "node-fetch";

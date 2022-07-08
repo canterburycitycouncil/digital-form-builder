@@ -1,4 +1,4 @@
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 import { Select } from "govuk-react-jsx";
 import React, { ChangeEvent, FC, FormEvent, useState } from "react";
 

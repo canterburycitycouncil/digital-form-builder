@@ -1,4 +1,4 @@
-import { ComponentDef } from "@xgovformbuilder/model/src";
+import { ComponentDef } from "@xgovformbuilder/model";
 
 import { findPage } from "../../Page/data";
 import { Path } from "../componentData/types";

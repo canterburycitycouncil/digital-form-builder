@@ -3,7 +3,7 @@ import LinkCreate from "@xgovformbuilder/designer/client/components/Links/link-c
 import { useMenuItem } from "@xgovformbuilder/designer/client/components/Menu/useMenuItem";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 import React, { useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 

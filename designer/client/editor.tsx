@@ -3,7 +3,7 @@
 
 // import core from "prismjs/components/prism-core";
 import React from "react";
-import SimpleEditor from "react-simple-code-editor";
+// import SimpleEditor from "react-simple-code-editor";
 
 interface Props {
   value: string;

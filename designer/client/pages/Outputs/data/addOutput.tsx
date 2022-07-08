@@ -1,4 +1,4 @@
-import { FormDefinition, Output } from "@xgovformbuilder/model/src";
+import { FormDefinition, Output } from "@xgovformbuilder/model";
 
 export function addOutput(
   data: FormDefinition,

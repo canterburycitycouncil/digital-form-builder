@@ -11,6 +11,11 @@
       "lib": ["DOM", "es2018.promise", "ES2019"],
       "noEmit": false
     },
+    "references": [
+      {
+        "path": "../model"
+      }
+    ],
     "include": [
       "server",
       "client",
@@ -19,6 +24,6 @@
       "client/i18n/translations/en.translation.json",
       "test/helpers/window-stubbing.js"
     ],
-    "exclude": ["node_modules", "../node_modules", "**/*.jest.*", "**/*.test.*", "**/__tests__"]
+    "exclude": ["node_modules", "../node_modules", "**/*.jest.*", "**/*.test.*", "**/__tests__/*",]
   }
   

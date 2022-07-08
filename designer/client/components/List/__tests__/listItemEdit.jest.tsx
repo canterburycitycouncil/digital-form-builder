@@ -1,4 +1,4 @@
-import { Data } from "@xgovformbuilder/model/src";
+import { Data } from "@xgovformbuilder/model";
 import React from "react";
 
 import { ListItemEdit } from "../ListItemEdit";

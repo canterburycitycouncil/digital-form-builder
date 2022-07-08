@@ -9,8 +9,8 @@ import { DataContext } from "@xgovformbuilder/designer/client/context";
 import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import logger from "@xgovformbuilder/designer/client/plugins/logger";
-import { FormConfiguration } from "@xgovformbuilder/model/src";
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormConfiguration } from "@xgovformbuilder/model";
+import { FormDefinition } from "@xgovformbuilder/model";
 import isFunction from "lodash/isFunction";
 import React, { ChangeEvent, Component, ContextType, FormEvent } from "react";
 

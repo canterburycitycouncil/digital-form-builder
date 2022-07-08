@@ -1,6 +1,8 @@
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import React, { useEffect, useRef } from "react";
 
+import { ValidationError } from "./components/FormComponent/componentReducer/componentReducer.validations";
+
 export interface ErrorListItem {
   reactListKey?: string;
   href?: string;
@@ -10,7 +12,7 @@ export interface ErrorListItem {
 interface ErrorSummaryProps {
   className?: string;
   descriptionChildren?: string;
-  errorList: Array<ErrorListItem>;
+  errorList: ValidationError[];
   titleChildren?: string;
 }
 
@@ -20,10 +22,12 @@ export function ErrorSummary({
   errorList,
   titleChildren = "There is a problem",
 }: ErrorSummaryProps) {
-  const errorSummaryRef = useRef();
+  const errorSummaryRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    errorSummaryRef.current.focus();
+    if (errorSummaryRef.current) {
+      errorSummaryRef.current.focus();
+    }
   }, []);
 
   let description;
@@ -38,6 +42,8 @@ export function ErrorSummary({
       element.focus();
     }
   };
+
+  console.log(errorList);
 
   return (
     <div

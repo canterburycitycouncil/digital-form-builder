@@ -1,4 +1,4 @@
-import { InputFieldsComponentsDef } from "@xgovformbuilder/model/src";
+import { InputFieldsComponentsDef } from "@xgovformbuilder/model";
 import { FormComponent } from "runner/src/server/plugins/engine/components/FormComponent";
 import * as helpers from "runner/src/server/plugins/engine/components/helpers";
 import { addClassOptionIfNone } from "runner/src/server/plugins/engine/components/helpers";

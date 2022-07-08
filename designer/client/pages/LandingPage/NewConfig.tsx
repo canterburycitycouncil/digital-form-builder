@@ -3,16 +3,16 @@ import "./LandingPage.scss";
 import * as formConfigurationApi from "@xgovformbuilder/designer/client/api/configuration-api";
 import { Input } from "govuk-react-jsx";
 import React, { Component, MouseEvent } from "react";
-import { withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
 import { BackLink } from "../../components/BackLink";
 import ErrorSummary from "../../error-summary";
 import { isEmpty } from "../../helpers";
 import { i18n } from "../../i18n";
 
-type Props = {
+interface Props extends RouteComponentProps {
   history: any;
-};
+}
 
 type State = {
   configs: { Key: string; DisplayName: string }[];

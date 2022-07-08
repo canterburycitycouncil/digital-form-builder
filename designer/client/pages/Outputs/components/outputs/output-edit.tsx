@@ -9,7 +9,7 @@ import {
   validateTitle,
 } from "@xgovformbuilder/designer/client/validations";
 import { Input } from "@xgovformbuilder/govuk-react-jsx";
-import { clone } from "@xgovformbuilder/model/src";
+import { clone } from "@xgovformbuilder/model";
 import React from "react";
 
 import { findOutput, updateLinksTo } from "../../data/findOutput";

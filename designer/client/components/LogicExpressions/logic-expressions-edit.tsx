@@ -1,6 +1,6 @@
 import { LogicExpressionEdit } from "@xgovformbuilder/designer/client/components/LogicExpressions";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
-import { LogicExpression } from "@xgovformbuilder/model/src";
+import { FormDefinition, LogicExpression } from "@xgovformbuilder/model";
 import React, { useContext, useState } from "react";
 
 export const LogicExpressionsEdit = () => {
@@ -11,7 +11,7 @@ export const LogicExpressionsEdit = () => {
   ] = useState<LogicExpression | null>(null);
   const [showAddExpression, setShowAddExpression] = useState(false);
 
-  const logicExpressions = data.logicExpressions;
+  const logicExpressions = data?.logicExpressions;
 
   const onClickExpression = (event, expression) => {
     event.preventDefault();
@@ -23,6 +23,7 @@ export const LogicExpressionsEdit = () => {
     e.preventDefault();
     setLogicExpression({
       label: "new logic expression",
+      expressionType: "predefined",
       variableName: "",
       expression: "{number_of_rooms} * 500",
     });
@@ -51,7 +52,7 @@ export const LogicExpressionsEdit = () => {
         <div>
           {showAddExpression ? (
             <LogicExpressionEdit
-              data={data}
+              data={data as FormDefinition}
               save={save}
               logicExpression={(logicExpression as unknown) as LogicExpression}
               onEdit={() => setShowAddExpression(false)}
@@ -78,7 +79,7 @@ export const LogicExpressionsEdit = () => {
       ) : (
         <LogicExpressionEdit
           logicExpression={logicExpression}
-          data={data}
+          data={data as FormDefinition}
           save={save}
           onEdit={(e: Event) => handleEdit(e)}
           onCancel={(e: Event) => handleCancel(e)}

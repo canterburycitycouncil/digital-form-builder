@@ -1,4 +1,4 @@
-import { FormDefinition, Page, Section } from "@xgovformbuilder/model/src";
+import { FormDefinition, Page, Section } from "@xgovformbuilder/model";
 import React from "react";
 
 import { Flyout } from "../Flyout";

@@ -1,4 +1,4 @@
-import { FormDefinition, Section } from "@xgovformbuilder/model/src";
+import { FormDefinition, Section } from "@xgovformbuilder/model";
 
 /**
  * @param data - data from DataContext

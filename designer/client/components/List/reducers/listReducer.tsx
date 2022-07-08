@@ -178,7 +178,7 @@ export const ListContextProvider = (props) => {
   const { selectedListName } = props;
   const { data } = useContext(DataContext);
 
-  if (selectedListName) {
+  if (selectedListName && data) {
     init = {
       selectedList: data.lists.find(
         (list) => list.name === props.selectedListName

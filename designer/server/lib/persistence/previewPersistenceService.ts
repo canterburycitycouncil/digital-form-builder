@@ -1,6 +1,7 @@
-import type { PersistenceService } from "./persistenceService";
 import Wreck from "@hapi/wreck";
+
 import config from "../../config";
+import type { PersistenceService } from "./persistenceService";
 
 /**
  * Persistence service that relies on the runner for storing
@@ -8,11 +9,13 @@ import config from "../../config";
  * This should likely never be used in production but is a handy
  * development utility.
  */
+
+// @ts-nocheck
 export class PreviewPersistenceService implements PersistenceService {
   logger: any;
 
   async uploadConfiguration(id: string, configuration: string) {
-    return Wreck.post(`${config.publishUrl}/publish`, {
+    Wreck.post(`${config.publishUrl}/publish`, {
       payload: JSON.stringify({ id, configuration }),
     });
   }
@@ -24,11 +27,15 @@ export class PreviewPersistenceService implements PersistenceService {
 
   async listAllConfigurations() {
     const { payload } = await Wreck.get(`${config.publishUrl}/published`);
-    return JSON.parse(payload.toString());
+    return JSON.parse((payload as object).toString());
   }
 
   async getConfiguration(id: string) {
     const { payload } = await Wreck.get(`${config.publishUrl}/published/${id}`);
-    return payload.toString();
+    return (payload as object).toString();
+  }
+
+  async deleteConfiguration(_configurationId: string): Promise<any> {
+    return "";
   }
 }

@@ -2,7 +2,7 @@ import ListsEdit from "@xgovformbuilder/designer/client/components/List/ListsEdi
 import { ListsEditorContextProvider } from "@xgovformbuilder/designer/client/components/List/reducers/list/listsEditorReducer";
 import { ListContextProvider } from "@xgovformbuilder/designer/client/components/List/reducers/listReducer";
 import { RenderInPortal } from "@xgovformbuilder/designer/client/components/RenderInPortal";
-import { Page } from "@xgovformbuilder/model/src";
+import { Page } from "@xgovformbuilder/model";
 import React, { ReactNode } from "react";
 
 import ComponentListSelect from "../components/ComponentListSelect/ComponentListSelect";

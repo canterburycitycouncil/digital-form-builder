@@ -1,4 +1,4 @@
-import { FormDefinition, Section } from "@xgovformbuilder/model/src";
+import { FormDefinition, Section } from "@xgovformbuilder/model";
 
 import { addSection } from "../addSection";
 

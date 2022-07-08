@@ -6,10 +6,9 @@ import {
 import {
   clone,
   Condition,
-  ConditionGroupDef,
   ConditionsModel,
   toPresentationString,
-} from "@xgovformbuilder/model/src";
+} from "@xgovformbuilder/model";
 import React from "react";
 
 import { FieldInputObject } from "./InlineConditions";
@@ -24,7 +23,7 @@ interface Props {
 
 interface State {
   conditions: ConditionsModel;
-  selectedConditions: ConditionsModel;
+  selectedConditions: number[];
   condition?: Condition;
   editingError?: string;
   editingIndex?: number;
@@ -56,47 +55,47 @@ class InlineConditionsEdit extends React.Component<Props, State> {
     );
   };
 
-  onClickGroup = (e) => {
-    e?.preventDefault();
-    if (this.state.selectedConditions?.length < 2) {
-      this.setState(
-        {
-          editingError: "Please select at least 2 items for grouping",
-        },
-        () => {}
-      );
-    } else {
-      const groups = this.groupWithConsecutiveConditions(
-        this.state.selectedConditions
-      );
-      if (groups.find((group) => group.length === 1)) {
-        this.setState(
-          {
-            editingError: "Please select consecutive items to group",
-          },
-          () => {}
-        );
-      } else {
-        this.setState(
-          {
-            editingError: undefined,
-            selectedConditions: [],
-            conditions: this.state.conditions.addGroups(
-              groups
-                .sort((a, b) => a - b)
-                .reduce((groupDefs, group) => {
-                  groupDefs.push(
-                    new ConditionGroupDef(group[0], group[group.length - 1])
-                  );
-                  return groupDefs;
-                }, [])
-            ),
-          },
-          () => {}
-        );
-      }
-    }
-  };
+  // onClickGroup = (e) => {
+  //   e?.preventDefault();
+  //   if (this.state.selectedConditions?.length < 2) {
+  //     this.setState(
+  //       {
+  //         editingError: "Please select at least 2 items for grouping",
+  //       },
+  //       () => {}
+  //     );
+  //   } else {
+  //     const groups = this.groupWithConsecutiveConditions(
+  //       this.state.selectedConditions
+  //     );
+  //     if (groups.find((group) => group.length === 1)) {
+  //       this.setState(
+  //         {
+  //           editingError: "Please select consecutive items to group",
+  //         },
+  //         () => {}
+  //       );
+  //     } else {
+  //       this.setState(
+  //         {
+  //           editingError: undefined,
+  //           selectedConditions: [],
+  //           conditions: this.state.conditions.addGroups(
+  //             groups
+  //               .sort((a, b) => a - b)
+  //               .reduce((groupDefs, group) => {
+  //                 groupDefs.push(
+  //                   new ConditionGroupDef(group[0], group[group.length - 1])
+  //                 );
+  //                 return groupDefs;
+  //               }, [])
+  //           ),
+  //         },
+  //         () => {}
+  //       );
+  //     }
+  //   }
+  // };
 
   onClickRemove = (e) => {
     e?.preventDefault();
@@ -125,22 +124,22 @@ class InlineConditionsEdit extends React.Component<Props, State> {
     }
   };
 
-  groupWithConsecutiveConditions(selectedConditions) {
-    const result: ConditionGroupDef[] = [];
-    selectedConditions.sort((a, b) => a - b);
-    selectedConditions.forEach((condition) => {
-      const groupForCondition = result.find(
-        (group) =>
-          group.includes(condition - 1) || group.includes(condition + 1)
-      );
-      if (groupForCondition) {
-        groupForCondition.push(condition);
-      } else {
-        result.push([condition]);
-      }
-    });
-    return result;
-  }
+  // groupWithConsecutiveConditions(selectedConditions: number[]) {
+  //   const result: ConditionGroupDef[] = [];
+  //   selectedConditions.sort((a, b) => a - b);
+  //   selectedConditions.forEach((condition) => {
+  //     const groupForCondition = result.find(
+  //       (group) =>
+  //         group.contains(condition - 1) || group.contains(condition + 1)
+  //     );
+  //     if (groupForCondition) {
+  //       groupForCondition.push(condition);
+  //     } else {
+  //       result.push([condition]);
+  //     }
+  //   });
+  //   return result;
+  // }
 
   componentDidUpdate(prevProps) {
     if (prevProps.conditions !== this.props.conditions) {
@@ -225,7 +224,7 @@ class InlineConditionsEdit extends React.Component<Props, State> {
     this.setState(
       {
         conditions: this.state.conditions.replace(
-          this.state.editingIndex,
+          this.state.editingIndex as number,
           condition
         ),
         condition: undefined,
@@ -272,7 +271,7 @@ class InlineConditionsEdit extends React.Component<Props, State> {
                       name={`condition-${index}`}
                       value={index}
                       onChange={this.onChangeCheckbox}
-                      checked={selectedConditions?.includes(index) || ""}
+                      checked={selectedConditions?.includes(index) || false}
                     />
                     <label
                       className="govuk-label govuk-checkboxes__label"
@@ -345,7 +344,7 @@ class InlineConditionsEdit extends React.Component<Props, State> {
               })}
             </div>
             <div className="govuk-form-group" id="group-and-remove">
-              {selectedConditions?.length > 1 && (
+              {/* {selectedConditions?.length > 1 && (
                 <span>
                   <a
                     href="#"
@@ -357,7 +356,7 @@ class InlineConditionsEdit extends React.Component<Props, State> {
                   </a>{" "}
                   /
                 </span>
-              )}
+              )} */}
               {selectedConditions?.length > 0 && (
                 <a
                   href="#"

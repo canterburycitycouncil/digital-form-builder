@@ -1,10 +1,9 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
-import { topdeskIncident } from "@xgovformbuilder/designer/server/lib/outputs/topdesk-incident";
 import {
   Condition,
   ConditionValue,
   TopdeskOutputConfiguration,
-} from "@xgovformbuilder/model/src";
+} from "@xgovformbuilder/model";
 import fetch from "node-fetch";
 
 import {
@@ -15,6 +14,7 @@ import {
 import { freshdesk, s3fileupload, webhook } from "../../../../lib/outputs";
 import { FileResponse, FileUpload } from "../../../../lib/outputs/s3fileupload";
 import { topdesk } from "../../../../lib/outputs/topdesk";
+import { topdeskIncident } from "../../../../lib/outputs/topdesk-incident";
 import { getTrueSubmission, returnResponse } from "../../helpers";
 import { IntegrationLog, OutputRequest } from "../../types";
 

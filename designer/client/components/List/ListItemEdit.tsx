@@ -1,7 +1,7 @@
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { useListItem } from "@xgovformbuilder/designer/client/hooks/list/useListItem";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 import { Input } from "govuk-react-jsx";
 import { Textarea } from "govuk-react-jsx";
 import { Label } from "govuk-react-jsx";

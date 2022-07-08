@@ -6,7 +6,7 @@ import {
   dateUnits,
   RelativeTimeValue,
   timeUnits,
-} from "@xgovformbuilder/model/src";
+} from "@xgovformbuilder/model";
 import { shallow } from "enzyme";
 import React from "react";
 import sinon from "sinon";

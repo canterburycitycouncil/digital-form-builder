@@ -18,10 +18,10 @@ import {
   clone,
   ConditionRawData,
   ConditionsModel,
+  ConditionWrapperValue,
   Item,
-} from "@xgovformbuilder/model/src";
+} from "@xgovformbuilder/model";
 import classNames from "classnames";
-import { ConditionWrapperValue } from "model/src/data-model";
 import React, { ChangeEvent, MouseEvent } from "react";
 
 import InlineConditionsEdit from "./inline-conditions-edit";

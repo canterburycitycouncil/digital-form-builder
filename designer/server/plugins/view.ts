@@ -1,6 +1,6 @@
+import nunjucks from "nunjucks";
 import path from "path";
 import resolve from "resolve";
-import nunjucks from "nunjucks";
 import vision from "vision";
 
 import pkg from "../../package.json";

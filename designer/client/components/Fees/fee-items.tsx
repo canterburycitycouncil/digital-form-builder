@@ -1,9 +1,9 @@
 import {
   clone,
-  Condition,
+  ConditionRawData,
   Fee,
   FormDefinition,
-} from "@xgovformbuilder/model/src";
+} from "@xgovformbuilder/model";
 import classNames from "classnames";
 import { ErrorMessage } from "govuk-react-jsx";
 import React from "react";
@@ -11,6 +11,7 @@ import React from "react";
 import { DataContext } from "../../context";
 import { isEmpty } from "../../helpers";
 import logger from "../../plugins/logger";
+import { ValidationError } from "../FormComponent/componentReducer/componentReducer.validations";
 
 function headDuplicate(arr) {
   for (let i = 0; i < arr.length; i++) {
@@ -25,7 +26,7 @@ function headDuplicate(arr) {
 
 interface Props {
   items: Fee[];
-  conditions: Condition[];
+  conditions: ConditionRawData[];
   ref: React.RefObject<FeeItems>;
   data: FormDefinition;
   fee: Fee;
@@ -34,19 +35,13 @@ interface Props {
 
 interface State {
   items: Fee[];
-  errors: MissingError;
+  errors: ValidationError[];
 }
 
-interface MissingError {
+export interface MissingError {
   href?: string;
   children?: string;
-  [key: string]: boolean | string | undefined | MissingError;
 }
-
-const MISSING_DESC = "missingDescription";
-const INVALID_AMOUNT = "invalidAmount";
-const MISSING_COND = "missingCondition";
-const DUP_CONDITIONS = "dupConditions";
 
 class FeeItems extends React.Component<Props, State> {
   static contextType = DataContext;
@@ -55,54 +50,39 @@ class FeeItems extends React.Component<Props, State> {
     super(props);
     this.state = {
       items: props.items ? clone(props.items) : [],
-      errors: {},
+      errors: [],
     };
   }
 
   validate = (form) => {
-    let errors = {};
+    let errors: ValidationError[] = [];
     const formData = new window.FormData(form);
-    let missingDescription = false;
-    let missingDescriptions: MissingError = {};
-    let amountInvalid = false;
-    let amountsInvalid: MissingError = {};
-    let missingCondition = false;
-    let missingConditions: MissingError = {};
     formData.getAll("description").forEach((d, i) => {
       if (isEmpty(d as string)) {
-        missingDescriptions[i] = true;
-        missingDescription = true;
+        errors.push({
+          href: `#description-${i}`,
+          children: "Enter description",
+        });
       }
     });
-    if (missingDescription) {
-      missingDescriptions.href = "#items-table";
-      missingDescriptions.children = "Enter description";
-      errors[MISSING_DESC] = missingDescriptions;
-    }
 
     formData.getAll("condition").forEach((d, i) => {
       if (isEmpty(d as string)) {
-        missingDescriptions[i] = true;
-        missingCondition = true;
+        errors.push({
+          href: `#condition-${i}`,
+          children: "Select a condition",
+        });
       }
     });
-    if (missingCondition) {
-      missingConditions.href = "#items-table";
-      missingConditions.children = "Select a condition";
-      errors[MISSING_COND] = missingConditions;
-    }
 
     formData.getAll("amount").forEach((d, i) => {
       if (((d as unknown) as number) < 0) {
-        amountsInvalid[i] = true;
-        amountInvalid = true;
+        errors.push({
+          href: `#amount-${i}`,
+          children: "Enter a valid amount",
+        });
       }
     });
-    if (amountInvalid) {
-      amountsInvalid.href = "#items-table";
-      amountsInvalid.children = "Enter a valid amount";
-      errors[INVALID_AMOUNT] = amountsInvalid;
-    }
 
     const descriptions = formData
       .getAll("description")
@@ -113,10 +93,10 @@ class FeeItems extends React.Component<Props, State> {
 
     // Only validate dupes if there is more than one item
     if (descriptions.length >= 2 && headDuplicate(conditions)) {
-      errors[DUP_CONDITIONS] = {
+      errors.push({
         href: "#items-table",
         children: "Duplicate conditions found in the list items",
-      };
+      });
     }
 
     this.setState({
@@ -139,8 +119,8 @@ class FeeItems extends React.Component<Props, State> {
 
   removeItem = (idx) => {
     this.setState(() => ({
-      items: this.state.items.filter((s, i) => i !== idx),
-      errors: {},
+      items: this.state.items.filter((_s, i) => i !== idx),
+      errors: [],
     }));
   };
 
@@ -173,10 +153,10 @@ class FeeItems extends React.Component<Props, State> {
 
     let hasValidationErrors = Object.keys(errors).length > 0;
 
-    const errorMessages = Object.entries(errors).map(([key, value]) => {
+    const errorMessages = errors.map((value, index) => {
       return (
-        <ErrorMessage key={key}>
-          {value ? (value as MissingError).children : null}
+        <ErrorMessage key={`error-message-${index}`}>
+          {value ? value.children : null}
         </ErrorMessage>
       );
     });
@@ -219,9 +199,13 @@ class FeeItems extends React.Component<Props, State> {
               <tr key={item.description + index} className="govuk-table__row">
                 <td className="govuk-table__cell">
                   <input
+                    id={`description-${index}`}
                     className={classNames({
                       "govuk-input": true,
-                      "govuk-input--error": errors?.[MISSING_DESC]?.[index],
+                      "govuk-input--error": errors.find(
+                        (err) =>
+                          err.href && err.href.includes(`description-${index}`)
+                      ),
                     })}
                     name="description"
                     type="text"
@@ -230,9 +214,13 @@ class FeeItems extends React.Component<Props, State> {
                 </td>
                 <td className="govuk-table__cell">
                   <input
+                    id={`amount-${index}`}
                     className={classNames({
                       "govuk-input": true,
-                      "govuk-input--error": errors?.[INVALID_AMOUNT]?.[index],
+                      "govuk-input--error": errors.find(
+                        (err) =>
+                          err.href && err.href.includes(`amount-${index}`)
+                      ),
                     })}
                     name="amount"
                     type="number"
@@ -244,9 +232,12 @@ class FeeItems extends React.Component<Props, State> {
                   <select
                     className={classNames({
                       "govuk-select": true,
-                      "govuk-input--error": errors?.[MISSING_COND]?.[index],
+                      "govuk-input--error": errors.find(
+                        (err) =>
+                          err.href && err.href.includes(`condition-${index}`)
+                      ),
                     })}
-                    id="link-source"
+                    id={`condition-${index}`}
                     name="condition"
                     defaultValue={item.condition}
                   >

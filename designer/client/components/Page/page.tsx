@@ -2,8 +2,8 @@ import { Component } from "@xgovformbuilder/designer/client/components/FormCompo
 import { ComponentContextProvider } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/componentReducer";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { I18n, withI18n } from "@xgovformbuilder/designer/client/i18n";
-import { ComponentDef, ComponentTypes } from "@xgovformbuilder/model/src";
-import { FormDefinition, Page } from "@xgovformbuilder/model/src";
+import { ComponentDef, ComponentTypes } from "@xgovformbuilder/model";
+import { FormDefinition, Page } from "@xgovformbuilder/model";
 import React from "react";
 import {
   arrayMove,
@@ -126,7 +126,7 @@ export class PageComponent extends React.Component<PageProps, PageState> {
 
     const section =
       page.section && sections.find((section) => section.name === page.section);
-    const conditional = !!page.condition;
+    // const conditional = !!page.condition;
 
     let pageTitle =
       page.title ||
@@ -141,10 +141,7 @@ export class PageComponent extends React.Component<PageProps, PageState> {
     // }
 
     const highlight = persona?.paths?.includes(page.path);
-    const pageClassName = [
-      `page${conditional ? " conditional" : ""}`,
-      `${highlight ? "highlight" : ""}`,
-    ].join(" ");
+    const pageClassName = [`page`, `${highlight ? "highlight" : ""}`].join(" ");
 
     return (
       <div

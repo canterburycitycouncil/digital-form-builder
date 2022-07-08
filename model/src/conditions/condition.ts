@@ -1,8 +1,8 @@
-import { ConditionField } from "./condition-field";
 import { ConditionAbstract } from "./condition-abstract";
+import { ConditionField } from "./condition-field";
 import { getExpression } from "./condition-operators";
-import { ConditionValue, RelativeTimeValue } from "./condition-values";
 import { ConditionValueAbstract } from "./condition-value-abstract";
+import { ConditionValue, RelativeTimeValue } from "./condition-values";
 import { Coordinator } from "./types";
 
 export class Condition extends ConditionAbstract {

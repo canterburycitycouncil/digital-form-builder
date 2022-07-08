@@ -1,4 +1,4 @@
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 import {
   CompositeDecorator,
   ContentBlock,
@@ -122,12 +122,14 @@ export const FormDetailsSubmissionMessage: FC<Props> = ({
 
   const mapKeyToEditorCommand = (e: React.KeyboardEvent<{}>) => {
     if (e.keyCode && e.keyCode === 9 /* TAB */) {
+      // @ts-ignore
       const newEditorState = RichUtils.onTab(e, editorState, 4 /* maxDepth */);
       if (newEditorState !== editorState) {
         handleChange(newEditorState);
       }
       return null;
     }
+    // @ts-ignore
     return getDefaultKeyBinding(e);
   };
 

@@ -10,7 +10,7 @@ import {
   Condition,
   ConditionsModel,
   FormDefinition,
-} from "@xgovformbuilder/model/src";
+} from "@xgovformbuilder/model";
 import { Select } from "govuk-react-jsx";
 import { Hint } from "govuk-react-jsx";
 import React, { ChangeEvent } from "react";

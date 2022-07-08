@@ -2,7 +2,7 @@ import "../Designer/Visualisation/visualisation.scss";
 
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { Minimap } from "@xgovformbuilder/designer/client/pages/Designer/Visualisation/Minimap";
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 import React, { useContext, useEffect, useRef, useState } from "react";
 
 import { Lines } from "./components/OutputLines";

@@ -1,6 +1,6 @@
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import logger from "@xgovformbuilder/designer/client/plugins/logger";
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 import React from "react";
 
 import { findOutput } from "../data";

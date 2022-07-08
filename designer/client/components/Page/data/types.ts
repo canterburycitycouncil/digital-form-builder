@@ -1,4 +1,4 @@
-import { Page, ConditionRawData } from "@xgovformbuilder/model";
+import { ConditionRawData, Page } from "@xgovformbuilder/model";
 
 export type Path = Page["path"];
 export type ConditionName = ConditionRawData["name"];

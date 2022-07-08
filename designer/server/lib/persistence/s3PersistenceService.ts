@@ -1,4 +1,4 @@
-import { FormConfiguration, Logger } from "@xgovformbuilder/model/src";
+import { FormConfiguration, Logger } from "@xgovformbuilder/model";
 import S3 from "aws-sdk/clients/s3";
 
 import config from "../../config";

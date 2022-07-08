@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { Data } from "@xgovformbuilder/model/src";
+import { Data } from "@xgovformbuilder/model";
 import React from "react";
 
 import { DataContext } from "../../context";

@@ -1,4 +1,4 @@
-import { FormConfiguration } from "@xgovformbuilder/model/src";
+import { FormConfiguration } from "@xgovformbuilder/model";
 import { Radios } from "govuk-react-jsx";
 import { Label } from "govuk-react-jsx";
 import React, { ChangeEvent, useEffect, useState } from "react";

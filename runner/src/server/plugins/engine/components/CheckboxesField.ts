@@ -1,4 +1,4 @@
-import { ListComponentsDef } from "@xgovformbuilder/model/src";
+import { ListComponentsDef } from "@xgovformbuilder/model";
 import joi from "joi";
 import { SelectionControlField } from "runner/src/server/plugins/engine/components/SelectionControlField";
 import { FormModel } from "runner/src/server/plugins/engine/models";

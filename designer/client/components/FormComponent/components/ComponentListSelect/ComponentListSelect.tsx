@@ -10,7 +10,7 @@ import { ListContext } from "@xgovformbuilder/designer/client/components/List/re
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import logger from "@xgovformbuilder/designer/client/plugins/logger";
-import { ListComponentsDef } from "@xgovformbuilder/model/src";
+import { ListComponentsDef } from "@xgovformbuilder/model";
 import classNames from "classnames";
 import { Label } from "govuk-react-jsx";
 import React, { useContext, useEffect, useState } from "react";
@@ -38,15 +38,17 @@ export function ComponentListSelect() {
       return;
     }
     try {
-      const [foundList] = findList(data, list);
-      listDispatch({
-        type: ListActions.SET_SELECTED_LIST,
-        payload: foundList,
-      });
+      if (data) {
+        const [foundList] = findList(data, list);
+        listDispatch({
+          type: ListActions.SET_SELECTED_LIST,
+          payload: foundList,
+        });
+      }
     } catch (e) {
       logger.error("ComponentListSelect", e);
     }
-  }, [data.lists, list]);
+  }, [data?.lists, list]);
 
   useEffect(() => {
     setSelectedListTitle(selectedList?.title ?? selectedList?.name);
@@ -101,7 +103,7 @@ export function ComponentListSelect() {
           onChange={editList}
         >
           <option value="-1">{i18n("list.select.option")}</option>
-          {data.lists.map(
+          {data?.lists.map(
             (
               list: {
                 name: string | number | readonly string[] | undefined;

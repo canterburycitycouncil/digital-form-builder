@@ -7,7 +7,7 @@ import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import { Edge } from "@xgovformbuilder/designer/client/pages/Designer/Visualisation/types";
 import logger from "@xgovformbuilder/designer/client/plugins/logger";
-import { FormDefinition, Page } from "@xgovformbuilder/model/src";
+import { FormDefinition, Page } from "@xgovformbuilder/model";
 import React from "react";
 
 interface Props {

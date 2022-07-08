@@ -1,5 +1,6 @@
 import { CssClasses } from "@xgovformbuilder/designer/client/components/FormComponent/components/CssClasses";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import { FileUploadFieldComponent } from "model/src/components";
 import React, { useContext } from "react";
 
 import { ComponentContext } from "../componentReducer/componentReducer";
@@ -25,12 +26,16 @@ export function FileUploadFieldEdit() {
             id="field-options.multiple"
             name="options.multiple"
             type="checkbox"
-            checked={options.multiple === false}
+            checked={
+              (options as FileUploadFieldComponent["options"]).multiple ===
+              false
+            }
             onChange={(e) => {
               e.preventDefault();
               dispatch({
                 type: Actions.EDIT_OPTIONS_FILE_UPLOAD_MULTIPLE,
-                payload: !options.multiple,
+                payload: !(options as FileUploadFieldComponent["options"])
+                  .multiple,
               });
             }}
           />

@@ -4,7 +4,6 @@ import { DataContext } from "@xgovformbuilder/designer/client/context";
 import ErrorSummary from "@xgovformbuilder/designer/client/error-summary";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import logger from "@xgovformbuilder/designer/client/plugins/logger";
-import { Condition } from "@xgovformbuilder/model/src";
 import classNames from "classnames";
 import { ErrorMessage } from "govuk-react-jsx";
 import React from "react";
@@ -21,7 +20,7 @@ interface State {
   errors: Errors;
   from: string;
   to: string;
-  selectedCondition?: Condition;
+  selectedCondition?: string;
 }
 
 class LinkCreate extends React.Component<Props, State> {

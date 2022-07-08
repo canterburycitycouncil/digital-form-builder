@@ -1,5 +1,5 @@
-import { FormDefinition } from "@xgovformbuilder/model/src";
-import { clone } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
+import { clone } from "@xgovformbuilder/model";
 import React from "react";
 
 import logger from "../client/plugins/logger";

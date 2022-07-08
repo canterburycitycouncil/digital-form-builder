@@ -1,6 +1,6 @@
 import "./submissions.scss";
 
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 import React, { useEffect, useState } from "react";
 
 import { DesignerApi } from "../../api/designerApi";

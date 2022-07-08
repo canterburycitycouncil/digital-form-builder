@@ -1,10 +1,8 @@
 import { useContext } from "react";
-import {
-  FeatureFlagContext,
-  FeaturesInterface,
-} from "../context/FeatureFlagContext";
+
+import { FeatureFlagContext, FlagState } from "../context/FeatureFlagContext";
 
 export const useFeatures = () => {
-  const features: FeaturesInterface = useContext(FeatureFlagContext);
+  const features: FlagState = useContext(FeatureFlagContext);
   return features;
 };

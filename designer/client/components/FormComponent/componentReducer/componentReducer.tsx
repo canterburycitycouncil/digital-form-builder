@@ -1,7 +1,6 @@
-import { ErrorListItem } from "@xgovformbuilder/designer/client/error-summary";
 import { randomId } from "@xgovformbuilder/designer/client/helpers";
 import logger from "@xgovformbuilder/designer/client/plugins/logger";
-import { ComponentDef } from "@xgovformbuilder/model/src";
+import { ComponentDef } from "@xgovformbuilder/model";
 import React, { createContext, useReducer } from "react";
 
 import { fieldsReducer } from "../componentReducer/componentReducer.fields";
@@ -9,6 +8,7 @@ import { metaReducer } from "../componentReducer/componentReducer.meta";
 import { optionsReducer } from "../componentReducer/componentReducer.options";
 import { schemaReducer } from "../componentReducer/componentReducer.schema";
 import type { ComponentActions } from "../componentReducer/types";
+import { ValidationError } from "./componentReducer.validations";
 import { Actions, Fields, Meta, Options, Schema } from "./types";
 
 type ComponentState = {
@@ -17,8 +17,9 @@ type ComponentState = {
   initialName?: ComponentDef["name"];
   pagePath?: string;
   listItemErrors?: {};
-  errors?: ErrorListItem[];
+  errors?: ValidationError[];
   hasValidated?: boolean;
+  selectedListName?: string;
 };
 
 const defaultValues = {

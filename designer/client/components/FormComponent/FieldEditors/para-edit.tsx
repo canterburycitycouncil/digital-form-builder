@@ -1,7 +1,7 @@
 import { GovUKFieldWrapper } from "@xgovformbuilder/designer/client/components/GovUKFields";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import Editor from "@xgovformbuilder/designer/client/editor";
-import { ContentOptions, FormDefinition } from "@xgovformbuilder/model/src";
+import { ContentOptions, FormDefinition } from "@xgovformbuilder/model";
 import React, { useContext } from "react";
 
 import { ComponentContext } from "../componentReducer/componentReducer";

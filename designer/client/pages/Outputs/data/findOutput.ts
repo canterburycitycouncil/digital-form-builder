@@ -1,4 +1,4 @@
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 
 import { Output } from "../outputs/types";
 import { Found } from "./types";

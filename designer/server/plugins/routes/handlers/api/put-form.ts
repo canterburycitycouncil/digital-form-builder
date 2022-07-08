@@ -1,5 +1,5 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
-import { Schema } from "@xgovformbuilder/model/src";
+import { Schema } from "@xgovformbuilder/model";
 
 import { returnResponse } from "../../helpers";
 

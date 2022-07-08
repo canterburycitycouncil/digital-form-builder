@@ -1,6 +1,6 @@
 import { Flyout } from "@xgovformbuilder/designer/client/components/Flyout";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 import React from "react";
 
 import { Edge, Layout } from "../types";

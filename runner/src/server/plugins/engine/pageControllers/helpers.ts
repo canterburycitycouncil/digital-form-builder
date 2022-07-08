@@ -1,4 +1,4 @@
-import { Page } from "@xgovformbuilder/model/src";
+import { Page } from "@xgovformbuilder/model";
 import { camelCase, upperFirst } from "lodash";
 import path from "path";
 import { DobPageController } from "runner/src/server/plugins/engine/pageControllers/DobPageController";

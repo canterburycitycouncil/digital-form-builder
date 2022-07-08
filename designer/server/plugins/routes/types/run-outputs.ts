@@ -2,7 +2,7 @@ import {
   OutputConfiguration,
   OutputType,
 } from "@xgovformbuilder/designer/client/pages/Outputs/outputs/types";
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 
 export interface OutputRequest {
   formScheme: FormDefinition;

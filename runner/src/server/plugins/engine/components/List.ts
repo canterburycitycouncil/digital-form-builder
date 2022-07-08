@@ -1,4 +1,4 @@
-import { Item } from "@xgovformbuilder/model/src";
+import { Item } from "@xgovformbuilder/model";
 import { ComponentBase } from "runner/src/server/plugins/engine/components/ComponentBase";
 import {
   FormData,

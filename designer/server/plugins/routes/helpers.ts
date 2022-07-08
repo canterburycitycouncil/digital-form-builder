@@ -1,6 +1,6 @@
 import { ResponseToolkit } from "@hapi/hapi";
 import Wreck from "@hapi/wreck";
-import { FormConfiguration } from "@xgovformbuilder/model/src";
+import { FormConfiguration } from "@xgovformbuilder/model";
 import * as _ from "lodash";
 
 import config from "../../config";

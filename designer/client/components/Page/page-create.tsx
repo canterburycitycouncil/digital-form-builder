@@ -12,8 +12,8 @@ import {
   hasValidationErrors,
   validateTitle,
 } from "@xgovformbuilder/designer/client/validations";
-import { ComponentDef, Section } from "@xgovformbuilder/model/src";
-import { FormDefinition, Page } from "@xgovformbuilder/model/src";
+import { ComponentDef, Section } from "@xgovformbuilder/model";
+import { FormDefinition, Page } from "@xgovformbuilder/model";
 import { Input } from "govuk-react-jsx";
 import React from "react";
 

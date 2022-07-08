@@ -1,8 +1,9 @@
-import config from "../../config";
-import newFormJson from "../../../new-form.json";
-import { nanoid } from "nanoid";
-import { publish } from "../../lib/publish";
 import { ServerRoute } from "@hapi/hapi";
+import { nanoid } from "nanoid";
+
+import newFormJson from "../../../new-form.json";
+import config from "../../config";
+import { publish } from "../../lib/publish";
 import { HapiRequest } from "../../types";
 import { newConfigPayload } from "./types";
 

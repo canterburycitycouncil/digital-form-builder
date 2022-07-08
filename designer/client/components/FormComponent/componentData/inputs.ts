@@ -1,4 +1,4 @@
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 
 import { allPathsLeadingTo } from "../../Page/data";
 import { Input, isNotContentType, Path } from "../componentData/types";

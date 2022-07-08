@@ -1,4 +1,4 @@
-import { Output, WebhookOutputConfiguration } from "@xgovformbuilder/model/src";
+import { Output, WebhookOutputConfiguration } from "@xgovformbuilder/model";
 import { ComponentCollection } from "runner/src/server/plugins/engine/components/ComponentCollection";
 import { FormModel } from "runner/src/server/plugins/engine/models";
 import type { NotifyModel } from "runner/src/server/plugins/engine/models/submission";

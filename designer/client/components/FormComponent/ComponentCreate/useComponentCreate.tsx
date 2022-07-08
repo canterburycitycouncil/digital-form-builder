@@ -3,7 +3,7 @@ import "./ComponentCreate.scss";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import logger from "@xgovformbuilder/designer/client/plugins/logger";
 import { hasValidationErrors } from "@xgovformbuilder/designer/client/validations";
-import { ComponentDef, FormDefinition, Page } from "@xgovformbuilder/model/src";
+import { ComponentDef, FormDefinition, Page } from "@xgovformbuilder/model";
 import {
   FormEvent,
   useContext,
@@ -76,7 +76,7 @@ export const useComponentCreate = (props) => {
     const updatedData = addComponent(
       data as FormDefinition,
       (page as Page).path,
-      selectedComponent
+      selectedComponent as ComponentDef
     );
 
     await save(updatedData);

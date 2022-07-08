@@ -1,5 +1,5 @@
 import logger from "@xgovformbuilder/designer/client/plugins/logger";
-import { FormDefinition } from "@xgovformbuilder/model/src";
+import { FormDefinition } from "@xgovformbuilder/model";
 
 export class DesignerApi {
   async save(id: string, updatedData: FormDefinition): Promise<Response | any> {

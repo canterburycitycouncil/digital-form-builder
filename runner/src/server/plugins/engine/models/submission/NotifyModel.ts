@@ -1,4 +1,4 @@
-import { NotifyOutputConfiguration } from "@xgovformbuilder/model/src/types";
+import { NotifyOutputConfiguration } from "@xgovformbuilder/model/types";
 import { reach } from "hoek";
 import { FormModel } from "runner/src/server/plugins/engine/models";
 import { FormSubmissionState } from "runner/src/server/plugins/engine/types";
