@@ -7,3 +7,4 @@ docs-old/*
 *.json
 *.lock
 *.svg
+buildspec.yml
