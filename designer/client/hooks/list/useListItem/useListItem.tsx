@@ -48,8 +48,10 @@ export function useListItem(state, dispatch): ListItemHook {
     const title = state.selectedItem.text || "";
     const errors = [
       ...validateTitle("title", title, i18nProp),
-      ...validateNotEmpty("value", "value", "value", value),
+      ...validateNotEmpty("value", "value", value),
     ];
+
+    console.log("the errors: ", errors);
 
     const valErrors = hasValidationErrors(errors);
 
@@ -64,6 +66,7 @@ export function useListItem(state, dispatch): ListItemHook {
 
   function prepareForSubmit(data: FormDefinition) {
     let copy: FormDefinition = { ...data };
+    console.log("old copy: ", copy);
     const { selectedList, selectedItemIndex } = state;
     let { items } = selectedList;
     if (!selectedItem.isNew) {
@@ -80,6 +83,7 @@ export function useListItem(state, dispatch): ListItemHook {
       const [list, indexOfList] = findList(copy, selectedList.name);
       copy.lists[indexOfList] = { ...list, items };
     }
+    console.log("new copy: ", copy);
     return copy;
   }
 
