@@ -23,16 +23,7 @@ const serverOptions = (): hapi.ServerOptions => {
           abortEarly: false,
         },
       },
-      security: {
-        hsts: {
-          maxAge: 31536000,
-          includeSubDomains: true,
-          preload: false,
-        },
-        xss: true,
-        noSniff: true,
-        xframe: true,
-      },
+      security: false,
     },
   };
 };

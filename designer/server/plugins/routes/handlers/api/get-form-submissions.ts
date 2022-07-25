@@ -1,10 +1,11 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
+import fetch from "node-fetch";
+
 import {
   Submission,
   SubmissionKey,
 } from "../../../../../client/pages/Submissions/types";
 import { returnResponse } from "../../helpers";
-import fetch from "node-fetch";
 
 interface AllSubmissionsResponse {
   submissions: Submission[];
