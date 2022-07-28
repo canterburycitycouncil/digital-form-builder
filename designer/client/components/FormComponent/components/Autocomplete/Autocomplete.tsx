@@ -1,4 +1,4 @@
-import { TextFieldComponent } from "model/src";
+import { TextFieldComponent } from "@xgovformbuilder/model";
 import React, { useContext } from "react";
 
 import { GovUKInput } from "../../../GovUKFields";

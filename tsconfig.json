@@ -42,7 +42,7 @@
     "**/*.ts",
     "**/*.tsx"
   ],
-  "exclude": ["webpack.config.js", "node_modules", "babel*", "test", "node_modules/", "**/*.jest.**", "**/*.test.**", "./runner/*"],
+  "exclude": ["webpack.config.js", "node_modules", "babel*", "test", "node_modules/", "**/*.jest.**", "**/*.test.**", "./runner/*", "model/dist/*"],
   "references": [
     {
       "path": "./model"

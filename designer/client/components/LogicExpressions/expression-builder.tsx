@@ -1,4 +1,4 @@
-import { LogicExpressionTypes } from "model/src";
+import { LogicExpressionTypes } from "@xgovformbuilder/model";
 import React, {
   ChangeEvent,
   Dispatch,

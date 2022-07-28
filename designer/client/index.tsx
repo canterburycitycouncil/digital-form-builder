@@ -1,15 +1,17 @@
+import "./styles/index.scss";
+
 import React from "react";
 import ReactDOM from "react-dom";
-import { LandingChoice, NewConfig, ChooseExisting } from "./pages/LandingPage";
-import "./styles/index.scss";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import { initI18n } from "./i18n";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Designer from "./pages/Designer/designer";
 import { SaveError } from "./pages/ErrorPages";
+import { ChooseExisting, LandingChoice, NewConfig } from "./pages/LandingPage";
 import { OutputsDesigner } from "./pages/Outputs";
 import { Submissions } from "./pages/Submissions";
-import { SubmissionView } from "./pages/Submissions/submission";
 import { Integration } from "./pages/Submissions/integration";
+import { SubmissionView } from "./pages/Submissions/submission";
 
 initI18n();
 

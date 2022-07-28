@@ -1,6 +1,6 @@
 import { CssClasses } from "@xgovformbuilder/designer/client/components/FormComponent/components/CssClasses";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
-import { FileUploadFieldComponent } from "model/src/components";
+import { FileUploadFieldComponent } from "@xgovformbuilder/model";
 import React, { useContext } from "react";
 
 import { ComponentContext } from "../componentReducer/componentReducer";
