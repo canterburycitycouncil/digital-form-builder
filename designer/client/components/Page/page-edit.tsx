@@ -140,6 +140,12 @@ export class PageEdit extends React.Component<Props, State> {
     });
 
     copy.pages.splice(copyPageIdx, 1);
+
+    if (copy.startPage === page.path) {
+      copy.startPage =
+        page.next && page.next[0] ? page.next[0].path : copy.pages[0].path;
+    }
+
     try {
       await save(copy);
     } catch (error) {
