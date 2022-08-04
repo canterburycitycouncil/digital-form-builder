@@ -2,21 +2,32 @@ import { Request, ResponseToolkit } from "@hapi/hapi";
 import {
   Condition,
   ConditionValue,
+  FormDefinition,
+  FreshdeskOutputConfiguration,
+  NotifyOutputConfiguration,
+  Output,
+  S3FileUploadOutputConfiguration,
   TopdeskOutputConfiguration,
+  WebhookOutputConfiguration,
 } from "@xgovformbuilder/model";
+import { Submission } from "designer/client/pages/Submissions/types";
 import fetch from "node-fetch";
 
 import {
-  FreshdeskOutputConfiguration,
-  S3FileUploadOutputConfiguration,
-  WebhookOutputConfiguration,
-} from "../../../../../client/pages/Outputs/outputs/types";
-import { freshdesk, s3fileupload, webhook } from "../../../../lib/outputs";
-import { FileResponse, FileUpload } from "../../../../lib/outputs/s3fileupload";
-import { topdesk } from "../../../../lib/outputs/topdesk";
-import { topdeskIncident } from "../../../../lib/outputs/topdesk-incident";
+  freshdesk,
+  GOVNotifySendEmail,
+  s3fileupload,
+  topdesk,
+  topdeskIncident,
+  webhook,
+} from "../../../../lib/outputs";
+import { FileUpload } from "../../../../lib/outputs/s3fileupload";
 import { getTrueSubmission, returnResponse } from "../../helpers";
 import { IntegrationLog, OutputRequest } from "../../types";
+
+interface blankObject {
+  [key: string]: any;
+}
 
 export const runOutputsHandler = async (
   request: Request,
@@ -54,8 +65,6 @@ export const runOutputsHandler = async (
             });
           }
         }
-        let integrationLogsArray: IntegrationLog[] = [];
-        let promiseArray: Promise<string | FileResponse>[] = [];
         let flattenedFormValues = Object.keys(submission.formValues).reduce(
           (acc, currentPage) => {
             return {
@@ -96,130 +105,63 @@ export const runOutputsHandler = async (
             return true;
           }
         });
-        validOutputs.forEach((output) => {
-          switch (output.type) {
-            case "email":
-              break;
-            case "notify":
-              break;
-            case "webhook":
-              let webhookPromise = webhook(
-                output.outputConfiguration as WebhookOutputConfiguration,
-                submission.formValues
-              );
-              promiseArray.push(webhookPromise);
-              integrationLogsArray.push({
-                submissionId: submission.submissionId,
-                integrationName: output.title,
-                integrationType: output.type,
-                configuration: output.outputConfiguration,
-                request: submission.formValues,
-              });
-              break;
-            case "freshdesk":
-              let fdPromise = freshdesk(
-                output.outputConfiguration as FreshdeskOutputConfiguration,
-                submission,
-                submission.formValues
-              );
-              promiseArray.push(fdPromise);
-              integrationLogsArray.push({
-                submissionId: submission.submissionId,
-                integrationName: output.title,
-                integrationType: output.type,
-                configuration: output.outputConfiguration,
-                request: submission.formValues,
-              });
-              break;
-            case "s3fileupload":
-              let s3Promise = s3fileupload(
-                output.outputConfiguration as S3FileUploadOutputConfiguration,
-                submission,
-                filesDecoded
-              );
-              promiseArray.push(s3Promise);
-              integrationLogsArray.push({
-                submissionId: submission.submissionId,
-                integrationName: output.title,
-                integrationType: output.type,
-                configuration: output.outputConfiguration,
-                request: {
-                  submission: submission,
-                  files: filesDecoded.map((file) => file.filename),
-                },
-              });
-              break;
-            case "topdesk":
-              let topdeskPromise = topdesk(
-                output.outputConfiguration as TopdeskOutputConfiguration,
-                submission.formValues,
-                formScheme
-              );
-              promiseArray.push(topdeskPromise);
-              integrationLogsArray.push({
-                submissionId: submission.submissionId,
-                integrationName: output.title,
-                integrationType: output.type,
-                configuration: output.outputConfiguration,
-                request: {
-                  submission: submission,
-                },
-              });
-              break;
-            case "topdesk-incident":
-              let topdeskIncidentPromise = topdeskIncident(
-                output.outputConfiguration as TopdeskOutputConfiguration,
-                submission.formValues,
-                formScheme,
-                filesDecoded
-              );
-              promiseArray.push(topdeskIncidentPromise);
-              integrationLogsArray.push({
-                submissionId: submission.submissionId,
-                integrationName: output.title,
-                integrationType: output.type,
-                configuration: output.outputConfiguration,
-                request: {
-                  submission: submission,
-                },
-              });
-              break;
-            default:
-              const message = "No output of that type found";
-              resolve(returnResponse(h, message, 400, "application/json"));
-          }
+        let outputsTree = buildOutputsTree(validOutputs);
+        console.log(outputsTree);
+        let outputPromises: Promise<IntegrationLog[]>[] = [];
+        outputsTree.forEach(async (outputNode) => {
+          outputPromises.push(
+            runOutput(
+              outputNode.output,
+              outputNode.next,
+              submission as Submission,
+              formScheme,
+              filesDecoded
+            )
+          );
         });
-        Promise.all(promiseArray)
+        Promise.all(outputPromises)
           .then((res) => {
-            console.log(integrationLogsArray);
             let integrationLogPromises: Promise<any>[] = [];
-            res.forEach((response, index) => {
-              integrationLogsArray[index].response = response;
-              integrationLogPromises.push(
-                new Promise((resolve, reject) => {
-                  fetch(
-                    "https://6zy0ta2uxg.execute-api.eu-west-2.amazonaws.com/dev/integrations-log",
-                    {
-                      headers: {
-                        "Content-Type": "application/json",
-                        "X-API-Key": process.env.AWS_API_KEY as string,
-                      },
-                      method: "POST",
-                      body: JSON.stringify(integrationLogsArray[index]),
-                    }
-                  )
-                    .then(() => {
-                      console.log("hello");
-                      resolve("");
-                    })
-                    .catch((err) => reject(err));
-                })
-              );
+            res.forEach((response) => {
+              const integrationLogs = response;
+              integrationLogs.forEach((log) => {
+                integrationLogPromises.push(
+                  new Promise((resolve, reject) => {
+                    fetch(
+                      "https://6zy0ta2uxg.execute-api.eu-west-2.amazonaws.com/dev/integrations-log",
+                      {
+                        headers: {
+                          "Content-Type": "application/json",
+                          "X-API-Key": process.env.AWS_API_KEY as string,
+                        },
+                        method: "POST",
+                        body: JSON.stringify(log),
+                      }
+                    )
+                      .then(() => {
+                        resolve("");
+                      })
+                      .catch((err) => reject(err));
+                  })
+                );
+              });
             });
-            let possibleSubmissionChanges = res.filter(
-              (response) =>
-                response.constructor.name === "object" &&
-                Object.keys(response).indexOf("submission") > -1
+            let possibleSubmissionChanges = res.reduce<any[]>(
+              (acc, currentOutputRes) => [
+                ...acc,
+                currentOutputRes
+                  .filter(
+                    (currentRes) =>
+                      currentRes &&
+                      typeof currentRes.response === "object" &&
+                      currentRes.response.constructor.name === "object" &&
+                      currentRes.response.submission
+                  )
+                  .map((currentRes) => ({
+                    submission: currentRes.response.submission,
+                  })),
+              ],
+              []
             );
             let submissionCopy = { ...submission };
             if (possibleSubmissionChanges.length > 0) {
@@ -268,4 +210,205 @@ export const runOutputsHandler = async (
       resolve(returnResponse(h, response, 401, "application/json"));
     }
   });
+};
+
+const runOutput = (
+  output: Output,
+  nextOutputs: OutputTreeNode[],
+  submission: Submission,
+  formScheme: FormDefinition,
+  files: FileUpload[],
+  previousValues?: blankObject
+): Promise<IntegrationLog[]> => {
+  return new Promise((resolve, reject) => {
+    let innerPromise: Promise<any>;
+    let integrationLogs: IntegrationLog[] = [];
+    switch (output.type) {
+      case "email":
+        innerPromise = new Promise<void>((resolve) => resolve());
+        break;
+      case "notify":
+        innerPromise = GOVNotifySendEmail(
+          submission,
+          formScheme,
+          output.outputConfiguration as NotifyOutputConfiguration,
+          previousValues
+        );
+        integrationLogs.push({
+          submissionId: submission.submissionId,
+          integrationName: output.title,
+          integrationType: output.type,
+          configuration: output.outputConfiguration,
+          request: submission.formValues,
+          result: "success",
+        });
+        break;
+      case "webhook":
+        innerPromise = webhook(
+          output.outputConfiguration as WebhookOutputConfiguration,
+          submission.formValues
+        );
+
+        integrationLogs.push({
+          submissionId: submission.submissionId,
+          integrationName: output.title,
+          integrationType: output.type,
+          configuration: output.outputConfiguration,
+          request: submission.formValues,
+          result: "success",
+        });
+        break;
+      case "freshdesk":
+        innerPromise = freshdesk(
+          output.outputConfiguration as FreshdeskOutputConfiguration,
+          submission,
+          submission.formValues
+        );
+        integrationLogs.push({
+          submissionId: submission.submissionId,
+          integrationName: output.title,
+          integrationType: output.type,
+          configuration: output.outputConfiguration,
+          request: submission.formValues,
+          result: "success",
+        });
+        break;
+      case "s3fileupload":
+        innerPromise = s3fileupload(
+          output.outputConfiguration as S3FileUploadOutputConfiguration,
+          submission,
+          files
+        );
+        integrationLogs.push({
+          submissionId: submission.submissionId,
+          integrationName: output.title,
+          integrationType: output.type,
+          configuration: output.outputConfiguration,
+          request: {
+            submission: submission,
+            files: files.map((file) => file.filename),
+          },
+          result: "success",
+        });
+        break;
+      case "topdesk":
+        innerPromise = topdesk(
+          output.outputConfiguration as TopdeskOutputConfiguration,
+          submission.formValues,
+          formScheme
+        );
+        integrationLogs.push({
+          submissionId: submission.submissionId,
+          integrationName: output.title,
+          integrationType: output.type,
+          configuration: output.outputConfiguration,
+          request: {
+            submission: submission,
+          },
+          result: "success",
+        });
+        break;
+      case "topdesk-incident":
+        innerPromise = topdeskIncident(
+          output.outputConfiguration as TopdeskOutputConfiguration,
+          submission.formValues,
+          formScheme,
+          files
+        );
+        integrationLogs.push({
+          submissionId: submission.submissionId,
+          integrationName: output.title,
+          integrationType: output.type,
+          configuration: output.outputConfiguration,
+          request: {
+            submission: submission,
+          },
+          result: "success",
+        });
+        break;
+      default:
+        const message = "No output of that type found";
+        innerPromise = new Promise<void>((resolve) => resolve());
+        reject(message);
+    }
+    if (nextOutputs.length > 0) {
+      innerPromise
+        .then((res) => {
+          integrationLogs[0].response = res;
+          if (!previousValues) {
+            previousValues = {
+              [output.name]: res,
+            };
+          } else {
+            previousValues[output.name] = res;
+          }
+          Promise.all(
+            nextOutputs.map((nextOutput) =>
+              runOutput(
+                nextOutput.output,
+                nextOutput.next,
+                submission,
+                formScheme,
+                files,
+                previousValues
+              )
+            )
+          ).then((nextRes) => {
+            nextRes.forEach((promiseRes) => {
+              integrationLogs = integrationLogs.concat(promiseRes);
+            });
+            resolve(integrationLogs);
+          });
+        })
+        .catch((err) => {
+          integrationLogs[0].response = err;
+          integrationLogs[0].result = "failure";
+          console.log("There was an error", err);
+          resolve(integrationLogs);
+        });
+    } else {
+      innerPromise
+        .then((res) => {
+          integrationLogs[0].response = res;
+          resolve(integrationLogs);
+        })
+        .catch((err) => {
+          integrationLogs[0].response = err;
+          integrationLogs[0].result = "failure";
+          console.log("there was an error", err);
+          resolve(integrationLogs);
+        });
+    }
+  });
+};
+
+interface OutputTreeNode {
+  output: Output;
+  next: OutputTreeNode[];
+}
+
+const buildOutputsTree = (
+  outputs: Output[],
+  parent?: string
+): OutputTreeNode[] => {
+  let [topLevelOutputs, otherOutputs] = outputs.reduce<[Output[], Output[]]>(
+    (acc, currentOutput) => {
+      if (
+        (parent && currentOutput.previous !== parent) ||
+        (!parent && currentOutput.previous)
+      ) {
+        return [[...acc[0]], [...acc[1], currentOutput]];
+      } else {
+        return [[...acc[0], currentOutput], [...acc[0]]];
+      }
+    },
+    [[], []]
+  );
+  return topLevelOutputs.map((output) => ({
+    output: output,
+    next:
+      otherOutputs.length > 0
+        ? buildOutputsTree(otherOutputs, output.name)
+        : [],
+  }));
 };
