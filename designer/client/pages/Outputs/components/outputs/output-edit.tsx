@@ -18,7 +18,7 @@ import FreshdeskEdit from "../../outputs/freshdesk-edit";
 import NotifyEdit from "../../outputs/notify-edit";
 import S3FileUploadEdit from "../../outputs/s3fileupload-edit";
 import TopdeskEdit from "../../outputs/topdesk-edit";
-import { Output, OutputType, responses } from "../../outputs/types";
+import { Output, OutputType } from "../../outputs/types";
 import WebhookEdit from "../../outputs/webhook-edit";
 
 interface OutputEditProps extends WithI18nProps {
@@ -45,7 +45,6 @@ export class OutputEdit extends React.Component<OutputEditProps> {
       condition: output?.condition ?? "",
       type: output?.type ?? "",
       previous: output?.previous ?? "",
-      previousValues: output?.previousValues ?? [],
       next: output?.next ?? "",
       outputConfiguration: output?.outputConfiguration ?? null,
       isEditingSection: false,
@@ -181,7 +180,63 @@ export class OutputEdit extends React.Component<OutputEditProps> {
     const property = e.target.name;
     const value = e.target.value;
     let outputConfigurationCopy = { ...this.state.outputConfiguration };
-    outputConfigurationCopy[property] = value;
+    if (property.indexOf(".") > -1) {
+      let splitProperty: string[] = property.split(".");
+      let lastKey = splitProperty.pop();
+      if (lastKey) {
+        let nestedValue = splitProperty.reduce(
+          (acc, currentKey) => acc[currentKey],
+          outputConfigurationCopy
+        );
+        nestedValue[lastKey] = value;
+      }
+    } else {
+      outputConfigurationCopy[property] = value;
+    }
+    this.setState({
+      outputConfiguration: outputConfigurationCopy,
+    });
+  };
+
+  onDeleteNestedOutputConfigurationValue = (propertyName: string) => {
+    let outputConfigurationCopy = { ...this.state.outputConfiguration };
+    if (propertyName.indexOf(".") > -1) {
+      let splitProperty: string[] = propertyName.split(".");
+      let lastKey = splitProperty.pop();
+      if (lastKey) {
+        let nestedValue = splitProperty.reduce(
+          (acc, currentKey) => acc[currentKey],
+          outputConfigurationCopy
+        );
+        if (Array.isArray(nestedValue)) {
+          nestedValue.splice(parseInt(lastKey), 1);
+        } else {
+          delete nestedValue[lastKey];
+        }
+      }
+    } else if (outputConfigurationCopy[propertyName]) {
+      delete outputConfigurationCopy[propertyName];
+    }
+    this.setState({
+      outputConfiguration: outputConfigurationCopy,
+    });
+  };
+
+  onAddNestedConfigurationOutputValue = (propertyName: string, value: any) => {
+    let outputConfigurationCopy = { ...this.state.outputConfiguration };
+    if (propertyName.indexOf(".") > -1) {
+      let splitProperty: string[] = propertyName.split(".");
+      let lastKey = splitProperty.pop();
+      if (lastKey) {
+        let nestedValue = splitProperty.reduce(
+          (acc, currentKey) => acc[currentKey],
+          outputConfigurationCopy
+        );
+        nestedValue[lastKey] = value;
+      }
+    } else {
+      outputConfigurationCopy[propertyName] = value;
+    }
     this.setState({
       outputConfiguration: outputConfigurationCopy,
     });
@@ -199,73 +254,6 @@ export class OutputEdit extends React.Component<OutputEditProps> {
     this.setState({
       previous: previous,
     });
-  };
-
-  onChangePreviousValues = (e) => {
-    let previousValuesCopy = [...this.state.previousValues];
-    if (
-      !e.target.checked &&
-      this.state.previousValues.findIndex(
-        (value) => value === e.target.name.replace("previousValues.", "")
-      ) > -1
-    ) {
-      let index = this.state.previousValues.findIndex(
-        (value) => value === e.target.name.replace("previousValues.", "")
-      );
-      previousValuesCopy.splice(index, 1);
-    } else if (
-      e.target.checked &&
-      this.state.previousValues.findIndex(
-        (value) => value === e.target.name.replace("previousValues.", "")
-      ) === -1
-    ) {
-      previousValuesCopy.push(e.target.name.replace("previousValues.", ""));
-    }
-    this.setState({
-      previousValues: previousValuesCopy,
-    });
-  };
-
-  getValuesForPreviousOutput = (previous) => {
-    const { data } = this.context;
-    const [previousOutput] = findOutput(data, previous);
-    const previousOutputType = previousOutput.type;
-    let responseFormat = responses[previousOutputType];
-    return (
-      <div className="govuk-checkboxes govuk-form-group">
-        <label className="govuk-label govuk-checkboxes__label">
-          Previous output values
-        </label>
-        <span className="govuk-hint govuk-checkboxes__hint">
-          Choose which values are needed for processing this output
-        </span>
-        {Object.keys(responseFormat).map((property) => (
-          <div
-            className="govuk-checkboxes__item"
-            key={`response-value-${property}`}
-          >
-            <input
-              type="checkbox"
-              className={`govuk-checkboxes__input`}
-              id={`field-previousValues-${property}`}
-              name={`previousValues.${property}`}
-              checked={
-                this.state.previousValues.findIndex(
-                  (value) => value === property
-                ) > -1
-              }
-              onChange={this.onChangePreviousValues}
-            />
-            <label
-              className="govuk-label govuk-checkboxes__label"
-              htmlFor={`field-previousValues-${property}`}
-            >
-              {property}
-            </label>
-          </div>
-        ))}
-      </div>
-    );
   };
 
   findSectionWithName(name) {
@@ -290,7 +278,14 @@ export class OutputEdit extends React.Component<OutputEditProps> {
 
     if (type === OutputType.Notify) {
       outputEdit = (
-        <NotifyEdit data={data} output={this.props.output} errors={errors} />
+        <NotifyEdit
+          data={data}
+          output={this.props.output}
+          errors={errors}
+          onChange={this.onChangeOutputConfiguration}
+          onItemDelete={this.onDeleteNestedOutputConfigurationValue}
+          onItemAdd={this.onAddNestedConfigurationOutputValue}
+        />
       );
     } else if (type === OutputType.Email) {
       outputEdit = <EmailEdit output={this.props.output} errors={errors} />;
@@ -326,7 +321,7 @@ export class OutputEdit extends React.Component<OutputEditProps> {
         <TopdeskEdit
           template={outputConfiguration?.["template"]}
           email={outputConfiguration?.["email"]}
-          briefDescription={outputConfiguration?.["briefDecsription"]}
+          briefDescription={outputConfiguration?.["briefDescription"]}
           errors={errors}
           onChange={this.onChangeOutputConfiguration}
         />
@@ -394,31 +389,6 @@ export class OutputEdit extends React.Component<OutputEditProps> {
             </select>
           </div>
           {outputEdit}
-          {/* <div className="govuk-form-group">
-            <label className="govuk-label govuk-label--s" htmlFor="previous">
-              {i18n("Previous output")}
-            </label>
-            <span className="govuk-hint">
-              {i18n(
-                "If this output relies on previous values to run, choos ethe output to take these values from here"
-              )}
-            </span>
-            <select
-              className="govuk-select"
-              id="previous"
-              name="previous"
-              value={previous}
-              onChange={this.onChangePrevious}
-            >
-              <option />
-              {outputs.map((output) => (
-                <option key={output.name} value={output.name}>
-                  {output.title}
-                </option>
-              ))}
-            </select>
-          </div> */}
-          {/* {previous && this.getValuesForPreviousOutput(previous)} */}
           <button className="govuk-button" type="submit">
             {i18n("save")}
           </button>{" "}
