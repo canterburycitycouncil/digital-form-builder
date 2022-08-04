@@ -4,13 +4,22 @@ import { clone } from "@xgovformbuilder/model";
 import React, { ChangeEvent, MouseEvent } from "react";
 
 type State = {
-  items: string[];
+  items: {
+    item: string;
+    value: string;
+  }[];
 };
 
 type Props = {
   data: any; // TODO: type
-  items?: string[];
+  items?: {
+    item: string;
+    value: string;
+  }[];
   values: { name: string; display: string }[];
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  onItemDelete: (propertyName: string) => void;
+  onItemAdd: (propertyName: string, value: any) => void;
 };
 
 class NotifyItems extends React.Component<Props, State> {
@@ -18,6 +27,7 @@ class NotifyItems extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
+    console.log(props.items);
     this.state = {
       items: props.items ? clone(props.items) : [],
     };
@@ -25,15 +35,24 @@ class NotifyItems extends React.Component<Props, State> {
 
   onClickAddItem = (e: MouseEvent) => {
     e.preventDefault();
-    this.setState((state) => ({
-      items: [...state.items, ""],
-    }));
+    let newItems = [
+      ...this.state.items,
+      {
+        item: "",
+        value: "",
+      },
+    ];
+    this.setState({
+      items: newItems,
+    });
+    this.props.onItemAdd("personalisation", newItems);
   };
 
   removeItem = (idx: number) => {
     this.setState({
       items: this.state.items.filter((_s, i) => i !== idx),
     });
+    this.props.onItemDelete(`personalisation.${idx}`);
   };
 
   onClickDelete = (event: MouseEvent) => {
@@ -54,14 +73,15 @@ class NotifyItems extends React.Component<Props, State> {
 
   onChangeItem = (event: ChangeEvent<HTMLSelectElement>, index: number) => {
     const { items } = this.state;
-    items[index] = event.target.value;
+    items[index].item = event.target.value;
     this.setState({
       items,
     });
 
     if (
       items.find(
-        (item, itemIndex) => item === event.target.value && itemIndex !== index
+        (item, itemIndex) =>
+          item.item === event.target.value && itemIndex !== index
       )
     ) {
       event.target.setCustomValidity(
@@ -70,6 +90,27 @@ class NotifyItems extends React.Component<Props, State> {
     } else {
       event.target.setCustomValidity("");
     }
+    this.props.onChange(event);
+  };
+
+  onChangeValue = (event: ChangeEvent<HTMLInputElement>, index: number) => {
+    const { items } = this.state;
+
+    items[index].value = event.target.value;
+
+    if (
+      items.find(
+        (item, itemIndex) =>
+          item.value === event.target.value && itemIndex !== index
+      )
+    ) {
+      event.target.setCustomValidity(
+        "Duplicate variable names found in list items"
+      );
+    } else {
+      event.target.setCustomValidity("");
+    }
+    this.props.onChange(event);
   };
 
   render() {
@@ -102,13 +143,13 @@ class NotifyItems extends React.Component<Props, State> {
         </thead>
         <tbody className="govuk-table__body">
           {items.map((item, index) => (
-            <tr key={item + index} className="govuk-table__row">
+            <tr key={item.item + index} className="govuk-table__row">
               <td className="govuk-table__cell">
                 <select
                   className="govuk-select"
-                  id="link-source"
-                  name="personalisation"
-                  value={item}
+                  id={`personalisation.${index}.item`}
+                  name={`personalisation.${index}.item`}
+                  value={item.item}
                   onChange={(e) => this.onChangeItem(e, index)}
                   required
                 >
@@ -120,7 +161,16 @@ class NotifyItems extends React.Component<Props, State> {
                   ))}
                 </select>
               </td>
-              <td className="govuk-table__cell">{item}</td>
+              <td className="govuk-table__cell">
+                <input
+                  className="govuk-input"
+                  id={`personalisation.${index}.value`}
+                  name={`personalisation.${index}.value`}
+                  type="text"
+                  value={item.value}
+                  onChange={(e) => this.onChangeValue(e, index)}
+                />
+              </td>
               <td className="govuk-table__cell" width="20px">
                 <a
                   className="list-item-delete"
