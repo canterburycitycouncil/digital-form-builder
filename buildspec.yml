@@ -14,12 +14,12 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -f ./designer/Dockerfile -t $REPOSITORY_URI:latest .
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - docker build -f ./designer/Dockerfile -t $REPOSITORY_URI:$DEPLOYED_TAG .
+      - docker tag $REPOSITORY_URI:$DEPLOYED_TAG $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
-      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$DEPLOYED_TAG
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - printf '[{"name":"designer", "imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
