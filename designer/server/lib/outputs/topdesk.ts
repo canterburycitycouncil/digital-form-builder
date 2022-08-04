@@ -195,11 +195,17 @@ export const topdeskTemplates: topdeskTemplate[] = [
   },
 ];
 
+interface TopdeskResponse {
+  id: string;
+  number: string;
+  viewLink: string;
+}
+
 export const topdesk = (
   outputConfig: TopdeskOutputConfiguration,
   formValues,
   formScheme: FormDefinition
-): Promise<string> => {
+): Promise<TopdeskResponse | string> => {
   return new Promise((resolve, reject) => {
     let config = {
       topdeskUrl: "https://eks.topdesk.net/tas/api",
@@ -273,6 +279,7 @@ export const topdesk = (
               requestParams.briefDescription = outputConfig.briefDescription
                 ? formValues[outputConfig.briefDescription]
                 : "";
+              requestParams.changeType = "simple";
             }
 
             let requestString = `${Object.keys(formValues)
@@ -292,8 +299,6 @@ export const topdesk = (
 
             requestParams.request = requestString;
 
-            console.log("request params: ", requestParams);
-
             fetch(`${config.topdeskUrl}/operatorChanges`, {
               method: "POST",
               body: JSON.stringify(requestParams),
@@ -307,13 +312,17 @@ export const topdesk = (
               })
               .then((res) => {
                 if (res.number) {
-                  console.log("created the ticket: ", res);
-                  resolve(res);
+                  resolve({
+                    id: res.id as string,
+                    number: res.number as string,
+                    viewLink: `staffroom.canterbury.gov.uk/my-changes/${res.id}`,
+                  });
                 } else {
                   reject(res);
                 }
               })
               .catch((err) => {
+                console.log(err);
                 reject(err);
               });
           }
