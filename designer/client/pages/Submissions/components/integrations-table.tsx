@@ -1,4 +1,7 @@
+import "../submissions.scss";
+
 import React from "react";
+
 import { IntegrationLog } from "../../../../server/plugins/routes/types";
 
 interface Props {
@@ -8,7 +11,7 @@ interface Props {
 
 export const IntegrationsTable = ({ integrationLogs, parentPath }: Props) => {
   return (
-    <table className="govuk-table">
+    <table className="govuk-table integration-log-table">
       <thead className="govuk-table__head">
         <tr className="govuk-table__row">
           <th scope="col" className="govuk-table__header">
@@ -36,7 +39,14 @@ export const IntegrationsTable = ({ integrationLogs, parentPath }: Props) => {
               <p>{log.integrationName}</p>
             </td>
             <td className="govuk-table__cell">
-              <p>Success</p>
+              <p>
+                <span
+                  className={`integration-status ${log.result ?? "unknown"}
+                `}
+                >
+                  {log.result ?? "unknown"}
+                </span>
+              </p>
             </td>
           </tr>
         ))}

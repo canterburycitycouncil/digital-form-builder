@@ -8,6 +8,28 @@
   margin: auto;
 }
 
+.integration-log-table{
+  .integration-status {
+    display: inline-block;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    &.failure {
+      background-color: #ff6961;
+      color: white;
+    }
+    &.unknown {
+      background-color: #888;
+      color: white;
+    }
+    &.submitted,
+    &.success {
+      background-color: #77dd77;
+      color: white;
+    }
+  }
+}
+
 .submission-details-container,
 .integration-details-container {
   width: 80%;
@@ -27,11 +49,11 @@
       padding: 5px 10px;
       border-radius: 5px;
       float: right;
-      &.failed {
+      &.failure {
         background-color: #ff6961;
         color: white;
       }
-      &.incomplete {
+      &.unknown {
         background-color: #888;
         color: white;
       }
@@ -191,6 +213,22 @@
         border-color: #380b37;
         color: #fff;
         text-decoration: none;
+      }
+    }
+  }
+}
+.config-value-table{
+  thead{
+    tr{
+      padding-bottom: 5px;
+      border-bottom: 2px solid black;
+    }
+  }
+  tbody{
+    tr{
+      padding: 3px 5px;
+      td{
+        padding: 0 3px;
       }
     }
   }

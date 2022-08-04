@@ -1,11 +1,12 @@
+import { Tabs } from "govuk-react-jsx";
 import React, { useEffect, useState } from "react";
+
 import { IntegrationLog } from "../../../server/plugins/routes/types";
 import { SubmissionApi } from "../../api/submissionApi";
 import { IntegrationConfiguration } from "./components/integration-configuration";
 import { IntegrationMenu } from "./components/integration-menu";
 import { IntegrationRequest } from "./components/integration-request";
 import { IntegrationResponse } from "./components/integration-response";
-import { Tabs } from "govuk-react-jsx";
 
 interface Props {
   match?: any;
@@ -35,6 +36,7 @@ export const Integration = (props: Props) => {
         .catch((err) => console.log(err));
     }
   });
+  console.log(integration);
   return (
     <React.Fragment>
       <IntegrationMenu />
