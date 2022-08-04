@@ -16,7 +16,10 @@ export type NotifyOutputConfiguration = {
   apiKey: string;
   templateId: string;
   emailField: string;
-  personalisation: string[];
+  personalisation: {
+    item: string;
+    value: string;
+  }[];
   addReferencesToPersonalisation?: boolean;
 };
 
@@ -62,7 +65,6 @@ export type Output = {
   type: OutputType;
   outputConfiguration: OutputConfiguration;
   previous: string;
-  previousValues: string[];
   next: string[];
 };
 
