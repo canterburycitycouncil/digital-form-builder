@@ -24,4 +24,5 @@ export interface IntegrationLog {
     [key: string]: any;
   };
   response?: any;
+  result: "success" | "failure";
 }
