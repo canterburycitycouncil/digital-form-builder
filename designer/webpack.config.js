@@ -6,7 +6,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const nodeExternals = require("webpack-node-externals");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
-const autoprefixer = require("autoprefixer");
+const Dotenv = require("dotenv-webpack");
 
 const devMode = process.env.NODE_ENV !== "production";
 const prodMode = process.env.NODE_ENV === "production";
@@ -113,6 +113,7 @@ const client = {
       openAnalyzer: false,
     }),
     reactEnvVariables,
+    new Dotenv(),
   ],
   externals: {
     react: "React",
