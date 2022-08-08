@@ -31,7 +31,7 @@ export default function Menu({ updateDownloadedAt, id }: Props) {
   const history = useHistory();
   const location = useLocation();
 
-  const menuItemsObject = getMenuItems(useMenuItem, data);
+  const menuItemsObject = getMenuItems(useMenuItem, data, id);
 
   const goToOutputs = () => {
     let currentUrl = location.pathname;

@@ -14,22 +14,9 @@ export const FormDetailsTitle = (props: Props) => {
       fieldName="title"
       fieldParent="form"
       value={title}
-      translationNamespace="form"
+      translationNamespace="formDetails"
       type="text"
       handleChange={handleTitleInputBlur}
     />
-    // <Input
-    //   id="form-title"
-    //   name="title"
-    //   label={{
-    //     className: "govuk-label--s",
-    //     children: [i18n("Title")],
-    //   }}
-    //   onChange={handleTitleInputBlur}
-    //   defaultValue={title}
-    //   errorMessage={
-    //     errors?.title ? { children: errors.title.children } : undefined
-    //   }
-    // />
   );
 };

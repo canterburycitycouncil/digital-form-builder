@@ -15,14 +15,18 @@ import isFunction from "lodash/isFunction";
 import React, { ChangeEvent, Component, ContextType, FormEvent } from "react";
 
 import { FormDetailsSubmissionMessage } from "./FormDetailsSubmissionMessage";
+import { FormDetailsTitle } from "./FormDetailsTitle";
 type PhaseBanner = Exclude<FormDefinition["phaseBanner"], undefined>;
 type Phase = PhaseBanner["phase"];
 
 interface Props {
+  id: string;
   onCreate?: () => void;
 }
 
 interface State {
+  id: string;
+  title: string;
   phase: Phase;
   feedbackForm: boolean;
   formConfigurations: FormConfiguration[];
@@ -37,12 +41,13 @@ export class FormDetails extends Component<Props, State> {
   context!: ContextType<typeof DataContext>;
   isUnmounting = false;
 
-  constructor(props, context) {
+  constructor(props: Props, context) {
     super(props, context);
     const { data } = context;
     const selectedFeedbackForm = data.feedback?.url?.substr(1) ?? "";
-    console.log(data.submissionMessage);
     this.state = {
+      id: props.id,
+      title: data.title !== "" ? data.title : props.id.replace(/-/g, " "),
       feedbackForm: data.feedback?.feedbackForm ?? false,
       formConfigurations: [],
       selectedFeedbackForm,
@@ -63,11 +68,13 @@ export class FormDetails extends Component<Props, State> {
       phase,
       internalOnly,
       submissionMessage,
+      title,
     } = this.state;
     if (data) {
       const { phaseBanner = {} } = data;
       const { onCreate } = this.props;
       let copy: FormDefinition = { ...data };
+      copy.title = title;
       copy.internalOnly = internalOnly;
       copy.feedback = {
         feedbackForm,
@@ -127,8 +134,16 @@ export class FormDetails extends Component<Props, State> {
     });
   };
 
+  handleTitleInputBlur = (event: ChangeEvent<HTMLInputElement>) => {
+    this.setState({
+      title: event.target.value,
+    });
+  };
+
   render() {
     const {
+      id,
+      title,
       phase,
       feedbackForm,
       selectedFeedbackForm,
@@ -146,6 +161,16 @@ export class FormDetails extends Component<Props, State> {
           <ErrorSummary errorList={Object.values(errors)} />
         )}
         <form onSubmit={this.onSubmit} autoComplete="off">
+          <div className="govuk-label govuk-label--s">Form id</div>
+          <div className="govuk-hint">
+            The form id cannot be changed after being created.
+          </div>
+          <div className="govuk-label form-id">{id}</div>
+          <FormDetailsTitle
+            title={title}
+            handleTitleInputBlur={this.handleTitleInputBlur}
+            errors={errors}
+          />
           <FormDetailsInternalOnly
             internalOnly={internalOnly}
             handleInternalOnlyInputBlur={this.handleInternalOnlyInputBlur}

@@ -29,7 +29,8 @@ interface MenuItemObject {
 
 export default function getMenuItems(
   useMenuItem: () => MenuItemHook,
-  data: any
+  data: any,
+  id: string
 ): MenuItemObject {
   return {
     "form-details": {
@@ -38,7 +39,9 @@ export default function getMenuItems(
         title: "Form details",
         component: {
           type: FormDetails,
-          props: {},
+          props: {
+            id: id,
+          },
         },
       },
     },

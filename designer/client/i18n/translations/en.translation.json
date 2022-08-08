@@ -251,7 +251,11 @@
       "fieldTitle": "Select a phase banner to add or change to your form",
       "hint": "A phase banner includes a link for users to give feedback on your form."
     },
-    "internalOnly": "Is this form internal only?"
+    "internalOnly": "Is this form internal only?",
+    "title": {
+      "title": "Form title",
+      "helpText": "Defaults to a readable version of the form id"
+    }
   },
   "landingPage": {
     "choice": {
