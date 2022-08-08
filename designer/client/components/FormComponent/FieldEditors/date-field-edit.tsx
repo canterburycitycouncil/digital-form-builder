@@ -3,7 +3,7 @@ import { Actions } from "@xgovformbuilder/designer/client/components/FormCompone
 import { CssClasses } from "@xgovformbuilder/designer/client/components/FormComponent/components/CssClasses";
 import { GovUKInput } from "@xgovformbuilder/designer/client/components/GovUKFields";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
-import React, { useContext } from "react";
+import React, { ChangeEvent, useContext } from "react";
 
 type Props = {
   context: any; // TODO
@@ -26,29 +26,29 @@ export function DateFieldEdit({ context = ComponentContext }: Props) {
 
       <GovUKInput
         translationNamespace="dateFieldEditComponent"
-        fieldName="max-days-in-past-field"
+        fieldName="max-Days-In-Past-Field"
         fieldParent="options"
-        customisationClasses={["govuk-input--width-3"]}
+        // customisationClasses={["govuk-input--width-3"]}
         type="number"
         value={options.maxDaysInPast || ""}
-        handleChange={(e) =>
+        handleChange={(e: ChangeEvent<HTMLInputElement>) =>
           dispatch({
             type: Actions.EDIT_OPTIONS_MAX_DAYS_IN_PAST,
-            payload: e.target.nodeValue,
+            payload: e.target.value,
           })
         }
       />
       <GovUKInput
         translationNamespace="dateFieldEditComponent"
-        fieldName="max-days-in-future-field"
+        fieldName="max-Days-In-Future-Field"
         fieldParent="options"
-        customisationClasses={["govuk-input--width-3"]}
+        // customisationClasses={["govuk-input--width-3"]}
         type="number"
-        value={options.maxDaysInPast || ""}
-        handleChange={(e) =>
+        value={options.maxDaysInFuture || ""}
+        handleChange={(e: ChangeEvent<HTMLInputElement>) =>
           dispatch({
             type: Actions.EDIT_OPTIONS_MAX_DAYS_IN_FUTURE,
-            payload: e.target.nodeValue,
+            payload: e.target.value,
           })
         }
       />

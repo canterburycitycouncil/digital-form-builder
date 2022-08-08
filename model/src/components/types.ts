@@ -157,6 +157,8 @@ interface DateFieldBase {
     isExternal?: boolean;
     variable?: string;
     classes?: string;
+    maxDaysInPast?: number;
+    maxDaysInFuture?: number;
   };
   schema: {};
 }
