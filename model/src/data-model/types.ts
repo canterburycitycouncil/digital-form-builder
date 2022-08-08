@@ -164,7 +164,7 @@ export type FormDefinition = {
   lists: List[];
   sections: Section[];
   startPage?: Page["path"] | undefined;
-  name?: string | undefined;
+  title?: string;
   feedback?: Feedback;
   phaseBanner?: PhaseBanner;
   fees: Fee[];

@@ -31,14 +31,14 @@ export const registerNewFormWithRunner: ServerRoute = {
             await persistenceService.uploadConfiguration(
               `${newName}.json`,
               JSON.stringify({
-                name: formName,
                 ...newFormJson,
+                title: formName,
               })
             );
           }
           await publish(newName, {
-            name: formName,
             ...newFormJson,
+            title: formName,
           });
         } else {
           // await persistenceService.copyConfiguration(

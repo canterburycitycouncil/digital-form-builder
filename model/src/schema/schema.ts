@@ -261,6 +261,7 @@ export const Schema = joi
   .required()
   .keys({
     id: joi.string().allow("").optional(),
+    title: joi.string().allow("").optional(),
     internalOnly: joi.boolean().default(false),
     feedback: feedbackSchema,
     startPage: joi.string().required(),
