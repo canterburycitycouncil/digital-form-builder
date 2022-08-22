@@ -19,6 +19,7 @@
       display: block;
       max-width: 25%;
       position: relative;
+      z-index: 1;
       box-sizing: border-box;
       a {
         padding: 5px 15px;
@@ -44,6 +45,7 @@
         box-sizing: border-box;
         background-color: #263238;
         top: calc(100% + 15px);
+        z-index: 1000;
         &.hidden {
           display: none;
         }
