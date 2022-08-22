@@ -10,7 +10,7 @@ There are a few different folders where models are kept in this package, separat
 
 the components folder houses all the types and interfaces for form components. In here the default configuration is kept for all different types of fields in forms. There are a few different files contained in this folder which hold different parts of the component models:
 
-### Component-types.ts
+### component-types.ts
 
 This file holds the default configuration for each form component. All components have a few properties:
 

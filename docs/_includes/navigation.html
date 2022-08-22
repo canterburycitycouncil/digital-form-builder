@@ -2,7 +2,7 @@
     <ul class="navigation-list">
         {% for item in site.data.navigation %}
             <li class="navigation-list-item">
-                <a href="/digital-form-builder{{ item.link }}" {% if page.url == item.link %}class="current"{% endif %}>
+                <a href="{{ item.link }}" {% if page.url == item.link %}class="current"{% endif %}>
                     {{ item.name }}
                 </a>
                 {% if item.children %}

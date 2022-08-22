@@ -1,18 +1,20 @@
 ---
 ---
 
-@import "slate";
+@import "{{ site.theme }}";
 
 .navigation {
   width: 100%;
   padding: 15px 45px;
   box-sizing: border-box;
+  background-color: #263238;
   .navigation-list {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
     align-items: stretch;
     justify-content: space-around;
+    margin-bottom: 0;
     .navigation-list-item {
       display: block;
       max-width: 25%;
@@ -24,10 +26,11 @@
         transition: all ease-in-out 200ms;
         font-size: 16px;
         display: block;
+        color: white;
         &:hover,
         &:focus,
         &.current {
-          border-bottom: 2px solid #263238;
+          border-bottom: 2px solid white;
           text-decoration: none;
         }
       }
@@ -40,7 +43,7 @@
         padding: 5px 15px;
         box-sizing: border-box;
         background-color: #263238;
-        top: 100%;
+        top: calc(100% + 15px);
         &.hidden {
           display: none;
         }
@@ -56,13 +59,56 @@
           a {
             color: white;
             font-size: 12px;
+            border-bottom: none;
             &:hover,
             &:focus {
               text-decoration: none;
+              border-bottom: none;
             }
           }
         }
       }
     }
+  }
+}
+
+.inner{
+  max-width: calc(100% - 90px);
+  padding: 30px 45px;
+  margin: auto;
+  @media screen and (min-width: 1080px){
+    max-width: 1020px;
+    padding: 30px 30px;
+  }
+}
+
+h1{
+  font-size: 2rem;
+  padding-bottom: 30px;
+}
+
+h2{
+  font-size: 1.75rem;
+  padding-bottom: 15px;
+  padding-top: 10px;
+  margin-top: 25px;
+  border-top: 2px solid #263238;
+}
+
+h3{
+  font-size: 1.5rem;
+  padding-bottom: 15px;
+  text-decoration: underline;
+}
+
+p{
+  font-size: 1.2rem;
+}
+
+ul{
+  margin-bottom: 15px;
+  li{
+    font-size: 1.2rem;
+    list-style-position: inside;
   }
 }
