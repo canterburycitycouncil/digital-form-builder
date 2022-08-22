@@ -2,14 +2,14 @@
     <ul class="navigation-list">
         {% for item in site.data.navigation %}
             <li class="navigation-list-item">
-                <a href="{{ item.link }}" {% if page.url == item.link %}class="current"{% endif %}>
+                <a href="/digital-form-builder{{ item.link }}" {% if page.url == item.link %}class="current"{% endif %}>
                     {{ item.name }}
                 </a>
                 {% if item.children %}
                     <ul class="navigation-dropdown hidden">
                         {% for child in item.children %}
                             <li class="dropdown-item">
-                                <a href="{{ child.link }}">{{ child.name }}</a>
+                                <a href="/digital-form-builder{{ child.link }}">{{ child.name }}</a>
                             </li>
                         {% endfor %}
                     </ul>
