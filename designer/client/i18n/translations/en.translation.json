@@ -376,6 +376,16 @@
       "summary": "Summary page"
     }
   },
+  "logicExpression": {
+    "expressionTypes": {
+      "title": "Expression type",
+      "helpText": "The type of expression you would like to add"
+    },
+    "predefinedExpressions": {
+      "title": "Predefined expression",
+      "helpText": "Choose from the dropdown the expression you want to use"
+    }
+  },
   "outputs": {
     "menu": {
       "backToForm": "Back to form",

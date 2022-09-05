@@ -3,6 +3,7 @@ import { FormDefinition, LogicExpression, Page } from "@xgovformbuilder/model";
 export interface LogicExpressionProps {
   data: FormDefinition;
   logicExpression: LogicExpression;
+  logicExpressionIndex: number;
   save: Function;
   onEdit: Function;
   onCancel: Function;
