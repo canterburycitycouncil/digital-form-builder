@@ -1,8 +1,19 @@
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+  test,
+} from "@jest/globals";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { ComponentCreate } from "@xgovformbuilder/designer/client/components/ComponentCreate/ComponentCreate";
+import { ComponentCreate } from "@xgovformbuilder/designer/client/components/FormComponent/ComponentCreate";
+import { ComponentContextProvider } from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
-import { ComponentContextProvider } from "@xgovformbuilder/designer/client/reducers/component";
 import { DetailsComponent } from "@xgovformbuilder/model";
 import React from "react";
 

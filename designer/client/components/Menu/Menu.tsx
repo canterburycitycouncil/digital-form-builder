@@ -29,18 +29,14 @@ const convertMenuItemName = (menuItem: string) => {
 export default function Menu({ updateDownloadedAt, id }: Props) {
   const { data } = useContext(DataContext);
   const history = useHistory();
-  const location = useLocation();
-
-  const menuItemsObject = getMenuItems(useMenuItem, data);
+  const location = window.location.pathname.split("/");
+  const menuItemsObject = getMenuItems(useMenuItem, data, id);
 
   const goToOutputs = () => {
-    let currentUrl = location.pathname;
-    history.push(currentUrl + "/outputs");
+    history.push("/" + location[2] + "/" + location[3] + "/outputs");
   };
-
   const goToSubmissions = () => {
-    let currentUrl = location.pathname;
-    history.push(currentUrl + "/submissions");
+    history.push("/" + location[2] + "/" + location[3] + "/submissions");
   };
 
   return (

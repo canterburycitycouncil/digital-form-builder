@@ -112,9 +112,10 @@ exports[`ChooseExisting with existing configurations 1`] = `
                 >
                   <a
                     class="govuk-link"
+                    data-testid="Not a form title"
                     href="#"
                   >
-                    Not a feedback form
+                    Not a form title
                   </a>
                 </td>
               </tr>
@@ -126,9 +127,10 @@ exports[`ChooseExisting with existing configurations 1`] = `
                 >
                   <a
                     class="govuk-link"
+                    data-testid="Form title"
                     href="#"
                   >
-                    My feedback form
+                    Form title
                   </a>
                 </td>
               </tr>

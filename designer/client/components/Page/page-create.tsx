@@ -109,7 +109,6 @@ class PageCreate extends React.Component<Props, State> {
     }
     try {
       await save(copy);
-      console.log("time to do the create");
       this.props.onCreate();
     } catch (err) {
       logger.error("PageCreate", err);

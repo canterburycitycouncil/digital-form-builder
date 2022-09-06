@@ -1,7 +1,11 @@
-import { Menu } from "..";
-import { render, fireEvent } from "@testing-library/react";
-import { DataContext, FlyoutContext } from "../../../context";
+import { fireEvent, render } from "@testing-library/react";
+import {
+  DataContext,
+  FlyoutContext,
+} from "@xgovformbuilder/designer/client/context";
 import React from "react";
+
+import { Menu } from "..";
 
 const dataValue = { data: {}, save: jest.fn() };
 const flyoutValue = {
@@ -23,7 +27,6 @@ export const customRender = (children) => {
 
 it("Renders button strings correctly", () => {
   const { getByText } = customRender(<Menu />);
-
   expect(getByText("Form details")).toBeInTheDocument();
   expect(getByText("Add page")).toBeInTheDocument();
   expect(getByText("Add link")).toBeInTheDocument();

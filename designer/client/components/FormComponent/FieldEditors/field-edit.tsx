@@ -39,7 +39,7 @@ export function FieldEdit({ isContentField = false }: Props) {
     },
   ];
   const availableVariables = emptyVariableOption.concat(
-    data
+    data && data.logicExpressions
       ? data.logicExpressions.map((expression) => {
           return {
             children: expression.variableName,

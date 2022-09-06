@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { RenderWithContext } from "@xgovformbuilder/designer/client/__tests__/helpers/renderers";
-import { FileUploadFieldEdit } from "@xgovformbuilder/designer/client/file-upload-field-edit";
+import { FileUploadFieldEdit } from "@xgovformbuilder/designer/client/components/FormComponent/FieldEditors/file-upload-field-edit";
 import React from "react";
 
 describe("File upload", () => {

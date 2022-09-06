@@ -26,7 +26,7 @@ export function DateFieldEdit({ context = ComponentContext }: Props) {
 
       <GovUKInput
         translationNamespace="dateFieldEditComponent"
-        fieldName="max-days-in-past-field"
+        fieldName="max-Days-In-Past-Field"
         fieldParent="options"
         customisationClasses={["govuk-input--width-3"]}
         type="number"
@@ -40,7 +40,7 @@ export function DateFieldEdit({ context = ComponentContext }: Props) {
       />
       <GovUKInput
         translationNamespace="dateFieldEditComponent"
-        fieldName="max-days-in-future-field"
+        fieldName="max-Days-In-Future-Field"
         fieldParent="options"
         customisationClasses={["govuk-input--width-3"]}
         type="number"

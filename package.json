@@ -57,6 +57,7 @@
     "@types/hapi__crumb": "^7.3.3",
     "@types/hapi__yar": "^10.1.1",
     "@types/hoek": "^4.1.4",
+    "@types/jest": "^28.1.6",
     "@types/joi": "^17.2.3",
     "@types/lodash": "^4.14.181",
     "@types/node-fetch": "^2.6.1",

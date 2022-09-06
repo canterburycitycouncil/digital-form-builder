@@ -62,6 +62,6 @@ describe("SaveErrorPage", () => {
 
     fireEvent.click(screen.getByText("Back to Designer"));
     await waitFor(() => expect(push).toHaveBeenCalledTimes(1));
-    expect(push).toBeCalledWith("@xgovformbuilder/designer/testid");
+    expect(push).toBeCalledWith("designer/testid");
   });
 });

@@ -30,7 +30,7 @@ export function TextFieldEdit({ children, context = ComponentContext }: Props) {
 
       <GovUKInput
         translationNamespace="textFieldEditComponent"
-        fieldName="min-length-field"
+        fieldName="min-Length-Field"
         fieldParent="schema"
         type="number"
         value={schema.min || ""}
@@ -44,7 +44,7 @@ export function TextFieldEdit({ children, context = ComponentContext }: Props) {
 
       <GovUKInput
         translationNamespace="textFieldEditComponent"
-        fieldName="max-length-field"
+        fieldName="max-Length-Field"
         fieldParent="schema"
         type="number"
         value={schema.max || ""}
@@ -58,7 +58,7 @@ export function TextFieldEdit({ children, context = ComponentContext }: Props) {
 
       <GovUKInput
         translationNamespace="textFieldEditComponent"
-        fieldName="length-field"
+        fieldName="length-Field"
         fieldParent="schema"
         type="number"
         value={schema.length || ""}
@@ -72,7 +72,7 @@ export function TextFieldEdit({ children, context = ComponentContext }: Props) {
 
       <GovUKInput
         translationNamespace="textFieldEditComponent"
-        fieldName="regex-field"
+        fieldName="regex-Field"
         fieldParent="schema"
         type="number"
         value={schema.regex || ""}

@@ -171,7 +171,7 @@
   "fieldEdit": {
     "conditions": {
       "title": "Conditions (optional)",
-      "hint": "Select a condition that determines whether to show the contents of this component. You can create and edit conditions from the Conditions screen."
+      "helpText": "Select a condition that determines whether to show the contents of this component. You can create and edit conditions from the Conditions screen."
     },
     "details": {
       "hint": "Enter the text you want to show when users expand the title. You can apply basic HTML, such as text formatting and hyperlinks."
@@ -182,7 +182,7 @@
     "optionalHint": "Tick this box if users do not need to complete this field to progress through the form",
     "para": {
       "title": "Content",
-      "hint": "Enter the text you want to show. You can apply basic HTML, such as text formatting and hyperlinks."
+      "helpText": "Enter the text you want to show. You can apply basic HTML, such as text formatting and hyperlinks."
     }
   },
   "fieldTypeToName": {
@@ -243,7 +243,8 @@
     "alpha": "Alpha",
     "beta": "Beta",
     "feedbackForm": {
-      "fieldTitle": "Is this a feedback form?"
+      "fieldTitle": "Is this a feedback form?",
+      "fieldHint": "A feedback form allows you to provide feedback on other forms."
     },
     "none": "None",
     "phaseBanner": {
@@ -251,7 +252,11 @@
       "fieldTitle": "Select a phase banner to add or change to your form",
       "hint": "A phase banner includes a link for users to give feedback on your form."
     },
-    "internalOnly": "Is this form internal only?"
+    "internalOnly": "Is this form internal only?",
+    "title": {
+      "title": "Form title",
+      "helpText": "Defaults to a readable version of the form id"
+    }
   },
   "landingPage": {
     "choice": {

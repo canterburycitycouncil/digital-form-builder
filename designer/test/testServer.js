@@ -1,16 +1,17 @@
 import "whatwg-fetch";
+
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 
 const mockedFormConfigurations = [
   {
     Key: "Not-a-feedback-form",
-    DisplayName: "Not a feedback form",
+    DisplayName: "Not a form title",
     feedbackForm: false,
   },
   {
     Key: "My-feedback-form",
-    DisplayName: "My feedback form",
+    DisplayName: "Form title",
     feedbackForm: true,
   },
 ];

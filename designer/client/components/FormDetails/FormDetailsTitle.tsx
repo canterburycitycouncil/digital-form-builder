@@ -14,7 +14,7 @@ export const FormDetailsTitle = (props: Props) => {
       fieldName="title"
       fieldParent="form"
       value={title}
-      translationNamespace="form"
+      translationNamespace="formDetails"
       type="text"
       handleChange={handleTitleInputBlur}
     />

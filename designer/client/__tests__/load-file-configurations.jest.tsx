@@ -1,4 +1,4 @@
-import * as formConfigurationsApi from "@xgovformbuilder/designer/client/load-form-configurations";
+import * as formConfigurationsApi from "@xgovformbuilder/designer/client/api/configuration-api";
 import { server } from "@xgovformbuilder/designer/test/testServer";
 import { rest } from "msw";
 

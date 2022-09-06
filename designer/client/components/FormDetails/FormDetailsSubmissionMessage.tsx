@@ -191,7 +191,6 @@ export const FormDetailsSubmissionMessage: FC<Props> = ({
     setEditorState(value);
     let valueBlocks = value.getCurrentContent().getBlocksAsArray();
     let plainTextValue = convertBlockArrayToString(valueBlocks);
-    console.log(plainTextValue);
     onChange(plainTextValue);
   };
 

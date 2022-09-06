@@ -1,6 +1,6 @@
 import { FormDefinition } from "@xgovformbuilder/model";
 
-import { addLink } from "..";
+import { addLink } from "../addLink";
 
 const data: FormDefinition = {
   conditions: [],
@@ -15,19 +15,24 @@ const data: FormDefinition = {
     { title: "poached", path: "/poached" },
     { title: "sunny", path: "/sunny" },
   ],
-  sections: [],
-  startPage: "",
 };
 
 test("addLink throws if to, from or both are not found", () => {
-  expect(() => addLink(data, "404", "4004")).toThrow(/no page found/);
-  expect(() => addLink(data, "404", "/scrambled")).toThrow(/no page found/);
-  expect(() => addLink(data, "/scrambled", "404")).toThrow(/no page found/);
+  // ALTER PARAMS TO TEST OUT SCENARIOS
+  expect(() => addLink(data, "404", "4004")).toThrow(
+    /no page found with the path 404/
+  );
+  expect(() => addLink(data, "404", "/scrambled")).toThrow(
+    /no page found with the path 404/
+  );
+  expect(() => addLink(data, "/scrambled", "404")).toThrow(
+    /no page found with the path 404/
+  );
 });
 
-test("addLink throws if to and from are equal", () => {
+test("addLink throws if to and from are equal", async () => {
   expect(() => addLink(data, "404", "404")).toThrow(
-    /cannot link a page to itself/
+    /Cannot link a page to itself/
   );
 });
 
@@ -45,8 +50,6 @@ test("addLink successfully adds a new link", () => {
       { title: "poached", path: "/poached", next: [{ path: "/sunny" }] },
       { title: "sunny", path: "/sunny" },
     ],
-    sections: [],
-    startPage: "",
   });
 });
 
@@ -64,7 +67,5 @@ test("addLink does nothing happens if the link already exists", () => {
       { title: "poached", path: "/poached" },
       { title: "sunny", path: "/sunny" },
     ],
-    sections: [],
-    startPage: "",
   });
 });

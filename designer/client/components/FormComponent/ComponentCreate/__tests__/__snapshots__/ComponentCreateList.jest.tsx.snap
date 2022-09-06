@@ -20,7 +20,7 @@ exports[`ComponentCreateList should match snapshot 1`] = `
         <h2
           class="govuk-heading-s"
         >
-          Content
+          content
         </h2>
         <div
           class="govuk-hint"
@@ -106,6 +106,79 @@ exports[`ComponentCreateList should match snapshot 1`] = `
               class="govuk-hint"
             >
               A block of text
+            </div>
+          </li>
+        </ol>
+        <hr
+          class="govuk-section-break govuk-section-break--m govuk-section-break--visible"
+        />
+      </li>
+      <li
+        class="component-create__list__item"
+      >
+        <h2
+          class="govuk-heading-s"
+        >
+          Selection fields
+        </h2>
+        <div
+          class="govuk-hint"
+        >
+          Selection fields allow you to provide lists of answers for users to choose from
+        </div>
+        <ol
+          class="govuk-list"
+        >
+          <li>
+            <a
+              class="govuk-link"
+              href="#0"
+            >
+              Checkboxes
+            </a>
+            <div
+              class="govuk-hint"
+            >
+              A list for users to select multiple answers
+            </div>
+          </li>
+          <li>
+            <a
+              class="govuk-link"
+              href="#0"
+            >
+              Radios
+            </a>
+            <div
+              class="govuk-hint"
+            >
+              A list for users to select one answer
+            </div>
+          </li>
+          <li>
+            <a
+              class="govuk-link"
+              href="#0"
+            >
+              Select
+            </a>
+            <div
+              class="govuk-hint"
+            >
+              A drop-down list for users to select one answer
+            </div>
+          </li>
+          <li>
+            <a
+              class="govuk-link"
+              href="#0"
+            >
+              YesNo
+            </a>
+            <div
+              class="govuk-hint"
+            >
+              Allows users to answer either 'Yes' or 'No'
             </div>
           </li>
         </ol>
@@ -302,76 +375,6 @@ exports[`ComponentCreateList should match snapshot 1`] = `
         <hr
           class="govuk-section-break govuk-section-break--m govuk-section-break--visible"
         />
-      </li>
-      <li
-        class="component-create__list__item"
-      >
-        <h2
-          class="govuk-heading-s"
-        >
-          Selection fields
-        </h2>
-        <div
-          class="govuk-hint"
-        >
-          Selection fields allow you to provide lists of answers for users to choose from
-        </div>
-        <ol
-          class="govuk-list"
-        >
-          <li>
-            <a
-              class="govuk-link"
-              href="#0"
-            >
-              Checkboxes
-            </a>
-            <div
-              class="govuk-hint"
-            >
-              A list for users to select multiple answers
-            </div>
-          </li>
-          <li>
-            <a
-              class="govuk-link"
-              href="#0"
-            >
-              Radios
-            </a>
-            <div
-              class="govuk-hint"
-            >
-              A list for users to select one answer
-            </div>
-          </li>
-          <li>
-            <a
-              class="govuk-link"
-              href="#0"
-            >
-              Select
-            </a>
-            <div
-              class="govuk-hint"
-            >
-              A drop-down list for users to select one answer
-            </div>
-          </li>
-          <li>
-            <a
-              class="govuk-link"
-              href="#0"
-            >
-              YesNo
-            </a>
-            <div
-              class="govuk-hint"
-            >
-              Allows users to answer either 'Yes' or 'No'
-            </div>
-          </li>
-        </ol>
       </li>
     </ol>
   </div>

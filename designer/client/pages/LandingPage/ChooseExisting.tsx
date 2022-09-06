@@ -70,6 +70,7 @@ export class ChooseExisting extends Component<RouteComponentProps, State> {
           <a
             className="govuk-link"
             href="#"
+            data-testid={form.DisplayName}
             onClick={(e) => {
               e.preventDefault();
               this.selectForm(form.Key);

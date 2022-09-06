@@ -1,14 +1,20 @@
 module.exports = {
+  moduleNameMapper: {
+    "^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|ico|svg)$":
+      "jest-transform-stub",
+  },
+  transformIgnorePatterns: [
+    "node_modules/(?!(govuk-react-jsx))",
+    "\\.pnp\\.[^\\/]+$",
+  ],
   projects: [
     {
       roots: ["<rootDir>/client"],
       displayName: "client",
       setupFilesAfterEnv: ["<rootDir>/jest-setup.js"],
+      preset: "ts-jest",
       testMatch: ["<rootDir>/**/__tests__/*.jest.(ts|tsx)"],
       testPathIgnorePatterns: ["<rootDir>/test/"],
-      moduleNameMapper: {
-        "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
-      },
       coverageThreshold: {
         global: {
           branches: 85,
@@ -22,6 +28,7 @@ module.exports = {
       displayName: "server",
       roots: ["<rootDir>/server"],
       setupFilesAfterEnv: ["<rootDir>/jest-server-setup.js"],
+      preset: "ts-jest",
       testMatch: ["<rootDir>/**/__tests__/*.jest.(ts|tsx)"],
       testPathIgnorePatterns: ["<rootDir>/test/"],
       coverageThreshold: {

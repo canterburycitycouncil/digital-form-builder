@@ -1,9 +1,8 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
+import { RenderWithContextAndDataContext } from "@xgovformbuilder/designer/client/__tests__/helpers/renderers";
+import OutputEdit from "@xgovformbuilder/designer/client/pages/Outputs/components/outputs/output-edit";
 import { FormDefinition } from "@xgovformbuilder/model";
 import React from "react";
-
-import { RenderWithContextAndDataContext } from "../../__tests__/helpers/renderers";
-import OutputEdit from "../output-edit";
 
 describe("OutputEdit", () => {
   let mockData: FormDefinition;
@@ -27,14 +26,27 @@ describe("OutputEdit", () => {
           controller: "./pages/summary.js",
         },
       ],
-      outputs: [],
+      outputs: [
+        {
+          name: "Notify Test",
+          title: "NewTitle",
+          type: "notify",
+          outputConfiguration: {
+            personalisation: [],
+            templateId: "NewTemplateId",
+            apiKey: "NewAPIKey",
+            emailField: "9WH4EX",
+            addReferencesToPersonalisation: true,
+          },
+        },
+      ],
       conditions: [],
     };
   });
 
   describe("Notify", () => {
     test("Notify Output object is created correctly", async () => {
-      const props: any = {
+      const props = {
         onEdit: jest.fn(),
         onCancel: jest.fn(),
         data: mockData,
@@ -43,10 +55,11 @@ describe("OutputEdit", () => {
           title: "Notify Test",
           type: "notify",
           outputConfiguration: {
-            templateId: "123ID",
-            apiKey: "123KEY",
+            templateId: "NewTemplateId",
+            apiKey: "NewAPIKey",
             emailField: "9WH4EX",
             personalisation: [],
+            addReferencesToPersonalisation: true,
           },
         },
       };
@@ -95,6 +108,7 @@ describe("OutputEdit", () => {
 
       expect(mockSave.mock.calls[0][0].outputs).toEqual([
         {
+          condition: "",
           name: "NewName",
           title: "NewTitle",
           type: "notify",

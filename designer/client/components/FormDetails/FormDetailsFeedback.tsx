@@ -68,7 +68,7 @@ export const FormDetailsFeedback = (props: Props) => {
         ]}
       />
       {feedbackForm === false && (
-        <div className="govuk-form-group">
+        <div className="govuk-form-group" data-testid="target-feedback-form">
           <label
             className="govuk-label govuk-label--s"
             htmlFor="target-feedback-form"
@@ -95,7 +95,6 @@ export const FormDetailsFeedback = (props: Props) => {
               <select
                 className="govuk-select"
                 id="target-feedback-form"
-                data-testid="target-feedback-form"
                 name="targetFeedbackForm"
                 value={selectedFeedbackForm}
                 required

@@ -33,7 +33,7 @@ describe("Newconfig", () => {
     });
     fireEvent.click(screen.getByText("Next"));
     await waitFor(() => expect(push).toHaveBeenCalledTimes(1));
-    expect(push).toBeCalledWith("@xgovformbuilder/designer/somekey");
+    expect(push).toBeCalledWith("designer/somekey");
 
     expect(postBodyMatched).toBe(true);
   });

@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import React from "react";
 
 import { DataContext } from "../../../../context";
@@ -39,18 +39,35 @@ describe("para edit", () => {
     );
   }
 
-  it("Should render with correct screen text", () => {
-    const { container } = render(
+  let textParaEdit;
+
+  beforeEach(() => {
+    textParaEdit = render(
       <TestComponentWithContext>
-        <ParaEdit context={ComponentContext}></ParaEdit>
+        <ParaEdit context={ComponentContext} />
       </TestComponentWithContext>
     );
-    expect(container).toHaveTextContent(
-      "Enter the text you want to show. You can apply basic HTML, such as text formatting and hyperlinks."
-    );
+  });
 
-    expect(container).toHaveTextContent(
-      "Select a condition that determines whether to show the contents of this component. You can create and edit conditions from the Conditions screen."
-    );
+  test("Should render with correct content label screen text", () => {
+    const text = "Content";
+    expect(textParaEdit.getByText(text)).toBeInTheDocument();
+  });
+
+  test("Should render content help text", () => {
+    const text =
+      "Enter the text you want to show. You can apply basic HTML, such as text formatting and hyperlinks.";
+    expect(textParaEdit.getByText(text)).toBeInTheDocument();
+  });
+
+  test("Should render with correct Conditions label screen text", () => {
+    const text = "Conditions (optional)";
+    expect(textParaEdit.getByText(text)).toBeInTheDocument();
+  });
+
+  test("Should render with correct Conditions help text screen text", () => {
+    const text =
+      "Select a condition that determines whether to show the contents of this component. You can create and edit conditions from the Conditions screen.";
+    expect(textParaEdit.getByText(text)).toBeInTheDocument();
   });
 });

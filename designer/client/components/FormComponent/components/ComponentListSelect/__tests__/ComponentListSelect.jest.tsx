@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import userEvent, { TargetElement } from "@testing-library/user-event";
-import { DataContext } from "@xgovformbuilder/designer/context";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
 import React, { useReducer } from "react";
 
 import { ListsEditorContextProvider } from "../../../../List/reducers/list/listsEditorReducer";

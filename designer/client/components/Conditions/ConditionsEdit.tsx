@@ -60,7 +60,6 @@ export function ConditionsEdit({ path }: Props) {
   const { data } = useContext(DataContext);
   const { conditions } = data as FormDefinition;
   const inputs = allInputs(data as FormDefinition);
-  console.log(conditions);
   return (
     <div className="govuk-body">
       <div className="govuk-hint">{i18n("conditions.hint")}</div>
@@ -84,8 +83,12 @@ export function ConditionsEdit({ path }: Props) {
 
           <ul className="govuk-list" data-testid="conditions-list">
             {conditions.map((condition) => (
-              <li key={condition.name} data-testid="conditions-list-item">
-                <a href="#" onClick={(e) => onClickCondition(e, condition)}>
+              <li key={condition.name}>
+                <a
+                  href="#"
+                  data-testid={`conditions-list-item-${condition.name}`}
+                  onClick={(e) => onClickCondition(e, condition)}
+                >
                   {condition.displayName}
                 </a>{" "}
                 <small>{condition.name}</small>

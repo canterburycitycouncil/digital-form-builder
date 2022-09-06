@@ -13,4 +13,12 @@ module.exports = {
       statements: 55,
     },
   },
+  moduleNameMapper: {
+    "^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|ico|svg)$":
+      "jest-transform-stub",
+  },
+  transformIgnorePatterns: [
+    "node_modules/(?!(govuk-react-jsx))",
+    "\\.pnp\\.[^\\/]+$",
+  ],
 };

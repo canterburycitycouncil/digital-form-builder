@@ -10,10 +10,13 @@ import SectionsEdit from "@xgovformbuilder/designer/client/components/Section/se
 import SummaryEdit from "@xgovformbuilder/designer/client/components/Summary/SummaryEdit";
 import DeclarationEdit from "@xgovformbuilder/designer/client/declaration-edit";
 import { i18n } from "@xgovformbuilder/designer/client/i18n";
+import { identity } from "lodash";
 
 interface MenuItemObject {
   [key: string]: {
     component: MenuItemHook;
+    data: any;
+    id: string;
     flyout: {
       title: string;
       width?: string;
@@ -29,7 +32,8 @@ interface MenuItemObject {
 
 export default function getMenuItems(
   useMenuItem: () => MenuItemHook,
-  data: any
+  data: any,
+  id: string
 ): MenuItemObject {
   return {
     "form-details": {
@@ -38,7 +42,9 @@ export default function getMenuItems(
         title: "Form details",
         component: {
           type: FormDetails,
-          props: {},
+          props: {
+            id: id,
+          },
         },
       },
     },

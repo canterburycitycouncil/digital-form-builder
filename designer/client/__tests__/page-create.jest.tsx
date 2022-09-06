@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import PageCreate from "@xgovformbuilder/designer/client/page-create";
+import PageCreate from "@xgovformbuilder/designer/client/components/Page/page-create";
 import React from "react";
 
 describe("page create fields text", () => {

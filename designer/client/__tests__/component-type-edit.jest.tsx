@@ -1,12 +1,12 @@
 import { render } from "@testing-library/react";
-import ComponentTypeEdit from "@xgovformbuilder/designer/client/ComponentTypeEdit";
-import { DataContext } from "@xgovformbuilder/designer/client/context";
 import {
   ComponentContext,
   componentReducer,
   initComponentState,
-} from "@xgovformbuilder/designer/client/reducers/component/componentReducer";
-import { Data } from "@xgovformbuilder/model";
+} from "@xgovformbuilder/designer/client/components/FormComponent/componentReducer/componentReducer";
+import ComponentTypeEdit from "@xgovformbuilder/designer/client/components/FormComponent/ComponentTypeEdit";
+import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { Data } from "@xgovformbuilder/model/dist";
 import React, { useReducer } from "react";
 
 describe("ComponentTypeEdit", () => {

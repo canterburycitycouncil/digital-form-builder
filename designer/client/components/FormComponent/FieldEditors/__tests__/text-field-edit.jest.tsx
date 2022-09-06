@@ -1,7 +1,8 @@
-import React from "react";
 import { render } from "@testing-library/react";
-import { TextFieldEdit } from "../text-field-edit";
+import React from "react";
+
 import { RenderWithContext } from "../../../../__tests__/helpers/renderers";
+import { TextFieldEdit } from "../text-field-edit";
 
 describe("Text field edit", () => {
   describe("Text field edit fields", () => {
@@ -24,6 +25,7 @@ describe("Text field edit", () => {
       );
     });
 
+    // FIELD TEXT SET IN TRANSLATIONS AND DEPENDANT ON CORRECT FIELDNAME CASING
     test("should display details link title", () => {
       const text = "Additional settings";
       expect(textFieldEditPage.getByText(text)).toBeInTheDocument();

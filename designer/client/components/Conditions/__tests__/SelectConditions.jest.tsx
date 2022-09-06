@@ -1,8 +1,18 @@
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  jest,
+  test,
+} from "@jest/globals";
 import { render } from "@testing-library/react";
-import { Data } from "@xgovformbuilder/model";
+import { DataContext } from "@xgovformbuilder/designer/client/context/DataContext";
+// import { Data } from "@xgovformbuilder/model/";
 import React from "react";
 
-import { DataContext } from "../../context";
 import SelectConditions from "./../SelectConditions";
 
 const dataValue = {
@@ -40,7 +50,7 @@ describe("SelectConditions", () => {
     const { getByText } = customRender(<SelectConditions {...props} />);
 
     const hint = "NoFieldsHintText";
-    expect(getByText(hint)).toBeInTheDocument();
+    expect(getByText(hint)).toBeTruthy();
   });
 });
 
@@ -90,8 +100,8 @@ test("SelectConditions renders available conditions", () => {
     (condition) => condition.displayName
   );
   expect(queryByText("You cannot add any conditions as")).toBeNull();
-  expect(getByTestId("select-condition")).toBeInTheDocument();
+  expect(getByTestId("select-condition")).toBeTruthy();
   expectedConditions.forEach((condition) => {
-    expect(getByText(condition)).toBeInTheDocument();
+    expect(getByText(condition)).toBeTruthy();
   });
 });
