@@ -73,6 +73,8 @@ export const ExpressionBuilder: FC<Props> = ({
     }
   }, [inputActions]);
 
+  // manage changes in dragend state
+
   const handleDragEnd = (results: DropResult) => {
     let newIndices = 0;
     if (expressionType === "literal") {
@@ -127,10 +129,6 @@ export const ExpressionBuilder: FC<Props> = ({
     }
   };
 
-  // const getVariablesFromExpression = (expression: string): InputResult[] => {
-  //   let expressionParts = expression.match(/g/)
-  // };
-
   const getExpressionFromVariables = (inputResults: InputResult[]): string => {
     let sortedInputs = [...inputResults].sort((a, b) => {
       if (a.order < b.order) {
@@ -175,14 +173,15 @@ export const ExpressionBuilder: FC<Props> = ({
 
   return (
     <>
+      <>This is using the expression builder original</>
       <DragDropContext onDragEnd={(results) => handleDragEnd(results)}>
         <div className="expressionBuilderDndArea">
           <ExpressionBuilderActions inputActions={inputActions} />
           <Droppable droppableId="expressionBuilderValuesArea">
             {(provided) => {
               <div
-                className="expressionBuilderValuesArea"
                 ref={provided.innerRef}
+                className="expressionBuilderValuesArea"
                 {...provided.droppableProps}
               >
                 {inputResults &&
@@ -208,17 +207,19 @@ export const ExpressionBuilder: FC<Props> = ({
                           key={`${result.value}_${result.order}`}
                         >
                           {(provided) => (
-                            <button
-                              className="expressionBuilderAction"
-                              style={{
-                                backgroundColor: actionColor[result.color],
-                              }}
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
-                              <span>{result.label}</span>
-                            </button>
+                            <div>
+                              <button
+                                className="expressionBuilderAction"
+                                // style={{
+                                //   backgroundColor: actionColor[result.color],
+                                // }}
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <span>{result.label}</span>
+                              </button>
+                            </div>
                           )}
                         </Draggable>
                       )}

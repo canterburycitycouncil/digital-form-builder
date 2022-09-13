@@ -16,7 +16,7 @@ This repository is a mono repo for
 
 The repos are forked from [DEFRA's digital form builder](https://github.com/DEFRA/digital-form-builder).
 
-This is a (getting close to) zero-install yarn 2 workspaces repository. .yarnrc.yml allows us to align our yarn environments. Please commit any plugins in .yarn, but do not commit your .yarn/cache. CI will save and restore the caches.
+This is a (getting close to) zero-install yarn 2 workspaces repository. .yarnrc.yml allows us to align our yarn environments. Please commit any plugins in .yarn, but do not commit your .yarn/cache. CI focwill save and restore the caches.
 
 Workspaces will deal with sym-linking the packages, so we do not have to manually run `yarn link`.
 It will also deal with hoisting the node_modules for any packages that are shared between the repos, thus decreasing any install times. Hopefully it all just works™️.

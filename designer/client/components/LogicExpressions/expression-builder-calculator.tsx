@@ -17,13 +17,14 @@ const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
   ...draggableStyle,
 });
 
-export const ExpressionBuilderActions: FC<Props> = ({ inputActions }) => {
+export const ExpressionBuilderCalculator: FC<Props> = ({ inputActions }) => {
   console.log(inputActions);
   return (
     <>
       <div className="expressionBuilderActionsContainer">
-        <h2>Expression Builder</h2>
-        {inputActions.map((action, index) => {
+        <h2>Building Area</h2>
+
+        {inputActions?.map((action, index) => {
           return (
             <Draggable
               draggableId={`${action.label}`}

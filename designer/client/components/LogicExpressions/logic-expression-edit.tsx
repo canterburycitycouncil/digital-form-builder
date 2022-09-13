@@ -10,6 +10,7 @@ import { Input, Select } from "govuk-react-jsx";
 import React, { useState } from "react";
 
 import { ValidationError } from "../FormComponent/componentReducer/componentReducer.validations";
+import { DragDrop } from "./dragdrop";
 import { ExpressionBuilder } from "./expression-builder";
 import { LogicExpressionProps } from "./types";
 
@@ -188,7 +189,14 @@ export const LogicExpressionEdit = ({
       ) : expressionType === "conditional" ? (
         ""
       ) : (
-        <ExpressionBuilder
+        // )
+        // : expressionType === "literal" ? (
+        //   <ExpressionBuilder
+        //     expression={selectedExpression}
+        //     expressionType={expressionType}
+        //     onExpressionChange={setSelectedExpression}
+        //   />
+        <DragDrop
           expression={selectedExpression}
           expressionType={expressionType}
           onExpressionChange={setSelectedExpression}

@@ -139,6 +139,7 @@
     "schmervice": "^1.6.0",
     "sinon": "^13.0.1",
     "usehooks-ts": "2.2.1",
+    "uuid": "^9.0.0",
     "vision": "^5.4.4",
     "wreck": "^14.2.0"
   },
@@ -149,7 +150,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "yarn lint-staged"
     }
   },
   "lint-staged": {
