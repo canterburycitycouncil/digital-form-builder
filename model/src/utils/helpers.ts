@@ -19,20 +19,20 @@ export const clone = <T>(obj: T & { clone?: () => T }): T => {
   return obj;
 };
 
-export function filter<T>(
-  obj: T,
-  predicate: (value: any) => boolean
-): Partial<T> {
-  const result = {};
+// export function filter<T>(
+//   obj: T,
+//   predicate: (value: any) => boolean
+// ): Partial<T> {
+//   const result = {};
 
-  for (const [key, value] of Object.entries(obj)) {
-    if (value && predicate(value)) {
-      result[key] = value;
-    }
-  }
+//   for (const [key, value] of Object.entries(obj)) {
+//     if (value && predicate(value)) {
+//       result[key] = value;
+//     }
+//   }
 
-  return result;
-}
+//   return result;
+// }
 
 export const nanoid = customAlphabet(
   "0123456789_abcdefghijklmnopqrstuvwxyz",

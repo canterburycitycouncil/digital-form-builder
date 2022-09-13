@@ -1,4 +1,5 @@
-import { clone, Fee } from "@xgovformbuilder/model";
+import { Fee } from "@xgovformbuilder/model";
+import { clone } from "@xgovformbuilder/model";
 import { Input } from "govuk-react-jsx";
 import React from "react";
 
@@ -39,6 +40,7 @@ class FeeEdit extends React.Component<Props, State> {
     const formData = new window.FormData(form);
     const { data } = this.props;
     const { save } = this.context;
+    const copy = clone(data);
 
     // Items
     const payApiKey = (formData.get("pay-api-key") as string).trim();
@@ -53,7 +55,6 @@ class FeeEdit extends React.Component<Props, State> {
     let hasValidationErrors = this.validate(payApiKey, form);
     if (hasValidationErrors) return;
 
-    const copy = clone(data);
     copy.payApiKey = payApiKey;
     copy.fees = descriptions.map((description, i) => ({
       description,
@@ -114,6 +115,7 @@ class FeeEdit extends React.Component<Props, State> {
     const { data } = this.props;
     const { fees, conditions, payApiKey, fee, onEdit } = data;
     const { errors, hasValidationErrors } = this.state;
+
     return (
       <div className="govuk-body">
         <form onSubmit={(e) => this.onSubmit(e)} autoComplete="off">
