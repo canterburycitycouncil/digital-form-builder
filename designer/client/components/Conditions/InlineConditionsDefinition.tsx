@@ -8,6 +8,7 @@ import {
   getOperatorNames,
 } from "@xgovformbuilder/model";
 import React from "react";
+import Select from "react-select";
 
 import { FieldInputObject } from "./InlineConditions";
 import { InlineConditionsDefinitionValue } from "./InlineConditionsDefinitionValue";
@@ -100,14 +101,11 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
   };
 
   onChangeField = (e) => {
-    const input = e.target;
-    const fieldName = input.value;
-
+    const input = e;
+    const fieldName = input.name;
     const { condition } = this.state;
-
     const currentField = condition.field?.name;
     const currentOperator = condition.operator;
-
     const fieldDef = this.props.fields[fieldName];
 
     this._updateCondition(condition, (c) => {
@@ -154,8 +152,11 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
   }
 
   onChangeOperator = (e) => {
+    console.log(e);
     const input = e.target;
+    console.log(input);
     const { condition } = this.state;
+    console.log(condition);
 
     this._updateCondition(condition, (c) => {
       c.operator = input.value;
@@ -183,6 +184,23 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
     const { expectsCoordinator, fields } = this.props;
     const { condition } = this.state;
     const fieldDef = fields[condition.field?.name];
+    const customStyles = {
+      option: (provided, state) => ({
+        ...provided,
+        color: state.isSelected ? "yellow" : "black",
+        backgroundColor: state.isSelected ? "white" : "white",
+      }),
+      control: (provided) => ({
+        ...provided,
+        border: 0,
+        boxShadow: "none",
+      }),
+      container: (provided) => ({
+        ...provided,
+        height: "auto",
+        width: "auto",
+      }),
+    };
 
     return (
       <div className="govuk-form-group" id="condition-definition-group">
@@ -207,26 +225,23 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
         )}
         {(condition.coordinator || !expectsCoordinator) && (
           <div id="condition-definition-inputs">
-            <select
+            <Select
               className="govuk-select"
+              placeholder={i18n("conditions.startTyping")}
+              styles={customStyles}
               id="cond-field"
               name="cond-field"
-              value={condition?.field?.name ?? ""}
+              options={Object.values(this.props.fields)}
+              autoFocus={true}
               onChange={this.onChangeField}
-            >
-              <option />
-              {Object.values(this.props.fields).map((field, index) => (
-                <option key={`${field.name}-${index}`} value={field.name}>
-                  {field.label}
-                </option>
-              ))}
-            </select>
+            />
 
             {fieldDef && !isCondition(fieldDef) && (
               <select
                 className="govuk-select"
                 id="cond-operator"
                 name="cond-operator"
+                // options={getOperatorNames(fieldDef.type)}
                 value={condition.operator ?? ""}
                 onChange={this.onChangeOperator}
               >
