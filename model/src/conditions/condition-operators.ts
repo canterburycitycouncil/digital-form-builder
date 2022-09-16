@@ -1,13 +1,12 @@
-import { ComponentType, ComponentDef } from "../components";
+import { ComponentDef, ComponentType } from "../components";
 import { ConditionValueAbstract } from "./condition-value-abstract";
-
 import {
-  timeUnits,
-  dateUnits,
-  dateTimeUnits,
   ConditionValue,
   DateDirections,
+  dateTimeUnits,
+  dateUnits,
   RelativeTimeValue,
+  timeUnits,
 } from "./condition-values";
 
 type Operator = "==" | "!=" | ">=" | "<=" | "<" | ">";

@@ -152,11 +152,8 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
   }
 
   onChangeOperator = (e) => {
-    console.log(e);
     const input = e.target;
-    console.log(input);
     const { condition } = this.state;
-    console.log(condition);
 
     this._updateCondition(condition, (c) => {
       c.operator = input.value;
@@ -184,11 +181,12 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
     const { expectsCoordinator, fields } = this.props;
     const { condition } = this.state;
     const fieldDef = fields[condition.field?.name];
+
     const customStyles = {
       option: (provided, state) => ({
         ...provided,
-        color: state.isSelected ? "yellow" : "black",
-        backgroundColor: state.isSelected ? "white" : "white",
+        color: state.isSelected ? "black" : "black",
+        backgroundColor: state.isFocused ? "#999999" : null,
       }),
       control: (provided) => ({
         ...provided,
@@ -223,16 +221,16 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
             </select>
           </div>
         )}
+
         {(condition.coordinator || !expectsCoordinator) && (
           <div id="condition-definition-inputs">
             <Select
               className="govuk-select"
               placeholder={i18n("conditions.startTyping")}
-              styles={customStyles}
               id="cond-field"
               name="cond-field"
+              styles={customStyles}
               options={Object.values(this.props.fields)}
-              autoFocus={true}
               onChange={this.onChangeField}
             />
 
@@ -241,7 +239,6 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
                 className="govuk-select"
                 id="cond-operator"
                 name="cond-operator"
-                // options={getOperatorNames(fieldDef.type)}
                 value={condition.operator ?? ""}
                 onChange={this.onChangeOperator}
               >
