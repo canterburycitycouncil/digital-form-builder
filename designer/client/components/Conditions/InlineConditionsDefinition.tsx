@@ -210,26 +210,29 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
       container: (provided) => ({
         ...provided,
         height: "auto",
-        width: "15em",
+        width: "auto",
       }),
     };
 
     return (
       <div className="govuk-form-group" id="condition-definition-group">
         {expectsCoordinator && (
-          <Select
-            className="govuk-select"
-            id="cond-coordinator"
-            name="cond-coordinator"
-            placeholder={i18n("conditions.additionalCriteria")}
-            options={followUpOptions}
-            onChange={this.onChangeCoordinator}
-            styles={customStyles}
-          />
+          <div className="govuk-form-group">
+            <Select
+              className="govuk-select"
+              id="cond-coordinator"
+              name="cond-coordinator"
+              placeholder={i18n("conditions.additionalCriteria")}
+              options={followUpOptions}
+              onChange={this.onChangeCoordinator}
+              styles={customStyles}
+            />
+          </div>
         )}
 
         {(condition.coordinator || !expectsCoordinator) && (
-          <div id="condition-definition-inputs">
+          // <div id="condition-definition-inputs">
+          <div className="govuk-form-group">
             <Select
               className="govuk-select"
               placeholder={i18n("conditions.startTyping")}
@@ -274,7 +277,6 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
             {(condition.value || isCondition(fieldDef)) && (
               <div className="govuk-form-group">
                 <a
-                  href="#"
                   id="save-inline-conditions"
                   className="govuk-link"
                   onClick={this.onClickFinalise}
