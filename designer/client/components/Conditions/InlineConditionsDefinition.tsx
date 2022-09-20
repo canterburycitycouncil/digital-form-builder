@@ -58,8 +58,9 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
     }
   }
 
-  onChangeCoordinator = (e) => {
-    const input = e.target;
+  onChangeCoordinator = (selected) => {
+    const input = selected;
+
     let newCondition: blankObject = {};
 
     if (input.value && input.value.trim() !== "") {
@@ -102,7 +103,8 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
 
   onChangeField = (e) => {
     const input = e;
-    const fieldName = input.name;
+    const fieldName = input.value;
+
     const { condition } = this.state;
     const currentField = condition.field?.name;
     const currentOperator = condition.operator;
@@ -151,10 +153,10 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
     );
   }
 
-  onChangeOperator = (e) => {
-    const input = e.target;
-    const { condition } = this.state;
+  onChangeOperator = (selected) => {
+    const input = selected;
 
+    const { condition } = this.state;
     this._updateCondition(condition, (c) => {
       c.operator = input.value;
     });
@@ -181,6 +183,18 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
     const { expectsCoordinator, fields } = this.props;
     const { condition } = this.state;
     const fieldDef = fields[condition.field?.name];
+    const followUpOptions = [
+      {
+        label: "and",
+        key: "and",
+        value: "and",
+      },
+      {
+        label: "or",
+        key: "or",
+        value: "or",
+      },
+    ];
 
     const customStyles = {
       option: (provided, state) => ({
@@ -196,30 +210,22 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
       container: (provided) => ({
         ...provided,
         height: "auto",
-        width: "auto",
+        width: "15em",
       }),
     };
 
     return (
       <div className="govuk-form-group" id="condition-definition-group">
         {expectsCoordinator && (
-          <div className="govuk-form-group" id="cond-coordinator-group">
-            <select
-              className="govuk-select"
-              id="cond-coordinator"
-              name="cond-coordinator"
-              value={condition?.coordinator ?? ""}
-              onChange={this.onChangeCoordinator}
-            >
-              <option />
-              <option key="and" value="and">
-                And
-              </option>
-              <option key="or" value="or">
-                Or
-              </option>
-            </select>
-          </div>
+          <Select
+            className="govuk-select"
+            id="cond-coordinator"
+            name="cond-coordinator"
+            placeholder={i18n("conditions.additionalCriteria")}
+            options={followUpOptions}
+            onChange={this.onChangeCoordinator}
+            styles={customStyles}
+          />
         )}
 
         {(condition.coordinator || !expectsCoordinator) && (
@@ -230,30 +236,31 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
               id="cond-field"
               name="cond-field"
               styles={customStyles}
-              options={Object.values(this.props.fields)}
+              options={
+                Object.values(this.props.fields).map((field) => ({
+                  label: field.label,
+                  value: field.name,
+                  type: field.type,
+                })) ?? [{ label: "", value: "" }]
+              }
               onChange={this.onChangeField}
             />
 
             {fieldDef && !isCondition(fieldDef) && (
-              <select
+              <Select
                 className="govuk-select"
+                placeholder={i18n("conditions.startTyping")}
                 id="cond-operator"
                 name="cond-operator"
-                value={condition.operator ?? ""}
+                options={
+                  getOperatorNames(fieldDef.type).map((conditional) => ({
+                    label: conditional,
+                    value: conditional,
+                  })) ?? [{ label: "", value: "" }]
+                }
+                styles={customStyles}
                 onChange={this.onChangeOperator}
-              >
-                <option />
-                {getOperatorNames(fieldDef.type).map((conditional) => {
-                  return (
-                    <option
-                      key={`${condition.field}-${conditional}`}
-                      value={conditional}
-                    >
-                      {conditional}
-                    </option>
-                  );
-                })}
-              </select>
+              />
             )}
 
             {condition.operator && (
@@ -266,13 +273,14 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
             )}
             {(condition.value || isCondition(fieldDef)) && (
               <div className="govuk-form-group">
-                <button
-                  id="save-condition"
+                <a
+                  href="#"
+                  id="save-inline-conditions"
                   className="govuk-link"
                   onClick={this.onClickFinalise}
                 >
                   {i18n("add")}
-                </button>
+                </a>
               </div>
             )}
           </div>

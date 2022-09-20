@@ -7,6 +7,7 @@ import logger from "@xgovformbuilder/designer/client/plugins/logger";
 import classNames from "classnames";
 import { ErrorMessage } from "govuk-react-jsx";
 import React from "react";
+import Select from "react-select";
 
 interface Props {
   onCreate: (e: any) => void;
@@ -106,7 +107,25 @@ class LinkCreate extends React.Component<Props, State> {
             {errors?.from && (
               <ErrorMessage>{errors?.from.children}</ErrorMessage>
             )}
-            <select
+
+            <Select
+              className={classNames({
+                "govuk-select": true,
+                "govuk-input--error": errors?.from,
+              })}
+              id="link-source"
+              data-testid="link-source"
+              name="path"
+              onChange={(e) => this.storeValue(e, "from")}
+              options={pages.map((page) => {
+                key: page.path;
+                value: page.title;
+                dataTestid: "link-source-option";
+              })}
+            />
+          </div>
+
+          {/* <select
               className={classNames({
                 "govuk-select": true,
                 "govuk-input--error": errors?.from,
@@ -127,7 +146,7 @@ class LinkCreate extends React.Component<Props, State> {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
 
           <div
             className={classNames({

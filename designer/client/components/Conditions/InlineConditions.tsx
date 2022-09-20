@@ -307,7 +307,7 @@ export class InlineConditions extends React.Component<Props, State> {
                 id="cond-name"
                 name="cond-name"
                 type="text"
-                value={conditions.name}
+                value={conditions.name ?? ""}
                 required
                 onChange={this.onChangeDisplayName}
               />
