@@ -39,19 +39,20 @@ class LinkCreate extends React.Component<Props, State> {
   onSubmit = async (e) => {
     e.preventDefault();
     const { data, save } = this.context;
-    console.log(this.context);
+
     const { from, to, selectedCondition } = this.state;
-    console.log(this.state);
+
     const hasValidationErrors = this.validate();
     if (hasValidationErrors) return;
 
     const copy = { ...data };
     const linkRes = addLink(copy, from, to, selectedCondition);
+
     if (linkRes instanceof Error) {
       logger.error("LinkCreate", linkRes);
     } else {
       const savedData = await save({ ...linkRes });
-      this.props.onCreate({ data: savedData });
+      this.props.onCreate(null);
     }
   };
 
@@ -62,13 +63,9 @@ class LinkCreate extends React.Component<Props, State> {
   };
 
   storeValue = (e, key) => {
-    console.log(e, key);
     const input = e;
-    console.log(input);
     const stateUpdate = {};
     stateUpdate[key] = input.value;
-    console.log(input.value);
-
     this.setState(stateUpdate);
   };
 
@@ -193,6 +190,7 @@ class LinkCreate extends React.Component<Props, State> {
               data-testid="link-target"
               name="page"
               styles={customStyles}
+              // onChange={(e) => this.storeValue(e, "to")}
               onChange={(e) => this.storeValue(e, "to")}
               options={pages.map((page) => ({
                 label: page.title,
@@ -200,8 +198,9 @@ class LinkCreate extends React.Component<Props, State> {
                 dataTestid: "link-target-option",
               }))}
             />
+          </div>
 
-            {/* <select
+          {/* <select
               className={classNames({
                 "govuk-select": true,
                 "govuk-input--error": errors?.to,
@@ -221,8 +220,8 @@ class LinkCreate extends React.Component<Props, State> {
                   {page.title}
                 </option>
               ))}
-            </select> */}
-          </div>
+            </select>
+          </div> */}
 
           {from && from.trim() !== "" && (
             <SelectConditions
