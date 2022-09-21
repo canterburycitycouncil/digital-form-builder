@@ -39,7 +39,9 @@ class LinkCreate extends React.Component<Props, State> {
   onSubmit = async (e) => {
     e.preventDefault();
     const { data, save } = this.context;
+    console.log(this.context);
     const { from, to, selectedCondition } = this.state;
+    console.log(this.state);
     const hasValidationErrors = this.validate();
     if (hasValidationErrors) return;
 
@@ -60,9 +62,13 @@ class LinkCreate extends React.Component<Props, State> {
   };
 
   storeValue = (e, key) => {
-    const input = e.target;
+    console.log(e, key);
+    const input = e;
+    console.log(input);
     const stateUpdate = {};
     stateUpdate[key] = input.value;
+    console.log(input.value);
+
     this.setState(stateUpdate);
   };
 
@@ -86,6 +92,24 @@ class LinkCreate extends React.Component<Props, State> {
     const { pages } = data;
     const { from, errors } = this.state;
     let hasValidationErrors = Object.keys(errors).length > 0;
+
+    const customStyles = {
+      option: (provided, state) => ({
+        ...provided,
+        color: state.isSelected ? "black" : "black",
+        backgroundColor: state.isFocused ? "#999999" : null,
+      }),
+      control: (provided) => ({
+        ...provided,
+        border: 0,
+        boxShadow: "none",
+      }),
+      container: (provided) => ({
+        ...provided,
+        height: "auto",
+        width: "auto",
+      }),
+    };
 
     return (
       <>
@@ -116,12 +140,13 @@ class LinkCreate extends React.Component<Props, State> {
               id="link-source"
               data-testid="link-source"
               name="path"
+              styles={customStyles}
               onChange={(e) => this.storeValue(e, "from")}
-              options={pages.map((page) => {
-                key: page.path;
-                value: page.title;
-                dataTestid: "link-source-option";
-              })}
+              options={pages.map((page) => ({
+                label: page.title,
+                value: page.path,
+                dataTestid: "link-source-option",
+              }))}
             />
           </div>
 
@@ -158,7 +183,25 @@ class LinkCreate extends React.Component<Props, State> {
               To
             </label>
             {errors?.to && <ErrorMessage>{errors?.to.children}</ErrorMessage>}
-            <select
+
+            <Select
+              className={classNames({
+                "govuk-select": true,
+                "govuk-input--error": errors?.to,
+              })}
+              id="link-target"
+              data-testid="link-target"
+              name="page"
+              styles={customStyles}
+              onChange={(e) => this.storeValue(e, "to")}
+              options={pages.map((page) => ({
+                label: page.title,
+                value: page.path,
+                dataTestid: "link-target-option",
+              }))}
+            />
+
+            {/* <select
               className={classNames({
                 "govuk-select": true,
                 "govuk-input--error": errors?.to,
@@ -178,7 +221,7 @@ class LinkCreate extends React.Component<Props, State> {
                   {page.title}
                 </option>
               ))}
-            </select>
+            </select> */}
           </div>
 
           {from && from.trim() !== "" && (

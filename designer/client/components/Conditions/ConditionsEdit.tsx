@@ -81,7 +81,6 @@ export function ConditionsEdit({ path }: Props) {
               </Flyout>
             </RenderInPortal>
           )}
-          {console.log(conditions)}
 
           <ul className="govuk-list" data-testid="conditions-list">
             {conditions.map((condition) => (

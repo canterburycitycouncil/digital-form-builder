@@ -210,7 +210,10 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
       container: (provided) => ({
         ...provided,
         height: "auto",
-        width: "auto",
+        width: "390px",
+        margin: 0,
+        paddingBottom: 0,
+        paddingTop: 0,
       }),
     };
 
@@ -218,6 +221,7 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
       <div className="govuk-form-group" id="condition-definition-group">
         {expectsCoordinator && (
           <div className="govuk-form-group">
+            <label className="govuk-label govuk-label--s">And</label>
             <Select
               className="govuk-select"
               id="cond-coordinator"
@@ -250,39 +254,49 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
             />
 
             {fieldDef && !isCondition(fieldDef) && (
-              <Select
-                className="govuk-select"
-                placeholder={i18n("conditions.startTyping")}
-                id="cond-operator"
-                name="cond-operator"
-                options={
-                  getOperatorNames(fieldDef.type).map((conditional) => ({
-                    label: conditional,
-                    value: conditional,
-                  })) ?? [{ label: "", value: "" }]
-                }
-                styles={customStyles}
-                onChange={this.onChangeOperator}
-              />
+              <>
+                <label className="govuk-label govuk-label--s">Condition</label>
+                <Select
+                  className="govuk-select"
+                  placeholder={i18n("conditions.startTyping")}
+                  id="cond-operator"
+                  name="cond-operator"
+                  options={
+                    getOperatorNames(fieldDef.type).map((conditional) => ({
+                      label: conditional,
+                      value: conditional,
+                    })) ?? [{ label: "", value: "" }]
+                  }
+                  styles={customStyles}
+                  onChange={this.onChangeOperator}
+                />
+              </>
             )}
 
             {condition.operator && (
-              <InlineConditionsDefinitionValue
-                fieldDef={fieldDef}
-                value={condition.value}
-                operator={condition.operator}
-                updateValue={this.updateValue}
-              />
+              <>
+                <label className="govuk-label govuk-label--s">Value</label>
+
+                <InlineConditionsDefinitionValue
+                  fieldDef={fieldDef}
+                  value={condition.value}
+                  operator={condition.operator}
+                  updateValue={this.updateValue}
+                />
+              </>
             )}
+
             {(condition.value || isCondition(fieldDef)) && (
               <div className="govuk-form-group">
-                <a
-                  id="save-inline-conditions"
-                  className="govuk-link"
-                  onClick={this.onClickFinalise}
-                >
-                  {i18n("add")}
-                </a>
+                <div className="govuk-!-padding-top-5">
+                  <a
+                    id="save-inline-conditions"
+                    className="govuk-button"
+                    onClick={this.onClickFinalise}
+                  >
+                    {i18n("add")}
+                  </a>
+                </div>
               </div>
             )}
           </div>
