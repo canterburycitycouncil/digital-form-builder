@@ -7,11 +7,11 @@ import {
 } from "@xgovformbuilder/designer/client/validations";
 import { LogicExpressionTypes } from "@xgovformbuilder/model";
 import { Input, Select } from "govuk-react-jsx";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { ValidationError } from "../FormComponent/componentReducer/componentReducer.validations";
 import { DragDrop } from "./dragdrop";
-import { ExpressionBuilder } from "./expression-builder";
+// import { ExpressionBuilder } from "./expression-builder";
 import { LogicExpressionProps } from "./types";
 
 const expressionTypes = [
@@ -47,6 +47,7 @@ export const LogicExpressionEdit = ({
   const [expressionType, setExpressionType] = useState<LogicExpressionTypes>(
     "predefined"
   );
+  console.log(expressionType);
   const [errors, setErrors] = useState<ValidationError[]>([]);
   const logicExpressions = [
     {
@@ -129,6 +130,8 @@ export const LogicExpressionEdit = ({
     }
   };
 
+  useEffect(() => {}, [expressionType]);
+
   return (
     <div className="govuk-body">
       {hasValidationErrors(errors) && <ErrorSummary errorList={errors} />}
@@ -186,21 +189,14 @@ export const LogicExpressionEdit = ({
           value={selectedExpression}
           onChange={(e) => setSelectedExpression(e.target.value)}
         />
-      ) : expressionType === "conditional" ? (
-        ""
-      ) : (
-        // )
-        // : expressionType === "literal" ? (
-        //   <ExpressionBuilder
-        //     expression={selectedExpression}
-        //     expressionType={expressionType}
-        //     onExpressionChange={setSelectedExpression}
-        //   />
+      ) : expressionType === "mathematical" || "literal" ? (
         <DragDrop
           expression={selectedExpression}
           expressionType={expressionType}
           onExpressionChange={setSelectedExpression}
         />
+      ) : (
+        ""
       )}
       <div className="govuk-form-group">
         <button className="govuk-button" onClick={(e) => onSave(e)}>

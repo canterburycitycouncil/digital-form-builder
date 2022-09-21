@@ -70,31 +70,29 @@ let item = {
 export const DragDrop: FC<Props> = ({ expressionType, onExpressionChange }) => {
   const [inputResults, setInputResults] = useState<InputResult[]>([]);
   const [inputActions, setInputActions] = useState<actionType[]>([]);
-  const [column, setColumn] = useState<itemType>([]);
 
   useEffect(() => {
-    if (inputActions.length === 0) {
-      setColumn(item);
-      if (expressionType === "mathematical") {
-        setInputActions([
-          { label: "[variable]", color: "teal" },
-          { label: "number", color: "red" },
-          { label: "+", color: "grey" },
-          { label: "-", color: "grey" },
-          { label: "X", color: "grey" },
-          { label: "/", color: "grey" },
-          { label: "(", color: "blue" },
-          { label: ")", color: "blue" },
-        ]);
-      } else if (expressionType === "literal") {
-        setInputActions([
-          { label: "text", color: "grey" },
-          { label: "[variable]", color: "teal" },
-          { label: "⮐", color: "red" },
-        ]);
-      }
+    // if (inputActions.length === 0) {
+    if (expressionType === "mathematical") {
+      setInputActions([
+        { label: "[variable]", color: "teal" },
+        { label: "number", color: "red" },
+        { label: "+", color: "grey" },
+        { label: "-", color: "grey" },
+        { label: "X", color: "grey" },
+        { label: "/", color: "grey" },
+        { label: "(", color: "blue" },
+        { label: ")", color: "blue" },
+      ]);
+    } else if (expressionType === "literal") {
+      setInputActions([
+        { label: "text", color: "grey" },
+        { label: "[variable]", color: "teal" },
+        { label: "⮐", color: "red" },
+      ]);
     }
-  }, []);
+    // }
+  }, [expressionType]);
 
   const handleDragEnd = (results: DropResult) => {
     console.log(results);
