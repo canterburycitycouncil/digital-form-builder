@@ -325,10 +325,50 @@ export class InlineConditions extends React.Component<Props, State> {
           </div>
           {hasConditions && (
             <div id="conditions-display" className="govuk-body">
-              <div key="condition-string" id="condition-string">
+              {/* <div
+                key="condition-string"
+                id="condition-string"
+                className="govuk-error-summary__title"
+              >
                 {conditions.toPresentationString()}
+              </div> */}
+
+              <div
+                className="govuk-notification-banner govuk-notification-banner--success"
+                role="alert"
+              >
+                <div className="govuk-notification-banner__header">
+                  <h2
+                    className="govuk-notification-banner__title"
+                    id="govuk-notification-banner-title"
+                  >
+                    {i18n("conditions.savedCriteria")}
+                  </h2>
+                </div>
+                <div className="govuk-notification-banner__content">
+                  <p
+                    key="condition-string"
+                    id="condition-string"
+                    className="govuk-notification-banner__heading"
+                  >
+                    {conditions.toPresentationString()}.
+                    {!editView && (
+                      <a
+                        className="govuk-notification-banner__link"
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          this.toggleEdit();
+                        }}
+                      >
+                        {i18n("conditions.notWhatYouMean")}
+                      </a>
+                    )}
+                  </p>
+                </div>
               </div>
-              {!editView && (
+
+              {/* {!editView && (
                 <div>
                   <a
                     href="#"
@@ -342,7 +382,7 @@ export class InlineConditions extends React.Component<Props, State> {
                     {i18n("conditions.notWhatYouMean")}
                   </a>
                 </div>
-              )}
+              )} */}
             </div>
           )}
         </div>
