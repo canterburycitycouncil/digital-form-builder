@@ -111,7 +111,9 @@ export default function getMenuItems(
         width: "xlarge",
         component: {
           type: FeeEdit,
-          props: {},
+          props: {
+            data: data,
+          },
         },
       },
     },
