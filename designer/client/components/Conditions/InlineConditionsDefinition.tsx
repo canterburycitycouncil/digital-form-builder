@@ -107,29 +107,11 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
     const fieldName = input.value;
 
     const { condition } = this.state;
-
-    // console.log("this.state / conditon", condition);
-    // console.log("condition.field", condition.field);
-
     const currentField = condition.field?.name;
-
-    // console.log("current field:", currentField);
-
     const currentOperator = condition.operator;
-
     const fieldDef = this.props.fields[fieldName];
 
-    // console.log("fieldDef / this.props.fields[fieldName]", fieldDef);
-
     this._updateCondition(condition, (c) => {
-      // console.log("c", c);
-      // console.log("condition", condition);
-      // console.log("this.props.fields:", this.props.fields);
-      // console.log(
-      //   "this.props.fields[currentField]",
-      //   this.props.fields[currentField]
-      // );
-
       if (fieldName) {
         if (isCondition(fieldDef)) {
           delete c.value;

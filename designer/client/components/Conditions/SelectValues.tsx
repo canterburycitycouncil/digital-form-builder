@@ -3,7 +3,7 @@ import React from "react";
 import Select from "react-select";
 
 export const SelectValues = (props) => {
-  const { fieldDef, updateValue, value } = props;
+  const { fieldDef, updateValue } = props;
 
   const onChangeSelect = (e) => {
     console.log(e);
@@ -56,25 +56,6 @@ export const SelectValues = (props) => {
           key: option.value,
         })) ?? [{ label: "", value: "" }]
       }
-      // defaultValue={value}
     />
-
-    // <select
-    //   className="govuk-select"
-    //   id="cond-value"
-    //   name="cond-value"
-    //   value={value?.value ?? ""}
-    //   onChange={onChangeSelect}
-    // data-testid={"cond-value"}
-    // >
-    //   <option />
-    //   {fieldDef.values.map((option) => {
-    //     return (
-    //       <option key={option.value} value={option.value}>
-    //         {option.text}
-    //       </option>
-    //     );
-    //   })}
-    // </select>
   );
 };
