@@ -146,7 +146,7 @@
     "when": "When",
     "whenHint": "Set when a condition might be met in the form. For example, when the form asks a question and the user selects Yes instead of No (yes=true).",
     "youCannotEditWarning": "You cannot edit this condition '{{conditionString}}'. Please recreate it in the editor below to continue",
-    "savedCriteria": "Saved Criteria",
+    "savedCriteria": "Saved Condition",
     "startTyping": "Start typing..."
   },
   "create": "create {{noun}}",
