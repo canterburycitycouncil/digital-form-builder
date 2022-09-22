@@ -49,11 +49,14 @@ export const SelectValues = (props) => {
       name="cond-value"
       styles={customStyles}
       onChange={onChangeSelect}
-      options={fieldDef.values.map((option) => ({
-        label: option.text,
-        value: option.value,
-        key: option.value,
-      }))}
+      options={
+        fieldDef.values.map((option) => ({
+          label: option.text,
+          value: option.value,
+          key: option.value,
+        })) ?? [{ label: "", value: "" }]
+      }
+      // defaultValue={value}
     />
 
     // <select

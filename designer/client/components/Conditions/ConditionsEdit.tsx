@@ -28,8 +28,8 @@ function useConditionsEditor() {
     setEditingCondition(null);
     setShowAddCondition(false);
   }
-  function cancelInlineCondition(e) {
-    e?.preventDefault?.();
+  function cancelInlineCondition() {
+    // e?.preventDefault?.();
     setEditingCondition(null);
     setShowAddCondition(false);
   }
