@@ -134,6 +134,7 @@
     "add": "Add condition",
     "addOrEdit": "Add or edit condition",
     "addOrEditHint": "Set the rules that determine the conditional behaviour in the form flow. For example, a question page might have a component for yes and no options that need two conditions - one to control what happens if a user selects yes and one for when a user selects no.",
+    "additionalCriteria": "Add further criteria filters?",
     "displayName": "Display name",
     "displayNameHint": "Set a condition name that is easy to recognise. It appears as an option in the settings menus for the pages, components and links in a form.",
     "edit": "Edit condition",
@@ -144,7 +145,9 @@
     "optional": "Conditions (optional)",
     "when": "When",
     "whenHint": "Set when a condition might be met in the form. For example, when the form asks a question and the user selects Yes instead of No (yes=true).",
-    "youCannotEditWarning": "You cannot edit this condition '{{conditionString}}'. Please recreate it in the editor below to continue"
+    "youCannotEditWarning": "You cannot edit this condition '{{conditionString}}'. Please recreate it in the editor below to continue",
+    "savedCriteria": "Saved Condition",
+    "startTyping": "Start typing..."
   },
   "create": "create {{noun}}",
   "dateFieldEditComponent": {
@@ -374,6 +377,16 @@
       "question": "Question page",
       "start": "Start page",
       "summary": "Summary page"
+    }
+  },
+  "logicExpression": {
+    "expressionTypes": {
+      "title": "Expression type",
+      "helpText": "The type of expression you would like to add"
+    },
+    "predefinedExpressions": {
+      "title": "Predefined expression",
+      "helpText": "Choose from the dropdown the expression you want to use"
     }
   },
   "outputs": {

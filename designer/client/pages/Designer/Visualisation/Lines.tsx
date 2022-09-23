@@ -63,6 +63,7 @@ export class Lines extends React.Component<Props, State> {
                 />
                 {label && (
                   <text
+                    className="govuk-label"
                     textAnchor="middle"
                     x={textX}
                     y={textY}

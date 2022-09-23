@@ -8,6 +8,7 @@ import {
   getOperatorNames,
 } from "@xgovformbuilder/model";
 import React from "react";
+import Select from "react-select";
 
 import { FieldInputObject } from "./InlineConditions";
 import { InlineConditionsDefinitionValue } from "./InlineConditionsDefinitionValue";
@@ -33,6 +34,7 @@ interface State {
 
 class InlineConditionsDefinition extends React.Component<Props, State> {
   constructor(props) {
+    // super(props.condition);
     super(props);
     this.state = {
       condition: clone(props.condition) || {},
@@ -57,8 +59,9 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
     }
   }
 
-  onChangeCoordinator = (e) => {
-    const input = e.target;
+  onChangeCoordinator = (selected) => {
+    const input = selected;
+
     let newCondition: blankObject = {};
 
     if (input.value && input.value.trim() !== "") {
@@ -83,6 +86,7 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
     );
 
     const fieldDef = this.props.fields[condition.field.name];
+
     if (isCondition(fieldDef)) {
       this.props.saveCallback(
         new ConditionRef(fieldDef.name, fieldDef.label, condition.coordinator)
@@ -100,14 +104,11 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
   };
 
   onChangeField = (e) => {
-    const input = e.target;
+    const input = e;
     const fieldName = input.value;
-
     const { condition } = this.state;
-
     const currentField = condition.field?.name;
     const currentOperator = condition.operator;
-
     const fieldDef = this.props.fields[fieldName];
 
     this._updateCondition(condition, (c) => {
@@ -118,7 +119,7 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
         } else {
           if (
             currentField &&
-            this.props.fields[currentField].values !== fieldDef.values
+            this?.props?.fields[currentField]?.values !== fieldDef.values
           ) {
             delete c.value;
           }
@@ -153,10 +154,10 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
     );
   }
 
-  onChangeOperator = (e) => {
-    const input = e.target;
-    const { condition } = this.state;
+  onChangeOperator = (selected) => {
+    const input = selected;
 
+    const { condition } = this.state;
     this._updateCondition(condition, (c) => {
       c.operator = input.value;
     });
@@ -182,85 +183,142 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
   render() {
     const { expectsCoordinator, fields } = this.props;
     const { condition } = this.state;
-    const fieldDef = fields[condition.field?.name];
+    // const fieldDef = fields[condition.field?.name];
+    let fieldName = Object.keys(fields).find((fieldName) =>
+      fieldName.endsWith(condition.field?.name)
+    );
+    const fieldDef = fieldName ? fields[fieldName] : undefined;
+
+    const followUpOptions = [
+      {
+        label: "and",
+        key: "and",
+        value: "and",
+      },
+      {
+        label: "or",
+        key: "or",
+        value: "or",
+      },
+    ];
+
+    const customStyles = {
+      option: (provided, state) => ({
+        ...provided,
+        color: state.isSelected ? "black" : "black",
+        backgroundColor: state.isFocused ? "#999999" : null,
+      }),
+      control: (provided) => ({
+        ...provided,
+        border: 0,
+        boxShadow: "none",
+      }),
+      container: (provided) => ({
+        ...provided,
+        height: "auto",
+        width: "390px",
+        margin: 0,
+        paddingBottom: 0,
+        paddingTop: 0,
+      }),
+    };
 
     return (
       <div className="govuk-form-group" id="condition-definition-group">
         {expectsCoordinator && (
-          <div className="govuk-form-group" id="cond-coordinator-group">
-            <select
+          <div className="govuk-form-group">
+            <label className="govuk-label govuk-label--s">And</label>
+            <Select
               className="govuk-select"
               id="cond-coordinator"
               name="cond-coordinator"
-              value={condition?.coordinator ?? ""}
+              placeholder={i18n("conditions.additionalCriteria")}
+              options={followUpOptions}
               onChange={this.onChangeCoordinator}
-            >
-              <option />
-              <option key="and" value="and">
-                And
-              </option>
-              <option key="or" value="or">
-                Or
-              </option>
-            </select>
+              styles={customStyles}
+            />
           </div>
         )}
+
         {(condition.coordinator || !expectsCoordinator) && (
-          <div id="condition-definition-inputs">
-            <select
+          <div className="govuk-form-group">
+            <Select
               className="govuk-select"
+              placeholder={i18n("conditions.startTyping")}
               id="cond-field"
               name="cond-field"
-              value={condition?.field?.name ?? ""}
+              styles={customStyles}
+              options={
+                Object.values(this.props.fields).map((field) => ({
+                  label: field.label,
+                  value: field.name,
+                  type: field.type,
+                })) ?? [{ label: "", value: "" }]
+              }
+              defaultValue={
+                condition.field
+                  ? {
+                      label: condition.field.display,
+                      value: condition.field.name,
+                      type: condition.field.type,
+                    }
+                  : { label: "", value: "", type: "" }
+              }
               onChange={this.onChangeField}
-            >
-              <option />
-              {Object.values(this.props.fields).map((field, index) => (
-                <option key={`${field.name}-${index}`} value={field.name}>
-                  {field.label}
-                </option>
-              ))}
-            </select>
+            />
 
             {fieldDef && !isCondition(fieldDef) && (
-              <select
-                className="govuk-select"
-                id="cond-operator"
-                name="cond-operator"
-                value={condition.operator ?? ""}
-                onChange={this.onChangeOperator}
-              >
-                <option />
-                {getOperatorNames(fieldDef.type).map((conditional) => {
-                  return (
-                    <option
-                      key={`${condition.field}-${conditional}`}
-                      value={conditional}
-                    >
-                      {conditional}
-                    </option>
-                  );
-                })}
-              </select>
+              <>
+                <label className="govuk-label govuk-label--s">Condition</label>
+                <Select
+                  className="govuk-select"
+                  placeholder={i18n("conditions.startTyping")}
+                  id="cond-operator"
+                  name="cond-operator"
+                  styles={customStyles}
+                  options={
+                    getOperatorNames(fieldDef.type).map((conditional) => ({
+                      label: conditional,
+                      value: conditional,
+                    })) ?? [{ label: "", value: "" }]
+                  }
+                  defaultValue={
+                    condition.operator
+                      ? {
+                          label: condition.operator,
+                          value: condition.operator,
+                        }
+                      : { label: "", value: "" }
+                  }
+                  onChange={this.onChangeOperator}
+                />
+              </>
             )}
 
-            {condition.operator && (
-              <InlineConditionsDefinitionValue
-                fieldDef={fieldDef}
-                value={condition.value}
-                operator={condition.operator}
-                updateValue={this.updateValue}
-              />
+            {condition.operator && fieldDef && (
+              <>
+                <label className="govuk-label govuk-label--s">Value</label>
+
+                <InlineConditionsDefinitionValue
+                  fieldDef={fieldDef}
+                  value={condition.value}
+                  operator={condition.operator}
+                  updateValue={this.updateValue}
+                />
+              </>
             )}
+
             {(condition.value || isCondition(fieldDef)) && (
               <div className="govuk-form-group">
-                <button
-                  id="save-condition"
-                  className="govuk-link"
-                  onClick={this.onClickFinalise}
-                >
-                  {i18n("add")}
-                </button>
+                <div className="govuk-!-padding-top-5">
+                  <a
+                    id="save-inline-conditions"
+                    className="govuk-button"
+                    onClick={this.onClickFinalise}
+                  >
+                    {i18n("add")}
+                  </a>
+                </div>
               </div>
             )}
           </div>

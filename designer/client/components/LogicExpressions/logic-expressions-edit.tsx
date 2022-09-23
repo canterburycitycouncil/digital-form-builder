@@ -9,13 +9,21 @@ export const LogicExpressionsEdit = () => {
     logicExpression,
     setLogicExpression,
   ] = useState<LogicExpression | null>(null);
+  const [logicExpressionIndex, setLogicExpressionIndex] = useState<
+    number | null
+  >(null);
   const [showAddExpression, setShowAddExpression] = useState(false);
 
   const logicExpressions = data?.logicExpressions;
 
-  const onClickExpression = (event, expression) => {
+  const onClickExpression = (
+    event,
+    expression: LogicExpression,
+    index: number
+  ) => {
     event.preventDefault();
     setLogicExpression(expression);
+    setLogicExpressionIndex(index);
     setShowAddExpression(true);
   };
 
@@ -55,14 +63,20 @@ export const LogicExpressionsEdit = () => {
               data={data as FormDefinition}
               save={save}
               logicExpression={(logicExpression as unknown) as LogicExpression}
+              logicExpressionIndex={
+                (data as FormDefinition).logicExpressions.length
+              }
               onEdit={() => setShowAddExpression(false)}
               onCancel={() => setShowAddExpression(false)}
             />
           ) : (
             <ul className="govuk-list">
-              {(logicExpressions || []).map((expression) => (
+              {(logicExpressions || []).map((expression, index) => (
                 <li key={expression.label}>
-                  <a href="#" onClick={(e) => onClickExpression(e, expression)}>
+                  <a
+                    href="#"
+                    onClick={(e) => onClickExpression(e, expression, index)}
+                  >
                     {expression.label}
                   </a>
                 </li>
@@ -79,6 +93,7 @@ export const LogicExpressionsEdit = () => {
       ) : (
         <LogicExpressionEdit
           logicExpression={logicExpression}
+          logicExpressionIndex={logicExpressionIndex as number}
           data={data as FormDefinition}
           save={save}
           onEdit={(e: Event) => handleEdit(e)}

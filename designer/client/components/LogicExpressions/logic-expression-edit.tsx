@@ -32,6 +32,7 @@ export const LogicExpressionEdit = ({
   data,
   save,
   logicExpression,
+  logicExpressionIndex,
   onEdit,
   onCancel,
 }: LogicExpressionProps) => {
@@ -46,7 +47,12 @@ export const LogicExpressionEdit = ({
     "predefined"
   );
   const [errors, setErrors] = useState<ValidationError[]>([]);
-  const logicExpressions = [];
+  const logicExpressions = [
+    {
+      children: "logic expression 1",
+      value: "{number_of_rooms} * 500",
+    },
+  ];
 
   const validate = () => {
     const errors: ValidationError[] = [];
@@ -84,13 +90,20 @@ export const LogicExpressionEdit = ({
       expressionType: expressionType,
       expression: selectedExpression as any,
     };
-    dataCopy?.logicExpressions?.push(logicExpressionObject);
-    try {
-      save(dataCopy, () => {
-        onEdit();
-      });
-    } catch (err) {
-      logger.error("ExpressionEdit", err);
+    if (dataCopy?.logicExpressions) {
+      dataCopy.logicExpressions[logicExpressionIndex] = logicExpressionObject;
+      try {
+        save(dataCopy, () => {
+          onEdit();
+        });
+      } catch (err) {
+        logger.error("ExpressionEdit", err);
+      }
+    } else {
+      logger.error(
+        "ExpressionEdit",
+        "Could not find a list of logic expressions on the form definition"
+      );
     }
   };
 

@@ -7,6 +7,7 @@ import logger from "@xgovformbuilder/designer/client/plugins/logger";
 import classNames from "classnames";
 import { ErrorMessage } from "govuk-react-jsx";
 import React from "react";
+import Select from "react-select";
 
 interface Props {
   onCreate: (e: any) => void;
@@ -38,17 +39,20 @@ class LinkCreate extends React.Component<Props, State> {
   onSubmit = async (e) => {
     e.preventDefault();
     const { data, save } = this.context;
+
     const { from, to, selectedCondition } = this.state;
+
     const hasValidationErrors = this.validate();
     if (hasValidationErrors) return;
 
     const copy = { ...data };
     const linkRes = addLink(copy, from, to, selectedCondition);
+
     if (linkRes instanceof Error) {
       logger.error("LinkCreate", linkRes);
     } else {
       const savedData = await save({ ...linkRes });
-      this.props.onCreate({ data: savedData });
+      this.props.onCreate(null);
     }
   };
 
@@ -59,7 +63,7 @@ class LinkCreate extends React.Component<Props, State> {
   };
 
   storeValue = (e, key) => {
-    const input = e.target;
+    const input = e;
     const stateUpdate = {};
     stateUpdate[key] = input.value;
     this.setState(stateUpdate);
@@ -86,6 +90,24 @@ class LinkCreate extends React.Component<Props, State> {
     const { from, errors } = this.state;
     let hasValidationErrors = Object.keys(errors).length > 0;
 
+    const customStyles = {
+      option: (provided, state) => ({
+        ...provided,
+        color: state.isSelected ? "black" : "black",
+        backgroundColor: state.isFocused ? "#999999" : null,
+      }),
+      control: (provided) => ({
+        ...provided,
+        border: 0,
+        boxShadow: "none",
+      }),
+      container: (provided) => ({
+        ...provided,
+        height: "auto",
+        width: "auto",
+      }),
+    };
+
     return (
       <>
         {hasValidationErrors && (
@@ -106,7 +128,26 @@ class LinkCreate extends React.Component<Props, State> {
             {errors?.from && (
               <ErrorMessage>{errors?.from.children}</ErrorMessage>
             )}
-            <select
+
+            <Select
+              className={classNames({
+                "govuk-select": true,
+                "govuk-input--error": errors?.from,
+              })}
+              id="link-source"
+              data-testid="link-source"
+              name="path"
+              styles={customStyles}
+              onChange={(e) => this.storeValue(e, "from")}
+              options={pages.map((page) => ({
+                label: page.title,
+                value: page.path,
+                dataTestid: "link-source-option",
+              }))}
+            />
+          </div>
+
+          {/* <select
               className={classNames({
                 "govuk-select": true,
                 "govuk-input--error": errors?.from,
@@ -127,7 +168,7 @@ class LinkCreate extends React.Component<Props, State> {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
 
           <div
             className={classNames({
@@ -139,7 +180,27 @@ class LinkCreate extends React.Component<Props, State> {
               To
             </label>
             {errors?.to && <ErrorMessage>{errors?.to.children}</ErrorMessage>}
-            <select
+
+            <Select
+              className={classNames({
+                "govuk-select": true,
+                "govuk-input--error": errors?.to,
+              })}
+              id="link-target"
+              data-testid="link-target"
+              name="page"
+              styles={customStyles}
+              // onChange={(e) => this.storeValue(e, "to")}
+              onChange={(e) => this.storeValue(e, "to")}
+              options={pages.map((page) => ({
+                label: page.title,
+                value: page.path,
+                dataTestid: "link-target-option",
+              }))}
+            />
+          </div>
+
+          {/* <select
               className={classNames({
                 "govuk-select": true,
                 "govuk-input--error": errors?.to,
@@ -160,7 +221,7 @@ class LinkCreate extends React.Component<Props, State> {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
 
           {from && from.trim() !== "" && (
             <SelectConditions
