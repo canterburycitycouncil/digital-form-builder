@@ -236,7 +236,6 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
         )}
 
         {(condition.coordinator || !expectsCoordinator) && (
-          // <div id="condition-definition-inputs">
           <div className="govuk-form-group">
             <Select
               className="govuk-select"
@@ -254,10 +253,11 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
               defaultValue={
                 condition.field
                   ? {
-                      label: condition.field?.display,
-                      value: condition.field?.name,
+                      label: condition.field.display,
+                      value: condition.field.name,
+                      type: condition.field.type,
                     }
-                  : [{ label: "", value: "" }]
+                  : { label: "", value: "", type: "" }
               }
               onChange={this.onChangeField}
             />
@@ -280,8 +280,8 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
                   defaultValue={
                     condition.operator
                       ? {
-                          label: condition?.operator,
-                          value: condition?.operator,
+                          label: condition.operator,
+                          value: condition.operator,
                         }
                       : { label: "", value: "" }
                   }

@@ -6,9 +6,7 @@ export const SelectValues = (props) => {
   const { fieldDef, updateValue } = props;
 
   const onChangeSelect = (e) => {
-    console.log(e);
     const input = e;
-    console.log(input.value);
     const newValue = input.value;
     let value;
     if (newValue && newValue?.trim() !== "") {
@@ -40,6 +38,10 @@ export const SelectValues = (props) => {
       paddingTop: 0,
     }),
   };
+
+  {
+    console.log(fieldDef);
+  }
 
   return (
     <Select
