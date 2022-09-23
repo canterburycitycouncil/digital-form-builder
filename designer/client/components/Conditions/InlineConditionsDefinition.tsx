@@ -86,6 +86,7 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
     );
 
     const fieldDef = this.props.fields[condition.field.name];
+
     if (isCondition(fieldDef)) {
       this.props.saveCallback(
         new ConditionRef(fieldDef.name, fieldDef.label, condition.coordinator)
@@ -105,7 +106,6 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
   onChangeField = (e) => {
     const input = e;
     const fieldName = input.value;
-
     const { condition } = this.state;
     const currentField = condition.field?.name;
     const currentOperator = condition.operator;
@@ -183,7 +183,12 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
   render() {
     const { expectsCoordinator, fields } = this.props;
     const { condition } = this.state;
-    const fieldDef = fields[condition.field?.name];
+    // const fieldDef = fields[condition.field?.name];
+    let fieldName = Object.keys(fields).find((fieldName) =>
+      fieldName.endsWith(condition.field?.name)
+    );
+    const fieldDef = fieldName ? fields[fieldName] : undefined;
+
     const followUpOptions = [
       {
         label: "and",
@@ -290,7 +295,7 @@ class InlineConditionsDefinition extends React.Component<Props, State> {
               </>
             )}
 
-            {condition.operator && (
+            {condition.operator && fieldDef && (
               <>
                 <label className="govuk-label govuk-label--s">Value</label>
 
