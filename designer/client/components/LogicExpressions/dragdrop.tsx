@@ -6,14 +6,14 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 
-import { ExpressionBuilderActions } from "./expression-builder-actions";
+// import { ExpressionBuilderActions } from "./expression-builder-actions";
+import Testing from "./testing";
 
-enum ListsNames {
-  Items = "items",
-  Selected = "selected",
-}
+// enum ListsNames {
+//   Items = "items",
+//   Selected = "selected",
+// }
 
 export enum actionColor {
   "#8cd2ca" = "teal",
@@ -25,21 +25,22 @@ export enum actionColor {
 interface Props {
   expression: string;
   expressionType: LogicExpressionTypes;
-  onExpressionChange: Dispatch<SetStateAction<string>>;
+  // onExpressionChange: Dispatch<SetStateAction<string>>;
 }
 
-interface InputResult {
-  type: "variable" | "literal" | "mathematical";
-  color: actionColor;
-  value: string;
-  label: string;
-  order: number;
-  previousInputValue: string;
-}
+// interface InputResult {
+//   type: "variable" | "literal" | "mathematical";
+//   color: actionColor;
+//   value: string;
+//   label: string;
+//   order: number;
+//   previousInputValue: string;
+// }
 
 export interface actionType {
   label: string;
   color: "teal" | "grey" | "red" | "blue";
+  id: string;
 }
 
 export interface resultType {
@@ -51,61 +52,50 @@ export interface itemType {
   columnOrder: string;
 }
 
-let item = {
-  columns: {
-    columnOne: {
-      id: "column-1",
-      title: "Actions",
-      expressionIds: [],
-    },
-    columnTwo: {
-      id: "column-2",
-      title: "Live",
-      expressionIds: [],
-    },
-  },
-  columnOrder: "columnOne",
-};
-
-export const DragDrop: FC<Props> = ({ expressionType, onExpressionChange }) => {
-  const [inputResults, setInputResults] = useState<InputResult[]>([]);
+export const DragDrop: FC<Props> = ({
+  expressionType,
+  // , onExpressionChange
+}) => {
+  // const [inputResults, setInputResults] = useState<InputResult[]>([]);
   const [inputActions, setInputActions] = useState<actionType[]>([]);
 
   useEffect(() => {
     // if (inputActions.length === 0) {
     if (expressionType === "mathematical") {
       setInputActions([
-        { label: "[variable]", color: "teal" },
-        { label: "number", color: "red" },
-        { label: "+", color: "grey" },
-        { label: "-", color: "grey" },
-        { label: "X", color: "grey" },
-        { label: "/", color: "grey" },
-        { label: "(", color: "blue" },
-        { label: ")", color: "blue" },
+        { label: "[variable]", color: "teal", id: "1" },
+        { label: "number", color: "red", id: "2" },
+        { label: "+", color: "grey", id: "3" },
+        { label: "-", color: "grey", id: "4" },
+        { label: "X", color: "grey", id: "5" },
+        { label: "/", color: "grey", id: "6" },
+        { label: "(", color: "blue", id: "7" },
+        { label: ")", color: "blue", id: "8" },
       ]);
     } else if (expressionType === "literal") {
       setInputActions([
-        { label: "text", color: "grey" },
-        { label: "[variable]", color: "teal" },
-        { label: "⮐", color: "red" },
+        { label: "text", color: "grey", id: "9" },
+        { label: "[variable]", color: "teal", id: "10" },
+        { label: "⮐", color: "red", id: "11" },
       ]);
     }
     // }
   }, [expressionType]);
 
-  const handleDragEnd = (results: DropResult) => {
-    console.log(results);
-    if (!results.destination) return;
-    const items = Array.from(inputActions);
-    const [reorderedActions] = items.splice(results.source.index, 1);
-    items.splice(results.destination.index, 0, reorderedActions);
-    setInputActions(items);
-  };
+  // const handleDragEnd = (results: DropResult) => {
+  //   console.log(results);
+  //   if (!results.destination) return;
+  //   const items = Array.from(inputActions);
+  //   const [reorderedActions] = items.splice(results.source.index, 1);
+  //   items.splice(results.destination.index, 0, reorderedActions);
+  //   setInputActions(items);
+  // };
 
   return (
     <>
-      <div className="expressionBuilderDndArea">
+      <Testing inputActions={inputActions} />
+
+      {/* <div className="expressionBuilderDndArea">
         <div
           style={{
             display: "flex",
@@ -132,7 +122,7 @@ export const DragDrop: FC<Props> = ({ expressionType, onExpressionChange }) => {
             </Droppable>
           </DragDropContext>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
