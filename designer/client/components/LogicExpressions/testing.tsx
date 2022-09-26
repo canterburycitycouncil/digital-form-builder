@@ -21,6 +21,7 @@ interface Props {
 interface Item {
   id: string;
   content: string;
+  color: string;
 }
 interface DragState {
   items: Item[];
@@ -29,6 +30,13 @@ interface DragState {
 interface MoveResult {
   droppable: Item[];
   droppable2: Item[];
+}
+
+export enum actionColor {
+  "teal" = "#8cd2ca",
+  "grey" = "#dedede",
+  "red" = "#efb4c3",
+  "blue" = "#cae5ec",
 }
 
 // const getTestItems = (count: number, offset: number = 0): Item[] => {
@@ -42,8 +50,13 @@ const cleanItems = (actionType): Item[] => {
   return actionType.map((action) => ({
     content: action.label,
     id: action.label,
+    color: action.color,
   }));
 };
+
+/**
+ * reorder the result of the move
+ * */
 
 const reorder = (
   list: Item[],
@@ -81,12 +94,16 @@ const move = (
 
 const grid: number = 8;
 
-const getItemStyle = (draggableStyle: any, isDragging: boolean): {} => ({
+const getItemStyle = (
+  draggableStyle: any,
+  isDragging: boolean,
+  color: string
+): {} => ({
   userSelect: "none",
   padding: grid * 2,
   margin: `0 ${grid}px 0 0`,
   //colour change on dragging
-  background: isDragging ? "lightgreen" : "grey",
+  background: isDragging ? "lightgreen" : actionColor[color],
   ...draggableStyle,
 });
 
@@ -163,47 +180,54 @@ export default class Testing extends React.Component<Props, DragState> {
 
   render() {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className="govuk-grid-column">
-          <h2>Options</h2>
-          <>{}</>
-          <Droppable droppableId="droppable" direction="horizontal">
-            {(
-              provided: DroppableProvided,
-              snapshot: DroppableStateSnapshot
-            ) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                style={getListStyle(snapshot.isDraggingOver)}
-              >
-                {this.state.items.map((item, index) => (
-                  <Draggable key={item.id} draggableId={item.id} index={index}>
-                    {(
-                      providedDraggable: DraggableProvided,
-                      snapshotDraggable: DraggableStateSnapshot
-                    ) => (
-                      <div>
-                        <div
-                          ref={providedDraggable.innerRef}
-                          {...providedDraggable.draggableProps}
-                          {...providedDraggable.dragHandleProps}
-                          style={getItemStyle(
-                            providedDraggable.draggableProps.style,
-                            snapshotDraggable.isDragging
-                          )}
-                        >
-                          {item.content}
+      <div className="govuk-grid-column">
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <div className="govuk-grid-column">
+            <h2>Options</h2>
+            <Droppable droppableId="droppable" direction="horizontal">
+              {(
+                provided: DroppableProvided,
+                snapshot: DroppableStateSnapshot
+              ) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  style={getListStyle(snapshot.isDraggingOver)}
+                >
+                  {this.state.items.map((item, index) => (
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id}
+                      index={index}
+                      color={item.color}
+                    >
+                      {(
+                        providedDraggable: DraggableProvided,
+                        snapshotDraggable: DraggableStateSnapshot
+                      ) => (
+                        <div>
+                          <div
+                            ref={providedDraggable.innerRef}
+                            {...providedDraggable.draggableProps}
+                            {...providedDraggable.dragHandleProps}
+                            style={getItemStyle(
+                              providedDraggable.draggableProps.style,
+                              snapshotDraggable.isDragging,
+                              item.color
+                            )}
+                          >
+                            {item.content}
+                          </div>
+                          {providedDraggable.placeholder}
                         </div>
-                        {providedDraggable.placeholder}
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </div>
 
           <h2>Active</h2>
           <Droppable droppableId="droppable2" direction="horizontal">
@@ -216,7 +240,12 @@ export default class Testing extends React.Component<Props, DragState> {
                 style={getListStyle(snapshotDroppable2.isDraggingOver)}
               >
                 {this.state.selected.map((item, index) => (
-                  <Draggable key={item.id} draggableId={item.id} index={index}>
+                  <Draggable
+                    key={item.id}
+                    draggableId={item.id}
+                    index={index}
+                    color={item.color}
+                  >
                     {(
                       providedDraggable2: DraggableProvided,
                       snapshotDraggable2: DraggableStateSnapshot
@@ -228,7 +257,8 @@ export default class Testing extends React.Component<Props, DragState> {
                           {...providedDraggable2.dragHandleProps}
                           style={getItemStyle(
                             providedDraggable2.draggableProps.style,
-                            snapshotDraggable2.isDragging
+                            snapshotDraggable2.isDragging,
+                            item.color
                           )}
                         >
                           {item.content}
@@ -242,8 +272,8 @@ export default class Testing extends React.Component<Props, DragState> {
               </div>
             )}
           </Droppable>
-        </div>
-      </DragDropContext>
+        </DragDropContext>
+      </div>
     );
   }
 }

@@ -3,12 +3,6 @@ import React, { FC, useState } from "react";
 
 import Testing from "./testing";
 
-export enum actionColor {
-  "#8cd2ca" = "teal",
-  "#dedede" = "grey",
-  "#efb4c3" = "red",
-  "#cae5ec" = "blue",
-}
 interface Props {
   expression: string;
   expressionType: LogicExpressionTypes;
