@@ -1,4 +1,5 @@
 import React from "react";
+
 import { I18n, withI18n } from "./i18n";
 
 interface Props {

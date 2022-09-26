@@ -31,7 +31,7 @@ interface MoveResult {
   droppable2: Item[];
 }
 
-const getItems = (count: number, offset: number = 0): Item[] => {
+const getTestItems = (count: number, offset: number = 0): Item[] => {
   return Array.from({ length: count }, (v, k) => k).map((k) => ({
     content: `item ${k + offset}`,
     id: `item-${k + offset}`,
@@ -108,8 +108,8 @@ export default class Testing extends React.Component<Props, DragState> {
     super(props);
 
     this.state = {
-      // items: cleanItems(props.inputActions),
-      items: getItems(5, 0),
+      items: cleanItems(props.inputActions),
+      // items: getTestItems(5, 0),
       selected: [],
     };
 
@@ -209,7 +209,9 @@ export default class Testing extends React.Component<Props, DragState> {
               )}
             </Droppable>
           </div>
+
           {console.log("this.state.items", this.state.items)}
+
           <div className="govuk-grid-column-one-half">
             <Droppable droppableId="droppable2">
               {(
