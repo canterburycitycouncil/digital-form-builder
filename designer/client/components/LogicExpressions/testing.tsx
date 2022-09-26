@@ -31,17 +31,17 @@ interface MoveResult {
   droppable2: Item[];
 }
 
-const getTestItems = (count: number, offset: number = 0): Item[] => {
-  return Array.from({ length: count }, (v, k) => k).map((k) => ({
-    content: `item ${k + offset}`,
-    id: `item-${k + offset}`,
-  }));
-};
+// const getTestItems = (count: number, offset: number = 0): Item[] => {
+//   return Array.from({ length: count }, (v, k) => k).map((k) => ({
+//     content: `item ${k + offset}`,
+//     id: `item-${k + offset}`,
+//   }));
+// };
 
 const cleanItems = (actionType): Item[] => {
   return actionType.map((action) => ({
-    content: `${action.label} ${action.id}`,
-    id: `${action.label}-${action.id}`,
+    content: action.label,
+    id: action.label,
   }));
 };
 
@@ -83,8 +83,9 @@ const grid: number = 8;
 
 const getItemStyle = (draggableStyle: any, isDragging: boolean): {} => ({
   userSelect: "none",
-  padding: 2 * grid,
-  margin: `0 0 ${grid}px 0`,
+  padding: grid * 2,
+  margin: `0 ${grid}px 0 0`,
+  //colour change on dragging
   background: isDragging ? "lightgreen" : "grey",
   ...draggableStyle,
 });
@@ -92,8 +93,9 @@ const getItemStyle = (draggableStyle: any, isDragging: boolean): {} => ({
 const getListStyle = (isDraggingOver: boolean): {} => ({
   background: isDraggingOver ? "lightblue" : "lightgrey",
   padding: grid,
-  width: 300,
-  minHeight: 400,
+  width: 600,
+  minHeight: 75,
+  display: "flex",
 });
 
 export default class Testing extends React.Component<Props, DragState> {
@@ -109,7 +111,7 @@ export default class Testing extends React.Component<Props, DragState> {
 
     this.state = {
       items: cleanItems(props.inputActions),
-      // items: getTestItems(5, 0),
+      // items: getTestItems(10, 0),
       selected: [],
     };
 
@@ -160,100 +162,86 @@ export default class Testing extends React.Component<Props, DragState> {
   }
 
   render() {
-    console.log("this.props:", this.props);
-    console.log(cleanItems(this.props.inputActions));
-
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className="govuk-grid-column-two-thirds">
-          <div className="govuk-grid-column-one-half">
-            <Droppable droppableId="droppable">
-              {(
-                provided: DroppableProvided,
-                snapshot: DroppableStateSnapshot
-              ) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  style={getListStyle(snapshot.isDraggingOver)}
-                >
-                  {this.state.items.map((item, index) => (
-                    <Draggable
-                      key={item.id}
-                      draggableId={item.id}
-                      index={index}
-                    >
-                      {(
-                        providedDraggable: DraggableProvided,
-                        snapshotDraggable: DraggableStateSnapshot
-                      ) => (
-                        <div>
-                          <div
-                            ref={providedDraggable.innerRef}
-                            {...providedDraggable.draggableProps}
-                            {...providedDraggable.dragHandleProps}
-                            style={getItemStyle(
-                              providedDraggable.draggableProps.style,
-                              snapshotDraggable.isDragging
-                            )}
-                          >
-                            {item.content}
-                          </div>
-                          {providedDraggable.placeholder}
+        <div className="govuk-grid-column">
+          <h2>Options</h2>
+          <>{}</>
+          <Droppable droppableId="droppable" direction="horizontal">
+            {(
+              provided: DroppableProvided,
+              snapshot: DroppableStateSnapshot
+            ) => (
+              <div
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                style={getListStyle(snapshot.isDraggingOver)}
+              >
+                {this.state.items.map((item, index) => (
+                  <Draggable key={item.id} draggableId={item.id} index={index}>
+                    {(
+                      providedDraggable: DraggableProvided,
+                      snapshotDraggable: DraggableStateSnapshot
+                    ) => (
+                      <div>
+                        <div
+                          ref={providedDraggable.innerRef}
+                          {...providedDraggable.draggableProps}
+                          {...providedDraggable.dragHandleProps}
+                          style={getItemStyle(
+                            providedDraggable.draggableProps.style,
+                            snapshotDraggable.isDragging
+                          )}
+                        >
+                          {item.content}
                         </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </div>
+                        {providedDraggable.placeholder}
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
 
-          {console.log("this.state.items", this.state.items)}
-
-          <div className="govuk-grid-column-one-half">
-            <Droppable droppableId="droppable2">
-              {(
-                providedDroppable2: DroppableProvided,
-                snapshotDroppable2: DroppableStateSnapshot
-              ) => (
-                <div
-                  ref={providedDroppable2.innerRef}
-                  style={getListStyle(snapshotDroppable2.isDraggingOver)}
-                >
-                  {this.state.selected.map((item, index) => (
-                    <Draggable
-                      key={item.id}
-                      draggableId={item.id}
-                      index={index}
-                    >
-                      {(
-                        providedDraggable2: DraggableProvided,
-                        snapshotDraggable2: DraggableStateSnapshot
-                      ) => (
-                        <div>
-                          <div
-                            ref={providedDraggable2.innerRef}
-                            {...providedDraggable2.draggableProps}
-                            {...providedDraggable2.dragHandleProps}
-                            style={getItemStyle(
-                              providedDraggable2.draggableProps.style,
-                              snapshotDraggable2.isDragging
-                            )}
-                          >
-                            {item.content}
-                          </div>
-                          {providedDraggable2.placeholder}
+          <h2>Active</h2>
+          <Droppable droppableId="droppable2" direction="horizontal">
+            {(
+              providedDroppable2: DroppableProvided,
+              snapshotDroppable2: DroppableStateSnapshot
+            ) => (
+              <div
+                ref={providedDroppable2.innerRef}
+                style={getListStyle(snapshotDroppable2.isDraggingOver)}
+              >
+                {this.state.selected.map((item, index) => (
+                  <Draggable key={item.id} draggableId={item.id} index={index}>
+                    {(
+                      providedDraggable2: DraggableProvided,
+                      snapshotDraggable2: DraggableStateSnapshot
+                    ) => (
+                      <div>
+                        <div
+                          ref={providedDraggable2.innerRef}
+                          {...providedDraggable2.draggableProps}
+                          {...providedDraggable2.dragHandleProps}
+                          style={getItemStyle(
+                            providedDraggable2.draggableProps.style,
+                            snapshotDraggable2.isDragging
+                          )}
+                        >
+                          {item.content}
                         </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {providedDroppable2.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </div>
+                        {providedDraggable2.placeholder}
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {providedDroppable2.placeholder}
+              </div>
+            )}
+          </Droppable>
         </div>
       </DragDropContext>
     );
