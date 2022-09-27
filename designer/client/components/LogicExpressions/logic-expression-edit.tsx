@@ -49,6 +49,7 @@ export const LogicExpressionEdit = ({
   );
   console.log(expressionType);
   const [errors, setErrors] = useState<ValidationError[]>([]);
+
   const logicExpressions = [
     {
       children: "logic expression 1",

@@ -1,4 +1,4 @@
-import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { EditIcon } from "@xgovformbuilder/designer/client/components/Icons";
 import React from "react";
 import {
   DragDropContext,
@@ -12,7 +12,10 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 
+import { Flyout } from "../Flyout";
+import { RenderInPortal } from "../RenderInPortal";
 import { actionType } from "./dragdrop";
+import TestingEditor from "./testing-editor";
 
 interface Props {
   inputActions: actionType[];
@@ -23,9 +26,10 @@ interface Item {
   content: string;
   color: string;
 }
-interface DragState {
+interface State {
   items: Item[];
   selected: Item[];
+  isEditing: boolean;
 }
 interface MoveResult {
   droppable: Item[];
@@ -38,13 +42,6 @@ export enum actionColor {
   "red" = "#efb4c3",
   "blue" = "#cae5ec",
 }
-
-// const getTestItems = (count: number, offset: number = 0): Item[] => {
-//   return Array.from({ length: count }, (v, k) => k).map((k) => ({
-//     content: `item ${k + offset}`,
-//     id: `item-${k + offset}`,
-//   }));
-// };
 
 const cleanItems = (actionType): Item[] => {
   return actionType.map((action) => ({
@@ -115,9 +112,7 @@ const getListStyle = (isDraggingOver: boolean): {} => ({
   display: "flex",
 });
 
-export default class Testing extends React.Component<Props, DragState> {
-  static contextType = DataContext;
-
+export default class Testing extends React.Component<Props, State> {
   id2List = {
     droppable: "items",
     droppable2: "selected",
@@ -128,13 +123,20 @@ export default class Testing extends React.Component<Props, DragState> {
 
     this.state = {
       items: cleanItems(props.inputActions),
-      // items: getTestItems(10, 0),
       selected: [],
+      isEditing: false,
     };
 
     this.onDragEnd = this.onDragEnd.bind(this);
     this.getList = this.getList.bind(this);
   }
+
+  onEdit = (e) => {
+    e.preventDefault();
+    this.setState({
+      isEditing: !this.state.isEditing,
+    });
+  };
 
   getList(id: string): Item[] {
     return this.state[this.id2List[id]];
@@ -154,7 +156,7 @@ export default class Testing extends React.Component<Props, DragState> {
         destination.index
       );
 
-      let state: DragState = { ...this.state };
+      let state: State = { ...this.state };
 
       if (source.droppableId === "droppable2") {
         state = { ...this.state, selected: items };
@@ -179,101 +181,128 @@ export default class Testing extends React.Component<Props, DragState> {
   }
 
   render() {
-    return (
-      <div className="govuk-grid-column">
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <div className="govuk-grid-column">
-            <h2>Options</h2>
-            <Droppable droppableId="droppable" direction="horizontal">
-              {(
-                provided: DroppableProvided,
-                snapshot: DroppableStateSnapshot
-              ) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  style={getListStyle(snapshot.isDraggingOver)}
-                >
-                  {this.state.items.map((item, index) => (
-                    <Draggable
-                      key={item.id}
-                      draggableId={item.id}
-                      index={index}
-                      color={item.color}
-                    >
-                      {(
-                        providedDraggable: DraggableProvided,
-                        snapshotDraggable: DraggableStateSnapshot
-                      ) => (
-                        <div>
-                          <div
-                            ref={providedDraggable.innerRef}
-                            {...providedDraggable.draggableProps}
-                            {...providedDraggable.dragHandleProps}
-                            style={getItemStyle(
-                              providedDraggable.draggableProps.style,
-                              snapshotDraggable.isDragging,
-                              item.color
-                            )}
-                          >
-                            {item.content}
-                          </div>
-                          {providedDraggable.placeholder}
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </div>
+    const { isEditing } = this.state;
 
-          <h2>Active</h2>
-          <Droppable droppableId="droppable2" direction="horizontal">
-            {(
-              providedDroppable2: DroppableProvided,
-              snapshotDroppable2: DroppableStateSnapshot
-            ) => (
-              <div
-                ref={providedDroppable2.innerRef}
-                style={getListStyle(snapshotDroppable2.isDraggingOver)}
-              >
-                {this.state.selected.map((item, index) => (
-                  <Draggable
-                    key={item.id}
-                    draggableId={item.id}
-                    index={index}
-                    color={item.color}
+    return (
+      <>
+        <div className="govuk-grid-column">
+          <h2>Formula Builder</h2>
+          <DragDropContext onDragEnd={this.onDragEnd}>
+            <div className="govuk-grid-column">
+              <h3>Options</h3>
+              <Droppable droppableId="droppable" direction="horizontal">
+                {(
+                  provided: DroppableProvided,
+                  snapshot: DroppableStateSnapshot
+                ) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    style={getListStyle(snapshot.isDraggingOver)}
                   >
-                    {(
-                      providedDraggable2: DraggableProvided,
-                      snapshotDraggable2: DraggableStateSnapshot
-                    ) => (
-                      <div>
-                        <div
-                          ref={providedDraggable2.innerRef}
-                          {...providedDraggable2.draggableProps}
-                          {...providedDraggable2.dragHandleProps}
-                          style={getItemStyle(
-                            providedDraggable2.draggableProps.style,
-                            snapshotDraggable2.isDragging,
-                            item.color
-                          )}
-                        >
-                          {item.content}
-                        </div>
-                        {providedDraggable2.placeholder}
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {providedDroppable2.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
-      </div>
+                    {this.state.items.map((item, index) => (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index}
+                        color={item.color}
+                      >
+                        {(
+                          providedDraggable: DraggableProvided,
+                          snapshotDraggable: DraggableStateSnapshot
+                        ) => (
+                          <div>
+                            <div
+                              ref={providedDraggable.innerRef}
+                              {...providedDraggable.draggableProps}
+                              {...providedDraggable.dragHandleProps}
+                              style={getItemStyle(
+                                providedDraggable.draggableProps.style,
+                                snapshotDraggable.isDragging,
+                                item.color
+                              )}
+                            >
+                              {item.content}
+                            </div>
+                            {providedDraggable.placeholder}
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </div>
+
+            <div className="govuk-grid-column">
+              <h3>Active</h3>
+              <Droppable droppableId="droppable2" direction="horizontal">
+                {(
+                  providedDroppable2: DroppableProvided,
+                  snapshotDroppable2: DroppableStateSnapshot
+                ) => (
+                  <div
+                    ref={providedDroppable2.innerRef}
+                    style={getListStyle(snapshotDroppable2.isDraggingOver)}
+                  >
+                    {this.state.selected.map((item, index) => (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index}
+                        color={item.color}
+                      >
+                        {(
+                          providedDraggable2: DraggableProvided,
+                          snapshotDraggable2: DraggableStateSnapshot
+                        ) => (
+                          <div>
+                            <div
+                              ref={providedDraggable2.innerRef}
+                              {...providedDraggable2.draggableProps}
+                              {...providedDraggable2.dragHandleProps}
+                              style={getItemStyle(
+                                providedDraggable2.draggableProps.style,
+                                snapshotDraggable2.isDragging,
+                                item.color
+                              )}
+                            >
+                              {item.id === "number" ||
+                              item.id === "[variable]" ||
+                              item.id === "text" ? (
+                                <span>
+                                  <a
+                                    href="#"
+                                    className="govuk-link"
+                                    onClick={(e) => this.onEdit(e)}
+                                  >
+                                    <EditIcon bottom={true} />
+                                  </a>
+                                </span>
+                              ) : null}
+                              {item.content}
+                            </div>
+                            {providedDraggable2.placeholder}
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+
+                    {providedDroppable2.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </div>
+          </DragDropContext>
+        </div>
+
+        {isEditing && (
+          <Flyout>
+            <TestingEditor />
+          </Flyout>
+        )}
+      </>
     );
   }
 }
