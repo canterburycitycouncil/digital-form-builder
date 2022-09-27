@@ -6,7 +6,7 @@ import { findList } from "@xgovformbuilder/designer/client/components/List/data"
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { Item } from "@xgovformbuilder/model";
 import React from "react";
-import { AiOutlineFileAdd } from "react-icons/ai";
+import { AiOutlineFileAdd, AiTwotoneEdit } from "react-icons/ai";
 
 interface Props {}
 
@@ -104,7 +104,9 @@ class TestingEditor extends React.Component<Props, State> {
 
   render() {
     const { render, fields } = this.state;
-
+    {
+      console.log(fields);
+    }
     return (
       <div className="govuk-width-container">
         <a href="/#" className="govuk-back-link">
@@ -166,8 +168,9 @@ class TestingEditor extends React.Component<Props, State> {
                     </tr>
                   </thead>
                   <tbody className="govuk-table__body">
+                    {console.log(fields)}
                     {fields.map((field) => (
-                      <tr className="govuk-table__row">
+                      <tr key={field.name} className="govuk-table__row">
                         <th scope="row" className="govuk-table__header">
                           {field.label}
                         </th>
@@ -178,6 +181,7 @@ class TestingEditor extends React.Component<Props, State> {
                             onClick={(e) => console.log(e)}
                           >
                             <AiOutlineFileAdd />
+                            <AiTwotoneEdit />
                             Add {field.label}
                           </a>
                         </td>
