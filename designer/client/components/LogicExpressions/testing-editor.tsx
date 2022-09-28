@@ -6,7 +6,7 @@ import { findList } from "@xgovformbuilder/designer/client/components/List/data"
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { Item } from "@xgovformbuilder/model";
 import React from "react";
-import { AiOutlineFileAdd, AiTwotoneEdit } from "react-icons/ai";
+import { AiOutlineFileAdd } from "react-icons/ai";
 
 interface Props {}
 
@@ -181,7 +181,6 @@ class TestingEditor extends React.Component<Props, State> {
                             onClick={(e) => console.log(e)}
                           >
                             <AiOutlineFileAdd />
-                            <AiTwotoneEdit />
                             Add {field.label}
                           </a>
                         </td>

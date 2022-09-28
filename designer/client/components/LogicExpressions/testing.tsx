@@ -1,3 +1,4 @@
+import { EditIcon } from "@xgovformbuilder/designer/client/components/Icons";
 import React from "react";
 import {
   DragDropContext,
@@ -10,7 +11,6 @@ import {
   DroppableStateSnapshot,
   DropResult,
 } from "react-beautiful-dnd";
-import { AiTwotoneEdit } from "react-icons/ai";
 
 import { Flyout } from "../Flyout";
 import { actionType } from "./dragdrop";
@@ -276,7 +276,7 @@ export default class Testing extends React.Component<Props, State> {
                                     className="govuk-link"
                                     onClick={(e) => this.onEdit(e)}
                                   >
-                                    <AiTwotoneEdit />
+                                    <EditIcon bottom={true} />
                                   </a>
                                 </span>
                               ) : null}

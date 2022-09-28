@@ -3,6 +3,9 @@ import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { FormDefinition, LogicExpression } from "@xgovformbuilder/model";
 import React, { useContext, useState } from "react";
 
+import { Flyout } from "../Flyout";
+import { RenderInPortal } from "../RenderInPortal";
+
 export const LogicExpressionsEdit = () => {
   const { data, save } = useContext(DataContext);
   const [
@@ -55,20 +58,26 @@ export const LogicExpressionsEdit = () => {
   };
 
   return (
-    <div>
+    <div className="govuk-body">
       {!logicExpression ? (
-        <div>
+        <>
           {showAddExpression ? (
-            <LogicExpressionEdit
-              data={data as FormDefinition}
-              save={save}
-              logicExpression={(logicExpression as unknown) as LogicExpression}
-              logicExpressionIndex={
-                (data as FormDefinition).logicExpressions.length
-              }
-              onEdit={() => setShowAddExpression(false)}
-              onCancel={() => setShowAddExpression(false)}
-            />
+            <RenderInPortal>
+              <Flyout>
+                <LogicExpressionEdit
+                  data={data as FormDefinition}
+                  save={save}
+                  logicExpression={
+                    (logicExpression as unknown) as LogicExpression
+                  }
+                  logicExpressionIndex={
+                    (data as FormDefinition).logicExpressions.length
+                  }
+                  onEdit={() => setShowAddExpression(false)}
+                  onCancel={() => setShowAddExpression(false)}
+                />
+              </Flyout>
+            </RenderInPortal>
           ) : (
             <ul className="govuk-list">
               {(logicExpressions || []).map((expression, index) => (
@@ -89,16 +98,20 @@ export const LogicExpressionsEdit = () => {
               </li>
             </ul>
           )}
-        </div>
+        </>
       ) : (
-        <LogicExpressionEdit
-          logicExpression={logicExpression}
-          logicExpressionIndex={logicExpressionIndex as number}
-          data={data as FormDefinition}
-          save={save}
-          onEdit={(e: Event) => handleEdit(e)}
-          onCancel={(e: Event) => handleCancel(e)}
-        />
+        <RenderInPortal>
+          <Flyout>
+            <LogicExpressionEdit
+              logicExpression={logicExpression}
+              logicExpressionIndex={logicExpressionIndex as number}
+              data={data as FormDefinition}
+              save={save}
+              onEdit={(e: Event) => handleEdit(e)}
+              onCancel={(e: Event) => handleCancel(e)}
+            />
+          </Flyout>
+        </RenderInPortal>
       )}
     </div>
   );
