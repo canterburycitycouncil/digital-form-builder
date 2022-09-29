@@ -75,7 +75,6 @@ function TestingEditorRefactor(props) {
    */
 
   function fieldsForPath(path) {
-    // if data here is the same as 'data as FormDefinition'
     if (data) {
       const inputs = !!path ? inputsAccessibleAt(data, path) : allInputs(data);
 
@@ -118,63 +117,12 @@ function TestingEditorRefactor(props) {
         }, {});
     }
   }
-  // render() {
-  // const { render, fields } = this.state;
-
-  // {
-  // console.log(this.state.selectedExpression);
-  // }
 
   return (
-    // <div className="govuk-width-container">
-    //   <a href="/#" className="govuk-back-link">
-    //     Back
-    //   </a>
-
-    // <main className="govuk-main-wrapper">
     <div className="govuk-grid-row">
       <div className="govuk-grid-column-two-thirds">
-        <h3>{state.selectedExpression?.label}</h3>
-        <nav className="menu">
-          <div className="menu-row">
-            <button
-              className="govuk-button govuk-button--secondary"
-              onClick={(e) => onClickRender(e, "standard")}
-            >
-              Standard
-            </button>
-            <button
-              className="govuk-button govuk-button--secondary"
-              onClick={(e) => onClickRender(e, "logic")}
-            >
-              Logic
-            </button>
-            <button
-              className="govuk-button govuk-button--secondary"
-              onClick={(e) => onClickRender(e, "definition")}
-            >
-              Definition
-            </button>
-            <button
-              className="govuk-button govuk-button--secondary"
-              onClick={(e) => onClickRender(e, "question")}
-            >
-              Question
-            </button>
-            <button
-              className="govuk-button govuk-button--secondary"
-              onClick={(e) => onClickRender(e, "answers")}
-            >
-              Answers
-            </button>
-          </div>
-        </nav>
-
         <div className="govuk-body">
           <table className="govuk-table">
-            {/* <caption className="govuk-table__caption govuk-table__caption--m">
-                {render}
-              </caption> */}
             <thead className="govuk-table__head">
               <tr className="govuk-table__row">
                 <th scope="col" className="govuk-table__header">
@@ -186,7 +134,6 @@ function TestingEditorRefactor(props) {
               </tr>
             </thead>
             <tbody className="govuk-table__body">
-              {/* {console.log(fields)} */}
               {state.fields.map((field) => (
                 <tr key={field.name} className="govuk-table__row">
                   <th scope="row" className="govuk-table__header">
@@ -209,10 +156,6 @@ function TestingEditorRefactor(props) {
         </div>
       </div>
     </div>
-    // </main>
-    // </div>
   );
 }
-
-// TestingEditorRefactor.contextType = DataContext;
 export default TestingEditorRefactor;

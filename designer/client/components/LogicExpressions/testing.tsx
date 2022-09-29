@@ -13,8 +13,7 @@ import {
 } from "react-beautiful-dnd";
 
 import { actionType } from "./dragdrop";
-// import TestingEditor from "./testing-editor";
-import TestingEditorRefactor from "./testing-editor";
+import TestingEditorRefactor from "./testing-editor-refactor";
 
 interface Props {
   inputActions: actionType[];
