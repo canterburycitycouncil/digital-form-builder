@@ -377,6 +377,8 @@
     }
   },
   "logicExpression": {
+    "add": "Add Logic Expression",
+    "edit": "Edit Logic Expression",
     "expressionTypes": {
       "title": "Expression type",
       "helpText": "The type of expression you would like to add"
@@ -384,6 +386,9 @@
     "predefinedExpressions": {
       "title": "Predefined expression",
       "helpText": "Choose from the dropdown the expression you want to use"
+    },
+    "variables": {
+      "add" : "Add Variable" 
     }
   },
   "outputs": {

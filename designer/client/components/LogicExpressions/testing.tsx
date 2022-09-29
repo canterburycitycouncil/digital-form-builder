@@ -12,9 +12,9 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 
-import { Flyout } from "../Flyout";
 import { actionType } from "./dragdrop";
-import TestingEditor from "./testing-editor";
+// import TestingEditor from "./testing-editor";
+import TestingEditorRefactor from "./testing-editor";
 
 interface Props {
   inputActions: actionType[];
@@ -296,11 +296,8 @@ export default class Testing extends React.Component<Props, State> {
           </DragDropContext>
         </div>
 
-        {isEditing && (
-          <Flyout>
-            <TestingEditor />
-          </Flyout>
-        )}
+        {/* {isEditing && <TestingEditor />} */}
+        {isEditing && <TestingEditorRefactor />}
       </>
     );
   }

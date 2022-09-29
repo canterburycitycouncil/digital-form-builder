@@ -1,5 +1,6 @@
 import { LogicExpressionEdit } from "@xgovformbuilder/designer/client/components/LogicExpressions";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { i18n } from "@xgovformbuilder/designer/client/i18n";
 import { FormDefinition, LogicExpression } from "@xgovformbuilder/model";
 import React, { useContext, useState } from "react";
 
@@ -12,12 +13,16 @@ export const LogicExpressionsEdit = () => {
     logicExpression,
     setLogicExpression,
   ] = useState<LogicExpression | null>(null);
+
   const [logicExpressionIndex, setLogicExpressionIndex] = useState<
     number | null
   >(null);
+
   const [showAddExpression, setShowAddExpression] = useState(false);
 
   const logicExpressions = data?.logicExpressions;
+
+  console.log(data);
 
   const onClickExpression = (
     event,
@@ -101,7 +106,7 @@ export const LogicExpressionsEdit = () => {
         </>
       ) : (
         <RenderInPortal>
-          <Flyout>
+          <Flyout title={i18n("logicExpression.add")}>
             <LogicExpressionEdit
               logicExpression={logicExpression}
               logicExpressionIndex={logicExpressionIndex as number}

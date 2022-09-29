@@ -10,8 +10,7 @@ import { Input, Select } from "govuk-react-jsx";
 import React, { useEffect, useState } from "react";
 
 import { ValidationError } from "../FormComponent/componentReducer/componentReducer.validations";
-import { DragDrop } from "./dragdrop";
-// import { ExpressionBuilder } from "./expression-builder";
+import DragDrop from "./dragdrop";
 import { LogicExpressionProps } from "./types";
 
 const expressionTypes = [
@@ -47,7 +46,6 @@ export const LogicExpressionEdit = ({
   const [expressionType, setExpressionType] = useState<LogicExpressionTypes>(
     "predefined"
   );
-  console.log(expressionType);
   const [errors, setErrors] = useState<ValidationError[]>([]);
 
   const logicExpressions = [
@@ -134,83 +132,87 @@ export const LogicExpressionEdit = ({
   useEffect(() => {}, [expressionType]);
 
   return (
-    <div className="govuk-body">
-      {hasValidationErrors(errors) && <ErrorSummary errorList={errors} />}
-      {onCancel && (
-        <a className="govuk-back-link" href="#" onClick={(e) => onCancel(e)}>
-          Back
-        </a>
-      )}
-      <Input
-        label={{
-          children: "Label",
-        }}
-        id="label-name"
-        name="label-name"
-        type="text"
-        value={labelName}
-        onChange={(e) => setLabelName(e.target.value)}
-      />
-      <Input
-        label={{
-          children: "Variable Name",
-        }}
-        id="variable-name"
-        name="variable-name"
-        type="text"
-        value={variableName}
-        onChange={(e) => setVariableName(e.target.value)}
-      />
-      <Select
-        id="expression-type"
-        items={expressionTypes}
-        label={{
-          className: "govuk-label--s",
-          children: [i18n("logicExpression.expressionTypes.title")],
-        }}
-        hint={{
-          children: [i18n("logicExpression.expressionTypes.helpText")],
-        }}
-        name="predefined-expressions"
-        value={expressionType}
-        onChange={(e) => setExpressionType(e.target.value)}
-      />
-      {expressionType === "predefined" ? (
+    <>
+      <div className="govuk-body">
+        {hasValidationErrors(errors) && <ErrorSummary errorList={errors} />}
+        {onCancel && (
+          <a className="govuk-back-link" href="#" onClick={(e) => onCancel(e)}>
+            Back
+          </a>
+        )}
+        <Input
+          label={{
+            children: "Label",
+          }}
+          id="label-name"
+          name="label-name"
+          type="text"
+          value={labelName}
+          onChange={(e) => setLabelName(e.target.value)}
+        />
+        <Input
+          label={{
+            children: "Variable Name",
+          }}
+          id="variable-name"
+          name="variable-name"
+          type="text"
+          value={variableName}
+          onChange={(e) => setVariableName(e.target.value)}
+        />
         <Select
-          id="predefined-expressions"
-          items={logicExpressions}
+          id="expression-type"
+          items={expressionTypes}
           label={{
             className: "govuk-label--s",
-            children: [i18n("logicExpression.predefinedExpressions.title")],
+            children: [i18n("logicExpression.expressionTypes.title")],
           }}
           hint={{
-            children: [i18n("logicExpression.predefinedExpressions.helpText")],
+            children: [i18n("logicExpression.expressionTypes.helpText")],
           }}
           name="predefined-expressions"
-          value={selectedExpression}
-          onChange={(e) => setSelectedExpression(e.target.value)}
+          value={expressionType}
+          onChange={(e) => setExpressionType(e.target.value)}
         />
-      ) : expressionType === "mathematical" || "literal" ? (
-        <DragDrop
-          expression={selectedExpression}
-          expressionType={expressionType}
-          onExpressionChange={setSelectedExpression}
-        />
-      ) : (
-        ""
-      )}
-      <div className="govuk-form-group">
-        <button className="govuk-button" onClick={(e) => onSave(e)}>
-          save
-        </button>
-      </div>
-      {logicExpression && (
+        {expressionType === "predefined" ? (
+          <Select
+            id="predefined-expressions"
+            items={logicExpressions}
+            label={{
+              className: "govuk-label--s",
+              children: [i18n("logicExpression.predefinedExpressions.title")],
+            }}
+            hint={{
+              children: [
+                i18n("logicExpression.predefinedExpressions.helpText"),
+              ],
+            }}
+            name="predefined-expressions"
+            value={selectedExpression}
+            onChange={(e) => setSelectedExpression(e.target.value)}
+          />
+        ) : expressionType === "mathematical" || "literal" ? (
+          <DragDrop
+            expression={selectedExpression}
+            expressionType={expressionType}
+            // onExpressionChange={setSelectedExpression}
+          />
+        ) : (
+          ""
+        )}
         <div className="govuk-form-group">
-          <a onClick={(e) => onClickDelete(e)} href="#">
-            Delete
-          </a>
+          <button className="govuk-button" onClick={(e) => onSave(e)}>
+            save
+          </button>
         </div>
-      )}
-    </div>
+        {logicExpression && (
+          <div className="govuk-form-group">
+            <a onClick={(e) => onClickDelete(e)} href="#">
+              Delete
+            </a>
+          </div>
+        )}
+      </div>
+    </>
   );
 };

@@ -1,8 +1,7 @@
+import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { LogicExpressionTypes } from "@xgovformbuilder/model";
-import React, { FC, useState } from "react";
+import React, { useContext, useState } from "react";
 
-import { Flyout } from "../Flyout";
-import { RenderInPortal } from "../RenderInPortal";
 import Testing from "./testing";
 
 interface Props {
@@ -24,7 +23,10 @@ export interface itemType {
   columnOrder: string;
 }
 
-const initialInputActions = (expressionType: string): actionType[] => {
+function initialInputActions(expressionType: string): actionType[] {
+  const { data, save } = useContext(DataContext);
+  const logicExpressions = data?.logicExpressions;
+
   if (expressionType === "mathematical") {
     return [
       { label: "[variable]", color: "teal" },
@@ -43,12 +45,17 @@ const initialInputActions = (expressionType: string): actionType[] => {
       { label: "⮐", color: "red" },
     ] as actionType[];
   }
-};
+}
 
-export const DragDrop: FC<Props> = ({ expressionType }) => {
+function DragDrop({ expressionType }: Props) {
   const [inputActions, setInputActions] = useState<actionType[]>(
     initialInputActions(expressionType)
   );
 
-  return <Testing inputActions={inputActions} />;
-};
+  return (
+    <Testing inputActions={inputActions} />
+    // <TestingRefactor inputActions={inputActions} />
+  );
+}
+
+export default DragDrop;
