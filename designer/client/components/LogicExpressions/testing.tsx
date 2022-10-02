@@ -74,6 +74,16 @@ const move = (
   droppableSource: DraggableLocation,
   droppableDestination: DraggableLocation
 ): MoveResult | any => {
+  {
+    //undef
+    console.log("1", source);
+    console.log("2", destination);
+    //
+
+    console.log("3", droppableSource);
+    console.log("4", droppableDestination);
+  }
+
   const sourceClone = [...source];
   const destClone = [...destination];
   const [removed] = sourceClone.splice(droppableSource.index, 1);

@@ -2,7 +2,7 @@ import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { LogicExpressionTypes } from "@xgovformbuilder/model";
 import React, { useContext, useState } from "react";
 
-import Testing from "./testing";
+import TestingRefactor from "./testing-refactor";
 
 interface Props {
   expression: string;
@@ -24,8 +24,8 @@ export interface itemType {
 }
 
 function initialInputActions(expressionType: string): actionType[] {
-  const { data, save } = useContext(DataContext);
-  const logicExpressions = data?.logicExpressions;
+  // const { data, save } = useContext(DataContext);
+  // const logicExpressions = data?.logicExpressions;
 
   if (expressionType === "mathematical") {
     return [
@@ -52,10 +52,7 @@ function DragDrop({ expressionType }: Props) {
     initialInputActions(expressionType)
   );
 
-  return (
-    <Testing inputActions={inputActions} />
-    // <TestingRefactor inputActions={inputActions} />
-  );
+  return <TestingRefactor inputActions={inputActions} />;
 }
 
 export default DragDrop;

@@ -13,14 +13,21 @@ import {
 } from "react-beautiful-dnd";
 
 import { actionType } from "./dragdrop";
-import TestingEditor from "./testing-editor";
+import TestingEditorRefactor from "./testing-editor-refactor";
 
 interface Props {
   inputActions: actionType[];
 }
-// interface Items {
-//   item: Item[];
-// }
+
+interface State {
+  items: Item[];
+  selected: Item[];
+  isEditing: boolean;
+  id2List: {
+    droppable: string;
+    droppable2: string;
+  };
+}
 
 interface Item {
   id: string;
@@ -28,12 +35,9 @@ interface Item {
   color: string;
 }
 
-// interface IsEditing {
-//   isEditing: boolean;
-// }
-interface MoveResult {
-  droppable?: Item[];
-  droppable2?: Item[];
+export interface MoveResult {
+  droppable: Item[];
+  droppable2: Item[];
 }
 
 export enum actionColor {
@@ -76,16 +80,6 @@ const move = (
   droppableSource: DraggableLocation,
   droppableDestination: DraggableLocation
 ): MoveResult | any => {
-  {
-    //undef
-    console.log(source);
-    console.log(destination);
-    //
-
-    console.log(droppableSource);
-    console.log(droppableDestination);
-  }
-
   const sourceClone = [...source];
   const destClone = [...destination];
   const [removed] = sourceClone.splice(droppableSource.index, 1);
@@ -123,99 +117,50 @@ const getListStyle = (isDraggingOver: boolean): {} => ({
 });
 
 function TestingRefactor(props) {
-  // const [state, setState] = useState<State[]>();
-  const [list, setList] = useState<Item[]>(cleanItems(props.inputActions));
-  const [selected, setSelected] = useState<Item[]>([]);
-  const [isEditing, setIsEditing] = useState(false);
-  // const [moveResult, setMoveResult] = useState<MoveResult>();
-  const [id2List, setId2List] = useState<MoveResult>({
-    droppable: list,
-    droppable2: selected,
+  const [state, setState] = useState<State>({
+    items: cleanItems(props.inputActions),
+    selected: [],
+    isEditing: false,
+    id2List: {
+      droppable: "items",
+      droppable2: "selected",
+    },
   });
 
-  // setState({
-  //   items: cleanItems(props.inputActions),
-  // });
+  const { isEditing, items, selected, id2List } = state;
 
-  console.log(list);
-  console.log(selected);
-  // const [state, setState] = useState({
-  //   items: cleanItems(props.inputActions),
-  //   selected: ,
-  //   isEditing: false,
-  // });
-
-  // let id2List = {
-  //   droppable: "items",
-  //   droppable2: "selected",
-  // };
-
-  // export default class Testing extends React.Component<Props, State> {
-
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //     items: cleanItems(props.inputActions),
-  //     selected: [],
-  //     isEditing: false,
-  //   };
-
-  // this.onDragEnd = this.onDragEnd.bind(this);
-
-  // this.getList = this.getList.bind(this);
-
-  // onEdit = (e) => {
-  //   e.preventDefault();
-  //   this.setState({
-  //     isEditing: !this.state.isEditing,
-  //   });
-  // };
-
-  const onEdit = (e) => {
+  function onEdit(e) {
     e.preventDefault();
-    setIsEditing(!isEditing);
-  };
+    setState({
+      ...state,
+      isEditing: !isEditing,
+    });
+  }
 
-  const getList = (id: string): Item[] => {
-    return id2List[id];
-  };
-
-  // const getList = (id: string): Item[] => {
-  //   return items[id];
-  // };
+  function getList(id: string): Item[] {
+    return state[id2List[id]];
+  }
 
   function onDragEnd(result: DropResult): void {
     const { source, destination } = result;
-    console.log(result);
+
     if (!destination) {
       return;
     }
 
     if (source.droppableId === destination.droppableId) {
-      const items = reorder(
+      const its = reorder(
         getList(source.droppableId),
         source.index,
         destination.index
       );
 
-      // let state: State = { ...state };
-
       if (source.droppableId === "droppable2") {
-        setList(list);
-        // state = { ...state, selected: items };
+        setState({ ...state, selected: its });
       } else if (source.droppableId === "droppable") {
-        setSelected(list);
-        // state = { ...state, items };
+        setState({ ...state, items: its });
       }
-
-      // setState(state);
     } else {
-      console.log("1", getList(source.droppableId));
-      console.log("2", source.droppableId);
-      console.log("3", getList(destination.droppableId));
-      console.log("4", destination.droppableId);
-
       const resultFromMove: MoveResult = move(
         getList(source.droppableId),
         getList(destination.droppableId),
@@ -223,17 +168,13 @@ function TestingRefactor(props) {
         destination
       );
 
-      setList(resultFromMove.droppable || []);
-      setSelected(resultFromMove.droppable2 || []);
-
-      // setState({
-      //   setItems: resultFromMove.droppable,
-      //   setSelected: resultFromMove.droppable2,
-      // });
+      setState({
+        ...state,
+        items: resultFromMove.droppable,
+        selected: resultFromMove.droppable2,
+      });
     }
   }
-  // render() {
-  // const { isEditing } = this.state;
 
   return (
     <>
@@ -252,7 +193,7 @@ function TestingRefactor(props) {
                   {...provided.droppableProps}
                   style={getListStyle(snapshot.isDraggingOver)}
                 >
-                  {list?.map((item, index) => (
+                  {items.map((item, index) => (
                     <Draggable
                       key={item.id}
                       draggableId={item.id}
@@ -298,7 +239,7 @@ function TestingRefactor(props) {
                   ref={providedDroppable2.innerRef}
                   style={getListStyle(snapshotDroppable2.isDraggingOver)}
                 >
-                  {selected?.map((item, index) => (
+                  {selected.map((item, index) => (
                     <Draggable
                       key={item.id}
                       draggableId={item.id}
@@ -349,7 +290,7 @@ function TestingRefactor(props) {
         </DragDropContext>
       </div>
 
-      {isEditing && <TestingEditor />}
+      {isEditing && <TestingEditorRefactor />}
     </>
   );
 }

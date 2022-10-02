@@ -22,8 +22,6 @@ export const LogicExpressionsEdit = () => {
 
   const logicExpressions = data?.logicExpressions;
 
-  console.log(data);
-
   const onClickExpression = (
     event,
     expression: LogicExpression,

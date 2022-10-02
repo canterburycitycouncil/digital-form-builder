@@ -8,8 +8,6 @@ import { Item } from "@xgovformbuilder/model";
 import React, { useContext, useState } from "react";
 import { AiOutlineFileAdd } from "react-icons/ai";
 
-interface Props {}
-
 interface State {
   render: string;
   fields: any;
@@ -44,7 +42,7 @@ export interface FieldInputObject {
   [key: string]: FieldInput;
 }
 
-function TestingEditorRefactor(props) {
+function TestingEditorRefactor() {
   const { data } = useContext(DataContext);
   const [state, setState] = useState<State>({
     render: "standard",
