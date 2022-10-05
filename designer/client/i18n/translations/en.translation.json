@@ -377,15 +377,22 @@
     }
   },
   "logicExpression": {
-    "add": "Add Logic Expression",
+    "add": "Add Logic Expression",  
+    "addOrEdit": "Add or Edit Logic Expression",
+    "displayName": "Merry Xmas",
     "edit": "Edit Logic Expression",
     "expressionTypes": {
       "title": "Expression type",
-      "helpText": "The type of expression you would like to add"
+      "helpText": "The type of expression you would like to add."
+    },
+    "hint": "Logic can be used to calculate something that will be useful the flow of the form. Build a formula involving answers to questions and variables. You can then use the calculated value in a branching rules, integrations or email alerts sent on submission.",
+    "newExpression": {
+      "labelHint": "Eye of the tiger",
+      "variableHint": "You're going to hear me roar"
     },
     "predefinedExpressions": {
       "title": "Predefined expression",
-      "helpText": "Choose from the dropdown the expression you want to use"
+      "helpText": "The predefined expression you want to use."
     },
     "variables": {
       "add" : "Add Variable" 

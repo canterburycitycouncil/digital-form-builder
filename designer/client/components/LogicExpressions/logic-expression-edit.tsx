@@ -10,8 +10,17 @@ import { Input, Select } from "govuk-react-jsx";
 import React, { useEffect, useState } from "react";
 
 import { ValidationError } from "../FormComponent/componentReducer/componentReducer.validations";
-import DragDrop from "./dragdrop";
+import InputActions from "./input-actions";
 import { LogicExpressionProps } from "./types";
+
+export interface ExpressionState {
+  selectedExpression: any;
+  labelName: string;
+  variableName: string;
+  expressionType: LogicExpressionTypes;
+  errors: ValidationError[];
+  logicExpression: string;
+}
 
 const expressionTypes = [
   {
@@ -36,17 +45,24 @@ export const LogicExpressionEdit = ({
   onEdit,
   onCancel,
 }: LogicExpressionProps) => {
-  const [selectedExpression, setSelectedExpression] = useState(
-    logicExpression.expression
-  );
-  const [labelName, setLabelName] = useState<string>(logicExpression.label);
-  const [variableName, setVariableName] = useState<string>(
-    logicExpression.variableName
-  );
-  const [expressionType, setExpressionType] = useState<LogicExpressionTypes>(
-    "predefined"
-  );
-  const [errors, setErrors] = useState<ValidationError[]>([]);
+  const [expressionState, setExpressionState] = useState<ExpressionState>({
+    selectedExpression: logicExpression.expression,
+    labelName: logicExpression.label,
+    variableName: logicExpression.variableName,
+    expressionType: "predefined",
+    logicExpression: logicExpression.expression,
+    errors: [],
+  });
+
+  console.log("expression state", expressionState);
+
+  const {
+    selectedExpression,
+    labelName,
+    variableName,
+    expressionType,
+    errors,
+  } = expressionState;
 
   const logicExpressions = [
     {
@@ -74,7 +90,7 @@ export const LogicExpressionEdit = ({
       errors
     );
 
-    setErrors(errors);
+    setExpressionState({ ...expressionState, errors: errors });
 
     return errors;
   };
@@ -129,8 +145,6 @@ export const LogicExpressionEdit = ({
     }
   };
 
-  useEffect(() => {}, [expressionType]);
-
   return (
     <>
       <div className="govuk-body">
@@ -142,23 +156,39 @@ export const LogicExpressionEdit = ({
         )}
         <Input
           label={{
-            children: "Label",
+            children: "Label Name",
+            className: "govuk-label govuk-label--s",
           }}
+          hint={{ children: [i18n("logicExpression.newExpression.labelHint")] }}
           id="label-name"
           name="label-name"
           type="text"
           value={labelName}
-          onChange={(e) => setLabelName(e.target.value)}
+          onChange={(e) =>
+            setExpressionState({
+              ...expressionState,
+              labelName: e.target.value,
+            })
+          }
         />
         <Input
           label={{
             children: "Variable Name",
+            className: "govuk-label govuk-label--s",
+          }}
+          hint={{
+            children: [i18n("logicExpression.newExpression.variableHint")],
           }}
           id="variable-name"
           name="variable-name"
           type="text"
           value={variableName}
-          onChange={(e) => setVariableName(e.target.value)}
+          onChange={(e) =>
+            setExpressionState({
+              ...expressionState,
+              variableName: e.target.value,
+            })
+          }
         />
         <Select
           id="expression-type"
@@ -172,7 +202,12 @@ export const LogicExpressionEdit = ({
           }}
           name="predefined-expressions"
           value={expressionType}
-          onChange={(e) => setExpressionType(e.target.value)}
+          onChange={(e) =>
+            setExpressionState({
+              ...expressionState,
+              expressionType: e.target.value,
+            })
+          }
         />
         {expressionType === "predefined" ? (
           <Select
@@ -189,17 +224,16 @@ export const LogicExpressionEdit = ({
             }}
             name="predefined-expressions"
             value={selectedExpression}
-            onChange={(e) => setSelectedExpression(e.target.value)}
+            onChange={(e) =>
+              setExpressionState({
+                ...expressionState,
+                selectedExpression: e.target.value,
+              })
+            }
           />
         ) : expressionType === "mathematical" || "literal" ? (
-          <DragDrop
-            expression={selectedExpression}
-            expressionType={expressionType}
-            // onExpressionChange={setSelectedExpression}
-          />
-        ) : (
-          ""
-        )}
+          <InputActions expressionState={expressionState} />
+        ) : null}
         <div className="govuk-form-group">
           <button className="govuk-button" onClick={(e) => onSave(e)}>
             save

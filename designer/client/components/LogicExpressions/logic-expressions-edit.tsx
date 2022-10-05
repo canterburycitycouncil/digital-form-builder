@@ -9,18 +9,17 @@ import { RenderInPortal } from "../RenderInPortal";
 
 export const LogicExpressionsEdit = () => {
   const { data, save } = useContext(DataContext);
+  const logicExpressions = data?.logicExpressions;
+
   const [
     logicExpression,
     setLogicExpression,
-  ] = useState<LogicExpression | null>(null);
+  ] = useState<LogicExpression | null>();
 
   const [logicExpressionIndex, setLogicExpressionIndex] = useState<
     number | null
   >(null);
-
   const [showAddExpression, setShowAddExpression] = useState(false);
-
-  const logicExpressions = data?.logicExpressions;
 
   const onClickExpression = (
     event,
@@ -36,10 +35,10 @@ export const LogicExpressionsEdit = () => {
   const onClickAddExpression = (e) => {
     e.preventDefault();
     setLogicExpression({
-      label: "new logic expression",
+      label: "",
       expressionType: "predefined",
       variableName: "",
-      expression: "{number_of_rooms} * 500",
+      expression: "",
     });
     setShowAddExpression(true);
   };
@@ -62,60 +61,61 @@ export const LogicExpressionsEdit = () => {
 
   return (
     <div className="govuk-body">
-      {!logicExpression ? (
-        <>
-          {showAddExpression ? (
-            <RenderInPortal>
-              <Flyout>
-                <LogicExpressionEdit
-                  data={data as FormDefinition}
-                  save={save}
-                  logicExpression={
-                    (logicExpression as unknown) as LogicExpression
-                  }
-                  logicExpressionIndex={
-                    (data as FormDefinition).logicExpressions.length
-                  }
-                  onEdit={() => setShowAddExpression(false)}
-                  onCancel={() => setShowAddExpression(false)}
-                />
-              </Flyout>
-            </RenderInPortal>
-          ) : (
-            <ul className="govuk-list">
-              {(logicExpressions || []).map((expression, index) => (
-                <li key={expression.label}>
-                  <a
-                    href="#"
-                    onClick={(e) => onClickExpression(e, expression, index)}
-                  >
-                    {expression.label}
+      <div className="govuk-hint">{i18n("logicExpression.hint")}</div>
+      <div>
+        {!logicExpression ? (
+          <div>
+            {showAddExpression ? (
+              <RenderInPortal>
+                <Flyout title={i18n("logicExpression.add")}>
+                  <LogicExpressionEdit
+                    data={data as FormDefinition}
+                    logicExpressionIndex={logicExpressionIndex as number}
+                    save={save}
+                    logicExpression={
+                      (logicExpression as unknown) as LogicExpression
+                    }
+                    onEdit={() => setShowAddExpression(false)}
+                    onCancel={() => setShowAddExpression(false)}
+                  />
+                </Flyout>
+              </RenderInPortal>
+            ) : (
+              <ul className="govuk-list">
+                {(logicExpressions || []).map((expression, index) => (
+                  <li key={expression.label}>
+                    <a
+                      href="#"
+                      onClick={(e) => onClickExpression(e, expression, index)}
+                    >
+                      {expression.label}
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <hr />
+                  <a href="#" onClick={(e) => onClickAddExpression(e)}>
+                    Add logic expression
                   </a>
                 </li>
-              ))}
-              <li>
-                <hr />
-                <a href="#" onClick={(e) => onClickAddExpression(e)}>
-                  Add logic expression
-                </a>
-              </li>
-            </ul>
-          )}
-        </>
-      ) : (
-        <RenderInPortal>
-          <Flyout title={i18n("logicExpression.add")}>
-            <LogicExpressionEdit
-              logicExpression={logicExpression}
-              logicExpressionIndex={logicExpressionIndex as number}
-              data={data as FormDefinition}
-              save={save}
-              onEdit={(e: Event) => handleEdit(e)}
-              onCancel={(e: Event) => handleCancel(e)}
-            />
-          </Flyout>
-        </RenderInPortal>
-      )}
+              </ul>
+            )}
+          </div>
+        ) : (
+          <RenderInPortal>
+            <Flyout title={i18n("logicExpression.add")}>
+              <LogicExpressionEdit
+                logicExpression={logicExpression}
+                logicExpressionIndex={logicExpressionIndex as number}
+                data={data as FormDefinition}
+                save={save}
+                onEdit={(e: Event) => handleEdit(e)}
+                onCancel={(e: Event) => handleCancel(e)}
+              />
+            </Flyout>
+          </RenderInPortal>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import { isNull } from "lodash";
+
 import { ComponentDef } from "../components/types";
 import { ConditionRawData } from ".";
 
@@ -40,10 +42,11 @@ export type LogicExpressionTypes =
   | "literal"
   | "mathematical"
   | "conditional";
+
 export interface LogicExpression {
   label: string;
   variableName: string;
-  expressionType: LogicExpressionTypes;
+  expressionType?: LogicExpressionTypes;
   expression: string;
 }
 

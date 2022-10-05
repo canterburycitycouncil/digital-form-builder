@@ -13,6 +13,7 @@ function useConditionsEditor() {
     editingCondition,
     setEditingCondition,
   ] = useState<null | ConditionRawData>(null);
+
   const [showAddCondition, setShowAddCondition] = useState(false);
 
   function onClickCondition(e, condition: ConditionRawData) {

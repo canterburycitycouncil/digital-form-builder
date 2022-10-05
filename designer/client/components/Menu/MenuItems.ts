@@ -143,14 +143,16 @@ export default function getMenuItems(
         },
       },
     },
-    "logic-expression": {
+    logicExpression: {
       component: useMenuItem(),
       flyout: {
-        title: "Edit logic expressions",
-        width: "xlarge",
+        title: i18n("logicExpression.addOrEdit"),
+        width: "large",
         component: {
           type: LogicExpressionsEdit,
-          props: {},
+          props: {
+            data: data,
+          },
         },
       },
     },
