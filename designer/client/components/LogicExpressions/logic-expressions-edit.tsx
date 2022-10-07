@@ -37,7 +37,7 @@ export const LogicExpressionsEdit = () => {
     e.preventDefault();
     setLogicExpression({
       label: "",
-      expressionType: "predefined",
+      expressionType: "",
       variableName: "",
       expression: "",
     });
@@ -82,24 +82,26 @@ export const LogicExpressionsEdit = () => {
                 </Flyout>
               </RenderInPortal>
             ) : (
-              <ul className="govuk-list">
-                {(logicExpressions || []).map((expression, index) => (
-                  <li key={expression.label}>
-                    <a
-                      href="#"
-                      onClick={(e) => onClickExpression(e, expression, index)}
-                    >
-                      {expression.label}
+              <>
+                <ul className="govuk-list">
+                  {(logicExpressions || []).map((expression, index) => (
+                    <li key={expression.label}>
+                      <a
+                        href="#"
+                        onClick={(e) => onClickExpression(e, expression, index)}
+                      >
+                        {expression.label}
+                      </a>
+                    </li>
+                  ))}
+                  <li>
+                    <hr />
+                    <a href="#" onClick={(e) => onClickAddExpression(e)}>
+                      Add logic expression
                     </a>
                   </li>
-                ))}
-                <li>
-                  <hr />
-                  <a href="#" onClick={(e) => onClickAddExpression(e)}>
-                    Add logic expression
-                  </a>
-                </li>
-              </ul>
+                </ul>
+              </>
             )}
           </div>
         ) : (

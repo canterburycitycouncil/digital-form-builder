@@ -4,6 +4,7 @@ import {
 } from "@xgovformbuilder/designer/client/components/FormComponent/componentData";
 import { findList } from "@xgovformbuilder/designer/client/components/List/data";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
+import { randomId } from "@xgovformbuilder/designer/client/helpers";
 import { Item } from "@xgovformbuilder/model";
 import React, { useContext, useEffect, useState } from "react";
 import {
@@ -177,12 +178,12 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
 
   const { isEditing, items, selected, id2List, editingId } = state;
 
-  // useEffect(() => {
-  //   setState({
-  //     ...state,
-  //     items: cleanItems(inputActions),
-  //   });
-  // }, [inputActions]);
+  useEffect(() => {
+    setState({
+      ...state,
+      items: cleanItems(inputActions),
+    });
+  }, [inputActions]);
 
   function fieldsForPath(path) {
     if (data) {
@@ -303,12 +304,12 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
     }
   }, [editorState.selectedExpression]);
 
-  useEffect(() => {
-    setExpressionState({
-      ...expressionState,
-      expressions: selected,
-    });
-  }, [selected]);
+  // useEffect(() => {
+  //   setExpressionState({
+  //     ...expressionState,
+  //     expressions: selected,
+  //   });
+  // }, [selected]);
 
   return (
     <>

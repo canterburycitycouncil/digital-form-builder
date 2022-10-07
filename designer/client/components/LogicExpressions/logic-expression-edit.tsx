@@ -36,6 +36,7 @@ const expressionTypes = [
     children: "mathematical",
     value: "mathematical",
   },
+  {},
 ];
 
 export const LogicExpressionEdit = ({
@@ -50,15 +51,11 @@ export const LogicExpressionEdit = ({
     selectedExpression: logicExpression.expression,
     labelName: logicExpression.label,
     variableName: logicExpression.variableName,
-    expressionType: "predefined",
+    expressionType: logicExpression.expressionType,
     logicExpression: logicExpression.expression,
     expressions: [],
     errors: [],
   });
-
-  console.log(data);
-
-  console.log("expression state", expressionState);
 
   const {
     selectedExpression,
@@ -69,7 +66,7 @@ export const LogicExpressionEdit = ({
     expressions,
   } = expressionState;
 
-  console.log("selected expression", selectedExpression);
+  console.log(expressionType);
 
   const logicExpressions = [
     {
@@ -107,9 +104,7 @@ export const LogicExpressionEdit = ({
     // Math.max(...arr)
   }
 
-  console.log(getNewIndex(logicExpressions));
-
-  /// go through the expressions state which holds the expression, but in seperate objects. Data should be in the content field. Turn into new expression on the LogicExpressions object.
+  // go through the expressions state which holds the expression, but in seperate objects. Data should be in the content field. Turn into new expression on the LogicExpressions object.
 
   const cleanBuilderSelection = (expressions) => {
     const cleanExpression = expressions.map(
@@ -123,17 +118,31 @@ export const LogicExpressionEdit = ({
     let validationErrors = validate();
     if (hasValidationErrors(validationErrors)) return;
     let dataCopy = { ...data };
-    console.log("data copy", dataCopy);
+
     const logicExpressionObject = {
       label: labelName,
       variableName: variableName,
       expressionType: expressionType,
       expression: selectedExpression as any,
     };
-    console.log(logicExpressionObject);
-    if (dataCopy?.logicExpressions) {
+
+    // if the data exits then...
+
+    if (dataCopy?.logicExpressions && logicExpressionIndex !== null) {
+      dataCopy.logicExpressions[logicExpressionIndex] = logicExpressionObject;
+      try {
+        save(dataCopy, () => {
+          onEdit();
+        });
+      } catch (err) {
+        logger.error("ExpressionEdit", err);
+      }
+    }
+    // if it doesn't exist then ...
+
+    if (dataCopy?.logicExpressions && logicExpressionIndex === null) {
       dataCopy.logicExpressions[
-        getNewIndex(logicExpressions)
+        getNewIndex(data.logicExpressions)
       ] = logicExpressionObject;
       try {
         save(dataCopy, () => {
@@ -177,8 +186,6 @@ export const LogicExpressionEdit = ({
       selectedExpression: cleanBuilderSelection(expressions),
     });
   }, [expressions]);
-
-  // console.log("logic expressions", expressions);
 
   return (
     <>
@@ -236,7 +243,7 @@ export const LogicExpressionEdit = ({
             children: [i18n("logicExpression.expressionTypes.helpText")],
           }}
           name="predefined-expressions"
-          value={expressionType}
+          value={expressionType || ""}
           onChange={(e) =>
             setExpressionState({
               ...expressionState,
@@ -266,7 +273,12 @@ export const LogicExpressionEdit = ({
               })
             }
           />
-        ) : expressionType === "mathematical" || "literal" ? (
+        ) : expressionType === "mathematical" ? (
+          <InputActions
+            expressionState={expressionState}
+            setExpressionState={setExpressionState}
+          />
+        ) : expressionType === "literal" ? (
           <InputActions
             expressionState={expressionState}
             setExpressionState={setExpressionState}

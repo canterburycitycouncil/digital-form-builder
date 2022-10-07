@@ -41,7 +41,8 @@ export type LogicExpressionTypes =
   | "predefined"
   | "literal"
   | "mathematical"
-  | "conditional";
+  | "conditional"
+  | "";
 
 export interface LogicExpression {
   label: string;
