@@ -1,7 +1,8 @@
-import { Menu } from "..";
-import { render, fireEvent } from "@testing-library/react";
-import { DataContext, FlyoutContext } from "../../../context";
+import { fireEvent, render } from "@testing-library/react";
 import React from "react";
+
+import { DataContext, FlyoutContext } from "../../../context";
+import { Menu } from "..";
 
 const dataValue = { data: {}, save: jest.fn() };
 const flyoutValue = {

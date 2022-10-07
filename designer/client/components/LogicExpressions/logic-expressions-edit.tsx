@@ -19,6 +19,7 @@ export const LogicExpressionsEdit = () => {
   const [logicExpressionIndex, setLogicExpressionIndex] = useState<
     number | null
   >(null);
+
   const [showAddExpression, setShowAddExpression] = useState(false);
 
   const onClickExpression = (

@@ -387,7 +387,7 @@
     },
     "hint": "Logic can be used to calculate something that will be useful the flow of the form. Build a formula involving answers to questions and variables. You can then use the calculated value in a branching rules, integrations or email alerts sent on submission.",
     "newExpression": {
-      "labelHint": "Eye of the tiger",
+      "labelHint": "Set a name that is easy to recognise for other users.",
       "variableHint": "You're going to hear me roar"
     },
     "predefinedExpressions": {

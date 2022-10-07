@@ -31,10 +31,11 @@ function initialInputActions(expressionType: string): actionType[] {
   }
 }
 
-function InputActions({ expressionState }) {
+function InputActions({ expressionState, setExpressionState }) {
   return (
     <FormulaBuilder
       expressionState={expressionState}
+      setExpressionState={setExpressionState}
       inputActions={initialInputActions(expressionState.expressionType)}
     />
   );

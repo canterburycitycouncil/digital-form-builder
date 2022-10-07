@@ -13,7 +13,6 @@ function FormulaInputs({ setEditorState, editorState, edit, editingId }) {
   const { inputValue } = state;
 
   function onSelectVariable(e, input) {
-    console.log(input);
     e.preventDefault();
 
     setEditorState({

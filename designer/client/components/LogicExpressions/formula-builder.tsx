@@ -155,7 +155,7 @@ const getListStyle = (isDraggingOver: boolean): {} => ({
   display: "flex",
 });
 
-function FormulaBuilder({ expressionState, inputActions }) {
+function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
   const { data } = useContext(DataContext);
 
   const [state, setState] = useState<State>({
@@ -176,6 +176,13 @@ function FormulaBuilder({ expressionState, inputActions }) {
   });
 
   const { isEditing, items, selected, id2List, editingId } = state;
+
+  // useEffect(() => {
+  //   setState({
+  //     ...state,
+  //     items: cleanItems(inputActions),
+  //   });
+  // }, [inputActions]);
 
   function fieldsForPath(path) {
     if (data) {
@@ -280,13 +287,6 @@ function FormulaBuilder({ expressionState, inputActions }) {
     }
   }
 
-  // I want this function to add a  card to selected using the values from editor refactor...
-  // function createNewCardOnEdit() {}
-
-  // I think the best appraoch is when the editor state changes it can dcreata a new card with the cleaned values in it? And also send the other card back to the options menu. That way I wont be screwing with the flow, or stopping extra cards being added.
-
-  // also need to add here > dependant on what card was moved then re-add it to the selction.
-
   useEffect(() => {
     if (editorState.selectedExpression) {
       setState({
@@ -303,7 +303,13 @@ function FormulaBuilder({ expressionState, inputActions }) {
     }
   }, [editorState.selectedExpression]);
 
-  console.log("selected:", selected);
+  useEffect(() => {
+    setExpressionState({
+      ...expressionState,
+      expressions: selected,
+    });
+  }, [selected]);
+
   return (
     <>
       <div className="govuk-grid-column">
@@ -439,6 +445,7 @@ function FormulaBuilder({ expressionState, inputActions }) {
                             item.id !== "X" &&
                             item.id !== "/" &&
                             item.id !== "(" &&
+                            item.id !== "⮐" &&
                             item.id !== "number" &&
                             item.id !== "[variable]" &&
                             item.id !== "text" &&

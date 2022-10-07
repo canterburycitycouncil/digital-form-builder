@@ -20,6 +20,7 @@ export interface ExpressionState {
   expressionType: LogicExpressionTypes;
   errors: ValidationError[];
   logicExpression: string;
+  expressions: [];
 }
 
 const expressionTypes = [
@@ -51,8 +52,11 @@ export const LogicExpressionEdit = ({
     variableName: logicExpression.variableName,
     expressionType: "predefined",
     logicExpression: logicExpression.expression,
+    expressions: [],
     errors: [],
   });
+
+  console.log(data);
 
   console.log("expression state", expressionState);
 
@@ -62,7 +66,10 @@ export const LogicExpressionEdit = ({
     variableName,
     expressionType,
     errors,
+    expressions,
   } = expressionState;
+
+  console.log("selected expression", selectedExpression);
 
   const logicExpressions = [
     {
@@ -95,20 +102,39 @@ export const LogicExpressionEdit = ({
     return errors;
   };
 
+  function getNewIndex(logicExpressions) {
+    return logicExpressions.length;
+    // Math.max(...arr)
+  }
+
+  console.log(getNewIndex(logicExpressions));
+
+  /// go through the expressions state which holds the expression, but in seperate objects. Data should be in the content field. Turn into new expression on the LogicExpressions object.
+
+  const cleanBuilderSelection = (expressions) => {
+    const cleanExpression = expressions.map(
+      (singleExpression) => singleExpression.content
+    );
+    return cleanExpression.join(" ");
+  };
+
   const onSave = (e) => {
     e.preventDefault();
     let validationErrors = validate();
-
     if (hasValidationErrors(validationErrors)) return;
     let dataCopy = { ...data };
+    console.log("data copy", dataCopy);
     const logicExpressionObject = {
       label: labelName,
       variableName: variableName,
       expressionType: expressionType,
       expression: selectedExpression as any,
     };
+    console.log(logicExpressionObject);
     if (dataCopy?.logicExpressions) {
-      dataCopy.logicExpressions[logicExpressionIndex] = logicExpressionObject;
+      dataCopy.logicExpressions[
+        getNewIndex(logicExpressions)
+      ] = logicExpressionObject;
       try {
         save(dataCopy, () => {
           onEdit();
@@ -144,6 +170,15 @@ export const LogicExpressionEdit = ({
       onEdit();
     }
   };
+
+  useEffect(() => {
+    setExpressionState({
+      ...expressionState,
+      selectedExpression: cleanBuilderSelection(expressions),
+    });
+  }, [expressions]);
+
+  // console.log("logic expressions", expressions);
 
   return (
     <>
@@ -232,7 +267,10 @@ export const LogicExpressionEdit = ({
             }
           />
         ) : expressionType === "mathematical" || "literal" ? (
-          <InputActions expressionState={expressionState} />
+          <InputActions
+            expressionState={expressionState}
+            setExpressionState={setExpressionState}
+          />
         ) : null}
         <div className="govuk-form-group">
           <button className="govuk-button" onClick={(e) => onSave(e)}>
