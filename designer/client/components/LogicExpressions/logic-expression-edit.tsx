@@ -21,6 +21,7 @@ export interface ExpressionState {
   errors: ValidationError[];
   logicExpression: string;
   expressions: [];
+  editingToggle: boolean;
 }
 
 const expressionTypes = [
@@ -63,6 +64,7 @@ export const LogicExpressionEdit = ({
     logicExpression: "",
     expressions: [],
     errors: [],
+    editingToggle: false,
   });
 
   const {
@@ -72,6 +74,7 @@ export const LogicExpressionEdit = ({
     expressionType,
     errors,
     expressions,
+    editingToggle,
   } = expressionState;
 
   const validate = () => {
@@ -100,7 +103,6 @@ export const LogicExpressionEdit = ({
 
   function getNewIndex(logicExpressions) {
     return logicExpressions.length;
-    // Math.max(...arr)
   }
 
   // go through the expressions state which holds the expression, but in seperate objects. Data should be in the content field. Turn into new expression on the LogicExpressions object.
@@ -186,6 +188,15 @@ export const LogicExpressionEdit = ({
     });
   }, [expressions]);
 
+  useEffect(() => {
+    if (logicExpression.expression) {
+      setExpressionState({
+        ...expressionState,
+        editingToggle: !editingToggle,
+      });
+    }
+  }, [logicExpression.expression]);
+
   return (
     <>
       <div className="govuk-body">
@@ -213,6 +224,19 @@ export const LogicExpressionEdit = ({
               <h3 className="govuk-notification-banner__heading">
                 {logicExpression.expression}
               </h3>
+              <p className="govuk-body">
+                <button
+                  className="govuk-button"
+                  onClick={(e) =>
+                    setExpressionState({
+                      ...expressionState,
+                      editingToggle: !editingToggle,
+                    })
+                  }
+                >
+                  Edit
+                </button>
+              </p>
             </div>
           </div>
         ) : null}
@@ -253,58 +277,66 @@ export const LogicExpressionEdit = ({
             })
           }
         />
-        <Select
-          id="expression-type"
-          items={expressionTypes}
-          label={{
-            className: "govuk-label--s",
-            children: [i18n("logicExpression.expressionTypes.title")],
-          }}
-          hint={{
-            children: [i18n("logicExpression.expressionTypes.helpText")],
-          }}
-          name="predefined-expressions"
-          value={expressionType || ""}
-          onChange={(e) =>
-            setExpressionState({
-              ...expressionState,
-              expressionType: e.target.value,
-            })
-          }
-        />
-        {expressionType === "predefined" ? (
-          <Select
-            id="predefined-expressions"
-            items={predefinedLogicExpressions}
-            label={{
-              className: "govuk-label--s",
-              children: [i18n("logicExpression.predefinedExpressions.title")],
-            }}
-            hint={{
-              children: [
-                i18n("logicExpression.predefinedExpressions.helpText"),
-              ],
-            }}
-            name="predefined-expressions"
-            value={selectedExpression}
-            onChange={(e) =>
-              setExpressionState({
-                ...expressionState,
-                selectedExpression: e.target.value,
-              })
-            }
-          />
-        ) : expressionType === "mathematical" ? (
-          <InputActions
-            expressionState={expressionState}
-            setExpressionState={setExpressionState}
-          />
-        ) : expressionType === "literal" ? (
-          <InputActions
-            expressionState={expressionState}
-            setExpressionState={setExpressionState}
-          />
+        {!editingToggle ? (
+          <>
+            <Select
+              id="expression-type"
+              items={expressionTypes}
+              label={{
+                className: "govuk-label--s",
+                children: [i18n("logicExpression.expressionTypes.title")],
+              }}
+              hint={{
+                children: [i18n("logicExpression.expressionTypes.helpText")],
+              }}
+              name="predefined-expressions"
+              value={expressionType || ""}
+              onChange={(e) =>
+                setExpressionState({
+                  ...expressionState,
+                  expressionType: e.target.value,
+                })
+              }
+            />
+
+            {expressionType === "predefined" ? (
+              <Select
+                id="predefined-expressions"
+                items={predefinedLogicExpressions}
+                label={{
+                  className: "govuk-label--s",
+                  children: [
+                    i18n("logicExpression.predefinedExpressions.title"),
+                  ],
+                }}
+                hint={{
+                  children: [
+                    i18n("logicExpression.predefinedExpressions.helpText"),
+                  ],
+                }}
+                name="predefined-expressions"
+                value={selectedExpression}
+                onChange={(e) =>
+                  setExpressionState({
+                    ...expressionState,
+                    selectedExpression: e.target.value,
+                  })
+                }
+              />
+            ) : expressionType === "mathematical" ? (
+              <InputActions
+                expressionState={expressionState}
+                setExpressionState={setExpressionState}
+              />
+            ) : expressionType === "literal" ? (
+              <InputActions
+                expressionState={expressionState}
+                setExpressionState={setExpressionState}
+              />
+            ) : null}
+          </>
         ) : null}
+
         <div className="govuk-form-group">
           <button className="govuk-button" onClick={(e) => onSave(e)}>
             save
