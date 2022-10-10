@@ -4,7 +4,6 @@ import {
 } from "@xgovformbuilder/designer/client/components/FormComponent/componentData";
 import { findList } from "@xgovformbuilder/designer/client/components/List/data";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
-import { randomId } from "@xgovformbuilder/designer/client/helpers";
 import { Item } from "@xgovformbuilder/model";
 import React, { useContext, useEffect, useState } from "react";
 import {
@@ -91,6 +90,7 @@ const cleanItems = (actionType): IItem[] => {
   return actionType.map((action) => ({
     content: action.label,
     id: action.label,
+    // id: randomId(),
     color: action.color,
   }));
 };
@@ -143,8 +143,7 @@ const getItemStyle = (
   userSelect: "none",
   padding: grid * 2,
   margin: `0 ${grid}px 0 0`,
-  //colour change on dragging
-  background: isDragging ? "lightgreen" : actionColor[color],
+  background: isDragging ? "lightgrey" : actionColor[color],
   ...draggableStyle,
 });
 
@@ -177,13 +176,6 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
   });
 
   const { isEditing, items, selected, id2List, editingId } = state;
-
-  useEffect(() => {
-    setState({
-      ...state,
-      items: cleanItems(inputActions),
-    });
-  }, [inputActions]);
 
   function fieldsForPath(path) {
     if (data) {
@@ -256,6 +248,9 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
   function onDragEnd(result: DropResult): void {
     const { source, destination } = result;
 
+    console.log("source", source);
+    console.log("destingation", destination);
+
     if (!destination) {
       return;
     }
@@ -288,28 +283,58 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
     }
   }
 
+  function cleanEditState(source, destination) {
+    const resultFromMove: MoveResult = move(
+      getList(source.droppableId),
+      getList(destination.droppableId),
+      source,
+      destination
+    );
+
+    setState({
+      ...state,
+      items: resultFromMove.droppable,
+      selected: resultFromMove.droppable2,
+    });
+  }
+
+  // will rerender inputActions on change of value
+  useEffect(() => {
+    if (selected.length === 0) {
+      setState({
+        ...state,
+        items: cleanItems(inputActions),
+      });
+    }
+  }, [inputActions]);
+
+  /// here
+
+  // add new card to selected
   useEffect(() => {
     if (editorState.selectedExpression) {
       setState({
         ...state,
         selected: [
-          ...selected,
           {
             id: editorState.selectedExpression?.name,
             content: editorState.selectedExpression?.label,
             color: "orange",
           },
+          ...selected,
         ],
       });
+      // cleanEditState();
     }
   }, [editorState.selectedExpression]);
 
-  // useEffect(() => {
-  //   setExpressionState({
-  //     ...expressionState,
-  //     expressions: selected,
-  //   });
-  // }, [selected]);
+  // this hook updates the expressions "expressions" value, which populates the selected expressions state after a cleanup.
+  useEffect(() => {
+    setExpressionState({
+      ...expressionState,
+      expressions: selected,
+    });
+  }, [selected]);
 
   return (
     <>
@@ -328,11 +353,14 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
                 <div
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
-                  // {...snapshot}
-                  // {...snapshot.isDraggingOver}
                   ref={provided.innerRef}
+                  style={getItemStyle(
+                    provided.draggableProps.style,
+                    snapshot.isDragging,
+                    ""
+                  )}
                 >
-                  Item id: {items[rubric.source.index].id}
+                  {items[rubric.source.index].id}
                 </div>
               )}
             >
@@ -348,6 +376,7 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
                   {items.map((item, index) => (
                     <Draggable
                       key={item.id}
+                      // key={randomId()}
                       draggableId={item.id}
                       index={index}
                       color={item.color}
@@ -389,11 +418,14 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
                 <div
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
-                  // {...snapshot}
-                  // {...snapshot.isDraggingOver}
                   ref={provided.innerRef}
+                  style={getItemStyle(
+                    provided.draggableProps.style,
+                    snapshot.isDragging,
+                    ""
+                  )}
                 >
-                  Item id: {items[rubric.source.index].id}
+                  {selected[rubric.source.index].id}
                 </div>
               )}
             >
@@ -428,9 +460,9 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
                             )}
                           >
                             {item.content}
-                            {item.id === "number" ||
-                            item.id === "[variable]" ||
-                            item.id === "text" ? (
+                            {item.content === "number" ||
+                            item.content === "[variable]" ||
+                            item.content === "text" ? (
                               <span>
                                 <a
                                   href="#"
@@ -441,16 +473,16 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
                                 </a>
                               </span>
                             ) : null}
-                            {item.id !== "+" &&
-                            item.id !== "-" &&
-                            item.id !== "X" &&
-                            item.id !== "/" &&
-                            item.id !== "(" &&
-                            item.id !== "⮐" &&
-                            item.id !== "number" &&
-                            item.id !== "[variable]" &&
-                            item.id !== "text" &&
-                            item.id !== ")" ? (
+                            {item.content !== "+" &&
+                            item.content !== "-" &&
+                            item.content !== "X" &&
+                            item.content !== "/" &&
+                            item.content !== "(" &&
+                            item.content !== "⮐" &&
+                            item.content !== "number" &&
+                            item.content !== "[variable]" &&
+                            item.content !== "text" &&
+                            item.content !== ")" ? (
                               <a
                                 href="#"
                                 className="govuk-link"
@@ -476,6 +508,8 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
 
       {isEditing && (
         <FormulaInputs
+          setSelectedState={setState}
+          selectedState={state}
           editingId={editingId}
           setEditorState={setEditorState}
           editorState={editorState}

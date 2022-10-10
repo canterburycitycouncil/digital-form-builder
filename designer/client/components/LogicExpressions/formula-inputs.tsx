@@ -1,29 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineEnter, AiOutlineFileAdd } from "react-icons/ai";
 
 export interface State {
   inputValue: string;
 }
 
-function FormulaInputs({ setEditorState, editorState, edit, editingId }) {
+function FormulaInputs({
+  setEditorState,
+  editorState,
+  edit,
+  editingId,
+  selectedState,
+  setSelectedState,
+}) {
   const [state, setState] = useState<State>({
     inputValue: "",
   });
 
   const { inputValue } = state;
 
+  // const cleanedSelected = (inputArray) => {
+  //   return inputArray.filter((select) => {
+  //     select.id !== ("[variable]" || "number" || "text");
+  //   });
+  // };
+
   function onSelectVariable(e, input) {
     e.preventDefault();
 
+    // add new selected card
     setEditorState({
       ...editorState,
       selectedExpression: input,
     });
+
+    // remove builder value from active
+
     edit(e);
   }
 
   function onSaveValue(e) {
     e.preventDefault();
+
     setEditorState({
       ...editorState,
       selectedExpression: {
@@ -32,6 +50,10 @@ function FormulaInputs({ setEditorState, editorState, edit, editingId }) {
       },
     });
     setState({ inputValue: "" });
+    // setSelectedState({
+    //   ...selectedState,
+    //   selected: cleanedSelected,
+    // });
     edit(e);
   }
 
@@ -83,8 +105,8 @@ function FormulaInputs({ setEditorState, editorState, edit, editingId }) {
         </div>
         <div className="govuk-input__wrapper">
           <input
-            id="testing-editor-title"
-            name="title"
+            id="formula-inputs-input"
+            name="input"
             className="govuk-input govuk-!-width-one-half"
             value={inputValue}
             onChange={(e) => setState({ inputValue: e.target.value })}

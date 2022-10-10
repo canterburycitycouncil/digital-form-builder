@@ -39,6 +39,13 @@ const expressionTypes = [
   {},
 ];
 
+const predefinedLogicExpressions = [
+  {
+    children: "logic expression 1",
+    value: "{number_of_rooms} * 500",
+  },
+];
+
 export const LogicExpressionEdit = ({
   data,
   save,
@@ -66,14 +73,8 @@ export const LogicExpressionEdit = ({
     expressions,
   } = expressionState;
 
-  console.log(expressionType);
-
-  const logicExpressions = [
-    {
-      children: "logic expression 1",
-      value: "{number_of_rooms} * 500",
-    },
-  ];
+  console.log("expressionState", expressionState);
+  console.log("data", data);
 
   const validate = () => {
     const errors: ValidationError[] = [];
@@ -118,7 +119,7 @@ export const LogicExpressionEdit = ({
     let validationErrors = validate();
     if (hasValidationErrors(validationErrors)) return;
     let dataCopy = { ...data };
-
+    console.log(data.logicExpressions);
     const logicExpressionObject = {
       label: labelName,
       variableName: variableName,
@@ -196,6 +197,35 @@ export const LogicExpressionEdit = ({
             Back
           </a>
         )}
+
+        {logicExpression.expression ? (
+          <div
+            className="govuk-notification-banner govuk-notification-banner--success"
+            role="alert"
+          >
+            <div className="govuk-notification-banner__header">
+              <h2
+                className="govuk-notification-banner__title"
+                id="govuk-notification-banner-title"
+              >
+                Saved Expression
+              </h2>
+            </div>
+            <div className="govuk-notification-banner__content">
+              <h3 className="govuk-notification-banner__heading">
+                {logicExpression.expression}
+              </h3>
+              {/* <p class="govuk-body">
+              Contact{" "}
+              <a class="govuk-notification-banner__link" href="#">
+                example@department.gov.uk
+              </a>{" "}
+              if you think there's a problem.
+            </p> */}
+            </div>
+          </div>
+        ) : null}
+
         <Input
           label={{
             children: "Label Name",
@@ -254,7 +284,7 @@ export const LogicExpressionEdit = ({
         {expressionType === "predefined" ? (
           <Select
             id="predefined-expressions"
-            items={logicExpressions}
+            items={predefinedLogicExpressions}
             label={{
               className: "govuk-label--s",
               children: [i18n("logicExpression.predefinedExpressions.title")],
