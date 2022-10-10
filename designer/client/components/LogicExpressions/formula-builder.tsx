@@ -5,6 +5,7 @@ import {
 import { findList } from "@xgovformbuilder/designer/client/components/List/data";
 import { DataContext } from "@xgovformbuilder/designer/client/context";
 import { Item } from "@xgovformbuilder/model";
+import { nanoid } from "nanoid";
 import React, { useContext, useEffect, useState } from "react";
 import {
   DragDropContext,
@@ -89,8 +90,8 @@ export enum actionColor {
 const cleanItems = (actionType): IItem[] => {
   return actionType.map((action) => ({
     content: action.label,
-    id: action.label,
-    // id: randomId(),
+    // id: action.label,
+    id: nanoid(),
     color: action.color,
   }));
 };
@@ -248,9 +249,6 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
   function onDragEnd(result: DropResult): void {
     const { source, destination } = result;
 
-    console.log("source", source);
-    console.log("destingation", destination);
-
     if (!destination) {
       return;
     }
@@ -316,12 +314,13 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
       setState({
         ...state,
         selected: [
+          ...selected,
           {
-            id: editorState.selectedExpression?.name,
+            // id: editorState.selectedExpression?.name,
+            id: nanoid(),
             content: editorState.selectedExpression?.label,
             color: "orange",
           },
-          ...selected,
         ],
       });
       // cleanEditState();
@@ -360,7 +359,7 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
                     ""
                   )}
                 >
-                  {items[rubric.source.index].id}
+                  {items[rubric.source.index].content}
                 </div>
               )}
             >
@@ -425,7 +424,7 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
                     ""
                   )}
                 >
-                  {selected[rubric.source.index].id}
+                  {selected[rubric.source.index].content}
                 </div>
               )}
             >
@@ -467,7 +466,7 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
                                 <a
                                   href="#"
                                   className="govuk-link"
-                                  onClick={(e) => onEdit(e, item.id)}
+                                  onClick={(e) => onEdit(e, item.content)}
                                 >
                                   <MdOutlineMode size={20} />
                                 </a>

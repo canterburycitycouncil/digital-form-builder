@@ -43,8 +43,6 @@ export function ErrorSummary({
     }
   };
 
-  console.log(errorList);
-
   return (
     <div
       className={`govuk-error-summary ${className || ""}`}

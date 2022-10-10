@@ -59,7 +59,8 @@ export const LogicExpressionEdit = ({
     labelName: logicExpression.label,
     variableName: logicExpression.variableName,
     expressionType: logicExpression.expressionType,
-    logicExpression: logicExpression.expression,
+    // logicExpression: logicExpression.expression,
+    logicExpression: "",
     expressions: [],
     errors: [],
   });
@@ -72,9 +73,6 @@ export const LogicExpressionEdit = ({
     errors,
     expressions,
   } = expressionState;
-
-  console.log("expressionState", expressionState);
-  console.log("data", data);
 
   const validate = () => {
     const errors: ValidationError[] = [];
@@ -119,7 +117,7 @@ export const LogicExpressionEdit = ({
     let validationErrors = validate();
     if (hasValidationErrors(validationErrors)) return;
     let dataCopy = { ...data };
-    console.log(data.logicExpressions);
+
     const logicExpressionObject = {
       label: labelName,
       variableName: variableName,
@@ -215,13 +213,6 @@ export const LogicExpressionEdit = ({
               <h3 className="govuk-notification-banner__heading">
                 {logicExpression.expression}
               </h3>
-              {/* <p class="govuk-body">
-              Contact{" "}
-              <a class="govuk-notification-banner__link" href="#">
-                example@department.gov.uk
-              </a>{" "}
-              if you think there's a problem.
-            </p> */}
             </div>
           </div>
         ) : null}
