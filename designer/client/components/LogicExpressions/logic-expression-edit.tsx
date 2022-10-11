@@ -60,8 +60,6 @@ export const LogicExpressionEdit = ({
     labelName: logicExpression.label,
     variableName: logicExpression.variableName,
     expressionType: logicExpression.expressionType,
-    // logicExpressionIndex: logicExpressionIndex,
-    // logicExpression: logicExpression.expression,
     logicExpression: "",
     expressions: [],
     errors: [],
@@ -123,13 +121,28 @@ export const LogicExpressionEdit = ({
       expressionType: expressionType,
       expression: selectedExpression as any,
     };
-    dataCopy?.logicExpressions?.push(logicExpressionObject);
-    try {
-      save(dataCopy, () => {
-        onEdit();
-      });
-    } catch (err) {
-      logger.error("ExpressionEdit", err);
+    if (logicExpressionIndex !== null) {
+      dataCopy?.logicExpressions.splice(
+        logicExpressionIndex,
+        1,
+        logicExpressionObject
+      );
+      try {
+        save(dataCopy, () => {
+          onEdit();
+        });
+      } catch (err) {
+        logger.error("ExpressionEdit", err);
+      }
+    } else {
+      dataCopy?.logicExpressions.push(logicExpressionObject);
+      try {
+        save(dataCopy, () => {
+          onEdit();
+        });
+      } catch (err) {
+        logger.error("ExpressionEdit", err);
+      }
     }
   };
 

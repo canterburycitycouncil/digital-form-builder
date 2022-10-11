@@ -41,6 +41,7 @@ export const LogicExpressionsEdit = () => {
       variableName: "",
       expression: "",
     });
+    setLogicExpressionIndex(null);
     setShowAddExpression(true);
   };
 
