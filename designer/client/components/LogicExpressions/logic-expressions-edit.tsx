@@ -85,7 +85,7 @@ export const LogicExpressionsEdit = () => {
               <>
                 <ul className="govuk-list">
                   {(logicExpressions || []).map((expression, index) => (
-                    <li key={expression.label}>
+                    <li key={index}>
                       <a
                         href="#"
                         onClick={(e) => onClickExpression(e, expression, index)}

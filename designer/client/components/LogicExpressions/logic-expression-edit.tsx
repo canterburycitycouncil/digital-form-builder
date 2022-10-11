@@ -60,6 +60,7 @@ export const LogicExpressionEdit = ({
     labelName: logicExpression.label,
     variableName: logicExpression.variableName,
     expressionType: logicExpression.expressionType,
+    // logicExpressionIndex: logicExpressionIndex,
     // logicExpression: logicExpression.expression,
     logicExpression: "",
     expressions: [],
@@ -102,6 +103,7 @@ export const LogicExpressionEdit = ({
   };
 
   function getNewIndex(logicExpressions) {
+    console.log("im the boss", logicExpressions.length);
     return logicExpressions.length;
   }
 
@@ -117,46 +119,22 @@ export const LogicExpressionEdit = ({
   const onSave = (e) => {
     e.preventDefault();
     let validationErrors = validate();
+
     if (hasValidationErrors(validationErrors)) return;
     let dataCopy = { ...data };
-
     const logicExpressionObject = {
       label: labelName,
       variableName: variableName,
       expressionType: expressionType,
       expression: selectedExpression as any,
     };
-
-    // if the data exits then...
-
-    if (dataCopy?.logicExpressions && logicExpressionIndex !== null) {
-      dataCopy.logicExpressions[logicExpressionIndex] = logicExpressionObject;
-      try {
-        save(dataCopy, () => {
-          onEdit();
-        });
-      } catch (err) {
-        logger.error("ExpressionEdit", err);
-      }
-    }
-    // if it doesn't exist then ...
-
-    if (dataCopy?.logicExpressions && logicExpressionIndex === null) {
-      dataCopy.logicExpressions[
-        getNewIndex(data.logicExpressions)
-      ] = logicExpressionObject;
-      try {
-        save(dataCopy, () => {
-          onEdit();
-        });
-      } catch (err) {
-        logger.error("ExpressionEdit", err);
-      }
-    } else {
-      logger.error(
-        "ExpressionEdit",
-        "Could not find a list of logic expressions on the form definition"
-      );
+    dataCopy?.logicExpressions?.push(logicExpressionObject);
+    try {
+      save(dataCopy, () => {
+        onEdit();
+      });
+    } catch (err) {
+      logger.error("ExpressionEdit", err);
     }
   };
 
@@ -197,6 +175,8 @@ export const LogicExpressionEdit = ({
     }
   }, [logicExpression.expression]);
 
+  console.log("logic expression index", logicExpressionIndex);
+
   return (
     <>
       <div className="govuk-body">
@@ -218,6 +198,7 @@ export const LogicExpressionEdit = ({
                 id="govuk-notification-banner-title"
               >
                 Saved Expression
+                {/* {logicExpression.label} */}
               </h2>
             </div>
             <div className="govuk-notification-banner__content">
@@ -240,45 +221,47 @@ export const LogicExpressionEdit = ({
             </div>
           </div>
         ) : null}
-
-        <Input
-          label={{
-            children: "Label Name",
-            className: "govuk-label govuk-label--s",
-          }}
-          hint={{ children: [i18n("logicExpression.newExpression.labelHint")] }}
-          id="label-name"
-          name="label-name"
-          type="text"
-          value={labelName}
-          onChange={(e) =>
-            setExpressionState({
-              ...expressionState,
-              labelName: e.target.value,
-            })
-          }
-        />
-        <Input
-          label={{
-            children: "Variable Name",
-            className: "govuk-label govuk-label--s",
-          }}
-          hint={{
-            children: [i18n("logicExpression.newExpression.variableHint")],
-          }}
-          id="variable-name"
-          name="variable-name"
-          type="text"
-          value={variableName}
-          onChange={(e) =>
-            setExpressionState({
-              ...expressionState,
-              variableName: e.target.value,
-            })
-          }
-        />
         {!editingToggle ? (
           <>
+            <Input
+              label={{
+                children: "Label Name",
+                className: "govuk-label govuk-label--s",
+              }}
+              hint={{
+                children: [i18n("logicExpression.newExpression.labelHint")],
+              }}
+              id="label-name"
+              name="label-name"
+              type="text"
+              value={labelName}
+              onChange={(e) =>
+                setExpressionState({
+                  ...expressionState,
+                  labelName: e.target.value,
+                })
+              }
+            />
+            <Input
+              label={{
+                children: "Variable Name",
+                className: "govuk-label govuk-label--s",
+              }}
+              hint={{
+                children: [i18n("logicExpression.newExpression.variableHint")],
+              }}
+              id="variable-name"
+              name="variable-name"
+              type="text"
+              value={variableName}
+              onChange={(e) =>
+                setExpressionState({
+                  ...expressionState,
+                  variableName: e.target.value,
+                })
+              }
+            />
+
             <Select
               id="expression-type"
               items={expressionTypes}
