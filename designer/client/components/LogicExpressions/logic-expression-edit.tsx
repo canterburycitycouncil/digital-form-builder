@@ -102,11 +102,6 @@ export const LogicExpressionEdit = ({
     return errors;
   };
 
-  function getNewIndex(logicExpressions) {
-    console.log("im the boss", logicExpressions.length);
-    return logicExpressions.length;
-  }
-
   // go through the expressions state which holds the expression, but in seperate objects. Data should be in the content field. Turn into new expression on the LogicExpressions object.
 
   const cleanBuilderSelection = (expressions) => {
@@ -174,8 +169,6 @@ export const LogicExpressionEdit = ({
       });
     }
   }, [logicExpression.expression]);
-
-  console.log("logic expression index", logicExpressionIndex);
 
   return (
     <>
