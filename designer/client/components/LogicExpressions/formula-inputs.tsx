@@ -34,6 +34,11 @@ function FormulaInputs({
       selectedExpression: input,
     });
 
+    setSelectedState({
+      ...selectedState,
+      isComplete: !selectedState.isComplete,
+    });
+
     // remove builder value from active
 
     edit(e);

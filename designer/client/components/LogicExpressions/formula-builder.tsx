@@ -27,6 +27,7 @@ interface State {
   items: IItem[];
   selected: IItem[];
   isEditing: boolean;
+  isComplete: boolean;
   editingId: string;
   id2List: {
     droppable: string;
@@ -163,6 +164,7 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
     items: cleanItems(inputActions),
     selected: [],
     isEditing: false,
+    isComplete: false,
     editingId: "",
     id2List: {
       droppable: "items",
@@ -176,7 +178,7 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
     selectedExpression: undefined,
   });
 
-  const { isEditing, items, selected, id2List, editingId } = state;
+  const { isEditing, items, selected, id2List, editingId, isComplete } = state;
 
   function fieldsForPath(path) {
     if (data) {
@@ -231,8 +233,8 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
     });
   }
 
-  function onDelete(e, item) {
-    e.preventDefault();
+  function onDelete(item) {
+    // e.preventDefault();
     let filteredArray = selected.filter((select) => {
       return item.id !== select.id;
     });
@@ -296,7 +298,6 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
     });
   }
 
-  // will rerender inputActions on change of value
   useEffect(() => {
     if (selected.length === 0) {
       setState({
@@ -306,24 +307,33 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
     }
   }, [inputActions]);
 
-  /// here
+  const cleanState = selected.filter(
+    (item) =>
+      item.content !== "[variable]" &&
+      item.content !== "number" &&
+      item.content !== "text"
+  );
 
-  // add new card to selected
   useEffect(() => {
     if (editorState.selectedExpression) {
       setState({
         ...state,
+        items: cleanItems(inputActions),
         selected: [
-          ...selected,
+          /**
+           * cleanState will ensure that once an input action of type(number, text, variable) has completed a submit, it will scrub the value from the selected state
+           */
+          ...cleanState,
+          /**
+           * this below is adding the new card, value coming from a completed SaveValue or SelectValue which is saved to editor state in the formula inputs comp.
+           */
           {
-            // id: editorState.selectedExpression?.name,
             id: nanoid(),
             content: editorState.selectedExpression?.label,
             color: "orange",
           },
         ],
       });
-      // cleanEditState();
     }
   }, [editorState.selectedExpression]);
 
@@ -485,7 +495,7 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
                               <a
                                 href="#"
                                 className="govuk-link"
-                                onClick={(e) => onDelete(e, item)}
+                                onClick={() => onDelete(item)}
                               >
                                 <AiOutlineDelete size={20} />
                               </a>
