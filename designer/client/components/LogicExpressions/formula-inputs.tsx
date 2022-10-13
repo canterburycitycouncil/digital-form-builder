@@ -20,17 +20,9 @@ function FormulaInputs({
 
   const { inputValue } = state;
 
-  // const cleanedSelected = (inputArray) => {
-  //   return inputArray.filter((select) => {
-  //     select.id !== ("[variable]" || "number" || "text");
-  //   });
-  // };
-
   const updateCard = selectedState.selected.filter((item) => {
     return item.id !== selectedState.updateId;
   });
-
-  console.log("selectedState.updateId", selectedState.updateId);
 
   /**
    * if statement will update the value of an exisiting card through the value in updateCard. Otherwise it's creating a new card through setting an editor state, and a useEffect trigger in formulaBuilder comp.
@@ -109,7 +101,6 @@ function FormulaInputs({
                     <a
                       href="#"
                       className="govuk-link"
-                      // need to pass the inputAction type(number, variable etc)
                       onClick={(e) => onSelectVariable(e, field, editingId)}
                     >
                       <AiOutlineFileAdd />
