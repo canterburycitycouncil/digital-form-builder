@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineEnter, AiOutlineFileAdd } from "react-icons/ai";
 
 export interface State {
@@ -9,6 +9,7 @@ function FormulaInputs({
   setEditorState,
   editorState,
   edit,
+  updating,
   editingId,
   selectedState,
   setSelectedState,
@@ -25,23 +26,47 @@ function FormulaInputs({
   //   });
   // };
 
-  function onSelectVariable(e, input) {
-    e.preventDefault();
+  const updateCard = selectedState.selected.filter((item) => {
+    return item.id !== selectedState.updateId;
+  });
 
-    // add new selected card
-    setEditorState({
-      ...editorState,
-      selectedExpression: input,
-    });
+  console.log("selectedState.updateId", selectedState.updateId);
 
-    setSelectedState({
-      ...selectedState,
-      isComplete: !selectedState.isComplete,
-    });
+  /**
+   * if statement will update the value of an exisiting card through the value in updateCard. Otherwise it's creating a new card through setting an editor state, and a useEffect trigger in formulaBuilder comp.
+   */
 
-    // remove builder value from active
-
-    edit(e);
+  function onSelectVariable(e, input, editingId) {
+    if (!selectedState.updateId) {
+      setEditorState({
+        ...editorState,
+        selectedExpression: {
+          label: input.label,
+          type: editingId,
+        },
+      }),
+        setSelectedState({
+          ...selectedState,
+          isComplete: !selectedState.isComplete,
+          isEditing: !selectedState.isEditing,
+        });
+      edit(e);
+    } else {
+      setEditorState({
+        ...editorState,
+        selectedExpression: {
+          label: input.label,
+          type: editingId,
+        },
+      }),
+        setSelectedState({
+          ...selectedState,
+          selected: updateCard,
+          isUpdating: !selectedState.isUpdating,
+          updateId: "",
+        });
+      updating(e);
+    }
   }
 
   function onSaveValue(e) {
@@ -55,10 +80,6 @@ function FormulaInputs({
       },
     });
     setState({ inputValue: "" });
-    // setSelectedState({
-    //   ...selectedState,
-    //   selected: cleanedSelected,
-    // });
     edit(e);
   }
 
@@ -88,7 +109,8 @@ function FormulaInputs({
                     <a
                       href="#"
                       className="govuk-link"
-                      onClick={(e) => onSelectVariable(e, field)}
+                      // need to pass the inputAction type(number, variable etc)
+                      onClick={(e) => onSelectVariable(e, field, editingId)}
                     >
                       <AiOutlineFileAdd />
                       Add

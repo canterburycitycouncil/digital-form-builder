@@ -28,6 +28,8 @@ interface State {
   selected: IItem[];
   isEditing: boolean;
   isComplete: boolean;
+  isUpdating: boolean;
+  updateId: string | undefined;
   editingId: string;
   id2List: {
     droppable: string;
@@ -58,6 +60,7 @@ interface IItem {
   id: string | undefined;
   content: string | undefined;
   color: string;
+  type?: string;
 }
 
 export interface MoveResult {
@@ -91,7 +94,6 @@ export enum actionColor {
 const cleanItems = (actionType): IItem[] => {
   return actionType.map((action) => ({
     content: action.label,
-    // id: action.label,
     id: nanoid(),
     color: action.color,
   }));
@@ -164,7 +166,9 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
     items: cleanItems(inputActions),
     selected: [],
     isEditing: false,
+    isUpdating: false,
     isComplete: false,
+    updateId: "",
     editingId: "",
     id2List: {
       droppable: "items",
@@ -178,7 +182,14 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
     selectedExpression: undefined,
   });
 
-  const { isEditing, items, selected, id2List, editingId, isComplete } = state;
+  const { isEditing, items, selected, id2List, editingId, isUpdating } = state;
+
+  const cleanState = selected.filter(
+    (item) =>
+      item.content !== "[variable]" &&
+      item.content !== "number" &&
+      item.content !== "text"
+  );
 
   function fieldsForPath(path) {
     if (data) {
@@ -224,23 +235,34 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
     }
   }
 
-  function onEdit(e, id) {
+  function onEdit(e, typeOfVariable) {
     e.preventDefault();
     setState({
       ...state,
       isEditing: !isEditing,
-      editingId: id,
+      editingId: typeOfVariable,
     });
   }
 
-  function onDelete(item) {
-    // e.preventDefault();
+  function onUpdate(e, id, item: any | undefined) {
+    e.preventDefault();
+    setState({
+      ...state,
+      isUpdating: !isUpdating,
+      editingId: id,
+      updateId: item.id || undefined,
+    });
+  }
+
+  function onDelete(e, item) {
+    e.preventDefault();
     let filteredArray = selected.filter((select) => {
       return item.id !== select.id;
     });
     setState({
       ...state,
       selected: filteredArray,
+      isEditing: false,
     });
   }
 
@@ -283,21 +305,6 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
     }
   }
 
-  function cleanEditState(source, destination) {
-    const resultFromMove: MoveResult = move(
-      getList(source.droppableId),
-      getList(destination.droppableId),
-      source,
-      destination
-    );
-
-    setState({
-      ...state,
-      items: resultFromMove.droppable,
-      selected: resultFromMove.droppable2,
-    });
-  }
-
   useEffect(() => {
     if (selected.length === 0) {
       setState({
@@ -306,13 +313,6 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
       });
     }
   }, [inputActions]);
-
-  const cleanState = selected.filter(
-    (item) =>
-      item.content !== "[variable]" &&
-      item.content !== "number" &&
-      item.content !== "text"
-  );
 
   useEffect(() => {
     if (editorState.selectedExpression) {
@@ -330,6 +330,7 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
           {
             id: nanoid(),
             content: editorState.selectedExpression?.label,
+            type: editorState.selectedExpression?.type,
             color: "orange",
           },
         ],
@@ -337,8 +338,16 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
     }
   }, [editorState.selectedExpression]);
 
-  // this hook updates the expressions "expressions" value, which populates the selected expressions state after a cleanup.
+  /**
+   * the intial setState will readd missing items from the options in the builder as they have been dragged to selected.
+   *this second updates the state "expressions" value, which populates the selected expressions state after a cleanup. This is ultimatly where the saved value will be copied from
+   */
+
   useEffect(() => {
+    setState({
+      ...state,
+      items: cleanItems(inputActions),
+    });
     setExpressionState({
       ...expressionState,
       expressions: selected,
@@ -356,7 +365,7 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
               droppableId="droppable"
               direction="horizontal"
               /**
-               * render clone is used to reparent and stop card position moving on drag. https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/reparenting.md
+               * note render clone is used to reparent and strange card position moving on drag in portal. https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/guides/reparenting.md
                */
               renderClone={(provided, snapshot, rubric) => (
                 <div
@@ -482,20 +491,38 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
                                 </a>
                               </span>
                             ) : null}
-                            {item.content !== "+" &&
-                            item.content !== "-" &&
-                            item.content !== "X" &&
-                            item.content !== "/" &&
-                            item.content !== "(" &&
-                            item.content !== "⮐" &&
-                            item.content !== "number" &&
-                            item.content !== "[variable]" &&
-                            item.content !== "text" &&
-                            item.content !== ")" ? (
+
+                            {item.type === "[variable]" ? (
+                              <>
+                                <a
+                                  href="#"
+                                  className="govuk-link"
+                                  onClick={(e) => onUpdate(e, item.type, item)}
+                                >
+                                  <MdOutlineMode size={20} />
+                                </a>
+                                <a
+                                  href="#"
+                                  className="govuk-link"
+                                  onClick={(e) => onDelete(e, item)}
+                                >
+                                  <AiOutlineDelete size={20} />
+                                </a>
+                              </>
+                            ) : item.content !== "+" &&
+                              item.content !== "-" &&
+                              item.content !== "X" &&
+                              item.content !== "/" &&
+                              item.content !== "(" &&
+                              item.content !== ")" &&
+                              item.content !== "⮐" &&
+                              item.content !== "number" &&
+                              item.content !== "[variable]" &&
+                              item.content !== "text" ? (
                               <a
                                 href="#"
                                 className="govuk-link"
-                                onClick={() => onDelete(item)}
+                                onClick={(e) => onDelete(e, item)}
                               >
                                 <AiOutlineDelete size={20} />
                               </a>
@@ -523,6 +550,19 @@ function FormulaBuilder({ expressionState, setExpressionState, inputActions }) {
           setEditorState={setEditorState}
           editorState={editorState}
           edit={onEdit}
+          updating={onUpdate}
+        />
+      )}
+
+      {isUpdating && (
+        <FormulaInputs
+          setSelectedState={setState}
+          selectedState={state}
+          editingId={editingId}
+          setEditorState={setEditorState}
+          editorState={editorState}
+          edit={onEdit}
+          updating={onUpdate}
         />
       )}
     </>
